@@ -12,10 +12,11 @@
     home-manager,
     ...
   }: {
-    nixosConfigurations.LiAlH4-Nix = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.vbox-in-fedora = nixpkgs.lib.nixosSystem {
       modules = [
         home-manager.nixosModules.default
-        ./default.nix
+        ./users
+        ./devices/vbox-in-fedora
       ];
     };
   };

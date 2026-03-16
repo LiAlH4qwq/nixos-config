@@ -4,7 +4,6 @@
   imports =
     [
       ./hw.nix
-      ./users
     ];
 
 
