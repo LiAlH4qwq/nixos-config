@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./lialh4.nix
-  ]
+  ];
   
   users = {
     mutableUsers = false;
