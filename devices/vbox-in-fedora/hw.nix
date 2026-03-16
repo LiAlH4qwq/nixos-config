@@ -1,5 +1,11 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Virtualbox guest addons currently fails on kernel 6.19.
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  
   boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "virtio_scsi" "ahci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
