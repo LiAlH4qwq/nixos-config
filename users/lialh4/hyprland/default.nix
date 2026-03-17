@@ -6,8 +6,8 @@ _: {
     bind = [
       "$mainMod, Delete, exec, uwsm stop"
       "$mainMod, Q, killactive"
-      "$mainMod, T exec, uwsm app -- $terminal"
-      "$mainMod, B, exec, uwsm app -- $browser"
+      "$mainMod, T exec, uwsm-app -- $terminal"
+      "$mainMod, B, exec, uwsm-app -- $browser"
     ];
   };
 }
