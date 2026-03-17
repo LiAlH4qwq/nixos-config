@@ -19,12 +19,6 @@
       enable = true;
       # Due to conflict with home-manager
       systemd.enable = false;
-      settings = {
-        "$mod" = "SUPER";
-        bind = [
-          "$mod, B, exec, firefox"
-        ];
-      };
     };
 
     # Reflects NixOS version when system installed.

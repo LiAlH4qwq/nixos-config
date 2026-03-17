@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./lialh4.nix
+    ./lialh4
   ];
   
   users = {

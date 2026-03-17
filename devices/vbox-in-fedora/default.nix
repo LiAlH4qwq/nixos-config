@@ -2,7 +2,7 @@
 {
   imports =
     [
-      ./hw.nix
+      ./hw
     ];
 
   networking.hostName = "LiAlH4-Nix";
