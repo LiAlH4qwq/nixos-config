@@ -4,7 +4,7 @@ _: {
     "$browser" = "firefox";
     "$mainMod" = "SUPER";
     bind = [
-      "$mainMod, Delete, uwsm stop"
+      "$mainMod, Delete, exec, uwsm stop"
       "$mainMod, Q, killactive"
       "$mainMod, T exec, uwsm app -- $terminal"
       "$mainMod, B, exec, uwsm app -- $browser"
