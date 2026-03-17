@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./hyprland
-  ]
+  ];
 
   users.extraUsers.lialh4 = {
     isNormalUser = true;
