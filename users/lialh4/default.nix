@@ -18,7 +18,10 @@
       fish.enable = true;
       firefox.enable = true;
       kitty.enable = true;
+      foot.enable = true;
+      git.enable = true;
     };
+    programs.git.settings = import ./git;
     wayland.windowManager.hyprland = {
       enable = true;
       # Due to conflict with home-manager
