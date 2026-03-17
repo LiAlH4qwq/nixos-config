@@ -1,5 +1,5 @@
 _: {
-  wayland.windowManager.hyprland.settings = {
+  home-manager.users.lialh4.wayland.windowManager.hyprland.settings = {
     "$terminal" = "kitty";
     "$browser" = "firefox";
     "$mainMod" = "SUPER";
