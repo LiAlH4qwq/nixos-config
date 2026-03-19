@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./hyprland
+    ./materialgram
   ];
 
   users.extraUsers.lialh4 = {
@@ -13,6 +13,37 @@
     ];
   };
   home-manager.users.lialh4 = {
+    wayland.windowManager.hyprland = {
+      enable = true;
+      # Due to conflict with home-manager
+      systemd.enable = false;
+      settings = import ./hyprland;
+    };
+    # these hasn't been available as a program in release 25.11.
+    home.packages = with pkgs; [
+      hyprlauncher
+      materialgram
+    ];
+    i18n.inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5 = {
+        waylandFrontend = true;
+        addons = with pkgs; [
+          kdePackages.fcitx5-chinese-addons
+        ];
+      };
+    };
+    services = {
+      hyprpolkitagent.enable = true;
+      hyprpaper.enable = true;
+      mako.enable = true;
+    };
+    services.hyprpaper.settings = import ./hyprpaper;
+    services.mako.settings = import ./mako;
+    # when using genAttrs,
+    # it will broken with error:
+    # programs field already defined.
     programs = {
       home-manager.enable = true;
       fish.enable = true;
@@ -20,13 +51,12 @@
       kitty.enable = true;
       foot.enable = true;
       git.enable = true;
+      vscode.enable = true;
+      ashell.enable = true;
     };
+    programs.ashell.settings = import ./ashell;
+    programs.kitty.settings = import ./kitty;
     programs.git.settings = import ./git;
-    wayland.windowManager.hyprland = {
-      enable = true;
-      # Due to conflict with home-manager
-      systemd.enable = false;
-    };
 
     # Reflects NixOS version when system installed.
     # Do not change it unless needed.
