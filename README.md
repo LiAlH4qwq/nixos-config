@@ -1,5 +1,16 @@
-# NixOS Configuration by LiAlH4
+# 柳絮 —— NixOS 配置
 
-The name is still on the way...
+——「盼望着，盼望着，东风来了，春天的脚步近了。」
 
-It still work in progress.
+目前仍在完善，请谨慎用于生产环境。
+
+## 特性
+
+- 支持安全启动
+- 模块化的配置
+- 使用浅色主题
+- 无AI参与编写
+
+## 协议
+除非额外注明来源，配置文件均适用于 [MIT](./LICENSE) 协议。
+若有额外注明来源，则以链接终点之仓库协议为准。
