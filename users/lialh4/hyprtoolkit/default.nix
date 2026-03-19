@@ -11,15 +11,15 @@
 
 _: {
   home-manager.users.lialh4.home.file.hyprtoolkit = {
-    target = "./config/hypr/hyprtoolkit.conf";
+    target = ".config/hypr/hyprtoolkit.conf";
     text = ''
-      background = #fffaf4ed
-      base = #fffffaf3
-      text = #ff575279
-      alternate_base = #fff2e9e1
-      bright_text = #ff907aa9
-      accent = #ffd7827e
-      accent_secondary = #ffb4637a
+      background = 0xfffaf4ed
+      base = 0xfffffaf3
+      text = 0xff575279
+      alternate_base = 0xfff2e9e1
+      bright_text = 0xff907aa9
+      accent = 0xffd7827e
+      accent_secondary = 0xffb4637a
     '';
   };
 }
