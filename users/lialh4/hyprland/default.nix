@@ -1,14 +1,17 @@
-{
-  "$im" = "fcitx5";
+rec {
+  "$ime" = "fcitx5";
   "$statusbar" = "ashell";
-  "$launcher" = "hyprlauncher";
+  "$launcher" = "vicinae";
+  "$launcher_daemon" = "$launcher server";
+  "$launcher_toggle" = "$launcher toggle";
   "$terminal" = "kitty";
   "$browser" = "firefox";
   "$pwd" = "1password";
   "$mainMod" = "SUPER";
   execr-once = [
-    "uwsm-app -s s -u $im -- $im"
+    "uwsm-app -s s -u $ime -- $ime"
     "uwsm-app -s s -u $statusbar -- $statusbar"
+    "uwsm-app -s s -u $launcher -- $launcher_daemon"
     "uwsm-app -s b -u $pwd -- $pwd"
   ];
   monitor = [
@@ -19,7 +22,7 @@
   bind = [
     "$mainMod, Delete, execr, uwsm stop"
     "$mainMod, Q, killactive"
-    "$mainMod, R, execr, uwsm-app -- $launcher"
+    "$mainMod, R, execr, uwsm-app -- $launcher_toggle"
     "$mainMod, T, execr, uwsm-app -- $terminal"
     "$mainMod, B, execr, uwsm-app -- $browser"
   ] ++ (

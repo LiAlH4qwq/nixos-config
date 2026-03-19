@@ -22,7 +22,7 @@
     };
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
-      hyprlauncher
+      # hyprlauncher
       materialgram
     ];
     i18n.inputMethod = {
@@ -60,6 +60,7 @@
       git.enable = true;
       vscode.enable = true;
       ashell.enable = true;
+      vicinae.enable = true;
     };
     programs.ashell.settings = import ./ashell;
     programs.kitty.settings = import ./kitty;
