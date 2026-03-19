@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ./hyprtoolkit
-    ./materialgram
   ];
 
   users.extraUsers.lialh4 = {
