@@ -1,5 +1,4 @@
 rec {
-  "$ime" = "fcitx5";
   "$statusbar" = "ashell";
   "$launcher" = "vicinae";
   "$launcher_daemon" = "$launcher server";
@@ -9,7 +8,6 @@ rec {
   "$pwd" = "1password";
   "$mainMod" = "SUPER";
   execr-once = [
-    "uwsm-app -s s -u $ime -- $ime"
     "uwsm-app -s s -u $statusbar -- $statusbar"
     "uwsm-app -s s -u $launcher -- $launcher_daemon"
     "uwsm-app -s b -u $pwd -- $pwd"
