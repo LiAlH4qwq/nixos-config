@@ -1,16 +1,13 @@
 rec {
   "$statusbar" = "ashell";
-  "$launcher" = "vicinae";
-  "$launcher_daemon" = "$launcher server";
-  "$launcher_toggle" = "$launcher toggle";
+  "$launcher" = "vicinae toggle";
   "$terminal" = "kitty";
   "$browser" = "firefox";
   "$pwd" = "1password";
   "$mainMod" = "SUPER";
   execr-once = [
-    "uwsm-app -s s -u $statusbar -- $statusbar"
-    "uwsm-app -s s -u $launcher -- $launcher_daemon"
-    "uwsm-app -s b -u $pwd -- $pwd"
+    "uwsm-app -t service -s s -u $statusbar.service -- $statusbar"
+    "uwsm-app -t service -s b -u $pwd.service -- $pwd"
   ];
   monitor = [
     ", preferred, auto, 2"
@@ -20,7 +17,7 @@ rec {
   bind = [
     "$mainMod, Delete, execr, uwsm stop"
     "$mainMod, Q, killactive"
-    "$mainMod, R, execr, uwsm-app -- $launcher_toggle"
+    "$mainMod, R, execr, uwsm-app -- $launcher"
     "$mainMod, T, execr, uwsm-app -- $terminal"
     "$mainMod, B, execr, uwsm-app -- $browser"
   ] ++ (

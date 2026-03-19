@@ -59,7 +59,13 @@
       git.enable = true;
       vscode.enable = true;
       ashell.enable = true;
-      vicinae.enable = true;
+      vicinae = {
+        enable = true;
+        systemd = {
+          enable = true;
+          autoStart = true;
+        };
+      };
     };
     programs.ashell.settings = import ./ashell;
     programs.kitty.settings = import ./kitty;
