@@ -56,12 +56,13 @@
     };
   };
 
-  # i hate bash btw.
   programs = {
+    # i hate bash btw.
     fish.enable = true;
 
     # these programs can't simply be enabled only in the user scope.
     _1password-gui.enable = true;
+    steam.enable = true;
     hyprland = {
       enable = true;
       withUWSM = true;
