@@ -19,7 +19,7 @@
     networkmanager.enable = true;
 
     # allow tun mode traffic.
-    networking.firewall = {
+    firewall = {
       checkReversePath = false;
       trustedInterfaces = [
         "mihoyo"
