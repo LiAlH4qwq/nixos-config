@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }:
 {
-  imports =
-    [
-      ./hw
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./hw
+  ];
 
   networking.hostName = "LiAlH4-Laptop-Nix";
 
@@ -22,4 +26,3 @@
   # Do not change it unless needed.
   system.stateVersion = "25.11";
 }
-

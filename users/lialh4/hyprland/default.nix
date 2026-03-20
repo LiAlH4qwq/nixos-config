@@ -28,18 +28,17 @@ rec {
     "$mainMod, R, execr, uwsm-app -- $launcher"
     "$mainMod, T, execr, uwsm-app -- $terminal"
     "$mainMod, B, execr, uwsm-app -- $browser"
-  ] ++ (
-    builtins.concatLists (
-      builtins.genList (
-        i:
-          let
-            ws = i + 1;
-          in [
-            "$mainMod, code:1${toString i}, workspace, ${toString ws}"
-            "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-          ]
-      )
-      9
-    )
-  );
+  ]
+  ++ (builtins.concatLists (
+    builtins.genList (
+      i:
+      let
+        ws = i + 1;
+      in
+      [
+        "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+        "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+      ]
+    ) 9
+  ));
 }

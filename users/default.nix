@@ -1,8 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./lialh4
   ];
-  
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.fish;

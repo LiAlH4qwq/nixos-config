@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home-manager.users.lialh4.home.pointerCursor = {
     enable = true;
     package = pkgs.rose-pine-cursor;
