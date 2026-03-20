@@ -4,7 +4,9 @@
     ./state
     ./i18n
     ./xcursor
+    ./hyprland
     ./hyprtoolkit
+    ./vicinae
     ./vscode
   ];
 
@@ -18,12 +20,6 @@
     ];
   };
   home-manager.users.lialh4 = {
-    wayland.windowManager.hyprland = {
-      enable = true;
-      # Due to conflict with home-manager
-      systemd.enable = false;
-      settings = import ./hyprland;
-    };
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
       # hyprlauncher
@@ -48,13 +44,6 @@
       foot.enable = true;
       git.enable = true;
       ashell.enable = true;
-      vicinae = {
-        enable = true;
-        systemd = {
-          enable = true;
-          autoStart = true;
-        };
-      };
     };
     programs.ashell.settings = import ./ashell;
     programs.kitty.settings = import ./kitty;
