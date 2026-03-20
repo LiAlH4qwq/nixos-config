@@ -9,6 +9,14 @@ rec {
     "uwsm-app -t service -s s -u $statusbar.service -- $statusbar"
     "uwsm-app -t service -s b -u $pwd.service -- $pwd"
   ];
+  general = {
+    border_size = 5;
+    # Look like double? Actually they are same!
+    gaps_in = 5;
+    gaps_out = 10;
+    "col.active_border" = "0xffd7827e";
+    "col.inactive_border" = "0xff9893a5";
+  };
   monitor = [
     ", preferred, auto, 2"
   ];
