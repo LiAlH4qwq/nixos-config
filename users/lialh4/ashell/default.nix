@@ -1,19 +1,25 @@
+# Rose Pine Dawn Theme
+# Source: https://rosepinetheme.com/palette/
+# Relation: Hyprtoolkit color <--> Rose Pine Dawn color
+# text <--> Text
+# background.base <--> Base
+# background.weak <--> Surface
+# background.strong <--> Overlay
+# primary <--> Rose
+# secondary <--> Love
+
 {
   appearance = {
     # scale_factor = 1.5;
     style = "Solid";
-    # opacity = 0.8;
+    opacity = 0.75;
+    text_color = "#575279";
+    primary_color = "#d7827e";
+    secondary_color = "#b4637a";
     background_color = {
       base = "#faf4ed";
-      strong = "#faf4ed";
-      weak = "#faf4ed";
-      text = "#faf4ed";
-    };
-    text_color = {
-      base = "#575279";
-      strong = "#575279";
-      weak = "#575279";
-      text = "#575279";
+      strong = "#f2e9e1";
+      weak = "#fffaf3";
     };
   };
   modules = {
