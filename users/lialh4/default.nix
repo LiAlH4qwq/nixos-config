@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./i18n
     ./xcursor
     ./hyprtoolkit
     ./vscode

@@ -29,7 +29,7 @@
 
   services = {
     dbus.implementation = "broker";
-    displayManager.gdm.enable = true;
+    # displayManager.gdm.enable = true;
     openssh.enable = true;
     pipewire = {
       enable = true;
