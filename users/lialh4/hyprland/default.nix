@@ -11,9 +11,9 @@
       "$browser" = "firefox";
       "$pwd" = "1password";
       "$mainMod" = "SUPER";
-      execr-once = [
+      exec-once = [
         "uwsm-app -t service -s s -u $statusbar.service -- $statusbar"
-        "uwsm-app -t service -s b -u $pwd.service -- $pwd"
+        "[ws name:Password silent] uwsm-app -t service -s b -u $pwd.service -- $pwd"
       ];
       general = {
         border_size = 5;
@@ -34,10 +34,10 @@
         "$mainMod, R, execr, uwsm-app -- $launcher"
         "$mainMod, T, execr, uwsm-app -- $terminal"
         "$mainMod, B, execr, uwsm-app -- $browser"
+        ", XF86Favorites, workspace, name:Password"
+        "SHIFT, XF86Favorites, movetoworkspace, name:Password"
       ]
-      ++ [
 
-      ]
       ++ (lib.concatMap (
         k:
         let
@@ -50,6 +50,16 @@
           "$mainMod SHIFT, ${ks}, movetoworkspace, ${ws}"
         ]
       ) (lib.range 0 9));
+      bindl = [
+        ", XF86AudioMute, execr, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, execr, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      ];
+      bindle = [
+        ", XF86AudioRaiseVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86MonBrightnessUp, execr, brightnessctl set 5%+"
+        ", XF86MonBrightnessDown, execr, brightnessctl set 5%-"
+      ];
     };
   };
 }

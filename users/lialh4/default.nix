@@ -23,6 +23,7 @@
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
       # hyprlauncher
+      wev
       nixfmt
       materialgram
     ];
