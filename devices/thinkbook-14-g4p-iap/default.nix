@@ -13,10 +13,6 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  services.openssh.enable = true;
-
   environment.systemPackages = with pkgs; [
     sbctl
     brightnessctl

@@ -20,14 +20,6 @@
     }:
     {
       nixosConfigurations = {
-        vbox-in-fedora = nixpkgs.lib.nixosSystem {
-          modules = [
-            home-manager.nixosModules.default
-            ./system
-            ./users
-            ./devices/vbox-in-fedora
-          ];
-        };
         thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {
           modules = [
             lanzaboote.nixosModules.lanzaboote
