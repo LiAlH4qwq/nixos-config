@@ -16,6 +16,7 @@
 [system/state/default.nix](./system/state/default.nix) 和 [users/lialh4/state/default.nix](./users/lialh4/state/default.nix) 中的版本号反映的是系统安装时的版本，非必要时，仅在安装系统安装之初更改其为安装时的版本号。
 
 ## 协议
+
 除非额外注明来源，配置文件均适用于 [MIT](./LICENSE) 协议。
 
 若有额外注明来源，则以链接所指仓库的协议为准。
