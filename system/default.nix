@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./state
     ./fonts
     ./i18n
   ];

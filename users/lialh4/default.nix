@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./state
     ./i18n
     ./xcursor
     ./hyprtoolkit
@@ -58,9 +59,5 @@
     programs.ashell.settings = import ./ashell;
     programs.kitty.settings = import ./kitty;
     programs.git.settings = import ./git;
-
-    # Reflects NixOS version when system installed.
-    # Do not change it unless needed.
-    home.stateVersion = "25.11";
   };
 }
