@@ -35,14 +35,19 @@
         "$mainMod, T, execr, uwsm-app -- $terminal"
         "$mainMod, B, execr, uwsm-app -- $browser"
       ]
+      ++ [
+
+      ]
       ++ (lib.concatMap (
-        i:
+        k:
         let
-          s = toString i;
+          ks = toString k;
+          w = if k == 0 then 10 else k;
+          ws = toString w;
         in
         [
-          "$mainMod, ${s}, workspace, ${s}"
-          "$mainMod SHIFT, ${s}, movetoworkspace, ${s}"
+          "$mainMod, ${ks}, workspace, ${ws}"
+          "$mainMod SHIFT, ${ks}, movetoworkspace, ${ws}"
         ]
       ) (lib.range 0 9));
     };
