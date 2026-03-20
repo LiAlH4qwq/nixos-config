@@ -13,6 +13,7 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
+
   boot.initrd.systemd.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -29,68 +30,72 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  boot.initrd.luks.devices = {
-    root.device = "/dev/disk/by-uuid/284a5404-8946-4a5f-8dfb-a1edf696f906";
-  };
-
   services.upower.enable = true;
 
   hardware.enableRedistributableFirmware = true;
 
-  fileSystems."/" = {
-    device = "/dev/mapper/root";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "subvol=@"
-    ];
+  boot.initrd.luks.devices = {
+    root.device = "/dev/disk/by-uuid/284a5404-8946-4a5f-8dfb-a1edf696f906";
+    data.device = "/dev/disk/by-uuid/5868b3e9-306f-44fc-8414-aa8132c60a1c";
   };
 
-  fileSystems."/nix" = {
-    device = "/dev/mapper/root";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "noatime"
-      "subvol=@nix"
-    ];
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "compress=zstd"
+        "subvol=@"
+      ];
+    };
 
-  fileSystems."/var/log" = {
-    device = "/dev/mapper/root";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "noatime"
-      "subvol=@log"
-    ];
-  };
+    "/nix" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "compress=zstd"
+        "noatime"
+        "subvol=@nix"
+      ];
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/mapper/root";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "subvol=@home"
-    ];
-  };
+    "/var/log" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "compress=zstd"
+        "noatime"
+        "subvol=@log"
+      ];
+    };
 
-  fileSystems."/root" = {
-    device = "/dev/mapper/root";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "subvol=@root"
-    ];
-  };
+    "/home" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "compress=zstd"
+        "subvol=@home"
+      ];
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6E2A-9336";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
+    "/root" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "compress=zstd"
+        "subvol=@root"
+      ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/6E2A-9336";
+      fsType = "vfat";
+    };
+
+    "/mnt/data" = {
+      device = "/dev/mapper/data";
+      fsType = "xfs";
+    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
