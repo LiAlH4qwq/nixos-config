@@ -2,6 +2,7 @@
   imports = [
     ./xcursor
     ./hyprtoolkit
+    ./vscode
   ];
 
   users.extraUsers.lialh4 = {
@@ -23,6 +24,7 @@
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
       # hyprlauncher
+      nixfmt
       materialgram
     ];
     i18n.inputMethod = {
@@ -58,7 +60,6 @@
       kitty.enable = true;
       foot.enable = true;
       git.enable = true;
-      vscode.enable = true;
       ashell.enable = true;
       vicinae = {
         enable = true;
