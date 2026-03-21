@@ -6,6 +6,7 @@
     ./xcursor
     ./hyprland
     ./hyprtoolkit
+    ./flameshot
     ./syncthing
     ./vicinae
     ./vscode
