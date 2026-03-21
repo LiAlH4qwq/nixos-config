@@ -44,4 +44,22 @@
       "Temperature"
     ];
   };
+  settings = {
+    shutdown_cmd = "poweroff";
+    suspend_cmd = "systemctl suspend";
+    hibernate_cmd = "systemctl hibernate";
+    reboot_cmd = "reboot";
+    logout_cmd = "loginctl kill-session $XDG_SESSION_ID";
+    vpn_more_cmd = "clash-verge";
+    peripheral_battery_format = "IconAndPercentage";
+    indicators = [
+      "IdleInhibitor"
+      "Bluetooth"
+      "Vpn"
+      "Network"
+      "Audio"
+      "PowerProfile"
+      "Battery"
+    ];
+  };
 }

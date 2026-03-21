@@ -6,6 +6,10 @@
     ./i18n
   ];
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   boot.plymouth.enable = true;
@@ -60,7 +64,11 @@
 
   services = {
     dbus.implementation = "broker";
-    # displayManager.gdm.enable = true;
+    # displayManager.sddm = {
+    #   enable = true;
+    #   autoNumlock = true;
+    #   wayland.enable = true;
+    # };
     openssh.enable = true;
     pipewire = {
       enable = true;
