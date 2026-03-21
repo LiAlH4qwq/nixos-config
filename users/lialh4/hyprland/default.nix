@@ -9,7 +9,7 @@
       "$launcher" = "vicinae toggle";
       "$clipboard" = "vicinae vicinae://extensions/vicinae/clipboard/history";
       "$terminal" = "kitty";
-      "$explorer" = "nautilus";
+      "$explorer" = "nautilus -w";
       "$browser" = "firefox";
       "$pwd" = "1password";
       "$mainMod" = "SUPER";
@@ -18,10 +18,10 @@
         "[ws name:Password silent] uwsm-app -t service -s b -u $pwd.service -- $pwd"
       ];
       general = {
-        border_size = 5;
+        border_size = 4;
         # Look like double? Actually they are same!
-        gaps_in = 5;
-        gaps_out = 10;
+        gaps_in = 0;
+        gaps_out = 0;
         "col.active_border" = "0xffd7827e";
         "col.inactive_border" = "0xff9893a5";
       };

@@ -4,7 +4,7 @@
     enable = true;
     type = "fcitx5";
     fcitx5 = {
-      waylandFrontend = false;
+      waylandFrontend = true;
       addons = with pkgs; [
         fcitx5-gtk
         fcitx5-rose-pine
