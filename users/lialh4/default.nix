@@ -44,7 +44,10 @@
       # hyprlauncher
       wev
       nixfmt
+      nautilus
       materialgram
+      # For clipboard history of vicinae.
+      wl-clipboard-rs
       kdePackages.elisa
     ];
     services = {

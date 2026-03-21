@@ -8,6 +8,7 @@
       "$statusbar" = "ashell";
       "$launcher" = "vicinae toggle";
       "$terminal" = "kitty";
+      "$explorer" = "nautilus";
       "$browser" = "firefox";
       "$pwd" = "1password";
       "$mainMod" = "SUPER";
@@ -33,6 +34,7 @@
         "$mainMod, Q, killactive"
         "$mainMod, R, execr, uwsm-app -- $launcher"
         "$mainMod, T, execr, uwsm-app -- $terminal"
+        "$mainMod, E, execr, uwsm-app -- $explorer"
         "$mainMod, B, execr, uwsm-app -- $browser"
         ", XF86Favorites, workspace, name:Password"
         "SHIFT, XF86Favorites, movetoworkspace, name:Password"
