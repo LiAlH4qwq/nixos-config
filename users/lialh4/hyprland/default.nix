@@ -38,6 +38,13 @@
         "$mainMod, T, execr, uwsm-app -- $terminal"
         "$mainMod, E, execr, uwsm-app -- $explorer"
         "$mainMod, B, execr, uwsm-app -- $browser"
+        # Screenshot keys on Thinkbook 14 G4+ IAP.
+        # Screenshot key.
+        "$mainMod SHIFT, S, execr, uwsm-app -- hyprshot -zm region"
+        # Fn + Screenshot key.
+        ", Print, execr, uwsm-app -- hyprshot -zm window"
+        # Fn + Ctrl + Screenshot key.
+        "CTRL, Print, execr, uwsm-app -- hyprshot -zm output"
         ", XF86Favorites, workspace, name:Password"
         "SHIFT, XF86Favorites, movetoworkspace, name:Password"
       ]
