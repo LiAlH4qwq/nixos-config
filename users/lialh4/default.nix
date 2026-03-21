@@ -21,6 +21,24 @@
     ];
   };
   home-manager.users.lialh4 = {
+    gtk = rec {
+      enable = true;
+      colorScheme = "light";
+      theme = gtk4.theme;
+      iconTheme = gtk4.iconTheme;
+      # gtk4 needs to force enable.
+      gtk4 = {
+        enable = true;
+        theme = {
+          name = "rose-pine-dawn";
+          package = pkgs.rose-pine-gtk-theme;
+        };
+        iconTheme = {
+          name = "rose-pine-dawn";
+          package = pkgs.rose-pine-icon-theme;
+        };
+      };
+    };
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
       # hyprlauncher
