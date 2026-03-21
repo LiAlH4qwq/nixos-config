@@ -39,6 +39,7 @@
         "$mainMod, E, execr, uwsm-app -- $explorer"
         "$mainMod, B, execr, uwsm-app -- $browser"
         # Screenshot keys on Thinkbook 14 G4+ IAP.
+        # Screenshot key of this device is hardcoded to Win + Shift + S.
         # Screenshot key.
         "$mainMod SHIFT, S, execr, uwsm-app -- hyprshot -zm region"
         # Fn + Screenshot key.
