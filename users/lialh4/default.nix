@@ -27,6 +27,7 @@
       wev
       nixfmt
       materialgram
+      kdePackages.elisa
     ];
     services = {
       hyprpolkitagent.enable = true;
