@@ -7,6 +7,7 @@
     settings = {
       "$statusbar" = "ashell";
       "$launcher" = "vicinae toggle";
+      "$clipboard" = "vicinae vicinae://extensions/vicinae/clipboard/history";
       "$terminal" = "kitty";
       "$explorer" = "nautilus";
       "$browser" = "firefox";
@@ -33,6 +34,7 @@
         "$mainMod, Delete, execr, uwsm stop"
         "$mainMod, Q, killactive"
         "$mainMod, R, execr, uwsm-app -- $launcher"
+        "$mainMod, V, execr, uwsm-app -- $clipboard"
         "$mainMod, T, execr, uwsm-app -- $terminal"
         "$mainMod, E, execr, uwsm-app -- $explorer"
         "$mainMod, B, execr, uwsm-app -- $browser"
