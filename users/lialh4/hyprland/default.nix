@@ -31,7 +31,7 @@
       input.natural_scroll = true;
       input.touchpad.natural_scroll = true;
       bind = [
-        "$mainMod, Delete, execr, uwsm stop"
+        "$mainMod, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
         "$mainMod, Q, killactive"
         "$mainMod, R, execr, uwsm-app -- $launcher"
         "$mainMod, V, execr, uwsm-app -- $clipboard"

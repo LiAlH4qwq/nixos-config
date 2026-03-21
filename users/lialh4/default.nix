@@ -7,6 +7,7 @@
     ./hyprland
     ./hyprtoolkit
     ./hyprshot
+    ./mako
     ./syncthing
     ./vicinae
     ./vscode
@@ -54,10 +55,8 @@
     services = {
       hyprpolkitagent.enable = true;
       hyprpaper.enable = true;
-      mako.enable = true;
     };
     services.hyprpaper.settings = import ./hyprpaper;
-    services.mako.settings = import ./mako;
     # when using genAttrs,
     # it will broken with error:
     # programs field already defined.
