@@ -32,8 +32,6 @@
 
   services.upower.enable = true;
 
-  hardware.enableRedistributableFirmware = true;
-
   boot.initrd.luks.devices = {
     root.device = "/dev/disk/by-uuid/284a5404-8946-4a5f-8dfb-a1edf696f906";
     data.device = "/dev/disk/by-uuid/5868b3e9-306f-44fc-8414-aa8132c60a1c";

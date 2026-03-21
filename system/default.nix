@@ -10,11 +10,23 @@
 
   boot.plymouth.enable = true;
 
-  # replace sudo with run0.
+  hardware = {
+    enableRedistributableFirmware = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+      ];
+    };
+  };
+
   security = {
+    # replace sudo with run0.
     sudo.enable = false;
     polkit = {
       enable = true;
+      # allow users to shutdown or reboot computer.
       extraConfig = ''
         polkit.addRule(function(action, subject) {
           if (
@@ -52,7 +64,15 @@
     openssh.enable = true;
     pipewire = {
       enable = true;
+      socketActivation = true;
+      audio.enable = true;
       pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
   };
 
