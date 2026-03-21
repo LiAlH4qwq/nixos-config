@@ -21,5 +21,5 @@ _: {
     #   target = ".local/share/sounds/notification.ogg";
     #   source = "./notification.ogg";
     # };
-  };1
+  };
 }
