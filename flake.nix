@@ -19,16 +19,23 @@
       ...
     }:
     {
-      nixosConfigurations = {
-        thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {
-          modules = [
+      nixosConfigurations =
+        let
+          commons = [
             lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.default
             ./system
             ./users
-            ./devices/thinkbook-14-g4p-iap
-          ];
+          ]
+          ++ modules;
+          modules = [ ./system/modules ];
+        in
+        {
+          thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {
+            modules = commons ++ [
+              ./devices/thinkbook-14-g4p-iap
+            ];
+          };
         };
-      };
     };
 }

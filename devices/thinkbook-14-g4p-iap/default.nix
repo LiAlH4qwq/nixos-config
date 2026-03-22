@@ -9,7 +9,12 @@
     ./hw
   ];
 
-  liuxu.system.laptop.enable = true;
+  liuxu = {
+    system = {
+      laptop.enable = true;
+      podman.enable = true;
+    };
+  };
 
   networking.hostName = "LiAlH4-Laptop-Nix";
 
