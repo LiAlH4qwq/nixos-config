@@ -43,14 +43,13 @@
     };
     # these hasn't been available as a program in release 25.11.
     home.packages = with pkgs; [
-      # hyprlauncher
-      wev
-      nixfmt
-      nautilus
-      lollypop
-      materialgram
-      # For clipboard history of vicinae.
-      wl-clipboard-rs
+      wev # Input inspect tool
+      nixfmt # Nix file formatter
+      nautilus # Explorer
+      lollypop # Music player
+      clapper # Video player
+      materialgram # Telegram with material design
+      wl-clipboard-rs # Clipboard history of vicinae
     ];
     services = {
       hyprpolkitagent.enable = true;
