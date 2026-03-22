@@ -12,7 +12,6 @@
   appearance = {
     scale_factor = 1.1;
     style = "Solid";
-    opacity = 0.85;
     text_color = "#575279";
     primary_color = "#d7827e";
     secondary_color = "#b4637a";
