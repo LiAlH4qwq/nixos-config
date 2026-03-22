@@ -10,7 +10,8 @@
   # these hasn't been available as a program in release 25.11.
   home.packages = with pkgs; [
     wev # Input inspect tool
-    nixfmt # Nix file formatter
+    nixd # Nix LSP
+    nixfmt # Nix formatter
     wl-clipboard-rs # Clipboard history of vicinae
   ];
 
