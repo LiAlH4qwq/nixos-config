@@ -4,6 +4,7 @@
     ./state
     ./fonts
     ./i18n
+    ./laptop
   ];
 
   nix.settings.experimental-features = [
