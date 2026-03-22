@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home-manager.users.lialh4.i18n.inputMethod = {
+  i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
     fcitx5 = {

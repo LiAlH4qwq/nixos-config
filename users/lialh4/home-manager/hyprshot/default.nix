@@ -1,5 +1,5 @@
 _: {
-  home-manager.users.lialh4.programs.hyprshot = {
+  programs.hyprshot = {
     enable = true;
     saveLocation = "$HOME/Pictures/Screenshots";
   };

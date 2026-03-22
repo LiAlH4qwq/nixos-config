@@ -1,5 +1,5 @@
 _: {
-  home-manager.users.lialh4.services.syncthing = {
+  services.syncthing = {
     enable = true;
   };
 }

@@ -1,5 +1,5 @@
 _: {
-  home-manager.users.lialh4.programs.vicinae = {
+  programs.vicinae = {
     enable = true;
     systemd = {
       enable = true;

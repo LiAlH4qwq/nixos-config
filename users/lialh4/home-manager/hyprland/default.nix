@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  home-manager.users.lialh4.wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = {
     enable = true;
     # Due to conflict with home-manager
     systemd.enable = false;

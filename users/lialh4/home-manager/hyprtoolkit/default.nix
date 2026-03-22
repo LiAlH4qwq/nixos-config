@@ -10,7 +10,7 @@
 # accent_secondary <--> Love
 
 _: {
-  home-manager.users.lialh4.home.file.hyprtoolkit = {
+  home.file.hyprtoolkit = {
     target = ".config/hypr/hyprtoolkit.conf";
     text = ''
       background = 0xfffaf4ed
