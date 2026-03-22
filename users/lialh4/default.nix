@@ -47,7 +47,7 @@
       wev
       nixfmt
       nautilus
-      gnome-music
+      lollypop
       materialgram
       # For clipboard history of vicinae.
       wl-clipboard-rs
