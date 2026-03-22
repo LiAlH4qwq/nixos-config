@@ -11,10 +11,6 @@
   home.packages = with pkgs; [
     wev # Input inspect tool
     nixfmt # Nix file formatter
-    nautilus # Explorer
-    lollypop # Music player
-    clapper # Video player
-    materialgram # Telegram with material design
     wl-clipboard-rs # Clipboard history of vicinae
   ];
 
