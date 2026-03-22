@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options.liuxu.system.podman.enable = lib.mkOption {
     type = lib.types.bool;
@@ -23,5 +28,8 @@
         defaultNetwork.settings.dns_enabled = true;
       };
     };
+    environment.systemPackages = with pkgs; [
+      podman-compose
+    ];
   };
 }
