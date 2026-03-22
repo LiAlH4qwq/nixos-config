@@ -14,7 +14,7 @@
         clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
         terminal = "kitty";
         explorer = "nautilus -w";
-        taskmgr = "mission-center";
+        taskmgr = "missioncenter";
         browser = "firefox";
         pwd = "1password";
       in
