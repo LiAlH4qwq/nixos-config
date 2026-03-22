@@ -3,32 +3,10 @@
   imports = [
     ./state
     ./i18n
-    ./xcursor
-    ./hypr
-    ./mako
+    ./git
+    ./gui
     ./syncthing
-    ./vicinae
-    ./vscode
   ];
-
-  gtk = rec {
-    enable = true;
-    colorScheme = "light";
-    theme = gtk4.theme;
-    iconTheme = gtk4.iconTheme;
-    # gtk4 needs to force enable.
-    gtk4 = {
-      enable = true;
-      theme = {
-        name = "rose-pine-dawn";
-        package = pkgs.rose-pine-gtk-theme;
-      };
-      iconTheme = {
-        name = "rose-pine-dawn";
-        package = pkgs.rose-pine-icon-theme;
-      };
-    };
-  };
 
   # these hasn't been available as a program in release 25.11.
   home.packages = with pkgs; [
@@ -47,13 +25,5 @@
   programs = {
     home-manager.enable = true;
     fish.enable = true;
-    firefox.enable = true;
-    kitty.enable = true;
-    foot.enable = true;
-    git.enable = true;
-    ashell.enable = true;
   };
-  programs.ashell.settings = import ./ashell;
-  programs.kitty.settings = import ./kitty;
-  programs.git.settings = import ./git;
 }
