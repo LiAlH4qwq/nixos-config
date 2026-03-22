@@ -10,7 +10,7 @@
 
 {
   appearance = {
-    # scale_factor = 1.5;
+    scale_factor = 1.1;
     style = "Solid";
     opacity = 0.75;
     text_color = "#575279";
@@ -24,12 +24,12 @@
   };
   modules = {
     left = [
-      "Workspaces"
       "SystemInfo"
+      "Workspaces"
+      "WindowTitle"
     ];
     center = [
       "Clock"
-      "WindowTitle"
     ];
     right = [
       "MediaPlayer"

@@ -15,7 +15,7 @@
       "$mainMod" = "SUPER";
       exec-once = [
         "uwsm-app -t service -s s -u $statusbar.service -- $statusbar"
-        "[ws name:Password silent] uwsm-app -t service -s b -u $pwd.service -- $pwd"
+        "[workspace name:Password silent] uwsm-app -t service -s b -u $pwd.service -- $pwd"
       ];
       general = {
         border_size = 4;
@@ -33,11 +33,14 @@
       bind = [
         "$mainMod, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
         "$mainMod, Q, killactive"
+        "$mainMod SHIFT, Q, forcekillactive"
         "$mainMod, R, execr, uwsm-app -- $launcher"
         "$mainMod, V, execr, uwsm-app -- $clipboard"
         "$mainMod, T, execr, uwsm-app -- $terminal"
         "$mainMod, E, execr, uwsm-app -- $explorer"
         "$mainMod, B, execr, uwsm-app -- $browser"
+        "$mainMod ALT, Tab, workspace, empty"
+        "$mainMod ALT SHIFT, Tab, movetoworkspace, empty"
         # Screenshot keys on Thinkbook 14 G4+ IAP.
         # Screenshot key of this device is hardcoded to Win + Shift + S.
         # Screenshot key.
@@ -65,6 +68,10 @@
       bindl = [
         ", XF86AudioMute, execr, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioMicMute, execr, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      ];
+      binde = [
+        "$mainMod, Tab, workspace, +1"
+        "$mainMod SHIFT, Tab, workspace, -1"
       ];
       bindle = [
         ", XF86AudioRaiseVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
