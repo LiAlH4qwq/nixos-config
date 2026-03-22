@@ -47,10 +47,10 @@
       wev
       nixfmt
       nautilus
+      gnome-music
       materialgram
       # For clipboard history of vicinae.
       wl-clipboard-rs
-      kdePackages.elisa
     ];
     services = {
       hyprpolkitagent.enable = true;
