@@ -13,6 +13,7 @@
     system = {
       laptop.enable = true;
       podman.enable = true;
+      virtualbox.enable = true;
     };
   };
 
