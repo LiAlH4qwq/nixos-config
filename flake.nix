@@ -11,8 +11,7 @@
     };
   };
   outputs =
-    inputs@{
-      self,
+    {
       nixpkgs,
       lanzaboote,
       home-manager,
