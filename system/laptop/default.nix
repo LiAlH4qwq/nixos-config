@@ -7,7 +7,7 @@
     description = ''
       Liuxu: Whether to enable the laptop support.
         Currently enables UPower that handles battery usage,
-        but lid events are handle by loginctl.
+        but lid events are handled by loginctl.
     '';
   };
 
