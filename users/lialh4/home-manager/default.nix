@@ -4,9 +4,7 @@
     ./state
     ./i18n
     ./xcursor
-    ./hyprland
-    ./hyprtoolkit
-    ./hyprshot
+    ./hypr
     ./mako
     ./syncthing
     ./vicinae
@@ -42,11 +40,6 @@
     materialgram # Telegram with material design
     wl-clipboard-rs # Clipboard history of vicinae
   ];
-
-  services = {
-    hyprpolkitagent.enable = true;
-    hyprpaper.enable = true;
-  };
 
   # when using genAttrs,
   # it will broken with error:
