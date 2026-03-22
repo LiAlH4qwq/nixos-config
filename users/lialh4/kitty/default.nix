@@ -5,7 +5,7 @@ rec {
   background = "#faf4ed";
   selection_foreground = foreground;
   selection_background = "#dfdad9";
-  cursor = "#cecacd";
+  cursor = foreground;
   cursor_text_color = foreground;
   url_color = color5;
   active_tab_foreground = foreground;
