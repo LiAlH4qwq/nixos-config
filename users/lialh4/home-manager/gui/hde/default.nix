@@ -3,6 +3,7 @@
   imports = [
     ./ashell
     ./hypr
+    ./i18n
     ./mako
     ./vicinae
     ./xcursor

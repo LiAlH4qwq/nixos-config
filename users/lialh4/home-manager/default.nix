@@ -2,7 +2,6 @@
 {
   imports = [
     ./state
-    ./i18n
     ./git
     ./gui
     ./syncthing
