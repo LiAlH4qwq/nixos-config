@@ -1,6 +1,6 @@
 # source: https://github.com/rose-pine/kitty/blob/582d0d0d1acf8c41ff8b4bde77f55946a4027c5e/dist/rose-pine-dawn.conf
 rec {
-  background_opacity = 0.75;
+  background_opacity = 0.85;
   foreground = "#575279";
   background = "#faf4ed";
   selection_foreground = foreground;
