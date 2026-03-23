@@ -17,11 +17,6 @@
     wl-clipboard-rs # Clipboard history of vicinae
   ];
 
-  # when using genAttrs,
-  # it will broken with error:
-  # programs field already defined.
-  programs = {
-    home-manager.enable = true;
-    fish.enable = true;
-  };
+  # Home manager need this to bootstrap.
+  programs.home-manager.enable = true;
 }
