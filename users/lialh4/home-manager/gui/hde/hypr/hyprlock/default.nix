@@ -13,6 +13,8 @@ _: {
         };
       in
       {
+        bezier = [ "linear, 1, 1, 0, 0" ];
+        animation = [ "fade, 1, 10, linear" ];
         background = [
           {
             blur_passes = 3;
@@ -41,7 +43,7 @@ _: {
           {
             font_size = 32;
             color = "0xffffffff";
-            position = "0, -2%";
+            position = "0, -3%";
             text = "$USER";
           }
           # Hitokoto
