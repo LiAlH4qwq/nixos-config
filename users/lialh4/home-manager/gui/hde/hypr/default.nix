@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./hypridle
     ./hyprland
     ./hyprlock
     ./hyprpaper
