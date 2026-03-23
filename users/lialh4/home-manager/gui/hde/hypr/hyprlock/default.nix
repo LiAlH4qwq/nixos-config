@@ -8,6 +8,7 @@ _: {
         colors = {
           base = "0xfffaf4ed";
           surface = "0xfffffaf3";
+          love = "0xffb4637a";
           text = "0xff575279";
         };
       in
@@ -26,14 +27,29 @@ _: {
             font_size = 128;
             color = "0xffffffff";
             position = "0, 30%";
-            text = "cmd[update:1000] date +%H:%M";
+            text = "$TIME";
+            # text = "cmd[update:1000] date +%H:%M";
           }
           # Date
           {
             font_size = 32;
             color = "0xffffffff";
-            position = "0, 45%";
-            text = "cmd[update:1000] date +%A,\ %B\ %d";
+            position = "0, 36%";
+            text = "cmd[update:1000] date +%A,\\ %B\\ %d";
+          }
+          # Username
+          {
+            font_size = 32;
+            color = "0xffffffff";
+            position = "0, -2%";
+            text = "$USER";
+          }
+          # Hitokoto
+          {
+            font_size = 24;
+            color = "0xffffffff";
+            position = "0, -20%";
+            text = "cmd[update:0] bun ~/.config/hypr/hyprlock/hitokoto.ts";
           }
         ];
         # Avatar
@@ -42,7 +58,7 @@ _: {
             size = 300;
             border_size = 0;
             shadow_passes = 3;
-            position = "0, 0%";
+            position = "0, 10%";
             path = "~/Pictures/Avatar.jpg";
           }
         ];
@@ -50,8 +66,12 @@ _: {
           {
             fade_on_empty = false;
             shadow_passes = 3;
+            position = "0, -12%";
             inner_color = colors.surface;
-            position = "0, -15%";
+            outer_color = colors.surface;
+            fail_color = colors.love;
+            placeholder_text = "Password...";
+            fail_text = "$FAIL";
           }
         ];
       };

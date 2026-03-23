@@ -41,6 +41,7 @@
           "${mod}, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
           "${mod}, Q, killactive"
           "${mod} SHIFT, Q, forcekillactive"
+          "${mod}, L, execr, ${startBg "hyprlock"}"
           "${mod}, R, execr, uwsm-app -- ${launcher}"
           "${mod}, V, execr, uwsm-app -- ${clipboard}"
           "${mod}, T, execr, uwsm-app -- ${terminal}"
