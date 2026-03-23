@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./ashell
@@ -27,4 +27,29 @@
       };
     };
   };
+  qt = rec {
+    enable = true;
+    platformTheme.name = "qtct";
+    qt5ctSettings = qt6ctSettings;
+    qt6ctSettings = {
+      Appearance = {
+        style = "kvantum";
+        icon_theme = "rose-pine-dawn";
+        standar_dialogs = "xdgdesktopportal";
+      };
+    };
+  };
+  xdg.configFile = {
+    "Kvantum/kvantum.kvconfig".text = lib.generators.toINI { } {
+      General = {
+        theme = "rose-pine-dawn-iris";
+      };
+    };
+    "Kvantum/rose-pine-dawn-iris".source =
+      "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/rose-pine-dawn-iris";
+  };
+  home.packages = with pkgs; [
+    kdePackages.qtstyleplugin-kvantum
+    kdePackages.elisa
+  ];
 }
