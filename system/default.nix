@@ -91,6 +91,7 @@
     # these programs can't simply be enabled only in the user scope.
     _1password-gui.enable = true;
     steam.enable = true;
+    hyprlock.enable = true;
     hyprland = {
       enable = true;
       withUWSM = true;

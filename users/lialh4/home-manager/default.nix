@@ -2,6 +2,7 @@
 {
   imports = [
     ./state
+    ./bun
     ./git
     ./gui
     ./syncthing

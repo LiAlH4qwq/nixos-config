@@ -1,6 +1,7 @@
 _: {
   imports = [
     ./hyprland
+    ./hyprlock
     ./hyprpaper
     ./hyprshot
     ./hyprtoolkit
