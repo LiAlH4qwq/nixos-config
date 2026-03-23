@@ -6,6 +6,7 @@
     ./git
     ./gui
     ./syncthing
+    ./shell
   ];
 
   # these hasn't been available as a program in release 25.11.
