@@ -78,4 +78,9 @@ _: {
         ];
       };
   };
+  xdg.configFile.hyprlock-hitokoto = {
+    force = true;
+    source = ./hitokoto.ts;
+    target = "hypr/hyprlock/hitokoto.ts";
+  };
 }
