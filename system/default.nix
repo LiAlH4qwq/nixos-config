@@ -2,12 +2,11 @@
 {
   imports = [
     ./state
+    ./boot
     ./fonts
     ./i18n
     ./nix
   ];
-
-  boot.plymouth.enable = true;
 
   hardware = {
     enableRedistributableFirmware = true;
