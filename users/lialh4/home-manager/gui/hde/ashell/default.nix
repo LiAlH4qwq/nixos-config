@@ -46,6 +46,9 @@ _: {
           "Temperature"
         ];
       };
+      window_title = {
+        truncate_title_after_length = 42;
+      };
       settings = {
         shutdown_cmd = "poweroff";
         suspend_cmd = "systemctl suspend";
