@@ -8,6 +8,7 @@
     ./gui
     ./syncthing
     ./shell
+    ./uv
   ];
 
   # these hasn't been available as a program in release 25.11.
