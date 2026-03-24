@@ -9,6 +9,7 @@
 
   liuxu = {
     system = {
+      fprint.enable = true;
       laptop.enable = true;
       podman.enable = true;
       virtualbox.enable = true;
