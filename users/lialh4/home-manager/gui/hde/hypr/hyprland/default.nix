@@ -19,6 +19,10 @@
         pwd = "1password";
       in
       {
+        misc = {
+          # Fallback to anime wallpaper when hyprpaper fails.
+          force_default_wallpaper = 2;
+        };
         general = {
           border_size = 4;
           gaps_in = 0;
@@ -41,6 +45,7 @@
           "${mod}, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
           "${mod}, Q, killactive"
           "${mod} SHIFT, Q, forcekillactive"
+          "${mod}, F, togglefloating"
           "${mod}, L, execr, ${startBg "hyprlock"}"
           "${mod}, R, execr, uwsm-app -- ${launcher}"
           "${mod}, V, execr, uwsm-app -- ${clipboard}"
@@ -88,6 +93,9 @@
           ", XF86AudioLowerVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           ", XF86MonBrightnessUp, execr, brightnessctl set 5%+"
           ", XF86MonBrightnessDown, execr, brightnessctl set 5%-"
+        ];
+        bindm = [
+          "${mod}, mouse:272, movewindow"
         ];
       };
   };
