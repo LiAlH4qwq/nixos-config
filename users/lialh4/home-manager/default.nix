@@ -15,6 +15,7 @@
     wev # Input inspect tool
     nixd # Nix LSP
     nixfmt # Nix formatter
+    reptyr # Re-attach programs to pty
     wl-clipboard-rs # Clipboard history of vicinae
   ];
 
