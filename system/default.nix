@@ -64,11 +64,7 @@
 
   services = {
     dbus.implementation = "broker";
-    # displayManager.sddm = {
-    #   enable = true;
-    #   autoNumlock = true;
-    #   wayland.enable = true;
-    # };
+    power-profiles-daemon.enable = true;
     openssh.enable = true;
     pipewire = {
       enable = true;
