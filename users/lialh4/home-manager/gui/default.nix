@@ -8,6 +8,7 @@
 
   programs = {
     firefox.enable = true;
+    obs-studio.enable = true;
   };
 
   # These programs hasn't been availible as programs config. :(
