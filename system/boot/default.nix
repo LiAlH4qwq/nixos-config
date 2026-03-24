@@ -6,7 +6,8 @@
 
   boot = {
     consoleLogLevel = 0;
-    stage2Greeting = "Liuxu: Welcome!";
+    # 😭 It's unsupported by NixOS 25.11.
+    # stage2Greeting = "Liuxu: Welcome!";
     plymouth = {
       enable = true;
       font = "${pkgs.maple-mono.NF-CN}/share/fonts/truetype/MapleMono-NF-CN-Regular.ttf";
