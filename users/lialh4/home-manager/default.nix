@@ -3,6 +3,7 @@
   imports = [
     ./state
     ./bun
+    ./claude-code
     ./git
     ./gui
     ./syncthing
