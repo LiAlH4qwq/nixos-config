@@ -53,8 +53,10 @@
           "${mod}, E, execr, uwsm-app -- ${explorer}"
           "${mod}, Escape, execr, uwsm-app -- ${taskmgr}"
           "${mod}, B, execr, uwsm-app -- ${browser}"
-          "${mod} ALT, Tab, workspace, empty"
-          "${mod} ALT SHIFT, Tab, movetoworkspace, empty"
+          "${mod} SHIFT, Tab, execr, hyprnome -mc"
+          "${mod} ALT SHIFT, Tab, execr, hyprnome -mcp"
+          "${mod}, grave, workspace, empty"
+          "${mod} SHIFT, grave, movetoworkspace, empty"
           # Screenshot keys on Thinkbook 14 G4+ IAP.
           # Screenshot key of this device is hardcoded to Win + Shift + S.
           # Fn + Screenshot key is Screen/Sysrq
@@ -86,7 +88,7 @@
         ];
         binde = [
           "${mod}, Tab, execr, hyprnome -c"
-          "${mod} SHIFT, Tab, execr, hyprnome -cp"
+          "${mod} ALT, Tab, execr, hyprnome -cp"
         ];
         bindle = [
           ", XF86AudioRaiseVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
