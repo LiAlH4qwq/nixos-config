@@ -78,6 +78,10 @@
     # i hate bash btw.
     fish.enable = true;
 
+    nix-ld = {
+      enable = true;
+    };
+
     # these programs can't simply be enabled only in the user scope.
     _1password-gui.enable = true;
     steam.enable = true;
