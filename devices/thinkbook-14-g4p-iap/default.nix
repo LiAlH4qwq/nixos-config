@@ -5,6 +5,7 @@
 {
   imports = [
     ./hw
+    ./fprint
   ];
 
   liuxu = {
@@ -22,6 +23,7 @@
 
   environment.systemPackages = with pkgs; [
     sbctl
+    usbutils # `lsusb`
     brightnessctl
   ];
 }
