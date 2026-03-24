@@ -51,7 +51,7 @@ _: {
             font_size = 24;
             color = "0xffffffff";
             position = "0, -20%";
-            text = "cmd[update:0] bun ~/.config/hypr/hyprlock/hitokoto.ts";
+            text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
           }
         ];
         # Avatar
