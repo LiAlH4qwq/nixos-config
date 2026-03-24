@@ -5,6 +5,12 @@
   ];
 
   boot = {
+    loader = {
+      timeout = 0;
+      systemd-boot = {
+        configurationLimit = 5;
+      };
+    };
     consoleLogLevel = 0;
     # 😭 It's unsupported by NixOS 25.11.
     # stage2Greeting = "Liuxu: Welcome!";
