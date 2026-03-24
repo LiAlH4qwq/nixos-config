@@ -85,8 +85,8 @@
           ", XF86AudioMicMute, execr, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ];
         binde = [
-          "${mod}, Tab, workspace, +1"
-          "${mod} SHIFT, Tab, workspace, -1"
+          "${mod}, Tab, execr, hyprnome -c"
+          "${mod} SHIFT, Tab, execr, hyprnome -cp"
         ];
         bindle = [
           ", XF86AudioRaiseVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"

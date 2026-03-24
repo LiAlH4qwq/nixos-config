@@ -3,6 +3,7 @@ _: {
     ./hypridle
     ./hyprland
     ./hyprlock
+    ./hyprnome
     ./hyprpaper
     ./hyprshot
     ./hyprtoolkit
