@@ -4,13 +4,8 @@
     ./state
     ./fonts
     ./i18n
+    ./nix
   ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nixpkgs.config.allowUnfree = true;
 
   boot.plymouth.enable = true;
 
