@@ -99,6 +99,19 @@
         bindm = [
           "${mod}, mouse:272, movewindow"
         ];
+        # No border, rounding, shadow when only one window.
+        workspace = [
+          "w[tv1], gapsout:0, gapsin:0"
+          "f[1], gapsout:0, gapsin:0"
+        ];
+        windowrule = [
+          "noborder, floating:0, onworkspace:w[tv1]"
+          "noborder, floating:0, onworkspace:f[1]"
+          "norounding, floating:0, onworkspace:w[tv1]"
+          "norounding, floating:0, onworkspace:f[1]"
+          "noshadow, floating:0, onworkspace:w[tv1]"
+          "noshadow, floating:0, onworkspace:f[1]"
+        ];
       };
   };
 }
