@@ -1,6 +1,5 @@
 {
-  lib,
-  pkgs,
+  config,
   ...
 }:
 {
@@ -77,4 +76,6 @@
       ];
     }
   ];
+
+  boot.resumeDevice = config.swapDevices [ 0 ].device;
 }
