@@ -25,4 +25,15 @@
   environment.systemPackages = with pkgs; [
     brightnessctl
   ];
+
+  services.logind.settings.Login = {
+    # 😭 The fingerprint reader is on the power button.
+    HandlePowerKey = "ignore";
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "suspend-then-hibernate";
+  };
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30min
+  '';
 }
