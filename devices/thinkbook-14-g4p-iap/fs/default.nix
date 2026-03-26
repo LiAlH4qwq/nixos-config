@@ -71,7 +71,10 @@
 
   swapDevices = [
     {
-      devices = "/dev/mapper/swap";
+      device = "/dev/mapper/swap";
+      options = [
+        "discard"
+      ];
     }
   ];
 }
