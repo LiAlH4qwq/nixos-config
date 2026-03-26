@@ -55,14 +55,17 @@
           {
             font_size = 24;
             color = "0xffffffff";
-            position = "0, -20%";
-            text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
+            position = "0, -18%";
+            text = ''
+              Or scan fingerprint...
+              $FPRINTFAIL
+            '';
           }
           # Hitokoto
           {
             font_size = 24;
             color = "0xffffffff";
-            position = "0, -28%";
+            position = "0, -30%";
             text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
           }
         ];
@@ -81,10 +84,11 @@
             fade_on_empty = false;
             shadow_passes = 3;
             position = "0, -12%";
+            size = "500, 90";
             inner_color = colors.surface;
             outer_color = colors.surface;
             fail_color = colors.love;
-            placeholder_text = "Password...";
+            placeholder_text = "Input password...";
             fail_text = "Please try again...";
           }
         ];

@@ -98,4 +98,8 @@
       tunMode = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    usbutils # `lsusb`
+  ];
 }

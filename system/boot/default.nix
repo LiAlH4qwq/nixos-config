@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./kernel
@@ -7,7 +7,9 @@
   boot = {
     loader = {
       timeout = 0;
+      efi.canTouchEfiVariables = true;
       systemd-boot = {
+        enable = lib.mkDefault true;
         configurationLimit = 5;
       };
     };

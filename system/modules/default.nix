@@ -3,6 +3,7 @@ _: {
     ./fprint
     ./laptop
     ./podman
+    ./secureboot
     ./virtualbox
   ];
 }
