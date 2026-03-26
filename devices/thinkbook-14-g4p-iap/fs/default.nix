@@ -69,5 +69,9 @@
     };
   };
 
-  swapDevices.swap.devices = "/dev/mapper/swap";
+  swapDevices = [
+    {
+      devices = "/dev/mapper/swap";
+    }
+  ];
 }
