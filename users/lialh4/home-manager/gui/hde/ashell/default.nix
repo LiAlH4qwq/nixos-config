@@ -51,7 +51,7 @@ _: {
       };
       settings = {
         shutdown_cmd = "poweroff";
-        suspend_cmd = "systemctl suspend";
+        suspend_cmd = "systemctl suspend-then-hibernate";
         hibernate_cmd = "systemctl hibernate";
         reboot_cmd = "reboot";
         logout_cmd = "loginctl kill-session $XDG_SESSION_ID";
