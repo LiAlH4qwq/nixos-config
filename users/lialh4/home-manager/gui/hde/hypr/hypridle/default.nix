@@ -29,7 +29,7 @@ _: {
         }
         {
           timeout = 900;
-          on-timeout = "systemctl suspend";
+          on-timeout = "sleep 5 && systemctl suspend";
         }
       ];
     };

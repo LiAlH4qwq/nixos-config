@@ -13,5 +13,8 @@
     services.fprintd = {
       enable = true;
     };
+    # Hyprlock supports parallel fingerprint and password auth like GDM.
+    # But this default configuration cause a non-paralell and no-prompt auth.
+    security.pam.services.hyprlock.fprintAuth = false;
   };
 }

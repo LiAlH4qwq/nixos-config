@@ -1,4 +1,5 @@
-_: {
+{ lib, osConfig, ... }:
+{
   programs.hyprlock = {
     enable = true;
     settings =
@@ -13,6 +14,10 @@ _: {
         };
       in
       {
+        auth.fingerprint = lib.mkIf osConfig.liuxu.system.fprint.enable {
+          # Typo? No, there's absolutely no typo.
+          enabled = true;
+        };
         bezier = [ "linear, 1, 1, 0, 0" ];
         animation = [ "fade, 1, 10, linear" ];
         background = [
@@ -46,11 +51,18 @@ _: {
             position = "0, -3%";
             text = "$USER";
           }
-          # Hitokoto
+          # Hint
           {
             font_size = 24;
             color = "0xffffffff";
             position = "0, -20%";
+            text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
+          }
+          # Hitokoto
+          {
+            font_size = 24;
+            color = "0xffffffff";
+            position = "0, -28%";
             text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
           }
         ];
@@ -73,7 +85,7 @@ _: {
             outer_color = colors.surface;
             fail_color = colors.love;
             placeholder_text = "Password...";
-            fail_text = "$FAIL";
+            fail_text = "Please try again...";
           }
         ];
       };

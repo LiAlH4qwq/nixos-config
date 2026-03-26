@@ -1,3 +1,6 @@
+# Patch to make 10a5:9800 fingerprint reader work.
+# Source: https://github.com/NixOS/nixpkgs/issues/324624#issuecomment-2692141032
+
 { pkgs, ... }:
 let
   fpcbep = pkgs.fetchzip {
