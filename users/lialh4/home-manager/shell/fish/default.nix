@@ -6,11 +6,5 @@ _: {
         uwsm start default
       end
     '';
-    shellAliases = {
-      cat = "bat";
-      ls = "eza";
-      # Fix strange `la = eza -a` misbehavivor.
-      la = "eza -la";
-    };
   };
 }
