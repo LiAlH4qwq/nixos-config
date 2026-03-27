@@ -56,10 +56,8 @@
             font_size = 24;
             color = "0xffffffff";
             position = "0, -18%";
-            text = ''
-              Or scan fingerprint...
-              $FPRINTFAIL
-            '';
+            text = "Or scan fingerprint...\n$FPRINTFAIL";
+            # text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hint.ts FPRINTFAIL=\\\"$FPRINTFAIL\\\"";
           }
           # Hitokoto
           {
@@ -94,9 +92,16 @@
         ];
       };
   };
-  xdg.configFile.hyprlock-hitokoto = {
-    force = true;
-    source = ./hitokoto.ts;
-    target = "hypr/hyprlock/hitokoto.ts";
+  xdg.configFile = {
+    # hyprlock-hint = {
+    #   force = true;
+    #   source = ./hint.ts;
+    #   target = "hypr/hyprlock/hint.ts";
+    # };
+    hyprlock-hitokoto = {
+      force = true;
+      source = ./hitokoto.ts;
+      target = "hypr/hyprlock/hitokoto.ts";
+    };
   };
 }
