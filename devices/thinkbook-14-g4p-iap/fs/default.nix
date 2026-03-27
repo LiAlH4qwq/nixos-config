@@ -7,10 +7,21 @@ _: {
 
   fileSystems = {
     "/" = {
-      device = "none";
+      device = "tmpfs";
       fsType = "tmpfs";
       options = [
+        "mode=755"
         "size=25%"
+      ];
+    };
+
+    "/nix" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+        "subvol=@nix"
       ];
     };
 
@@ -19,18 +30,9 @@ _: {
       fsType = "btrfs";
       neededForBoot = true;
       options = [
+        "noatime"
         "compress=zstd"
         "subvol=@persist"
-      ];
-    };
-
-    "/nix" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      options = [
-        "compress=zstd"
-        "noatime"
-        "subvol=@nix"
       ];
     };
 
