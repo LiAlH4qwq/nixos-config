@@ -12,14 +12,14 @@
         cat --> bat
         ls --> eza
     '';
+  };
 
-    config = lib.mkIf config.liuxu.system.better-shell.enable {
-      imports = [
-        ./bat
-        ./eza
-        ./fish
-        ./zoxide
-      ];
-    };
+  config = lib.mkIf config.liuxu.system.better-shell.enable {
+    imports = [
+      ./bat
+      ./eza
+      ./fish
+      ./zoxide
+    ];
   };
 }
