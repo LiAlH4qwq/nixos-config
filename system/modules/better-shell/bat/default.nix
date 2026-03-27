@@ -1,8 +1,11 @@
-_: {
-  programs = {
-    bat = {
-      enable = true;
+{ config, lib, ... }:
+{
+  config = lib.mkIf config.liuxu.system.better-shell.enable {
+    programs = {
+      bat = {
+        enable = true;
+      };
+      fish.shellAliases.cat = "bat";
     };
-    fish.shellAliases.cat = "bat";
   };
 }

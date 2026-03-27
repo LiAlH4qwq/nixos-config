@@ -1,5 +1,12 @@
-{ config, lib, ... }:
+{ lib, ... }:
 {
+  imports = [
+    ./bat
+    ./eza
+    ./fish
+    ./zoxide
+  ];
+
   options.liuxu.system.better-shell.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
@@ -12,14 +19,5 @@
         cat --> bat
         ls --> eza
     '';
-  };
-
-  config = lib.mkIf config.liuxu.system.better-shell.enable {
-    imports = [
-      ./bat
-      ./eza
-      ./fish
-      ./zoxide
-    ];
   };
 }
