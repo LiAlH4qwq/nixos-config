@@ -6,6 +6,7 @@
     ./fonts
     ./i18n
     ./nix
+    ./persist
   ];
 
   hardware = {

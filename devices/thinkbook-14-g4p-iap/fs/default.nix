@@ -7,11 +7,19 @@ _: {
 
   fileSystems = {
     "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = [
+        "size=25%"
+      ];
+    };
+
+    "/persist" = {
       device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [
         "compress=zstd"
-        "subvol=@"
+        "subvol=@persist"
       ];
     };
 
