@@ -17,6 +17,7 @@ _: {
     "/persist" = {
       device = "/dev/mapper/root";
       fsType = "btrfs";
+      neededForBoot = true;
       options = [
         "compress=zstd"
         "subvol=@persist"
