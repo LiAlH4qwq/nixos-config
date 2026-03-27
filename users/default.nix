@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-{
+_: {
   imports = [
     ./lialh4
   ];
 
   users = {
     mutableUsers = false;
-    defaultUserShell = pkgs.fish;
   };
   home-manager = {
     useGlobalPkgs = true;

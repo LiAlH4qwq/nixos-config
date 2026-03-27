@@ -75,9 +75,6 @@
   };
 
   programs = {
-    # i hate bash btw.
-    fish.enable = true;
-
     nix-ld = {
       enable = true;
     };

@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./better-shell
     ./bluetooth
     ./brightness
     ./fingerprint

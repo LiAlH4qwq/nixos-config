@@ -6,6 +6,7 @@ _: {
 
   liuxu = {
     system = {
+      better-shell.enable = true; # Default enable
       bluetooth.enable = true;
       brightness.enable = true;
       fingerprint.enable = true;
