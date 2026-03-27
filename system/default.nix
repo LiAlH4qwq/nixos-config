@@ -3,7 +3,6 @@
   imports = [
     ./state
     ./boot
-    ./fonts
     ./i18n
     ./nix
     ./persist

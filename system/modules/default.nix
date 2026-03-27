@@ -2,7 +2,7 @@ _: {
   imports = [
     ./bluetooth
     ./brightness
-    ./fprint
+    ./fingerprint
     ./laptop
     ./podman
     ./secureboot

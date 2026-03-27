@@ -14,7 +14,7 @@
         };
       in
       {
-        auth.fingerprint = lib.mkIf osConfig.liuxu.system.fprint.enable {
+        auth.fingerprint = lib.mkIf osConfig.liuxu.system.fingerprint.enable {
           # Typo? No, there's absolutely no typo.
           enabled = true;
         };

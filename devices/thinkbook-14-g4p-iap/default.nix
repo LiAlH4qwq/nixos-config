@@ -1,14 +1,14 @@
 _: {
   imports = [
     ./fs
-    ./fprint
+    ./fingerprint
   ];
 
   liuxu = {
     system = {
       bluetooth.enable = true;
       brightness.enable = true;
-      fprint.enable = true;
+      fingerprint.enable = true;
       laptop.enable = true;
       podman.enable = true;
       secureboot.enable = true;

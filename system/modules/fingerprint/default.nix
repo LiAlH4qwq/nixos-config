@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.system.fprint.enable = lib.mkOption {
+  options.liuxu.system.fingerprint.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -9,7 +9,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.fprint.enable {
+  config = lib.mkIf config.liuxu.system.fingerprint.enable {
     services.fprintd = {
       enable = true;
     };
