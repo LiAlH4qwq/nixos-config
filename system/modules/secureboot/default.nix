@@ -23,8 +23,14 @@
         pkiBundle = "/var/lib/sbctl";
       };
     };
-    environment.systemPackages = with pkgs; [
-      sbctl
-    ];
+    environment = {
+      systemPackages = with pkgs; [
+        sbctl
+      ];
+      # Make secureboot keys persistent.
+      persistence."/persist".directories = [
+        "/var/lib/sbctl"
+      ];
+    };
   };
 }
