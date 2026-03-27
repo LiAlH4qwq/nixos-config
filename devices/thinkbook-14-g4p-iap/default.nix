@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
-{
+_: {
   imports = [
     ./fs
     ./fprint
