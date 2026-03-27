@@ -2,6 +2,7 @@ _: {
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
+      "/var/lib/fprint"
       "/var/lib/nixos"
       "/var/lib/sbctl"
       "/var/lib/systemd/coredump"
