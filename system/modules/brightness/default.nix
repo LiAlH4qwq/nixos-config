@@ -1,0 +1,29 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.liuxu.system.brightness.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    example = true;
+    description = ''
+      Liuxu: Whether to enable the brightness control support.
+        Currently enables `brightnessctl`.
+    '';
+  };
+
+  config = lib.mkIf config.liuxu.system.brightness.enable {
+    environment = {
+      systemPackages = with pkgs; [
+        brightnessctl
+      ];
+      # Prevent brightness setting loss when rebooting.
+      persistence."/persist".directories = [
+        "/var/lib/systemd/backlight"
+      ];
+    };
+  };
+}

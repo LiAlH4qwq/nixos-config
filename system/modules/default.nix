@@ -1,5 +1,7 @@
 _: {
   imports = [
+    ./bluetooth
+    ./brightness
     ./fprint
     ./laptop
     ./podman

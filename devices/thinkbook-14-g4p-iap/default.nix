@@ -11,6 +11,8 @@
 
   liuxu = {
     system = {
+      bluetooth.enable = true;
+      brightness.enable = true;
       fprint.enable = true;
       laptop.enable = true;
       podman.enable = true;
@@ -22,9 +24,6 @@
   networking.hostName = "LiAlH4-Laptop-Nix";
   time.timeZone = "Asia/Shanghai";
   nixpkgs.hostPlatform = "x86_64-linux";
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.
