@@ -1,15 +1,26 @@
-_: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./hypridle
     ./hyprland
     ./hyprlock
-    ./hyprnome
     ./hyprpaper
     ./hyprshot
     ./hyprtoolkit
   ];
 
-  services = {
-    hyprpolkitagent.enable = true;
+  config = lib.mkIf config.liuxu.user.gui.enable {
+    services = {
+      hyprpolkitagent.enable = true;
+    };
+
+    home.packages = with pkgs; [
+      hyprnome
+    ];
   };
 }

@@ -6,25 +6,23 @@
     ./users
   ];
 
-  liuxu = {
-    system = {
-      better-shell.enable = true; # Default enable
-      bluetooth.enable = true;
-      brightness.enable = true;
-      fingerprint.enable = true;
-      helix.enable = true; # Default enable
-      laptop.enable = true;
-      network = {
-        enable = true; # Default enable
-        clash-verge.enable = true;
-      };
-      podman.enable = true;
-      secureboot.enable = true;
-      user-support = {
-        gui.enable = true;
-      };
-      virtualbox.enable = true;
+  liuxu.system = {
+    better-shell.enable = true; # Default enable
+    bluetooth.enable = true;
+    brightness.enable = true;
+    fingerprint.enable = true;
+    helix.enable = true; # Default enable
+    laptop.enable = true;
+    network = {
+      enable = true; # Default enable
+      clash-verge.enable = true;
     };
+    podman.enable = true;
+    secureboot.enable = true;
+    user-support = {
+      gui.enable = true;
+    };
+    virtualbox.enable = true;
   };
 
   networking.hostName = "LiAlH4-Laptop-Nix";
