@@ -1,0 +1,48 @@
+{ config, lib, ... }:
+{
+  options.liuxu.system.user-support.gui.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    example = true;
+    description = ''
+      Liuxu: Whether to enable the GUI support for users.
+        Note: If there's user uses GUI, this should be enabled.
+    '';
+  };
+
+  config = lib.mkIf config.liuxu.system.user-support.gui.enable {
+    programs = {
+      # these programs can't simply be enabled only in the user scope.
+      _1password-gui.enable = true;
+      steam.enable = true;
+      hyprlock.enable = true;
+      hyprland = {
+        enable = true;
+        withUWSM = true;
+        xwayland.enable = true;
+      };
+    };
+
+    services = {
+      pipewire = {
+        enable = true;
+        socketActivation = true;
+        audio.enable = true;
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+      };
+    };
+
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+    };
+  };
+}

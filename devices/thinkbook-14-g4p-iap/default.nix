@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   imports = [
     ./fs
     ./fingerprint
@@ -14,11 +15,14 @@ _: {
       helix.enable = true; # Default enable
       laptop.enable = true;
       network = {
-        enable = false;
+        enable = true; # Default enable
         clash-verge.enable = true;
       };
       podman.enable = true;
       secureboot.enable = true;
+      user-support = {
+        gui.enable = true;
+      };
       virtualbox.enable = true;
     };
   };
@@ -37,4 +41,8 @@ _: {
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=30min
   '';
+
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+  ];
 }

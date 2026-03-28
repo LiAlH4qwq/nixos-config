@@ -21,13 +21,6 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        intel-media-driver
-      ];
-    };
   };
 
   security = {
@@ -59,33 +52,11 @@
     dbus.implementation = "broker";
     power-profiles-daemon.enable = true;
     openssh.enable = true;
-    pipewire = {
-      enable = true;
-      socketActivation = true;
-      audio.enable = true;
-      pulse.enable = true;
-      jack.enable = true;
-      wireplumber.enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-    };
   };
 
   programs = {
     nix-ld = {
       enable = true;
-    };
-
-    # these programs can't simply be enabled only in the user scope.
-    _1password-gui.enable = true;
-    steam.enable = true;
-    hyprlock.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
     };
   };
 
