@@ -16,8 +16,22 @@
   };
 
   config = lib.mkIf config.liuxu.system.helix.enable {
-    environment.systemPackages = with pkgs; [
-      helix
-    ];
+    environment = {
+      systemPackages = with pkgs; [
+        helix
+      ];
+      etc = {
+        helix = {
+          target = "helix/config.toml";
+          # TOML strings should be quoted.
+          text = lib.generators.toINIWithGlobalSection { } {
+            globalSection = {
+              theme = "\"github_light_colorblind\"";
+            };
+          };
+        };
+      };
+    };
+    programs.fish.shellAliases.hx = "command hx -c /etc/helix/config.toml";
   };
 }
