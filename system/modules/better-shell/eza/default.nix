@@ -10,6 +10,9 @@
     environment.systemPackages = with pkgs; [
       eza
     ];
-    programs.fish.shellAliases.ls = "eza --color --icons --git";
+    programs.fish.shellAliases = {
+      eza = "command eza --color --icons --git";
+      ls = "eza";
+    };
   };
 }

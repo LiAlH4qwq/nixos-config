@@ -1,4 +1,6 @@
 _: {
+  # We won't sacrifice our experience for FOSS.
+  nixpkgs.config.allowUnfree = true;
   nix =
     let
       commonOpions = {
@@ -34,6 +36,4 @@ _: {
           ;
       };
     };
-  # We won't sacrifice our experience for FOSS.
-  nixpkgs.config.allowUnfree = true;
 }

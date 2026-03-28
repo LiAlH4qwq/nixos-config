@@ -32,11 +32,23 @@
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.default
+            {
+              home-manager.sharedModules = [
+                {
+                  # Reflects NixOS version when system installed.
+                  # Do not change it unless needed.
+                  home.stateVersion = "25.11";
+                }
+                ./user
+              ];
+            }
+            {
+              # Reflects NixOS version when system installed.
+              # Do not change it unless needed.
+              system.stateVersion = "25.11";
+            }
             ./system
-            ./users
-          ]
-          ++ modules;
-          modules = [ ./system/modules ];
+          ];
         in
         {
           thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {

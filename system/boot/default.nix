@@ -1,9 +1,5 @@
 { lib, pkgs, ... }:
 {
-  imports = [
-    ./kernel
-  ];
-
   boot = {
     loader = {
       timeout = 0;
@@ -13,22 +9,23 @@
         configurationLimit = 5;
       };
     };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "quiet"
+      "splash"
+    ];
     consoleLogLevel = 0;
     # 😭 It's unsupported by NixOS 25.11.
     # stage2Greeting = "Liuxu: Welcome!";
-    plymouth = {
-      enable = true;
-      font = "${pkgs.maple-mono.NF-CN}/share/fonts/truetype/MapleMono-NF-CN-Regular.ttf";
-    };
     initrd = {
       systemd.enable = true;
       availableKernelModules = [
         "i915"
       ];
     };
-    kernelParams = [
-      "quiet"
-      "splash"
-    ];
+    plymouth = {
+      enable = true;
+      font = "${pkgs.maple-mono.NF-CN}/share/fonts/truetype/MapleMono-NF-CN-Regular.ttf";
+    };
   };
 }

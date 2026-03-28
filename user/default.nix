@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./state
     ./bun
     ./claude-code
     ./git

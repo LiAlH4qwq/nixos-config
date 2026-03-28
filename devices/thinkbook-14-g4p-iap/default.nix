@@ -2,6 +2,7 @@ _: {
   imports = [
     ./fs
     ./fingerprint
+    ./users
   ];
 
   liuxu = {
