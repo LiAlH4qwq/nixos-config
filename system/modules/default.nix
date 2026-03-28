@@ -4,6 +4,7 @@ _: {
     ./bluetooth
     ./brightness
     ./fingerprint
+    ./helix
     ./laptop
     ./podman
     ./secureboot

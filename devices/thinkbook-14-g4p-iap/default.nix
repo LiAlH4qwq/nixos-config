@@ -10,6 +10,7 @@ _: {
       bluetooth.enable = true;
       brightness.enable = true;
       fingerprint.enable = true;
+      helix.enable = true; # Default enable
       laptop.enable = true;
       podman.enable = true;
       secureboot.enable = true;
