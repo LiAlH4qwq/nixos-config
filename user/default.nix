@@ -12,6 +12,7 @@
 
   # these hasn't been available as a program in release 25.11.
   home.packages = with pkgs; [
+    fastfetch
     wev # Input inspect tool
     nixd # Nix LSP
     nixfmt # Nix formatter
