@@ -1,13 +1,19 @@
-# source: https://github.com/rose-pine/kitty/blob/582d0d0d1acf8c41ff8b4bde77f55946a4027c5e/dist/rose-pine-dawn.conf
+# Rose Pine Dawn theme
+# Source: https://github.com/rose-pine/kitty/blob/582d0d0d1acf8c41ff8b4bde77f55946a4027c5e/dist/rose-pine-dawn.conf
 _: {
   programs.kitty = {
     enable = true;
     settings = rec {
+      font_size = 12;
+      map = [
+        "ctrl+c copy_and_clear_or_interrupt"
+        "ctrl+v paste_from_clipboard"
+      ];
       foreground = "#575279";
       background = "#faf4ed";
       selection_foreground = foreground;
       selection_background = "#dfdad9";
-      cursor = foreground;
+      cursor = foreground; # Modified to make cursor visible
       cursor_text_color = foreground;
       url_color = color5;
       active_tab_foreground = foreground;
