@@ -1,5 +1,6 @@
 # Rose Pine Dawn theme
 # Source: https://github.com/rose-pine/kitty/blob/582d0d0d1acf8c41ff8b4bde77f55946a4027c5e/dist/rose-pine-dawn.conf
+
 _: {
   programs.kitty = {
     enable = true;
