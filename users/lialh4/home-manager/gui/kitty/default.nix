@@ -5,10 +5,8 @@ _: {
     enable = true;
     settings = rec {
       font_size = 12;
-      map = ''
-        ctrl+c copy_and_clear_or_interrupt
-        ctrl+v paste_from_clipboard
-      '';
+      "map ctrl+c" = "copy_and_clear_or_interrupt";
+      "map ctrl+v" = "paste_from_clipboard";
       foreground = "#575279";
       background = "#faf4ed";
       selection_foreground = foreground;
