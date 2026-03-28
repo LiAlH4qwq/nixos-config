@@ -28,6 +28,11 @@
     {
       nixosConfigurations =
         let
+
+          # Reflects NixOS release version when system installed.
+          # Do not change it unless needed.
+          nixosReleaseVersionWhenInstalled = "25.11";
+
           commons = [
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
@@ -35,9 +40,7 @@
             {
               home-manager.sharedModules = [
                 {
-                  # Reflects NixOS version when system installed.
-                  # Do not change it unless needed.
-                  home.stateVersion = "25.11";
+                  home.stateVersion = nixosReleaseVersionWhenInstalled;
                 }
                 ./user
               ];
@@ -45,7 +48,7 @@
             {
               # Reflects NixOS version when system installed.
               # Do not change it unless needed.
-              system.stateVersion = "25.11";
+              system.stateVersion = nixosReleaseVersionWhenInstalled;
             }
             ./system
           ];
