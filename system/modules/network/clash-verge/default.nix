@@ -15,7 +15,7 @@
     assertions = [
       {
         assertion = config.liuxu.system.network.enable;
-        messeage = "Network should be enable first in order to enable Clash Verge!";
+        message = "Network should be enable first in order to enable Clash Verge!";
       }
     ];
 
