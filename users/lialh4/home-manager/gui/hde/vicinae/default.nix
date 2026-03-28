@@ -5,5 +5,13 @@ _: {
       enable = true;
       autoStart = true;
     };
+    settings = {
+      font = {
+        size = 12;
+      };
+      theme = {
+        name = "rose-pine-dawn";
+      };
+    };
   };
 }
