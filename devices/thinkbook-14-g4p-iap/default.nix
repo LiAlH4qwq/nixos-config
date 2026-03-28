@@ -13,6 +13,10 @@ _: {
       fingerprint.enable = true;
       helix.enable = true; # Default enable
       laptop.enable = true;
+      network = {
+        enable = false;
+        clash-verge.enable = true;
+      };
       podman.enable = true;
       secureboot.enable = true;
       virtualbox.enable = true;

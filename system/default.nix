@@ -55,18 +55,6 @@
     };
   };
 
-  networking = {
-    networkmanager.enable = true;
-
-    # allow tun mode traffic.
-    firewall = {
-      checkReversePath = false;
-      trustedInterfaces = [
-        "mihoyo"
-      ];
-    };
-  };
-
   services = {
     dbus.implementation = "broker";
     power-profiles-daemon.enable = true;
@@ -98,12 +86,6 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
-    };
-    clash-verge = {
-      enable = true;
-      autoStart = true;
-      serviceMode = true;
-      tunMode = true;
     };
   };
 
