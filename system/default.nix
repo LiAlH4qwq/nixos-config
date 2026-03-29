@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./addons
     ./boot
     ./i18n
     ./modules
@@ -45,6 +46,12 @@
           }
         });
       '';
+    };
+    pam.services = {
+      hyprlock.pwdfileAuth = {
+        enable = true;
+        pwdfile = /etc/pin;
+      };
     };
   };
 

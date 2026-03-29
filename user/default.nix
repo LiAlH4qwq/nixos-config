@@ -4,7 +4,7 @@
     ./bun
     ./claude-code
     ./git
-    ./gui
+    ./modules
     ./syncthing
     ./shell
     ./uv
