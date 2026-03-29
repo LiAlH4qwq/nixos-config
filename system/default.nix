@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./addons
     ./boot
     ./i18n
     ./modules
@@ -22,6 +21,16 @@
 
   hardware = {
     enableRedistributableFirmware = true;
+  };
+
+  libpam-pwdfile-rs = {
+    pin = {
+      pwdfile = "/etc/pin";
+      services = [ "polkit-1" ];
+      users = {
+        lialh4.secret = "2f5e034b65504c52cbc4e575431d4d3888c1cdb66702b426ccacc33f0df3aea1d84de715959abe6d7a29b73d75ca608aa5c7c30c6aaafbcbb284a0bc0ab9e6df";
+      };
+    };
   };
 
   security = {
@@ -46,12 +55,6 @@
           }
         });
       '';
-    };
-    pam.services = {
-      hyprlock.pwdfileAuth = {
-        enable = true;
-        pwdfile = /etc/pin;
-      };
     };
   };
 

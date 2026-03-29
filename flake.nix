@@ -16,6 +16,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    libpam-pwdfile-rs = {
+      url = "github:lialh4qwq/libpam-pwdfile-rs/v0.2.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -23,6 +27,7 @@
       impermanence,
       lanzaboote,
       home-manager,
+      libpam-pwdfile-rs,
       ...
     }:
     {
@@ -36,7 +41,8 @@
           commons = [
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
-            home-manager.nixosModules.default
+            home-manager.nixosModules.home-manager
+            libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
             {
               home-manager.sharedModules = [
                 {
