@@ -124,8 +124,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1774802527,
-        "narHash": "sha256-HH4P3dDrDb+E9PRgeC3Ff7WsNrD+ad9uHWakJX24bQQ=",
+        "lastModified": 1774815105,
+        "narHash": "sha256-Twu0WRfjEEY1XjEjyXeoAufaCEEq/0/MPnmhVvbSsKo=",
         "path": "/mnt/data/lialh4/Projects/libpam-pwdfile-rs",
         "type": "path"
       },
