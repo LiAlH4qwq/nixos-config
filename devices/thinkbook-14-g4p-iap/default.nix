@@ -21,7 +21,10 @@
     secureboot.enable = true;
     ssh.enable = true;
     user-support = {
-      gui.enable = true;
+      gui = {
+        enable = false;
+        display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
+      };
     };
     virtualbox.enable = true;
   };

@@ -1,5 +1,15 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  self,
+  ...
+}:
+{
+  imports = [
+    ./display-manager
+  ];
+
   options.liuxu.system.user-support.gui.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;

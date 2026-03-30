@@ -24,6 +24,7 @@
   };
   outputs =
     {
+      self,
       nixpkgs,
       impermanence,
       lanzaboote,
@@ -39,6 +40,7 @@
           # Do not change it unless needed.
           nixosReleaseVersionWhenInstalled = "25.11";
 
+          specialArgs = { inherit self; };
           commons = [
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
@@ -62,6 +64,7 @@
         in
         {
           thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
             modules = commons ++ [
               ./devices/thinkbook-14-g4p-iap
             ];
