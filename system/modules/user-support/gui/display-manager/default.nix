@@ -83,10 +83,10 @@
           target = "greetd/wallpaper.png";
           source = "${self}/assets/rainy-everything-in-the-night.png";
         };
-        persistence."/persist".files = [
-          "/var/lib/regreet/state.toml"
-        ];
       };
+      persistence."/persist".files = [
+        "/var/lib/regreet/state.toml"
+      ];
     };
   };
 }
