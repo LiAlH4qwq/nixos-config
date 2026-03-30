@@ -19,6 +19,7 @@
     };
     podman.enable = true;
     secureboot.enable = true;
+    ssh.enable = true;
     user-support = {
       gui.enable = true;
     };
@@ -47,10 +48,11 @@
   libpam-pwdfile-rs = {
     pin = {
       pwdfile = "/etc/pin";
-      services = [ "polkit-1" ];
-      users = {
-        lialh4.secret = "$y$j9T$4ykydcB2NfkAynl36.mBS0$WjBhw0AG08iCSDtEYk/3a.K95xT2uw./bWGWQnI89yB";
-      };
+      services = [
+        "login"
+        "polkit-1"
+        "hyprlock"
+      ];
     };
   };
 }
