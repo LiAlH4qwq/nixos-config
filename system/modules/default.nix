@@ -9,6 +9,7 @@ _: {
     ./network
     ./podman
     ./secureboot
+    ./ssh
     ./user-support
     ./virtualbox
   ];

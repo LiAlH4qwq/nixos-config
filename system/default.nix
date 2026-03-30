@@ -8,6 +8,7 @@
     ./persist
   ];
 
+  # No more states.
   users = {
     mutableUsers = false;
   };
@@ -21,16 +22,6 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-  };
-
-  libpam-pwdfile-rs = {
-    pin = {
-      pwdfile = "/etc/pin";
-      services = [ "polkit-1" ];
-      users = {
-        lialh4.secret = "$y$j9T$4ykydcB2NfkAynl36.mBS0$WjBhw0AG08iCSDtEYk/3a.K95xT2uw./bWGWQnI89yB";
-      };
-    };
   };
 
   security = {
@@ -61,7 +52,6 @@
   services = {
     dbus.implementation = "broker";
     power-profiles-daemon.enable = true;
-    openssh.enable = true;
   };
 
   programs = {
