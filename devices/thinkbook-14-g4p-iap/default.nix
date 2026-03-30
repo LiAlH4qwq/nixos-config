@@ -22,7 +22,7 @@
     ssh.enable = true;
     user-support = {
       gui = {
-        enable = false;
+        enable = true;
         display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
       };
     };
