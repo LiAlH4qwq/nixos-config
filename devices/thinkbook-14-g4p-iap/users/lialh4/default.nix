@@ -14,6 +14,6 @@ _: {
     };
   };
   libpam-pwdfile-rs = {
-    pin.users.lialh4.secret = "$y$j9T$4ykydcB2NfkAynl36.mBS0$WjBhw0AG08iCSDtEYk/3a.K95xT2uw./bWGWQnI89yB";
+    pin.users.lialh4.secret = "$y$j9T$bjCgDKQCZmMhnca0Jw54X1$x4iqH6CXtKuBnFAPaO9M2Cdv6YMB.kPnFUBeGM4vUV4";
   };
 }
