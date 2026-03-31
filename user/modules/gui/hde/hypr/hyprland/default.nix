@@ -112,7 +112,7 @@
             "norounding, floating:0, onworkspace:f[1]"
             "noshadow, floating:0, onworkspace:w[tv1]"
             "noshadow, floating:0, onworkspace:f[1]"
-            "match:class .*, suppress_event maximize"
+            "suppress_event maximize, class:.*"
           ];
         };
     };
