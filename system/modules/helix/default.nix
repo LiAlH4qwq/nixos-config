@@ -32,6 +32,6 @@
         };
       };
     };
-    programs.fish.shellAliases.hx = "command hx -c /etc/helix/config.toml";
+    programs.fish.shellAliases.hx = "hx -c /etc/helix/config.toml";
   };
 }

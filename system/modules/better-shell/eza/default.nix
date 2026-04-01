@@ -11,7 +11,7 @@
       eza
     ];
     programs.fish.shellAliases = {
-      eza = "command eza --color --icons --git";
+      eza = "eza --color --icons --git";
       ls = "eza";
     };
   };
