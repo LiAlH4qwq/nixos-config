@@ -5,7 +5,7 @@
       bat = {
         enable = true;
       };
-      fish.shellAliases.cat = "command bat";
+      fish.shellAliases.cat = "bat";
     };
   };
 }
