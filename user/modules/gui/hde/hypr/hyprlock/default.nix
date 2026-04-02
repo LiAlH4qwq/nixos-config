@@ -62,7 +62,7 @@
               font_size = 24;
               color = "0xffffffff";
               position = "0, -18%";
-              text = "Or scan fingerprint...\\n$FPRINTFAIL";
+              text = "cmd[update:0] echo Or scan fingerprint...\\n$FPRINTFAIL";
               # text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hint.ts FPRINTFAIL=\\\"$FPRINTFAIL\\\"";
             }
             # Hitokoto
