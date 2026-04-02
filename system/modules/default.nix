@@ -7,6 +7,7 @@ _: {
     ./helix
     ./laptop
     ./network
+    ./pin
     ./podman
     ./secureboot
     ./ssh

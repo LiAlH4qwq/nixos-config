@@ -17,6 +17,7 @@
       enable = true; # Default enable
       clash-verge.enable = true;
     };
+    pin.enable = true; # Default enable
     podman.enable = true;
     secureboot.enable = true;
     ssh.enable = true;
@@ -47,15 +48,4 @@
   hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver
   ];
-
-  libpam-pwdfile-rs = {
-    pin = {
-      pwdfile = "/etc/pin";
-      services = [
-        "login"
-        "polkit-1"
-        "hyprlock"
-      ];
-    };
-  };
 }
