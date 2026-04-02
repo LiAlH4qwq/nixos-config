@@ -18,5 +18,11 @@
     networking = {
       networkmanager.enable = true;
     };
+    # Make network connections persist.
+    environment.persistence."/persist" = {
+      directories = [
+        "/etc/NetworkManager/system-connections"
+      ];
+    };
   };
 }
