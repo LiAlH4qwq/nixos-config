@@ -19,8 +19,8 @@
           "login"
           "polkit-1"
         ]
-        ++ lib.mkIf config.liuxu.system.user-support.gui.enable [ "hyprlock" ]
-        ++ lib.mkIf config.liuxu.system.user-support.gui.display-manager.enable [ "greetd" ];
+        ++ lib.optional config.liuxu.system.user-support.gui.enable "hyprlock"
+        ++ lib.optional config.liuxu.system.user-support.gui.display-manager.enable "greetd";
       };
     };
   };
