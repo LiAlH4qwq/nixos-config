@@ -11,8 +11,4 @@
       };
     };
   };
-  # 😭 Biome won't run when installed by bun.
-  home.packages = with pkgs; [
-    biome
-  ];
 }
