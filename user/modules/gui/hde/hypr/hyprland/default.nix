@@ -99,6 +99,8 @@
           ];
           bindm = [
             "${mod}, mouse:272, movewindow"
+            "${mod} ALT, mouse:272 resizewindow 1" # Keep aspect ratio
+            "${mod} ALT, mouse:272 resizewindow 2" # Ignore aspect ratio
           ];
           # No border, rounding, shadow when only one window.
           workspace = [
