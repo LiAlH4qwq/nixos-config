@@ -113,6 +113,7 @@
             "noshadow, floating:0, onworkspace:w[tv1]"
             "noshadow, floating:0, onworkspace:f[1]"
             "suppressevent maximize, class:.*"
+            "float, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
           ];
         };
     };
