@@ -42,6 +42,9 @@
       lollypop # Music player
       clapper # Video player
       materialgram # Telegram with material design
+      qq
+      wechat
+      wpsoffice-cn
     ];
   };
 }
