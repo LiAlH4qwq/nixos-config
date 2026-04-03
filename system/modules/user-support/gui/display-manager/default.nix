@@ -29,7 +29,7 @@
         application_prefer_dark_theme = false;
         background = {
           fit = "Cover";
-          path = "/etc/wallpaper/rainy-everything-in-the-night.png";
+          path = "/etc/wallpapers/rainy-everything-in-the-night.png";
         };
         widget.clock.format = "%a %d %b %H:%M";
       };

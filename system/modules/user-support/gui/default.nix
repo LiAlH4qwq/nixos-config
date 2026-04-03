@@ -49,7 +49,7 @@
 
     environment.etc = {
       wallpaper = {
-        target = "wallpaper/rainy-everything-in-the-night.png";
+        target = "wallpapers/rainy-everything-in-the-night.png";
         source = "${inputs.self}/assets/rainy-everything-in-the-night.png";
       };
     };
