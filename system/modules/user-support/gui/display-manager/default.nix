@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  self,
   ...
 }:
 {
@@ -30,7 +29,7 @@
         application_prefer_dark_theme = false;
         background = {
           fit = "Cover";
-          path = "/etc/greetd/wallpaper.png";
+          path = "/etc/wallpaper/rainy-everything-in-the-night.png";
         };
         widget.clock.format = "%a %d %b %H:%M";
       };
@@ -77,16 +76,8 @@
       '';
     };
 
-    environment = {
-      etc = {
-        regreet-wallpaper = {
-          target = "greetd/wallpaper.png";
-          source = "${self}/assets/rainy-everything-in-the-night.png";
-        };
-      };
-      persistence."/persist".files = [
-        "/var/lib/regreet/state.toml"
-      ];
-    };
+    environment.persistence."/persist".files = [
+      "/var/lib/regreet/state.toml"
+    ];
   };
 }

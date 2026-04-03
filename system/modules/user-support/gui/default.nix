@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   ...
 }:
@@ -43,6 +44,13 @@
           enable = true;
           support32Bit = true;
         };
+      };
+    };
+
+    environment.etc = {
+      wallpaper = {
+        target = "wallpaper/rainy-everything-in-the-night.png";
+        source = "${inputs.self}/assets/rainy-everything-in-the-night.png";
       };
     };
 

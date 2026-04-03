@@ -23,8 +23,7 @@
     };
   };
   outputs =
-    {
-      self,
+    inputs@{
       nixpkgs,
       impermanence,
       lanzaboote,
@@ -40,7 +39,7 @@
           # Do not change it unless needed.
           nixosReleaseVersionWhenInstalled = "25.11";
 
-          specialArgs = { inherit self; };
+          specialArgs = { inherit inputs; };
           commons = [
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote

@@ -31,7 +31,7 @@
               blur_passes = 3;
               # Fallback background color.
               color = colors.base;
-              path = "~/Pictures/Wallpapers/rainy-everything-in-the-night.png";
+              path = "/etc/wallpapers/rainy-everything-in-the-night.png";
             }
           ];
           label = [
