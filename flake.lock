@@ -124,14 +124,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1775219624,
-        "narHash": "sha256-RBnmGysWRWo+JlNhwhWvcvKiscOaheaP0bfGE8b1oKI=",
-        "path": "/mnt/data/lialh4/Projects/libpam-pwdfile-rs",
-        "type": "path"
+        "lastModified": 1775219854,
+        "narHash": "sha256-au/iWV3tCqMbW8L2b2Dr4BJUM9Jtt0kCPXGRKUY9vXk=",
+        "owner": "lialh4qwq",
+        "repo": "libpam-pwdfile-rs",
+        "rev": "426cbc791e981377d38e0898f7af929b65d51ce4",
+        "type": "github"
       },
       "original": {
-        "path": "/mnt/data/lialh4/Projects/libpam-pwdfile-rs",
-        "type": "path"
+        "owner": "lialh4qwq",
+        "ref": "v0.4.0",
+        "repo": "libpam-pwdfile-rs",
+        "type": "github"
       }
     },
     "nixpkgs": {
