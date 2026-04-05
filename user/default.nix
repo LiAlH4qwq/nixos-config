@@ -23,4 +23,6 @@
 
   # Home manager need this to bootstrap.
   programs.home-manager.enable = true;
+
+  programs.zellij.enable = true;
 }
