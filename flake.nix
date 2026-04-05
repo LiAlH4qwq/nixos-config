@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprlock-hint = {
-      url = "path:./packages/hyprlock-hint";
+      url = "path:/mnt/data/lialh4/Projects/nixos-config/packages/hyprlock-hint";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -129,14 +129,15 @@
         "systems": "systems"
       },
       "locked": {
-        "path": "./packages/hyprlock-hint",
+        "lastModified": 1775381855,
+        "narHash": "sha256-Y67KDWULhC5Vc+7kCNq5Z6dmbomEcIF+xOVtQ4A/O/Q=",
+        "path": "/mnt/data/lialh4/Projects/nixos-config/packages/hyprlock-hint",
         "type": "path"
       },
       "original": {
-        "path": "./packages/hyprlock-hint",
+        "path": "/mnt/data/lialh4/Projects/nixos-config/packages/hyprlock-hint",
         "type": "path"
-      },
-      "parent": []
+      }
     },
     "impermanence": {
       "inputs": {
