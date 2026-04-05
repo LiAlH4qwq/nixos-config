@@ -14,8 +14,9 @@
     programs.ashell = {
       enable = true;
       settings = {
+        enable_esc_key = true;
         appearance = {
-          scale_factor = 1.1;
+          scale_factor = 1.2;
           style = "Solid";
           text_color = "#575279";
           primary_color = "#d7827e";

@@ -14,7 +14,6 @@
   config = lib.mkIf config.liuxu.system.pin.enable {
     libpam-pwdfile-rs = {
       pin = {
-        pwdfile = "/etc/pin";
         services = [
           "login"
           "polkit-1"

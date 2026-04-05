@@ -2,6 +2,7 @@
   config,
   lib,
   osConfig,
+  pkgs,
   ...
 }:
 {
@@ -57,14 +58,6 @@
               position = "0, -3%";
               text = "$USER";
             }
-            # Hint
-            {
-              font_size = 24;
-              color = "0xffffffff";
-              position = "0, -18%";
-              text = "cmd[update:0] echo -e \"Or scan fingerprint...\\n$FPRINTFAIL\"";
-              # text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hint.ts FPRINTFAIL=\\\"$FPRINTFAIL\\\"";
-            }
             # Hitokoto
             {
               font_size = 24;
@@ -72,7 +65,14 @@
               position = "0, -30%";
               text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
             }
-          ];
+          ]
+          # Fingerprint Hint
+          ++ lib.optional osConfig.liuxu.system.fingerprint.enable {
+            font_size = 24;
+            color = "0xffffffff";
+            position = "0, -18%";
+            text = ''cmd[update:0] ${pkgs.hyprlock-hint}/bin/hyprlock-hint --user "$USER" --user-desc "$DESC" --kb-layout "$LAYOUT" --auth-fail-num "$ATTEMPTS" --auth-fail-msg "$FAIL" --auth-pam-prompt-msg "$PAMPROMPT" --auth-pam-fail-msg "$PAMFAIL" --auth-fprint-prompt-msg "$FPRINTPROMPT" --auth-fprint-fail-msg "$FPRINTFAIL"'';
+          };
           # Avatar
           image = [
             {
@@ -92,18 +92,13 @@
               inner_color = colors.surface;
               outer_color = colors.surface;
               fail_color = colors.love;
-              placeholder_text = "Input password...";
-              fail_text = "Please try again...";
+              placeholder_text = "$PAMPROMPT";
+              fail_text = "$PAMFAIL";
             }
           ];
         };
     };
     xdg.configFile = {
-      # hyprlock-hint = {
-      #   force = true;
-      #   source = ./hint.ts;
-      #   target = "hypr/hyprlock/hint.ts";
-      # };
       hyprlock-hitokoto = {
         force = true;
         source = ./hitokoto.ts;

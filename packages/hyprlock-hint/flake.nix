@@ -1,16 +1,18 @@
 {
-  description = "Bun2Nix minimal sample";
+  description = "Hyprlock Hint";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     systems.url = "github:nix-systems/default";
-
-    bun2nix.url = "github:nix-community/bun2nix?tag=2.0.8";
-    bun2nix.inputs.nixpkgs.follows = "nixpkgs";
-    bun2nix.inputs.systems.follows = "systems";
+    bun2nix = {
+      url = "github:nix-community/bun2nix?tag=2.0.8";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
   };
 
-  # Use the cached version of bun2nix from the nix-community cli
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org"
@@ -23,41 +25,36 @@
   };
 
   outputs =
-    inputs:
+    {
+      bun2nix,
+      nixpkgs,
+      self,
+      systems,
+      ...
+    }:
     let
-      # Read each system from the nix-systems input
-      eachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
-
-      # Access the package set for a given system
+      eachSystem = nixpkgs.lib.genAttrs (import systems);
       pkgsFor = eachSystem (
         system:
-        import inputs.nixpkgs {
+        import nixpkgs {
           inherit system;
-          # Use the bun2nix overlay, which puts `bun2nix` in pkgs
-          # You can, of course, still access
-          # inputs.bun2nix.packages.${system}.default instead
-          # and use that to build your package instead
-          overlays = [ inputs.bun2nix.overlays.default ];
+          overlays = [ bun2nix.overlays.default ];
         }
       );
     in
     {
       packages = eachSystem (system: {
-        # Produce a package for this template with bun2nix in
-        # the overlay
         default = pkgsFor.${system}.callPackage ./default.nix { };
       });
-
+      overlays.default = _: prev: {
+        hyprlock-hint = self.packages.${prev.system}.default;
+      };
       devShells = eachSystem (system: {
         default = pkgsFor.${system}.mkShell {
           packages = with pkgsFor.${system}; [
             bun
-
-            # Add the bun2nix binary to our devshell
-            # Optional now that we have a binary on npm
             bun2nix
           ];
-
           shellHook = ''
             bun install --frozen-lockfile
           '';

@@ -21,6 +21,10 @@
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprlock-hint = {
+      url = "path:./packages/hyprlock-hint";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
@@ -29,6 +33,7 @@
       lanzaboote,
       home-manager,
       libpam-pwdfile-rs,
+      hyprlock-hint,
       ...
     }:
     {
@@ -54,9 +59,12 @@
               ];
             }
             {
-              # Reflects NixOS version when system installed.
-              # Do not change it unless needed.
               system.stateVersion = nixosReleaseVersionWhenInstalled;
+            }
+            {
+              nixpkgs.overlays = [
+                hyprlock-hint.overlays.default
+              ];
             }
             ./system
           ];
