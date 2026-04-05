@@ -31,7 +31,7 @@
       configFile = "/run/mihoyo/config.yaml";
     };
 
-    systemd.tmpfiles.settings.mihoyo."/run/mihoyo/config.yaml".f = {
+    systemd.tmpfiles.settings.mihoyo."/run/mihoyo/config.yaml".F = {
       mode = "0600";
       argument = lib.readFile (
         (pkgs.formats.yaml_1_2 { }).generate "mihoyo" {
@@ -80,28 +80,36 @@
             enable = true;
             ipv6 = true;
             prefer-h3 = false; # Not Recommend
-            respect-rules = true; # enable them all.
+            # respect-rules = true; # enable them all.
             cache-algorithm = "arc";
             enhanced-mode = "fake-ip";
-            nameserver-policy = {
-              "geosite:cn" = [
-                "https://223.5.5.5/dns-query"
-                "https://119.29.29.29/dns-query"
-              ];
-            };
+            fake-ip-filter = [
+              "*"
+              "+.lan"
+            ];
+            # nameserver-policy = {
+            #   "geosite:cn" = [
+            #     "https://223.5.5.5/dns-query"
+            #     "https://119.29.29.29/dns-query"
+            #   ];
+            # };
+            # default-nameserver = [
+            #   "https://223.5.5.5/dns-query"
+            #   "https://119.29.29.29/dns-query"
+            # ];
+            # proxy-server-nameserver = [
+            #   "https://223.5.5.5/dns-query"
+            #   "https://119.29.29.29/dns-query"
+            # ];
+            # direct-nameserver = [
+            #   "https://223.5.5.5/dns-query"
+            #   "https://119.29.29.29/dns-query"
+            # ];
+            # direct-nameserver-follow-policy = false;
             default-nameserver = [
-              "https://223.5.5.5/dns-query"
-              "https://119.29.29.29/dns-query"
+              "223.5.5.5"
+              "119.29.29.29"
             ];
-            proxy-server-nameserver = [
-              "https://223.5.5.5/dns-query"
-              "https://119.29.29.29/dns-query"
-            ];
-            direct-nameserver = [
-              "https://223.5.5.5/dns-query"
-              "https://119.29.29.29/dns-query"
-            ];
-            direct-nameserver-follow-policy = false;
             nameserver = [
               "https://1.1.1.1/dns-query"
               "https://8.8.8.8/dns-query"
@@ -112,7 +120,7 @@
 
           tun = {
             enable = true;
-            stack = "mixed";
+            stack = "gvisor";
             device = "mihoyo";
             auto-route = true;
             strict-route = true;
@@ -169,6 +177,14 @@
               timeout = 5000;
               expected-status = 204;
               url = "https://cp.cloudflare.com";
+              proxies = [
+                "HK Auto"
+                "TW Auto"
+                "JP Auto"
+                "SG Auto"
+                "UK Auto"
+                "US Auto"
+              ];
             }
             {
               name = "AI Abroad";
@@ -180,6 +196,14 @@
               timeout = 5000;
               expected-status = 204;
               url = "https://cp.cloudflare.com";
+              proxies = [
+                "HK Auto"
+                "TW Auto"
+                "JP Auto"
+                "SG Auto"
+                "UK Auto"
+                "US Auto"
+              ];
             }
             {
               name = "HK Auto";
@@ -256,7 +280,6 @@
           ];
 
           rules = [
-            "DST-PORT, 53, Dns"
             "GEOIP, lan, Direct, no-resolve"
             "GEOSITE, private, Direct, no-resolve"
             "GEOSITE, category-ai-!cn, AI Abroad"
