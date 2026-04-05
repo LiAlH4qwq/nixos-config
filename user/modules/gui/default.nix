@@ -44,6 +44,7 @@
       materialgram # Telegram with material design
       qq
       wechat
+      wemeet
       wpsoffice-cn
     ];
   };
