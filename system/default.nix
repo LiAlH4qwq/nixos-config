@@ -52,8 +52,12 @@
   };
 
   services = {
+    # Better D-Bus implemention.
     dbus.implementation = "broker";
     power-profiles-daemon.enable = true;
+    # Use Chrony for better experience, especially on laptop.
+    timesyncd.enable = false;
+    chrony.enable = true;
   };
 
   programs = {

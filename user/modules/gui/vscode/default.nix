@@ -8,10 +8,38 @@
   config = lib.mkIf config.liuxu.user.gui.enable {
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-        biomejs.biome
-      ];
+      mutableExtensionsDir = false;
+      profiles = {
+        # It's wired but it's definately global settings.
+        default = {
+          enableUpdateCheck = false;
+          enableExtensionUpdateCheck = false;
+        };
+        default = {
+          extensions = with pkgs.vscode-extensions; [
+            jnoortheen.nix-ide
+            biomejs.biome
+          ];
+          userSettings = {
+            "workbench.secondarySideBar.defaultVisibility" = "hidden"; # No copilot
+            "workbench.colorTheme" = "Default Light Modern";
+            "window.zoomLevel" = 0.25;
+            "editor.formatOnSave" = true;
+            "editor.formatOnPaste" = true;
+            "editor.fontFamily" = "monospace";
+            "editor.fontLigatures" = true;
+            "terminal.integrated.fontLigatures.enabled" = true;
+            "nix.enableLanguageServer" = true;
+            "nix.serverPath" = "nixd";
+            "[typescript]" = {
+              "editor.defaultFormatter" = "biomejs.biome";
+            };
+            "[json]" = {
+              "editor.defaultFormatter" = "biomejs.biome";
+            };
+          };
+        };
+      };
     };
   };
 }
