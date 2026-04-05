@@ -37,6 +37,14 @@
             "[json]" = {
               "editor.defaultFormatter" = "biomejs.biome";
             };
+            # Biome rearrange imports.
+            # Source: https://biomejs.dev/reference/vscode/#import-sorting
+            # Why did it belongs to `assist` but not `formatter`?
+            "editor.codeActionsOnSave" = {
+              "source.organizeImports.biome" = "explicit";
+            };
+            # Fix Biome binary not found
+            "biome.lsp.bin" = "${pkgs.biome}/bin/biome";
           };
         };
       };
