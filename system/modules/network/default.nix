@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   imports = [
-    ./clash-verge
+    ./mihoyo
   ];
 
   options.liuxu.system.network.enable = lib.mkOption {

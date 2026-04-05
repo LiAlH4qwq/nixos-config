@@ -15,7 +15,7 @@
     laptop.enable = true;
     network = {
       enable = true; # Default enable
-      clash-verge.enable = true;
+      mihoyo.enable = true;
     };
     pin.enable = true; # Default enable
     podman.enable = true;
