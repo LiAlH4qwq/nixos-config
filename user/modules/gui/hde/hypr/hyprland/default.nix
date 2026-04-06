@@ -58,15 +58,6 @@
             "${mod} ALT SHIFT, Tab, execr, hyprnome -mcp"
             "${mod}, grave, workspace, empty"
             "${mod} SHIFT, grave, movetoworkspace, empty"
-            # Screenshot keys on Thinkbook 14 G4+ IAP.
-            # Screenshot key of this device is hardcoded to Win + Shift + S.
-            # Fn + Screenshot key is Screen/Sysrq
-            # Screenshot key.
-            "SUPER SHIFT, S, execr, uwsm-app -- hyprshot -zm region"
-            # Fn + Screenshot key.
-            ", Print, execr, uwsm-app -- hyprshot -zm window"
-            # Fn + Ctrl + Screenshot key.
-            "CTRL, Print, execr, uwsm-app -- hyprshot -zm output"
             "${mod}, XF86Favorites, workspace, name:Password"
             "${mod} SHIFT, XF86Favorites, movetoworkspace, name:Password"
           ]
