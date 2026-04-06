@@ -34,260 +34,240 @@
     systemd.tmpfiles.settings.mihoyo."/run/mihoyo/config.yaml".F = {
       mode = "0600";
       argument = lib.readFile (
-        (pkgs.formats.yaml_1_2 { }).generate "mihoyo" {
-          allow-lan = false;
-          ipv6 = true;
-          unified-delay = true;
-          tcp-concurrent = true;
-          external-controller = "[::1]:9090";
-          profile = {
-            store-selected = true;
-            store-fakeip = true;
-          };
-
-          geodata-mode = true;
-          geo-auto-update = true;
-          geox-url = {
-            geoip = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat";
-            geosite = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat";
-          };
-
-          sniffer = {
-            enable = true;
-            parse-pure-ip = true;
-            force-dns-mapping = true;
-            override-destination = true;
-            sniff = {
-              HTTP = {
-                ports = [
-                  80
-                ];
-              };
-              TLS = {
-                ports = [
-                  443
-                ];
-              };
-              QUIC = {
-                ports = [
-                  443
-                ];
-              };
+        (pkgs.formats.yaml_1_2 { }).generate "mihoyo" (
+          let
+            urlTestArgs = {
+              lazy = true;
+              interval = 300;
+              timeout = 5000;
+              expected-status = 204;
+              url = "https://cp.cloudflare.com";
             };
-          };
-
-          dns = {
-            enable = true;
+          in
+          {
+            allow-lan = false;
             ipv6 = true;
-            prefer-h3 = false; # Not Recommend
-            # respect-rules = true; # enable them all.
-            cache-algorithm = "arc";
-            enhanced-mode = "fake-ip";
-            fake-ip-filter = [
-              "*"
-              "+.lan"
-            ];
-            # nameserver-policy = {
-            #   "geosite:cn" = [
-            #     "https://223.5.5.5/dns-query"
-            #     "https://119.29.29.29/dns-query"
-            #   ];
-            # };
-            # default-nameserver = [
-            #   "https://223.5.5.5/dns-query"
-            #   "https://119.29.29.29/dns-query"
-            # ];
-            # proxy-server-nameserver = [
-            #   "https://223.5.5.5/dns-query"
-            #   "https://119.29.29.29/dns-query"
-            # ];
-            # direct-nameserver = [
-            #   "https://223.5.5.5/dns-query"
-            #   "https://119.29.29.29/dns-query"
-            # ];
-            # direct-nameserver-follow-policy = false;
-            default-nameserver = [
-              "223.5.5.5"
-              "119.29.29.29"
-            ];
-            nameserver = [
-              "https://1.1.1.1/dns-query"
-              "https://8.8.8.8/dns-query"
-            ];
-          };
+            unified-delay = true;
+            tcp-concurrent = true;
+            external-controller = "[::1]:9090";
+            profile = {
+              store-selected = true;
+              store-fakeip = true;
+            };
 
-          mixed-port = 7890;
+            geodata-mode = true;
+            geo-auto-update = true;
+            geo-update-interval = 24;
+            geox-url = {
+              geoip = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat";
+              geosite = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat";
+            };
 
-          tun = {
-            enable = true;
-            stack = "gvisor";
-            device = "mihoyo";
-            auto-route = true;
-            strict-route = true;
-            auto-redirect = true;
-            auto-detect-interface = true;
-            gso = true;
-            dns-hijack = [
-              "any:53"
-              "tcp://any:53"
-            ];
-          };
+            sniffer = {
+              enable = true;
+              parse-pure-ip = true;
+              force-dns-mapping = true;
+              override-destination = true;
+              sniff =
+                let
+                  httpsPort = 443;
+                in
+                {
+                  HTTP = {
+                    ports = [
+                      80
+                    ];
+                  };
+                  TLS = {
+                    ports = [
+                      httpsPort
+                    ];
+                  };
+                  QUIC = {
+                    ports = [
+                      httpsPort
+                    ];
+                  };
+                };
+            };
 
-          proxies = [
-            {
-              name = "Dns";
-              type = "dns";
-              udp = true;
-              tfo = true;
-              mptcp = true;
-            }
-            {
-              name = "Direct";
-              type = "direct";
-              udp = true;
-              tfo = true;
-              mptcp = true;
-            }
-          ];
-
-          proxy-providers = {
-            alink = {
-              type = "http";
-              url = import ./secret;
-              interval = 21600;
-              health-check = {
+            dns =
+              let
+                doh-cn = [
+                  "https://223.5.5.5/dns-query"
+                  "https://119.29.29.29/dns-query"
+                ];
+              in
+              {
                 enable = true;
-                lazy = true;
-                interval = 300;
-                timeout = 5000;
-                expected-status = 204;
-                url = "https://cp.cloudflare.com";
+                ipv6 = true;
+                # According to Genshin Impact Wiki
+                # It's not recommended to enable `prefer-h3` and `respect-rules`
+                # **simultaneously**.
+                prefer-h3 = false;
+                respect-rules = true;
+                cache-algorithm = "arc";
+                enhanced-mode = "fake-ip";
+                fake-ip-filter = [
+                  "*"
+                  "+.lan"
+                ];
+                default-nameserver = doh-cn;
+                proxy-server-nameserver = doh-cn;
+                direct-nameserver = doh-cn;
+                direct-nameserver-follow-policy = false;
+                nameserver-policy = {
+                  "geosite:cn" = doh-cn;
+                };
+                nameserver = [
+                  "https://1.1.1.1/dns-query"
+                  "https://8.8.8.8/dns-query"
+                ];
+              };
+
+            mixed-port = 7890;
+
+            tun = {
+              enable = true;
+              stack = "gvisor";
+              device = "mihoyo";
+              auto-route = true;
+              strict-route = true;
+              auto-redirect = true;
+              auto-detect-interface = true;
+              gso = true;
+              dns-hijack = [
+                "any:53"
+                "tcp://any:53"
+              ];
+            };
+
+            proxies =
+              let
+                proxyArgs = {
+                  udp = true;
+                  tfo = true;
+                  mptcp = true;
+                };
+              in
+              [
+                {
+                  inherit (proxyArgs) udp tfo mptcp;
+                  name = "Dns";
+                  type = "dns";
+                }
+                {
+                  inherit (proxyArgs) udp tfo mptcp;
+                  name = "Direct";
+                  type = "direct";
+                }
+              ];
+
+            proxy-providers = {
+              alink = {
+                type = "http";
+                url = lib.trim (lib.readFile "/persist/secret/mihoyo/alink.url");
+                interval = 21600;
+                health-check = {
+                  enable = true;
+                  inherit (urlTestArgs)
+                    lazy
+                    interval
+                    timeout
+                    expected-status
+                    url
+                    ;
+                };
               };
             };
-          };
 
-          proxy-groups = [
-            {
-              name = "General";
-              type = "select";
-              include-all = true;
-              exclude-type = "dns";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-              proxies = [
-                "HK Auto"
-                "TW Auto"
-                "JP Auto"
-                "SG Auto"
-                "UK Auto"
-                "US Auto"
-              ];
-            }
-            {
-              name = "AI Abroad";
-              type = "select";
-              include-all = true;
-              exclude-type = "dns";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-              proxies = [
-                "HK Auto"
-                "TW Auto"
-                "JP Auto"
-                "SG Auto"
-                "UK Auto"
-                "US Auto"
-              ];
-            }
-            {
-              name = "HK Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇭🇰";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-            {
-              name = "TW Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇹🇼";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-            {
-              name = "JP Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇯🇵";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-            {
-              name = "SG Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇸🇬";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-            {
-              name = "UK Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇬🇧";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-            {
-              name = "US Auto";
-              type = "url-test";
-              include-all = true;
-              exclude-type = "dns|direct";
-              filter = "^🇺🇸";
-              lazy = true;
-              interval = 300;
-              timeout = 5000;
-              expected-status = 204;
-              url = "https://cp.cloudflare.com";
-            }
-          ];
+            proxy-groups =
+              let
+                regs = [
+                  {
+                    name = "HK";
+                    emoji = "🇭🇰";
+                  }
+                  {
+                    name = "TW";
+                    emoji = "🇹🇼";
+                  }
+                  {
+                    name = "JP";
+                    emoji = "🇯🇵";
+                  }
+                  {
+                    name = "SG";
+                    emoji = "🇸🇬";
+                  }
+                  {
+                    name = "UK";
+                    emoji = "🇬🇧";
+                  }
+                  {
+                    name = "US";
+                    emoji = "🇺🇸";
+                  }
+                ];
+                grpArgs = {
+                  inherit (urlTestArgs)
+                    lazy
+                    interval
+                    timeout
+                    expected-status
+                    url
+                    ;
+                  include-all = true;
+                };
+                genRegAutoGrp =
+                  { name, emoji }:
+                  {
+                    inherit (grpArgs)
+                      lazy
+                      interval
+                      timeout
+                      expected-status
+                      url
+                      include-all
+                      ;
+                    name = "${name} Auto";
+                    type = "url-test";
+                    exclude-type = "dns|direct";
+                    filter = "^${emoji}";
+                  };
+                genRouteGrp = name: {
+                  inherit (grpArgs)
+                    lazy
+                    interval
+                    timeout
+                    expected-status
+                    url
+                    include-all
+                    ;
+                  inherit name;
+                  type = "select";
+                  exclude-type = "dns";
+                  proxies = regAutoGrps;
+                };
+                regAutoGrps = map genRegAutoGrp regs;
+              in
+              (map genRouteGrp [
+                "General"
+                "AI Aborad"
+              ])
+              ++ regAutoGrps;
 
-          rules = [
-            "GEOIP, lan, Direct, no-resolve"
-            "GEOSITE, private, Direct, no-resolve"
-            "GEOSITE, category-ai-!cn, AI Abroad"
-            "GEOSITE, cn, Direct"
-            "GEOIP, cn, Direct"
-            "MATCH, General"
-          ];
-        }
+            rules = [
+              "DST-PORT, 53, Dns"
+              "GEOIP, lan, Direct, no-resolve"
+              "GEOSITE, private, Direct, no-resolve"
+              "GEOSITE, category-ai-!cn, AI Abroad"
+              "GEOSITE, cn, Direct"
+              "GEOIP, cn, Direct"
+              "MATCH, General"
+            ];
+          }
+        )
       );
     };
 
