@@ -32,6 +32,7 @@
             "git.suggestSmartCommit" = false;
             "git.enableSmartCommit" = true;
             "git.smartCommitChanges" = "all";
+            "git.confirmSync" = false;
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = "nixd";
             "[typescript]" = {
