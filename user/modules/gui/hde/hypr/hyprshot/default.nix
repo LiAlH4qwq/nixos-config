@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     programs.hyprshot.enable = true;
-    wayland.windowManager.hyprland.settings.binds =
+    wayland.windowManager.hyprland.settings.bind =
       let
         cmd = "uwsm-app -- hyprshot -o ${loc}";
         loc = "$HOME/Pictures/Screenshots -zm";
