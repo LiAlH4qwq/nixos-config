@@ -15,8 +15,9 @@ _: {
     in
     {
       settings.experimental-features = [
-        "nix-command"
         "flakes"
+        "nix-command"
+        "pipe-operator"
       ];
       gc = {
         inherit (commonOpions)
