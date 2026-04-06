@@ -29,6 +29,9 @@
             "editor.fontFamily" = "monospace";
             "editor.fontLigatures" = true;
             "terminal.integrated.fontLigatures.enabled" = true;
+            "git.suggestSmartCommit" = false;
+            "git.enableSmartCommit" = true;
+            "git.smartCommitChanges" = "all";
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = "nixd";
             "[typescript]" = {
