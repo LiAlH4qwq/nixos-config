@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   urlTestArgs = {
     lazy = true;
@@ -129,7 +130,7 @@ in
   proxy-providers = {
     alink = {
       type = "http";
-      url = lib.trim (lib.readFile "/persist/secret/mihoyo/alink.url");
+      url = lib.trim <| lib.readFile <| "/persist/secret/mihoyo/alink.url";
       interval = 21600;
       health-check = {
         enable = true;

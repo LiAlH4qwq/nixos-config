@@ -38,7 +38,7 @@
           mkYaml = x: x |> genYaml |> lib.readFile;
           genYaml = pkgs.formats.yaml_1_2 { } |> (x: x.generate "");
         in
-        mkYaml <| import ./settings;
+        mkYaml <| import ./settings { inherit lib; };
     };
 
     networking = {
