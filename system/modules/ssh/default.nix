@@ -11,13 +11,21 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.ssh.enable {
+  config = {
+    # Agenix depends on sshd, so it couldn't be fully disabled.
     services.openssh = {
       enable = true;
-      openFirewall = true;
+      openFirewall = config.liuxu.system.ssh.enable;
     };
 
     # Why default settings enable fprint auth for it?
     security.pam.services.sshd.fprintAuth = false;
+
+    environment.persistence."/persist" = {
+      files = [
+        "/etc/ssh/ssh_host_ed25519_key"
+        "/etc/ssh/ssh_host_ed25519_key.pub"
+      ];
+    };
   };
 }
