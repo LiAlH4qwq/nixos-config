@@ -31,15 +31,22 @@
       configFile = "/run/mihoyo/config.yaml";
     };
 
-    systemd.tmpfiles.settings.mihoyo."/run/mihoyo/config.yaml".F = {
-      mode = "0600";
-      argument =
-        let
-          mkYaml = x: x |> genYaml |> lib.readFile;
-          genYaml = pkgs.formats.yaml_1_2 { } |> (x: x.generate "");
-        in
-        mkYaml <| import ./settings { inherit lib; };
-    };
+    system.activationScripts.mihoyo =
+      let
+        cfgDir = "/run/mihoyo";
+        cfgFile = "config.yaml";
+        settings = import ./settings { inherit lib; };
+        settingsStr = settings |> builtins.toJSON |> lib.escapeShellArg;
+      in
+      {
+        text = ''
+          mkdir -p ${cfgDir}
+          chmod 0700 ${cfgDir}
+          touch ${cfgDir}/${cfgFile}
+          chmod 0600 ${cfgDir}/${cfgFile}
+          echo -ne ${settingsStr} > ${cfgDir}/${cfgFile}
+        '';
+      };
 
     networking = {
       # allow tun mode traffic.

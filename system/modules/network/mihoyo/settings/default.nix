@@ -211,13 +211,13 @@ in
         inherit name;
         type = "select";
         exclude-type = "dns";
-        proxies = regAutoGrps;
+        proxies = lib.flip map regAutoGrps (x: x.name);
       };
       regAutoGrps = map genRegAutoGrp regs;
     in
     (map genRouteGrp [
       "General"
-      "AI Aborad"
+      "AI Abroad"
     ])
     ++ regAutoGrps;
 
