@@ -35,17 +35,22 @@
       obs-studio.enable = true;
     };
 
-    # These programs hasn't been availible as programs config. :(
-    home.packages = with pkgs; [
-      nautilus # explorer.exe
-      mission-center # taskmgr.exe
-      lollypop # Music player
-      clapper # Video player
-      materialgram # Telegram with material design
-      qq
-      wechat
-      wemeet
-      wpsoffice-cn
-    ];
+    home = {
+      sessionVariables = {
+        "NIXOS_OZONE_WL" = 1;
+      };
+      # These programs hasn't been availible as programs config. :(
+      packages = with pkgs; [
+        nautilus # explorer.exe
+        mission-center # taskmgr.exe
+        lollypop # Music player
+        clapper # Video player
+        materialgram # Telegram with material design
+        qq
+        wechat
+        wemeet
+        wpsoffice-cn
+      ];
+    };
   };
 }
