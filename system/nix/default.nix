@@ -9,7 +9,7 @@ _: {
         persistent = true;
         randomizedDelaySec = "1h";
         dates = [
-          "17.30"
+          "17:30"
         ];
       };
     in
