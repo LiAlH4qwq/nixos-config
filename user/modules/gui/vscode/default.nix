@@ -26,7 +26,7 @@
             "window.zoomLevel" = 0.25;
             "editor.formatOnSave" = true;
             "editor.formatOnPaste" = true;
-            "editor.fontFamily" = "monospace";
+            "editor.fontFamily" = "Maple Mono NF CN, monospace";
             "editor.fontLigatures" = true;
             "terminal.integrated.fontLigatures.enabled" = true;
             "git.suggestSmartCommit" = false;
