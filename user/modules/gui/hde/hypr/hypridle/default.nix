@@ -7,7 +7,7 @@
         general = {
           # Avoid starting multiple hyprlock instances.
           lock_cmd = "pidof hyprlock || hyprlock";
-          unlock_cmd = "pidof hyprlock | xargs kill";
+          unlock_cmd = "pidof hyprlock | xargs kill -USR1";
           # Lock before sleep.
           before_sleep_cmd = "loginctl lock-session";
           # Avoid pressing keys twich to wake screen.
