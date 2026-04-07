@@ -6,7 +6,7 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-color-emoji
-      maple-mono.NF-CN
+      maple-mono.NF-CN-unhinted
     ];
     fontconfig = {
       defaultFonts = {
