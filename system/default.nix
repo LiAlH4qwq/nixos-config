@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  stdenv,
   ...
 }:
 {
@@ -75,6 +74,6 @@
 
   environment.systemPackages = [
     pkgs.usbutils # `lsusb`
-    inputs.agenix.packages.${stdenv.hostPlatform.system}.default
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

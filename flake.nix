@@ -19,8 +19,7 @@
     agenix = {
       url = "github:yaxitech/ragenix";
       inputs = {
-        nixpkgs.follows = "";
-        home-manager.follows = "";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     libpam-pwdfile-rs = {
