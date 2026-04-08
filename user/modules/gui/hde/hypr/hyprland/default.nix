@@ -60,6 +60,7 @@
             "${mod} SHIFT, grave, movetoworkspace, empty"
             "${mod}, XF86Favorites, workspace, name:Password"
             "${mod} SHIFT, XF86Favorites, movetoworkspace, name:Password"
+            ", Help, execr, uwsm-app -- fish ~/.config/hypr/hyprland/power-profiles.fish"
           ]
 
           ++ (lib.concatMap (
@@ -109,6 +110,13 @@
             "float, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
           ];
         };
+    };
+    xdg.configFile = {
+      hyprland-power-profiles = {
+        force = true;
+        source = ./power-profiles.fish;
+        target = "hypr/hyprland/power-profiles.fish";
+      };
     };
   };
 }
