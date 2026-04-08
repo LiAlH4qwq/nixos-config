@@ -14,11 +14,29 @@ _: {
       };
     in
     {
-      settings.experimental-features = [
-        "flakes"
-        "nix-command"
-        "pipe-operator"
-      ];
+      settings =
+        let
+          admins = [
+            "root"
+            "@wheel"
+          ];
+        in
+        {
+          experimental-features = [
+            "flakes"
+            "nix-command"
+            "pipe-operator"
+          ];
+          allowed-users = admins;
+          trusted-users = admins;
+          substituters = [
+            "https://cache.nixos.org"
+            "https://nix-community.cachix.org"
+          ];
+          trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
+        };
       gc = {
         inherit (commonOpions)
           automatic
