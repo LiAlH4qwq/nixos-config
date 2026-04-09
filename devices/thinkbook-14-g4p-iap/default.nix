@@ -30,7 +30,7 @@
     virtualbox.enable = true;
   };
 
-  networking.hostName = "LiAlH4-Laptop-Nix";
+  networking.hostName = "LiAlH4-Laptop";
   time.timeZone = "Asia/Shanghai";
   nixpkgs.hostPlatform = "x86_64-linux";
 

@@ -79,7 +79,7 @@
           ];
         in
         {
-          thinkbook-14-g4p-iap = nixpkgs.lib.nixosSystem {
+          LiAlH4-Laptop = nixpkgs.lib.nixosSystem {
             inherit specialArgs;
             modules = commons ++ [
               ./devices/thinkbook-14-g4p-iap
