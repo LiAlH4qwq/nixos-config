@@ -1,8 +1,8 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
-  self,
   ...
 }:
 {
@@ -10,7 +10,7 @@
     programs.fish = {
       enable = true;
       shellAliases = {
-        rebuild = "run0 nixos-rebuild switch -F ${self}";
+        rebuild = "run0 nixos-rebuild switch -F ${inputs.self}";
       };
     };
     users.defaultUserShell = pkgs.fish;
