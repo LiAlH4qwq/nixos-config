@@ -5,6 +5,12 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,12 +20,6 @@
       inputs = {
         nixpkgs.follows = "";
         home-manager.follows = "";
-      };
-    };
-    agenix = {
-      url = "github:yaxitech/ragenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
       };
     };
     libpam-pwdfile-rs = {
@@ -36,9 +36,9 @@
     inputs@{
       nixpkgs,
       lanzaboote,
+      agenix,
       home-manager,
       impermanence,
-      agenix,
       libpam-pwdfile-rs,
       hyprlock-hint,
       ...
@@ -75,6 +75,7 @@
               ];
             }
             ./system
+            ./secrets
           ];
         in
         {
