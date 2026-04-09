@@ -1,4 +1,9 @@
 _: {
+  imports = [
+    ./lix
+    ./nixos
+  ];
+
   # We won't sacrifice our experience for FOSS.
   nixpkgs.config.allowUnfree = true;
   nix =

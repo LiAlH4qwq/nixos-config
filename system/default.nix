@@ -7,7 +7,6 @@
   imports = [
     ./boot
     ./i18n
-    ./lix
     ./modules
     ./nix
     ./persist
