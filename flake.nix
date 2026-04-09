@@ -1,10 +1,5 @@
 {
   inputs = {
-
-    # Reflects NixOS release version when system installed.
-    # Do not change it unless needed.
-    nixosReleaseVersionWhenInstalled = "25.11";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -39,7 +34,6 @@
   };
   outputs =
     inputs@{
-      nixosReleaseVersionWhenInstalled,
       nixpkgs,
       lanzaboote,
       agenix,
@@ -52,6 +46,11 @@
     {
       nixosConfigurations =
         let
+
+          # Reflects NixOS release version when system installed.
+          # Do not change it unless needed.
+          nixosReleaseVersionWhenInstalled = "25.11";
+
           specialArgs = { inherit inputs; };
           commons = [
             lanzaboote.nixosModules.lanzaboote
