@@ -130,7 +130,7 @@ in
   proxy-providers = {
     alink = {
       type = "http";
-      url = lib.trim <| lib.readFile <| "/persist/secret/mihoyo/alink.url";
+      url = "JIU_BU_GAO_SU_NI";
       interval = 21600;
       health-check = {
         enable = true;

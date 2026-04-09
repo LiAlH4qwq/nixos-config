@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./boot
@@ -68,7 +72,8 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    usbutils # `lsusb`
+  environment.systemPackages = [
+    pkgs.usbutils # `lsusb`
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

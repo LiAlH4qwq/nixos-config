@@ -1,20 +1,26 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs = {
         nixpkgs.follows = "";
         home-manager.follows = "";
       };
-    };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     libpam-pwdfile-rs = {
       url = "github:lialh4qwq/libpam-pwdfile-rs/v0.4.0";
@@ -29,9 +35,10 @@
   outputs =
     inputs@{
       nixpkgs,
-      impermanence,
       lanzaboote,
+      agenix,
       home-manager,
+      impermanence,
       libpam-pwdfile-rs,
       hyprlock-hint,
       ...
@@ -46,9 +53,10 @@
 
           specialArgs = { inherit inputs; };
           commons = [
-            impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.home-manager
+            impermanence.nixosModules.impermanence
+            agenix.nixosModules.default
             libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
             {
               home-manager.sharedModules = [
@@ -67,6 +75,7 @@
               ];
             }
             ./system
+            ./secrets
           ];
         in
         {

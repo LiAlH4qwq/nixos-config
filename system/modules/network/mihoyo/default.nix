@@ -31,22 +31,39 @@
       configFile = "/run/mihoyo/config.yaml";
     };
 
-    system.activationScripts.mihoyo =
+    system.activationScripts.mihoyo.text =
       let
         cfgDir = "/run/mihoyo";
-        cfgFile = "config.yaml";
+        cfgFile = "${cfgDir}/config.yaml";
+        cfgFileIn = "${cfgFile}.in";
         settings = import ./settings { inherit lib; };
         settingsStr = settings |> builtins.toJSON |> lib.escapeShellArg;
+        secret = config.age.secrets.mihoyo-alink.path;
       in
-      {
-        text = ''
-          mkdir -p ${cfgDir}
-          chmod 0700 ${cfgDir}
-          touch ${cfgDir}/${cfgFile}
-          chmod 0600 ${cfgDir}/${cfgFile}
-          echo -ne ${settingsStr} > ${cfgDir}/${cfgFile}
-        '';
-      };
+      ''
+        SECRET=$(cat "${secret}")
+        mkdir -p "${cfgDir}"
+        chmod 0700 "${cfgDir}"
+        touch "${cfgFileIn}"
+        chmod 0600 "${cfgFileIn}"
+        echo -ne ${settingsStr} > "${cfgFileIn}"
+        ${pkgs.jq}/bin/jq \
+          -c \
+          --arg secret "$SECRET" \
+          '.["proxy-providers"].alink.url = $secret' \
+          "${cfgFileIn}" > "${cfgFile}"
+        rm -f "${cfgFileIn}"
+      '';
+
+    # systemd.services.mihomo = {
+    #   serviceConfig.LoadCredential = [
+    #     "config.yaml.base:/run/mihoyo/config.yaml.base"
+    #     "secret:/run/agenix/mihoyo-alink"
+    #   ];
+    #   preStart = ''
+    #     SECRET=$(cat $CREDENTIALS_DIRECTORY/secret)
+    #   '';
+    # };
 
     networking = {
       # allow tun mode traffic.
