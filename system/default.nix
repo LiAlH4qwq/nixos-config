@@ -10,6 +10,7 @@
     ./modules
     ./nix
     ./persist
+    ./secrets
     ./uutils
   ];
 
