@@ -55,16 +55,6 @@
         rm -f "${cfgFileIn}"
       '';
 
-    # systemd.services.mihomo = {
-    #   serviceConfig.LoadCredential = [
-    #     "config.yaml.base:/run/mihoyo/config.yaml.base"
-    #     "secret:/run/agenix/mihoyo-alink"
-    #   ];
-    #   preStart = ''
-    #     SECRET=$(cat $CREDENTIALS_DIRECTORY/secret)
-    #   '';
-    # };
-
     networking = {
       # allow tun mode traffic.
       firewall = {
