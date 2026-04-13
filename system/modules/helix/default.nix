@@ -28,7 +28,7 @@
           target = "helix/config.toml";
           source =
             let
-              mkToml = pkgs.formats.toml { } |> (x: x.generate);
+              mkToml = pkgs.formats.toml { } |> (x: x.generate "");
             in
             mkToml {
               theme = "github_light_colorblind";
