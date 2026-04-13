@@ -17,6 +17,9 @@
         };
         default = {
           extensions = with pkgs.vscode-extensions; [
+            eamodio.gitlens
+            seatonjiang.gitmoji-vscode
+            redhat.vscode-yaml
             jnoortheen.nix-ide
             biomejs.biome
           ];
