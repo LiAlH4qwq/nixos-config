@@ -16,53 +16,64 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.network.mihoyo.enable {
-    assertions = [
-      {
-        assertion = config.liuxu.system.network.enable;
-        message = "Network should be enable first in order to enable Mihoyo!";
-      }
-    ];
+  config =
+    let
+      cfgDir = "/run/mihoyo";
+      cfgFile = "${cfgDir}/config.yaml";
+    in
+    lib.mkIf config.liuxu.system.network.mihoyo.enable {
+      assertions = [
+        {
+          assertion = config.liuxu.system.network.enable;
+          message = "Network should be enable first in order to enable Mihoyo!";
+        }
+      ];
 
-    services.mihomo = {
-      enable = true;
-      tunMode = true;
-      webui = pkgs.metacubexd;
-      configFile = "/run/mihoyo/config.yaml";
-    };
-
-    system.activationScripts.mihoyo.text =
-      let
-        cfgDir = "/run/mihoyo";
-        cfgFile = "${cfgDir}/config.yaml";
-        cfgFileIn = "${cfgFile}.in";
-        settings = import ./settings { inherit lib; };
-        settingsStr = settings |> builtins.toJSON |> lib.escapeShellArg;
-        secret = config.age.secrets.mihoyo-alink.path;
-      in
-      ''
-        SECRET=$(cat "${secret}")
-        mkdir -p "${cfgDir}"
-        chmod 0700 "${cfgDir}"
-        touch "${cfgFileIn}"
-        chmod 0600 "${cfgFileIn}"
-        echo -ne ${settingsStr} > "${cfgFileIn}"
-        ${pkgs.jq}/bin/jq \
-          -c \
-          --arg secret "$SECRET" \
-          '.["proxy-providers"].alink.url = $secret' \
-          "${cfgFileIn}" > "${cfgFile}"
-        rm -f "${cfgFileIn}"
-      '';
-
-    networking = {
-      # allow tun mode traffic.
-      firewall = {
-        checkReversePath = false;
-        trustedInterfaces = [
-          "mihoyo"
-        ];
+      services.mihomo = {
+        enable = true;
+        tunMode = true;
+        webui = pkgs.metacubexd;
+        configFile = cfgFile;
       };
+
+      system.activationScripts.mihoyo.text =
+        let
+          cfgFileIn = "${cfgFile}.in";
+          settings = import ./settings { inherit lib; };
+          cfgDirShArg = cfgDir |> lib.escapeShellArg;
+          cfgFileShArg = cfgFile |> lib.escapeShellArg;
+          cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
+          settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
+          secretShArg = config.age.secrets.mihoyo-alink.path |> lib.escapeShellArg;
+        in
+        ''
+          SECRET=$(cat ${secretShArg})
+          mkdir -p ${cfgDirShArg}
+          chmod 0700 ${cfgDirShArg}
+          touch ${cfgFileInShArg}
+          chmod 0600 ${cfgFileInShArg}
+          echo -ne ${settingsShArg} > ${cfgFileInShArg}
+          ${pkgs.jq}/bin/jq \
+            -c \
+            --arg secret "$SECRET" \
+            '.["proxy-providers"].alink.url = $secret' \
+            ${cfgFileInShArg} > ${cfgFileShArg}
+          rm -f ${cfgFileInShArg}
+        '';
+
+      networking = {
+        # allow tun mode traffic.
+        firewall = {
+          checkReversePath = false;
+          trustedInterfaces = [
+            "mihoyo"
+          ];
+        };
+      };
+
+      # Make cache persistent.
+      environment.persistence."/persist".directories = [
+        "/var/lib/private/mihomo"
+      ];
     };
-  };
 }
