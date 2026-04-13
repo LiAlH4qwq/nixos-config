@@ -26,9 +26,13 @@
       etc = {
         helix = {
           target = "helix/config.toml";
-          source = pkgs.formats.toml { } {
-            theme = "github_light_colorblind";
-          };
+          source =
+            let
+              mkToml = pkgs.formats.toml { } |> (x: x.generate);
+            in
+            mkToml {
+              theme = "github_light_colorblind";
+            };
         };
       };
     };
