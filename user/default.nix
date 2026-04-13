@@ -14,15 +14,13 @@
   home.packages = with pkgs; [
     cargo
     fastfetch
-    wev # Input inspect tool
-    nixd # Nix LSP
-    nixfmt # Nix formatter
     reptyr # Re-attach programs to pty
-    wl-clipboard-rs # Clipboard history of vicinae
   ];
 
-  # Home manager need this to bootstrap.
-  programs.home-manager.enable = true;
+  programs = {
+    programs.zellij.enable = true;
 
-  programs.zellij.enable = true;
+    # Home manager need this to bootstrap.
+    home-manager.enable = true;
+  };
 }

@@ -53,5 +53,9 @@
         };
       };
     };
+    home.packages = with pkgs; [
+      nixd # Nix LSP
+      nixfmt # Nix formatter
+    ];
   };
 }
