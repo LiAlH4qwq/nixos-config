@@ -18,7 +18,7 @@
   ];
 
   programs = {
-    programs.zellij.enable = true;
+    zellij.enable = true;
 
     # Home manager need this to bootstrap.
     home-manager.enable = true;
