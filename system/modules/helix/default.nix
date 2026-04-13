@@ -20,14 +20,14 @@
       systemPackages = with pkgs; [
         helix
       ];
+      sessionVariables = {
+        EDITOR = "hx";
+      };
       etc = {
         helix = {
           target = "helix/config.toml";
-          # TOML strings should be quoted.
-          text = lib.generators.toINIWithGlobalSection { } {
-            globalSection = {
-              theme = "\"github_light_colorblind\"";
-            };
+          source = pkgs.formats.toml { } {
+            theme = "github_light_colorblind";
           };
         };
       };
