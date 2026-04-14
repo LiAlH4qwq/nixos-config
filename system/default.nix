@@ -56,7 +56,7 @@
   };
 
   services = {
-    userborn.enable = true;
+    # userborn.enable = true;
     # Better D-Bus implemention.
     dbus.implementation = "broker";
     power-profiles-daemon.enable = true;
@@ -74,13 +74,13 @@
   };
 
   system.etc.overlay = {
-    enable = true;
+    # enable = true;
     # Otherwise it will break,
     # since some files in `/etc` are binded mount from `/persist`,
     # somes are tmpfiles only alive in runtime.
     # Neither of them are awared by nix,
     # so mutable should be allowed.
-    mutable = true;
+    # mutable = true;
   };
 
   environment.systemPackages = [
