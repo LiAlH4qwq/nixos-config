@@ -1,3 +1,10 @@
 _: {
-  age.secrets.mihoyo-alink.file = ./def/mihoyo-alink.age;
+  age = {
+    # Fix conflicting with impermanence.
+    # Otherwise, the agenix will try to do decryption
+    # before impermanence mounts keys in `/etc/ssh`
+    # which results in decryption failed.
+    identityPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
+    secrets.mihoyo-alink.file = ./def/mihoyo-alink.age;
+  };
 }
