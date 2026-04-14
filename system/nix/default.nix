@@ -35,6 +35,7 @@ _: {
           allowed-users = admins;
           trusted-users = admins;
           substituters = [
+            "https://mirrors.nju.edu.cn/nix-channels/store?priority=24"
             "https://cache.nixos.org"
             "https://nix-community.cachix.org"
           ];
