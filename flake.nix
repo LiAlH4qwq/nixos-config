@@ -1,15 +1,17 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-cli = {
+      url = "github:nix-community/nixos-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:yaxitech/ragenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -35,6 +37,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nixos-cli,
       lanzaboote,
       agenix,
       home-manager,
@@ -53,6 +56,7 @@
 
           specialArgs = { inherit inputs; };
           commons = [
+            nixos-cli.nixosModules.nixos-cli
             lanzaboote.nixosModules.lanzaboote
             agenix.nixosModules.default
             home-manager.nixosModules.home-manager
