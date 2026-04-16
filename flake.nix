@@ -1,5 +1,6 @@
 {
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-cli = {
       url = "github:nix-community/nixos-cli";
@@ -36,58 +37,53 @@
   };
   outputs =
     inputs@{
-      nixpkgs,
-      nixos-cli,
-      lanzaboote,
-      agenix,
-      home-manager,
-      impermanence,
-      libpam-pwdfile-rs,
-      hyprlock-hint,
+      flake-parts,
       ...
     }:
-    {
-      nixosConfigurations =
-        let
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      flake = {
+        nixosConfigurations =
+          let
 
-          # Reflects NixOS release version when system installed.
-          # Do not change it unless needed.
-          nixosReleaseVersionWhenInstalled = "25.11";
+            # Reflects NixOS release version when system installed.
+            # Do not change it unless needed.
+            nixosReleaseVersionWhenInstalled = "25.11";
 
-          specialArgs = { inherit inputs; };
-          commons = [
-            nixos-cli.nixosModules.nixos-cli
-            lanzaboote.nixosModules.lanzaboote
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            impermanence.nixosModules.impermanence
-            libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
-            {
-              home-manager.sharedModules = [
-                {
-                  home.stateVersion = nixosReleaseVersionWhenInstalled;
-                }
-                ./user
-              ];
-            }
-            {
-              system.stateVersion = nixosReleaseVersionWhenInstalled;
-            }
-            {
-              nixpkgs.overlays = [
-                hyprlock-hint.overlays.default
-              ];
-            }
-            ./system
-          ];
-        in
-        {
-          LiAlH4-Laptop = nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            modules = commons ++ [
-              ./devices/thinkbook-14-g4p-iap
+            specialArgs = { inherit inputs; };
+            commons = [
+              inputs.nixos-cli.nixosModules.nixos-cli
+              inputs.lanzaboote.nixosModules.lanzaboote
+              inputs.agenix.nixosModules.default
+              inputs.home-manager.nixosModules.home-manager
+              inputs.impermanence.nixosModules.impermanence
+              inputs.libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
+              {
+                home-manager.sharedModules = [
+                  {
+                    home.stateVersion = nixosReleaseVersionWhenInstalled;
+                  }
+                  ./user
+                ];
+              }
+              {
+                system.stateVersion = nixosReleaseVersionWhenInstalled;
+              }
+              {
+                nixpkgs.overlays = [
+                  inputs.hyprlock-hint.overlays.default
+                ];
+              }
+              ./system
             ];
+          in
+          {
+            LiAlH4-Laptop = inputs.nixpkgs.lib.nixosSystem {
+              inherit specialArgs;
+              modules = commons ++ [
+                ./devices/thinkbook-14-g4p-iap
+              ];
+            };
           };
-        };
+      };
     };
 }
