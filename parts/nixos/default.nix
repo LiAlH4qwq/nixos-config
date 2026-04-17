@@ -1,0 +1,47 @@
+{ inputs, ... }:
+{
+  flake = {
+    nixosConfigurations =
+      let
+        specialArgs = { inherit inputs; };
+        commons = [
+          inputs.agenix.nixosModules.default
+          inputs.nixos-cli.nixosModules.nixos-cli
+          inputs.lanzaboote.nixosModules.lanzaboote
+          inputs.impermanence.nixosModules.impermanence
+          inputs.home-manager.nixosModules.home-manager
+          inputs.libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              overwriteBackup = true;
+              backupFileExtension = "bak";
+              # Home Manager will not consume specialArgs
+              # unless explicitly pass it as this.
+              extraSpecialArgs = specialArgs;
+              sharedModules = [
+                "${inputs.self}/user"
+              ];
+            };
+          }
+          {
+            nixpkgs.overlays = [
+              (_: prev: {
+                hyprlock-hint = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hyprlock-hint;
+              })
+            ];
+          }
+          "${inputs.self}/system"
+        ];
+      in
+      {
+        LiAlH4-Laptop = inputs.nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = commons ++ [
+            "${inputs.self}/devices/thinkbook-14-g4p-iap"
+          ];
+        };
+      };
+  };
+}

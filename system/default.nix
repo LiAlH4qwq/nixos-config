@@ -19,13 +19,6 @@
     mutableUsers = false;
   };
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    overwriteBackup = true;
-    backupFileExtension = "bak";
-  };
-
   hardware = {
     enableRedistributableFirmware = true;
   };

@@ -28,6 +28,11 @@
       };
     };
     virtualbox.enable = true;
+
+    # Reflects NixOS version **when system get installed**.
+    # Do not change it after install **unless needed**!
+    version-when-installed = "25.11";
+
   };
 
   networking.hostName = "LiAlH4-Laptop";

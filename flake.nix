@@ -1,10 +1,14 @@
 {
   inputs = {
+    systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-cli = {
       url = "github:nix-community/nixos-cli";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -12,6 +16,10 @@
     };
     agenix = {
       url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lazyvim = {
+      url = "github:pfassina/lazyvim-nix/v15.15.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -25,65 +33,40 @@
         home-manager.follows = "";
       };
     };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     libpam-pwdfile-rs = {
       url = "github:lialh4qwq/libpam-pwdfile-rs/v0.4.0";
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprlock-hint = {
-      url = "path:/mnt/data/lialh4/Projects/nixos-config/packages/hyprlock-hint";
-      inputs.nixpkgs.follows = "nixpkgs";
+    bun2nix = {
+      url = "github:nix-community/bun2nix?ref=refs/tags/2.0.8";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
   };
   outputs =
-    inputs@{
-      flake-parts,
-      ...
-    }:
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      flake = {
-        nixosConfigurations =
-          let
+      imports = [
+        ./parts/nixos
+        ./parts/nix-on-droid
+      ];
 
-            # Reflects NixOS release version when system installed.
-            # Do not change it unless needed.
-            nixosReleaseVersionWhenInstalled = "25.11";
-
-            specialArgs = { inherit inputs; };
-            commons = [
-              inputs.nixos-cli.nixosModules.nixos-cli
-              inputs.lanzaboote.nixosModules.lanzaboote
-              inputs.agenix.nixosModules.default
-              inputs.home-manager.nixosModules.home-manager
-              inputs.impermanence.nixosModules.impermanence
-              inputs.libpam-pwdfile-rs.nixosModules.libpam-pwdfile-rs
-              {
-                home-manager.sharedModules = [
-                  {
-                    home.stateVersion = nixosReleaseVersionWhenInstalled;
-                  }
-                  ./user
-                ];
-              }
-              {
-                system.stateVersion = nixosReleaseVersionWhenInstalled;
-              }
-              {
-                nixpkgs.overlays = [
-                  inputs.hyprlock-hint.overlays.default
-                ];
-              }
-              ./system
-            ];
-          in
-          {
-            LiAlH4-Laptop = inputs.nixpkgs.lib.nixosSystem {
-              inherit specialArgs;
-              modules = commons ++ [
-                ./devices/thinkbook-14-g4p-iap
-              ];
-            };
-          };
-      };
+      systems = import inputs.systems;
+      perSystem =
+        { pkgs, ... }:
+        let
+          pkgsWithBun2Nix = pkgs.extend inputs.bun2nix.overlays.default;
+        in
+        {
+          packages.hyprlock-hint = pkgsWithBun2Nix.callPackage ./packages/hyprlock-hint { };
+        };
     };
 }

@@ -32,6 +32,7 @@ _: {
             "nix-command"
             "pipe-operator"
           ];
+          extra-deprecated-features = [ "url-literals" ];
           allowed-users = admins;
           trusted-users = admins;
           substituters = [

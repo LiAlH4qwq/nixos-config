@@ -12,6 +12,7 @@ _: {
     ./secureboot
     ./ssh
     ./user-support
+    ./version-when-installed
     ./virtualbox
   ];
 }
