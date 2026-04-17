@@ -32,7 +32,7 @@
               })
             ];
           }
-          "${inputs.self}/system"
+          "${inputs.self}/nixos"
         ];
       in
       {

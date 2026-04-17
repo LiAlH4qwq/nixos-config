@@ -57,16 +57,9 @@
       imports = [
         ./parts/nixos
         ./parts/nix-on-droid
+        ./parts/packages
       ];
 
       systems = import inputs.systems;
-      perSystem =
-        { pkgs, ... }:
-        let
-          pkgsWithBun2Nix = pkgs.extend inputs.bun2nix.overlays.default;
-        in
-        {
-          packages.hyprlock-hint = pkgsWithBun2Nix.callPackage ./packages/hyprlock-hint { };
-        };
     };
 }
