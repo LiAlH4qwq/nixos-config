@@ -4,7 +4,7 @@
     ./mihoyo
   ];
 
-  options.liuxu.system.network.enable = lib.mkOption {
+  options.liuxu.nixos.network.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     example = false;
@@ -14,7 +14,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.network.enable {
+  config = lib.mkIf config.liuxu.nixos.network.enable {
     networking = {
       networkmanager.enable = true;
     };

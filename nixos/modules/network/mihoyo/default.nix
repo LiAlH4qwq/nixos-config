@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.system.network.mihoyo.enable = lib.mkOption {
+  options.liuxu.nixos.network.mihoyo.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -21,10 +21,10 @@
       cfgDir = "/run/mihoyo";
       cfgFile = "${cfgDir}/config.yaml";
     in
-    lib.mkIf config.liuxu.system.network.mihoyo.enable {
+    lib.mkIf config.liuxu.nixos.network.mihoyo.enable {
       assertions = [
         {
-          assertion = config.liuxu.system.network.enable;
+          assertion = config.liuxu.nixos.network.enable;
           message = "Network should be enable first in order to enable Mihoyo!";
         }
       ];

@@ -6,33 +6,37 @@
     ./users
   ];
 
-  liuxu.system = {
-    better-shell.enable = true; # Default enable
-    bluetooth.enable = true;
-    brightness.enable = true;
-    fingerprint.enable = true;
-    helix.enable = true; # Default enable
-    laptop.enable = true;
-    network = {
-      enable = true; # Default enable
-      mihoyo.enable = true;
-    };
-    pin.enable = true; # Default enable
-    podman.enable = true;
-    secureboot.enable = true;
-    ssh.enable = true;
-    user-support = {
-      gui = {
-        enable = true;
-        display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
+  liuxu = {
+    nixos = {
+      network = {
+        enable = true; # Default enable
+        mihoyo.enable = true;
       };
     };
-    virtualbox.enable = true;
+    system = {
+      better-shell.enable = true; # Default enable
+      bluetooth.enable = true;
+      brightness.enable = true;
+      fingerprint.enable = true;
+      helix.enable = true; # Default enable
+      laptop.enable = true;
+      pin.enable = true; # Default enable
+      podman.enable = true;
+      secureboot.enable = true;
+      ssh.enable = true;
+      user-support = {
+        gui = {
+          enable = true;
+          display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
+        };
+      };
+      virtualbox.enable = true;
 
-    # Reflects NixOS version **when system get installed**.
-    # Do not change it after install **unless needed**!
-    version-when-installed = "25.11";
+      # Reflects NixOS version **when system get installed**.
+      # Do not change it after install **unless needed**!
+      version-when-installed = "25.11";
 
+    };
   };
 
   networking.hostName = "LiAlH4-Laptop";

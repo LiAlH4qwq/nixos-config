@@ -6,7 +6,6 @@ _: {
     ./fingerprint
     ./helix
     ./laptop
-    ./network
     ./pin
     ./podman
     ./secureboot
