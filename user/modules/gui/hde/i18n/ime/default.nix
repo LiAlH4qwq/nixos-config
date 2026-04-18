@@ -81,5 +81,10 @@
         };
       };
     };
+    home.files.fcitx5-punctuations = {
+      force = true;
+      source = ./punctuations.kv;
+      target = ".local/share/fcitx5/punctuation/punc.mb.zh_CN";
+    };
   };
 }
