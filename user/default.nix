@@ -22,6 +22,7 @@
 
   programs = {
     zellij.enable = true;
+    lazygit.enable = true;
 
     # Home manager need this to bootstrap.
     home-manager.enable = true;
