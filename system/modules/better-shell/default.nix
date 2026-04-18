@@ -4,6 +4,7 @@
     ./bat
     ./eza
     ./fish
+    ./starship
     ./zoxide
   ];
 
@@ -14,6 +15,7 @@
     description = ''
       Whether to enable the better shell.
         Currently enables fish, set it to default shell for all user,
+        enables starship, enables its shell integration for all shells,
         enables zoxide, enables its fish integration (`z` command),
         enables bat, eza, and set fish aliases:
         cat --> bat
