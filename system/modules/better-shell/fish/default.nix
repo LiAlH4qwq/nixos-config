@@ -10,7 +10,7 @@
     programs.fish = {
       enable = true;
       shellAliases = {
-        rebuild = "run0 nixos-rebuild switch -F ${inputs.self}";
+        fish_greeting = "";
       };
     };
     users.defaultUserShell = pkgs.fish;

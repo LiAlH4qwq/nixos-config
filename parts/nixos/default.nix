@@ -27,9 +27,7 @@
           }
           {
             nixpkgs.overlays = [
-              (_: prev: {
-                hyprlock-hint = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hyprlock-hint;
-              })
+              inputs.self.overlays.default
             ];
           }
           "${inputs.self}/nixos"

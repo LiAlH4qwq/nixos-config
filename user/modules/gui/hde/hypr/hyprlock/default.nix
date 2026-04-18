@@ -63,7 +63,7 @@
               font_size = 24;
               color = "0xffffffff";
               position = "0, -30%";
-              text = "cmd[update:0] /etc/profiles/per-user/$USER/bin/bun ~/.config/hypr/hyprlock/hitokoto.ts";
+              text = "cmd[update:0] ${pkgs.hitokoto}/bin/hitokoto";
             }
           ]
           # Fingerprint Hint
@@ -97,13 +97,6 @@
             }
           ];
         };
-    };
-    xdg.configFile = {
-      hyprlock-hitokoto = {
-        force = true;
-        source = ./hitokoto.ts;
-        target = "hypr/hyprlock/hitokoto.ts";
-      };
     };
   };
 }
