@@ -6,6 +6,7 @@
         enable = true;
       };
       fish.shellAliases.cat = "bat";
+      bash.shellAliases.cat = "bat";     
     };
   };
 }
