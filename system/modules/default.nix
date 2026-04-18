@@ -8,7 +8,6 @@ _: {
     ./laptop
     ./pin
     ./podman
-    ./secureboot
     ./ssh
     ./user-support
     ./version-when-installed

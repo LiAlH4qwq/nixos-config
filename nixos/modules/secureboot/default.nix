@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.system.secureboot.enable = lib.mkOption {
+  options.liuxu.nixos.secureboot.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -15,7 +15,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.secureboot.enable {
+  config = lib.mkIf config.liuxu.nixos.secureboot.enable {
     boot = {
       loader.systemd-boot.enable = false;
       lanzaboote = {

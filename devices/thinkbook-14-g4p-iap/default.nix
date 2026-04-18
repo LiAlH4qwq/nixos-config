@@ -12,6 +12,7 @@
         enable = true; # Default enable
         mihoyo.enable = true;
       };
+      secureboot.enable = true;
     };
     system = {
       better-shell.enable = true; # Default enable
@@ -22,7 +23,6 @@
       laptop.enable = true;
       pin.enable = true; # Default enable
       podman.enable = true;
-      secureboot.enable = true;
       ssh.enable = true;
       user-support = {
         gui = {
