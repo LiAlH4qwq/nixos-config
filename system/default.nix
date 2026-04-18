@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./boot
     ./i18n
     ./modules
     ./nix

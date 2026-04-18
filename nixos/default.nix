@@ -2,5 +2,6 @@
 {
   imports = [
     "${inputs.self}/system"
+    ./boot
   ];
 }

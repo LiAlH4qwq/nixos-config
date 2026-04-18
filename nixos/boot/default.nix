@@ -19,9 +19,6 @@
     # stage2Greeting = "Liuxu: Welcome!";
     initrd = {
       systemd.enable = true;
-      availableKernelModules = [
-        "i915"
-      ];
     };
     plymouth = {
       enable = true;
