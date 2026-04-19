@@ -9,6 +9,8 @@ _: {
       mihoyo-alink.file = ./def/mihoyo-alink.age;
       "devices.LiAlH4-Laptop.users.lialh4.password".file =
         ./def/devices.LiAlH4-Laptop.users.lialh4.password.age;
+      "devices.LiAlH4-Server.users.lialh4.password".file =
+        ./def/devices.LiAlH4-Server.users.lialh4.password.age;
     };
   };
 }

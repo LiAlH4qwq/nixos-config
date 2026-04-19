@@ -40,6 +40,12 @@
             "${inputs.self}/devices/thinkbook-14-g4p-iap"
           ];
         };
+        LiAlH4-Server = inputs.nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = commons ++ [
+            "${inputs.self}/devices/htpc"
+          ];
+        };
       };
   };
 }
