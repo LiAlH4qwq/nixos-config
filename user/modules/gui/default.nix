@@ -33,6 +33,12 @@
     programs = {
       firefox.enable = true;
       obs-studio.enable = true;
+      discord = {
+        enable = true;
+        settings = {
+          SKIP_HOST_UPDATE = true;
+        };
+      };
     };
 
     home = {
