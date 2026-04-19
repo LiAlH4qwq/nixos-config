@@ -36,6 +36,17 @@
         configFile = cfgFile;
       };
 
+      # Fix can't find process name.
+      # Source: https://github.com/MetaCubeX/mihomo/issues/961#issuecomment-1879610568
+      systemd.services.mihomo.serviceConfig =
+        let
+          abilities = lib.mkForce "CAP_NET_ADMIN CAP_SYS_PTRACE CAP_DAC_READ_SEARCH";
+        in
+        {
+          AmbientCapabilities = abilities;
+          CapabilityBoundingSet = abilities;
+        };
+
       system.activationScripts.mihoyo.text =
         let
           cfgFileIn = "${cfgFile}.in";
@@ -59,6 +70,8 @@
             '.["proxy-providers"].alink.url = $secret' \
             ${cfgFileInShArg} > ${cfgFileShArg}
           rm -f ${cfgFileInShArg}
+          # Fix directory permission error when starting service.
+          chmod 0700 /var/lib/private
         '';
 
       networking = {

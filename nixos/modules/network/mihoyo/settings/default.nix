@@ -13,6 +13,7 @@ in
   ipv6 = true;
   unified-delay = true;
   tcp-concurrent = true;
+  find-process-mode = "always";
   external-controller = "[::1]:9090";
   profile = {
     store-selected = true;
@@ -23,7 +24,7 @@ in
 
   tun = {
     enable = true;
-    stack = "gvisor";
+    stack = "system";
     device = "mihoyo";
     auto-route = true;
     strict-route = true;
@@ -225,6 +226,10 @@ in
     "DST-PORT, 53, Dns"
     "GEOIP, lan, Direct, no-resolve"
     "GEOSITE, private, Direct, no-resolve"
+    # FIXME: The specific game can't login unless it bypasses tun,
+    # but mihoyo can only see it as `wineserver`, not its real process name,
+    # so this fix this game, but will break further wine programs that needs tun.
+    "PROCESS-NAME, wineserver, Direct"
     "GEOSITE, category-ai-!cn, AI Abroad"
     "GEOSITE, cn, Direct"
     "GEOIP, cn, Direct"
