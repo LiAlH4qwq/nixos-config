@@ -13,6 +13,11 @@
         mihoyo.enable = true;
       };
       secureboot.enable = true;
+      user-support = {
+        gui = {
+          agl.enable = true;
+        };
+      };
     };
     system = {
       better-shell.enable = true; # Default enable

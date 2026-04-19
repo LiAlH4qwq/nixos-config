@@ -22,6 +22,10 @@
       url = "github:pfassina/lazyvim-nix/v15.15.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agl = {
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
