@@ -70,6 +70,9 @@
         window_title = {
           truncate_title_after_length = 42;
         };
+        media_player = {
+          max_title_length = 24;
+        };
         settings = {
           shutdown_cmd = "poweroff";
           suspend_cmd = "systemctl suspend-then-hibernate";

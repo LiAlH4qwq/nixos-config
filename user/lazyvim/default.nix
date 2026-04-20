@@ -9,6 +9,9 @@
         nix.enable = true;
       };
     };
+    extraPackages = with pkgs; [
+      statix # Nix Linter
+    ];
     plugins = {
       theme = ''
         return {
