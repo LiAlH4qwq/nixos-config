@@ -28,6 +28,7 @@
           {
             nixpkgs.overlays = [
               inputs.self.overlays.default
+              inputs.deploy-rs.overlays.default
             ];
           }
           "${inputs.self}/nixos"

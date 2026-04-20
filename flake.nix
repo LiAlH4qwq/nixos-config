@@ -10,6 +10,10 @@
         flake-parts.follows = "flake-parts";
       };
     };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,9 +63,7 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./parts/nixos
-        ./parts/nix-on-droid
-        ./parts/packages
+        ./parts
       ];
 
       systems = import inputs.systems;

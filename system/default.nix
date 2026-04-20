@@ -77,6 +77,7 @@
 
   environment.systemPackages = [
     pkgs.usbutils # `lsusb`
+    pkgs.deploy-rs.deploy-rs
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
