@@ -7,20 +7,22 @@
 
   liuxu = {
     nixos = {
+      bluetooth.enable = true;
       network = {
-        enable = true; # Default enable
+        enable = true;
         mihoyo.enable = true;
       };
       secureboot.enable = true;
       user-support = {
         gui = {
+          enable = false;
           agl.enable = false;
+          display-manager.enable = false;
         };
       };
     };
     system = {
       better-shell.enable = true; # Default enable
-      bluetooth.enable = true;
       brightness.enable = false;
       fingerprint.enable = false;
       helix.enable = true; # Default enable
@@ -28,12 +30,6 @@
       pin.enable = true; # Default enable
       podman.enable = true;
       ssh.enable = true;
-      user-support = {
-        gui = {
-          enable = false;
-          display-manager.enable = false; # Default enable when enabling GUI and requires enabling GUI
-        };
-      };
       virtualbox.enable = false;
 
       # Reflects NixOS version **when system get installed**.
@@ -50,8 +46,4 @@
   services.logind.settings.Login = {
     HandlePowerKey = "ignore";
   };
-
-  hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-  ];
 }

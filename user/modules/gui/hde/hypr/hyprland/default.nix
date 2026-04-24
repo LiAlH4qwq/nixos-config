@@ -106,7 +106,11 @@
             "noshadow, floating:0, onworkspace:w[tv1]"
             "noshadow, floating:0, onworkspace:f[1]"
             "suppressevent maximize, class:.*"
-            "float, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
+            # I don't know why,
+            # but calced position like 100%-w(weight) 100%-h(height)
+            # just doesn't work,
+            # maybe it doesn't support lazy evaluation like nix :(
+            "float, pin, size 25% 25%, move 75% 75%, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
           ];
         };
     };

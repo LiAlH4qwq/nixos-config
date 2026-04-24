@@ -20,7 +20,7 @@
   config = lib.mkIf config.liuxu.nixos.user-support.gui.agl.enable {
     assertions = [
       {
-        assertion = config.liuxu.system.user-support.gui.enable;
+        assertion = config.liuxu.nixos.user-support.gui.enable;
         message = "The agl can't be enabled without enabling GUI!";
       }
     ];

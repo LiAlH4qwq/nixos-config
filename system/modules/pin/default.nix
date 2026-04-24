@@ -18,8 +18,8 @@
           "login"
           "polkit-1"
         ]
-        ++ lib.optional config.liuxu.system.user-support.gui.enable "hyprlock"
-        ++ lib.optional config.liuxu.system.user-support.gui.display-manager.enable "greetd";
+        ++ lib.optional config.liuxu.nixos.user-support.gui.enable "hyprlock"
+        ++ lib.optional config.liuxu.nixos.user-support.gui.display-manager.enable "greetd";
       };
     };
   };

@@ -25,7 +25,7 @@
   config = lib.mkIf config.liuxu.user.gui.enable {
     assertions = [
       {
-        assertion = osConfig.liuxu.system.user-support.gui.enable;
+        assertion = osConfig.liuxu.nixos.user-support.gui.enable;
         message = "liuxu.system.user-support.gui.enable in system configuration should be set to true in order to enable GUI for user!";
       }
     ];
