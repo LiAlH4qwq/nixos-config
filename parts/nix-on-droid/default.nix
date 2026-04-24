@@ -6,12 +6,12 @@
         pkgs = import inputs.nixpkgs {
           system = "aarch64-linux";
           overlays = [
+            inputs.ragenix.nixosModules.default
             inputs.nix-on-droid.overlays.default
           ];
         };
         modules = [
-          "${inputs.self}"
-          /system
+          "${inputs.self}/system"
         ];
       };
     };
