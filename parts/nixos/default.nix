@@ -5,7 +5,7 @@
       let
         specialArgs = { inherit inputs; };
         commons = [
-          inputs.agenix.nixosModules.default
+          inputs.ragenix.nixosModules.default
           inputs.nixos-cli.nixosModules.nixos-cli
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.impermanence.nixosModules.impermanence
@@ -27,6 +27,7 @@
           }
           {
             nixpkgs.overlays = [
+              inputs.rust-overlay.overlays.default
               inputs.self.overlays.default
               inputs.deploy-rs.overlays.default
             ];

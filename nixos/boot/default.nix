@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  options,
+  pkgs,
+  ...
+}:
 {
   boot = {
     loader = {
@@ -6,7 +11,6 @@
       efi.canTouchEfiVariables = true;
       systemd-boot = {
         enable = lib.mkDefault true;
-        configurationLimit = 5;
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
@@ -19,6 +23,9 @@
     # stage2Greeting = "Liuxu: Welcome!";
     initrd = {
       systemd.enable = true;
+      # Temporary fix.
+      # See: https://github.com/NixOS/nixpkgs/pull/510953
+      luks.cryptoModules = lib.remove "aes_generic" options.boot.initrd.luks.cryptoModules.default;
     };
     plymouth = {
       enable = true;

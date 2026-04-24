@@ -78,6 +78,7 @@
   environment.systemPackages = [
     pkgs.usbutils # `lsusb`
     pkgs.deploy-rs.deploy-rs
-    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # FIXME: Write a overlay or use a presented one if possible.
+    inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

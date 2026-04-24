@@ -62,7 +62,6 @@
             "${mod} SHIFT, XF86Favorites, movetoworkspace, name:Password"
             ", Help, execr, uwsm-app -- fish ~/.config/hypr/hyprland/power-profiles.fish"
           ]
-
           ++ (lib.concatMap (
             k:
             let

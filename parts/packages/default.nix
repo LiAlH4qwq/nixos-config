@@ -14,6 +14,12 @@
       default = _: prev: {
         hitokoto = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hitokoto;
         hyprlock-hint = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hyprlock-hint;
+        zellij = prev.zellij.override (old: {
+          rustPlatform = prev.makeRustPlatform {
+            cargo = prev.rust-bin.stable.latest.minimal;
+            rustc = prev.rust-bin.stable.latest.minimal;
+          };
+        });
       };
     };
   };
