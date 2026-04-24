@@ -15,6 +15,9 @@
         font = "Sans 12";
         border-size = 4;
         border-radius = 10;
+        actionable = {
+          on-button-left = "exec makoctl menu -n $id -- vicinae dmenu && makoctl dismiss -n $id";
+        };
       };
     };
     # Notification sound.
