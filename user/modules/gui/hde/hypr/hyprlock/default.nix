@@ -21,7 +21,7 @@
           };
         in
         {
-          auth.fingerprint = lib.mkIf osConfig.liuxu.system.fingerprint.enable {
+          auth.fingerprint = lib.mkIf osConfig.liuxu.nixos.fingerprint.enable {
             # Typo? No, there's absolutely no typo.
             enabled = true;
           };
@@ -67,7 +67,7 @@
             }
           ]
           # Fingerprint Hint
-          ++ lib.optional osConfig.liuxu.system.fingerprint.enable {
+          ++ lib.optional osConfig.liuxu.nixos.fingerprint.enable {
             font_size = 24;
             color = "0xffffffff";
             position = "0, -18%";

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.system.brightness.enable = lib.mkOption {
+  options.liuxu.nixos.brightness.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -15,7 +15,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.brightness.enable {
+  config = lib.mkIf config.liuxu.nixos.brightness.enable {
     environment = {
       systemPackages = with pkgs; [
         brightnessctl

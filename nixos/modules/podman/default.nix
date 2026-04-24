@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.system.podman.enable = lib.mkOption {
+  options.liuxu.nixos.podman.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -16,7 +16,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.podman.enable {
+  config = lib.mkIf config.liuxu.nixos.podman.enable {
     virtualisation = {
       containers.enable = true;
       oci-containers.backend = "podman";

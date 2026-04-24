@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.liuxu.system.virtualbox.enable = lib.mkOption {
+  options.liuxu.nixos.virtualbox.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -14,7 +14,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.virtualbox.enable {
+  config = lib.mkIf config.liuxu.nixos.virtualbox.enable {
     virtualisation.virtualbox.host = {
       enable = true;
       # For USB 3.0 support and more, we don't care about FOSS.

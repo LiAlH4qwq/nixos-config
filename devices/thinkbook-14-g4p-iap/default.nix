@@ -9,10 +9,15 @@
   liuxu = {
     nixos = {
       bluetooth.enable = true;
+      brightness.enable = true;
+      fingerprint.enable = true;
+      laptop.enable = true;
       network = {
         enable = true; # Default enable
         mihoyo.enable = true;
       };
+      pin.enable = true; # Default enable
+      podman.enable = true;
       secureboot.enable = true;
       user-support = {
         gui = {
@@ -24,17 +29,12 @@
           intel-graphics.enable = true;
         };
       };
+      virtualbox.enable = true;
     };
     system = {
       better-shell.enable = true; # Default enable
-      brightness.enable = true;
-      fingerprint.enable = true;
       helix.enable = true; # Default enable
-      laptop.enable = true;
-      pin.enable = true; # Default enable
-      podman.enable = true;
       ssh.enable = true;
-      virtualbox.enable = true;
 
       # Reflects NixOS version **when system get installed**.
       # Do not change it after install **unless needed**!

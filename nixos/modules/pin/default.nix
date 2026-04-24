@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.system.pin.enable = lib.mkOption {
+  options.liuxu.nixos.pin.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     example = false;
@@ -11,7 +11,7 @@
     '';
   };
 
-  config = lib.mkIf config.liuxu.system.pin.enable {
+  config = lib.mkIf config.liuxu.nixos.pin.enable {
     libpam-pwdfile-rs = {
       pin = {
         services = [
