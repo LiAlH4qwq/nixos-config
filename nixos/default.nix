@@ -4,5 +4,6 @@
     "${inputs.self}/system"
     ./boot
     ./modules
+    ./persist
   ];
 }

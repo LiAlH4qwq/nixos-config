@@ -8,7 +8,6 @@
     ./i18n
     ./modules
     ./nix
-    ./persist
     ./secrets
     ./uutils
   ];
