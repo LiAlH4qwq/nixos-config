@@ -1,4 +1,5 @@
-_: {
+{ config, lib, ... }:
+{
   config = lib.mkIf config.liuxu.user.gui.enable {
     wayland.windowManager.hyprland.settings =
       let
