@@ -30,6 +30,7 @@
         };
         colorSchemes = {
           darkMode = false;
+          predefinedScheme = "Rose Pine";
         };
         wallpaper = {
           directory = "/etc/wallpapers";
