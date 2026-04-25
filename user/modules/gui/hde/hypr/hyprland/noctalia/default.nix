@@ -25,7 +25,6 @@
           ", XF86MonBrightnessUp, execr, ${ipc} brightness increase"
           ", XF86MonBrightnessDown, execr, ${ipc} brightness decrease"
         ];
-
       };
   };
 }

@@ -6,7 +6,9 @@
     enable = true;
     settings = {
       settingsVersion = 0;
-
+      colorSchemes = {
+        darkMode = false;
+      };
     };
   };
 }
