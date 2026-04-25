@@ -5,12 +5,10 @@
       default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import inputs.nixpkgs {
           system = "aarch64-linux";
-          overlays = [
-            inputs.ragenix.nixosModules.default
-            inputs.nix-on-droid.overlays.default
-          ];
+          overlays = [ inputs.nix-on-droid.overlays.default ];
         };
         modules = [
+          inputs.ragenix.nixosModules.default
           "${inputs.self}/system"
         ];
       };
