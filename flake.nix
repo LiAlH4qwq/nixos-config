@@ -10,7 +10,7 @@
       inputs.systems.follows = "systems";
     };
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -25,9 +25,59 @@
       url = "github:noctalia-dev/noctalia-qs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs = {
+        nixpkgs.follows = "";
+        home-manager.follows = "";
+      };
+    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        noctalia-qs.follows = "noctalia-qs";
+      };
+    };
+    lazyvim = {
+      url = "github:pfassina/lazyvim-nix/v15.15.0";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
+    nixos-cli = {
+      url = "github:nix-community/nixos-cli";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        flake-compat.follows = "flake-compat";
+      };
+    };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+        # `flake-utils`.
+        utils.follows = "flake-utils";
+      };
+    };
+    agl = {
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+    bun2nix = {
+      url = "github:nix-community/bun2nix?ref=refs/tags/2.0.8";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        flake-parts.follows = "flake-parts";
+      };
     };
     agenix = {
       url = "github:ryantm/agenix";
@@ -43,26 +93,9 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
-        rust-overlay.follows = "rust-overlay";
         crane.follows = "crane";
+        rust-overlay.follows = "rust-overlay";
         agenix.follows = "agenix";
-      };
-    };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        # `flake-utils`.
-        utils.follows = "flake-utils";
-        flake-compat.follows = "flake-compat";
-      };
-    };
-    nixos-cli = {
-      url = "github:nix-community/nixos-cli";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        flake-compat.follows = "flake-compat";
       };
     };
     lanzaboote = {
@@ -70,31 +103,8 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         crane.follows = "crane";
-        # Or it will fail to build.
-        # rust-overlay.follows = "ragenix/crane";
-        pre-commit.inputs.flake-compat.follows = "deploy-rs/flake-compat";
-      };
-    };
-    lazyvim = {
-      url = "github:pfassina/lazyvim-nix/v15.15.0";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-    agl = {
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
-        flake-compat.follows = "flake-compat";
-      };
-    };
-    impermanence = {
-      url = "github:nix-community/impermanence";
-      inputs = {
-        nixpkgs.follows = "";
-        home-manager.follows = "";
+        pre-commit.inputs.flake-compat.follows = "flake-compat";
       };
     };
     nix-on-droid = {
@@ -108,14 +118,6 @@
       url = "github:lialh4qwq/libpam-pwdfile-rs/v0.4.0";
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    bun2nix = {
-      url = "github:nix-community/bun2nix?ref=refs/tags/2.0.8";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        flake-parts.follows = "flake-parts";
-      };
     };
   };
   outputs =
