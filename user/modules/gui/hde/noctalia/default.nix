@@ -73,6 +73,7 @@
               }
               {
                 id = "Workspace";
+                pillSize = 0.67;
               }
               {
                 id = "ActiveWindow";
