@@ -1,11 +1,18 @@
 {
   inputs = {
-    # **.inputs.flake-utils.follows = "ragenix/flake-utils";
-    # **.inputs.crane.follows = "ragenix/crane";
-    # **.inputs.flake-compat.follows = "deploy-rs/flake-compat";
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-compat.url = "github:NixOS/flake-compat";
+    crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,16 +21,23 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        systems.follows = "systems";
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = "nix-darwin";
+        home-manager.follows = "home-manager";
+      };
+    };
     ragenix = {
       url = "github:yaxitech/ragenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
         rust-overlay.follows = "rust-overlay";
-        flake-utils.inputs.systems.follows = "systems";
-        agenix.inputs = {
-          systems.follows = "systems";
-          home-manager.follows = "home-manager";
-        };
+        crane.follows = "crane";
+        agenix.follows = "agenix";
       };
     };
     deploy-rs = {
@@ -31,7 +45,8 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         # `flake-utils`.
-        utils.follows = "ragenix/flake-utils";
+        utils.follows = "flake-utils";
+        flake-compat.follows = "flake-compat";
       };
     };
     nixos-cli = {
@@ -39,14 +54,14 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
-        flake-compat.follows = "deploy-rs/flake-compat";
+        flake-compat.follows = "flake-compat";
       };
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        crane.follows = "ragenix/crane";
+        crane.follows = "crane";
         # Or it will fail to build.
         # rust-overlay.follows = "ragenix/crane";
         pre-commit.inputs.flake-compat.follows = "deploy-rs/flake-compat";
@@ -56,7 +71,7 @@
       url = "github:pfassina/lazyvim-nix/v15.15.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "ragenix/flake-utils";
+        flake-utils.follows = "flake-utils";
       };
     };
     agl = {
@@ -64,7 +79,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
-        flake-compat.follows = "deploy-rs/flake-compat";
+        flake-compat.follows = "flake-compat";
       };
     };
     impermanence = {
