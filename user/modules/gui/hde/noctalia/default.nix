@@ -112,7 +112,7 @@
               }
               {
                 id = "ActiveWindow";
-                maxWidth = 456;
+                maxWidth = 411;
               }
             ];
             center = [
@@ -123,6 +123,7 @@
             right = [
               {
                 id = "MediaMini";
+                maxWidth = 411;
               }
               {
                 id = "Tray";
