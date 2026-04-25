@@ -1,17 +1,17 @@
 {
   inputs = {
     systems.url = "github:nix-systems/default";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-compat.url = "github:NixOS/flake-compat";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+    };
+    import-tree.url = "github:denful/import-tree";
     crane.url = "github:ipetkov/crane";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
-    };
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -21,15 +21,26 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs.nixpkgs.follows = "nixpkgs";
+    optnix = {
+      url = "github:water-sucks/optnix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "";
+      };
     };
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs = {
         nixpkgs.follows = "";
         home-manager.follows = "";
+      };
+    };
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        treefmt-nix.follows = "";
       };
     };
     noctalia = {
@@ -51,14 +62,15 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
-        flake-compat.follows = "flake-compat";
+        flake-compat.follows = "";
+        optnix.follows = "optnix";
       };
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
+        flake-compat.follows = "";
         # `flake-utils`.
         utils.follows = "flake-utils";
       };
@@ -67,7 +79,7 @@
       url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
+        flake-compat.follows = "";
         rust-overlay.follows = "rust-overlay";
       };
     };
@@ -77,6 +89,8 @@
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
         flake-parts.follows = "flake-parts";
+        import-tree.follows = "import-tree";
+        treefmt-nix.follows = "";
       };
     };
     agenix = {
@@ -84,7 +98,7 @@
       inputs = {
         systems.follows = "systems";
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "nix-darwin";
+        darwin.follows = "";
         home-manager.follows = "home-manager";
       };
     };
@@ -104,14 +118,21 @@
         nixpkgs.follows = "nixpkgs";
         crane.follows = "crane";
         rust-overlay.follows = "rust-overlay";
-        pre-commit.inputs.flake-compat.follows = "flake-compat";
+        # It not used, so set it to empty.
+        # See: https://github.com/nix-community/lanzaboote/blob/4eda91dd5abd2157a2c7bfb33142fc64da668b0a/flake.nix#L7
+        pre-commit.follows = "";
       };
     };
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        # Absolutely `Nixpkgs`.
+        # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L23
+        nixpkgs-docs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
+        nmd.follows = "";
+        nix-formatter-pack.follows = "";
       };
     };
     libpam-pwdfile-rs = {
@@ -127,5 +148,15 @@
         ./parts
       ];
       systems = import inputs.systems;
+      flake.flatFlake = {
+        allowed = [
+          # Not possible to flatten.
+          # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
+          [
+            "nix-on-droid"
+            "nixpkgs-for-bootstrap"
+          ]
+        ];
+      };
     };
 }
