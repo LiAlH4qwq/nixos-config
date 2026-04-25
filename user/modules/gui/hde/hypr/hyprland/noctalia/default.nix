@@ -4,9 +4,11 @@
     wayland.windowManager.hyprland.settings =
       let
         mod = "SUPER";
-        ipc = "qs -c noctalia-shell ipc call";
+        noctalia = "noctalia-shell";
+        ipc = "${noctalia} ipc call";
       in
       {
+        execr-once = [ "uwsm-app -s s -t service -u uwsm-service-noctalia.service -- ${noctalia}" ];
         bind = [
           "${mod}, R, execr, ${ipc} launcher toggle"
           "${mod}, V, execr, ${ipc} launcher clipboard"

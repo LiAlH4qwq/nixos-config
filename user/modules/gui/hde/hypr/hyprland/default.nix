@@ -12,7 +12,6 @@
       settings =
         let
           mod = "SUPER";
-          startService = target: "uwsm-app -s s -t service -u uwsm-service-${target}.service -- ${target}";
           startBg = target: "uwsm-app -s b -t service -u uwsm-bg-${target}.service -- ${target}";
           terminal = "kitty";
           explorer = "nautilus -w";
