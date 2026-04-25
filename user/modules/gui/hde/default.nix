@@ -1,6 +1,5 @@
 _: {
   imports = [
-    ./ashell
     ./gtk
     ./hypr
     ./i18n
