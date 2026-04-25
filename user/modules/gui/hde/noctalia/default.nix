@@ -44,6 +44,34 @@
         sessionMenu = {
           largeButtonsLayout = "grid";
         };
+        controlCenter = {
+          cards = [
+            {
+              enabled = true;
+              id = "profile-card";
+            }
+            {
+              enabled = true;
+              id = "shortcuts-card";
+            }
+            {
+              enabled = false;
+              id = "audio-card";
+            }
+            {
+              enabled = false;
+              id = "brightness-card";
+            }
+            {
+              enabled = true;
+              id = "weather-card";
+            }
+            {
+              enabled = true;
+              id = "media-sysmon-card";
+            }
+          ];
+        };
         appLauncher = {
           density = "comfortable";
           enableClipboardHistory = true;
