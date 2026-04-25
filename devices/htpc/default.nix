@@ -18,6 +18,7 @@
       pin.enable = true;
       podman.enable = true;
       secureboot.enable = true;
+      ssh-access.enable = true;
       user-support = {
         gui = {
           enable = false;
@@ -30,7 +31,6 @@
     system = {
       better-shell.enable = true; # Default enable
       helix.enable = true; # Default enable
-      ssh.enable = true;
 
       # Reflects NixOS version **when system get installed**.
       # Do not change it after install **unless needed**!

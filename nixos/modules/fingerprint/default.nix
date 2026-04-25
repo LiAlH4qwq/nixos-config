@@ -17,5 +17,7 @@
     environment.persistence."/persist".directories = [
       "/var/lib/fprint"
     ];
+    # Why default settings enable fprint auth for it?
+    security.pam.services.sshd.fprintAuth = false;
   };
 }

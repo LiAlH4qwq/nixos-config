@@ -6,8 +6,8 @@
         specialArgs = { inherit inputs; };
         commons = [
           inputs.ragenix.nixosModules.default
-          inputs.nixos-cli.nixosModules.default
-          inputs.lanzaboote.nixosModules.default
+          inputs.nixos-cli.nixosModules.nixos-cli
+          inputs.lanzaboote.nixosModules.lanzaboote
           inputs.impermanence.nixosModules.default
           inputs.home-manager.nixosModules.default
           inputs.libpam-pwdfile-rs.nixosModules.default
@@ -29,6 +29,7 @@
             nixpkgs.overlays = [
               inputs.self.overlays.default
               inputs.rust-overlay.overlays.default
+              inputs.ragenix.overlays.default
               inputs.deploy-rs.overlays.default
             ];
           }

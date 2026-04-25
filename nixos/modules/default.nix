@@ -8,6 +8,7 @@ _: {
     ./pin
     ./podman
     ./secureboot
+    ./ssh-access
     ./user-support
     ./virtualbox
   ];

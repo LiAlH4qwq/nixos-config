@@ -11,13 +11,13 @@
     };
   flake = {
     overlays = {
-      default = _: prev: {
+      default = final: prev: {
         hitokoto = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hitokoto;
         hyprlock-hint = inputs.self.packages.${prev.stdenv.hostPlatform.system}.hyprlock-hint;
         zellij = prev.zellij.override (old: {
-          rustPlatform = prev.makeRustPlatform {
-            cargo = prev.rust-bin.stable.latest.minimal;
-            rustc = prev.rust-bin.stable.latest.minimal;
+          rustPlatform = final.makeRustPlatform {
+            cargo = final.rust-bin.stable.latest.minimal;
+            rustc = final.rust-bin.stable.latest.minimal;
           };
         });
       };
