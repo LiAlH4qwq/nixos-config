@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./hypridle
     ./hyprland
     ./hyprlock
     ./hyprshot
