@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     services.mako = {
-      enable = true;
+      enable = false;
       settings = {
         background-color = "#f2e9e1";
         text-color = "#575279";
