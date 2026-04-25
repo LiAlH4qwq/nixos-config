@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     services.hyprpaper = {
-      enable = true;
+      enable = false;
       settings =
         let
           path = "/etc/wallpapers/rainy-everything-in-the-night.png";

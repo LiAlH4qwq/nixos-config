@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     services.hypridle = {
-      enable = true;
+      enable = false;
       settings = {
         general = {
           # Avoid starting multiple hyprlock instances.

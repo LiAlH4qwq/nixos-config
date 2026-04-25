@@ -8,7 +8,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     programs.hyprlock = {
-      enable = true;
+      enable = false;
       settings =
         let
           # Rose Pine Dawn Theme

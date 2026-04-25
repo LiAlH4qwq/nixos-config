@@ -5,7 +5,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     programs.ashell = {
-      enable = true;
+      enable = false;
       settings = {
         enable_esc_key = true;
         appearance =
