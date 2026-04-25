@@ -9,7 +9,6 @@
     ./hypridle
     ./hyprland
     ./hyprlock
-    ./hyprpaper
     ./hyprshot
     ./hyprtoolkit
   ];
