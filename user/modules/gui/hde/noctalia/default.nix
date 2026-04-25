@@ -44,6 +44,13 @@
         sessionMenu = {
           largeButtonsLayout = "grid";
         };
+        appLauncher = {
+          density = "comfortable";
+          enableClipboardHistory = true;
+          customLaunchPrefixEnabled = true;
+          customLaunchPrefix = "uwsm-app --";
+          terminalCommand = "kitty -e";
+        };
         osd = {
           location = "bottom_center";
           enabledTypes = [
