@@ -1,5 +1,9 @@
 { config, lib, ... }:
 {
+  imports = [
+    ./noctalia
+  ];
+
   config = lib.mkIf config.liuxu.user.gui.enable {
     wayland.windowManager.hyprland = {
       enable = true;
@@ -10,9 +14,6 @@
           mod = "SUPER";
           startService = target: "uwsm-app -s s -t service -u uwsm-service-${target}.service -- ${target}";
           startBg = target: "uwsm-app -s b -t service -u uwsm-bg-${target}.service -- ${target}";
-          statusbar = "ashell";
-          launcher = "vicinae toggle";
-          clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
           terminal = "kitty";
           explorer = "nautilus -w";
           taskmgr = "missioncenter";
@@ -39,7 +40,6 @@
             ", preferred, auto, 2"
           ];
           exec-once = [
-            (startService statusbar)
             (startBg pwd)
           ];
           bind = [
@@ -47,9 +47,6 @@
             "${mod}, Q, killactive"
             "${mod} SHIFT, Q, forcekillactive"
             "${mod}, F, togglefloating"
-            "${mod}, L, execr, ${startBg "hyprlock"}"
-            "${mod}, R, execr, uwsm-app -- ${launcher}"
-            "${mod}, V, execr, uwsm-app -- ${clipboard}"
             "${mod}, T, execr, uwsm-app -- ${terminal}"
             "${mod}, E, execr, uwsm-app -- ${explorer}"
             "${mod}, Escape, execr, uwsm-app -- ${taskmgr}"
@@ -60,7 +57,6 @@
             "${mod} SHIFT, grave, movetoworkspace, empty"
             "${mod}, XF86Favorites, workspace, name:Password"
             "${mod} SHIFT, XF86Favorites, movetoworkspace, name:Password"
-            ", Help, execr, uwsm-app -- fish ~/.config/hypr/hyprland/power-profiles.fish"
           ]
           ++ (lib.concatMap (
             k:
@@ -74,19 +70,9 @@
               "${mod} SHIFT, ${ks}, movetoworkspace, ${ws}"
             ]
           ) (lib.range 0 9));
-          bindl = [
-            ", XF86AudioMute, execr, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            ", XF86AudioMicMute, execr, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-          ];
           binde = [
             "${mod}, Tab, execr, hyprnome -c"
             "${mod} ALT, Tab, execr, hyprnome -cp"
-          ];
-          bindle = [
-            ", XF86AudioRaiseVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-            ", XF86AudioLowerVolume, execr, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-            ", XF86MonBrightnessUp, execr, brightnessctl set 5%+"
-            ", XF86MonBrightnessDown, execr, brightnessctl set 5%-"
           ];
           bindm = [
             "${mod}, mouse:272, movewindow"
@@ -113,13 +99,6 @@
             "float, pin, size 25% 25%, move 75% 75%, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
           ];
         };
-    };
-    xdg.configFile = {
-      hyprland-power-profiles = {
-        force = true;
-        source = ./power-profiles.fish;
-        target = "hypr/hyprland/power-profiles.fish";
-      };
     };
   };
 }

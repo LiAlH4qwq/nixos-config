@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.user.gui.enable {
     programs.vicinae = {
-      enable = true;
+      enable = false;
       systemd = {
         enable = true;
         autoStart = true;
