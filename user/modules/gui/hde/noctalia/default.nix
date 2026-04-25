@@ -141,6 +141,7 @@
               }
               {
                 id = "ControlCenter";
+                useDistroLogo = true;
               }
             ];
           };
