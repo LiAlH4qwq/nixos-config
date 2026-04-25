@@ -76,6 +76,7 @@
               }
               {
                 id = "ActiveWindow";
+                maxWidth = 456;
               }
             ];
             center = [
