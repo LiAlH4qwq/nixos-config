@@ -127,6 +127,9 @@
               }
               {
                 id = "Tray";
+                pinned = [
+                  "Fcitx"
+                ];
               }
               {
                 id = "NotificationHistory";
