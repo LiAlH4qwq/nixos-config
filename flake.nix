@@ -1,25 +1,36 @@
 {
   inputs = {
-    systems.url = "github:nix-systems/default";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
-    };
+    systems.url = "github:nix-systems/default-linux";
     import-tree.url = "github:denful/import-tree";
     crane.url = "github:ipetkov/crane";
-    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      # It's indeed Nixpkgs.
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs = {
+        nixpkgs.follows = "";
+        home-manager.follows = "";
+      };
     };
     optnix = {
       url = "github:water-sucks/optnix";
@@ -28,11 +39,11 @@
         flake-compat.follows = "";
       };
     };
-    impermanence = {
-      url = "github:nix-community/impermanence";
+    lazyvim = {
+      url = "github:pfassina/lazyvim-nix/v15.15.0";
       inputs = {
-        nixpkgs.follows = "";
-        home-manager.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
       };
     };
     noctalia-qs = {
@@ -50,11 +61,21 @@
         noctalia-qs.follows = "noctalia-qs";
       };
     };
-    lazyvim = {
-      url = "github:pfassina/lazyvim-nix/v15.15.0";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
+        # `flake-utils`.
+        utils.follows = "flake-utils";
+        flake-compat.follows = "";
+      };
+    };
+    agl = {
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "";
+        rust-overlay.follows = "rust-overlay";
       };
     };
     nixos-cli = {
@@ -66,23 +87,6 @@
         optnix.follows = "optnix";
       };
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "";
-        # `flake-utils`.
-        utils.follows = "flake-utils";
-      };
-    };
-    agl = {
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
     bun2nix = {
       url = "github:nix-community/bun2nix?ref=refs/tags/2.0.8";
       inputs = {
@@ -90,7 +94,7 @@
         systems.follows = "systems";
         flake-parts.follows = "flake-parts";
         import-tree.follows = "import-tree";
-        treefmt-nix.follows = "";
+        treefmt-nix.follows = "treefmt-nix";
       };
     };
     agenix = {
@@ -135,6 +139,18 @@
         nix-formatter-pack.follows = "";
       };
     };
+    flat-flake = {
+      url = "github:linyinfeng/flat-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        flake-parts.follows = "flake-parts";
+        treefmt-nix.follows = "treefmt-nix";
+        crane.follows = "crane";
+        rust-overlay.follows = "rust-overlay";
+        flake-compat.follows = "";
+      };
+    };
     libpam-pwdfile-rs = {
       url = "github:lialh4qwq/libpam-pwdfile-rs/v0.4.0";
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
@@ -145,18 +161,17 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        inputs.flat-flake.flakeModules.flatFlake
         ./parts
       ];
       systems = import inputs.systems;
-      flake.flatFlake = {
-        allowed = [
-          # Not possible to flatten.
-          # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
-          [
-            "nix-on-droid"
-            "nixpkgs-for-bootstrap"
-          ]
-        ];
-      };
+      flatFlake.config.allowed = [
+        # Not possible to flatten.
+        # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
+        [
+          "nix-on-droid"
+          "nixpkgs-for-bootstrap"
+        ]
+      ];
     };
 }

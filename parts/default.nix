@@ -4,5 +4,6 @@ _: {
     ./nixos
     ./nix-on-droid
     ./packages
+    ./treefmt
   ];
 }
