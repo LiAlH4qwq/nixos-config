@@ -9,6 +9,13 @@
     ./persist
   ];
 
+  programs = {
+    # Used by `nixos-rebuild`
+    git.enable = true;
+    nix-ld = {
+      enable = true;
+    };
+  };
   services = {
     # userborn.enable = true;
     # Better D-Bus implemention.

@@ -12,14 +12,6 @@
     ./uutils
   ];
 
-  programs = {
-    # Used by `nixos-rebuild`
-    git.enable = true;
-    nix-ld = {
-      enable = true;
-    };
-  };
-
   environment.systemPackages = [
     pkgs.ragenix
     pkgs.deploy-rs.deploy-rs
