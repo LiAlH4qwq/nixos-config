@@ -9,7 +9,7 @@
         };
         modules = [
           inputs.ragenix.nixosModules.default
-          "${inputs.self}/system"
+          "${inputs.self}/nix-on-droid"
         ];
       };
     };
