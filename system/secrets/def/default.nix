@@ -1,7 +1,7 @@
 let
   alls = users ++ systems;
   users = [ lialh4 ];
-  lialh4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrK8/XY2U6HQJ79HourV5SBele6qPn83iAwBda6xozd";
+  lialh4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPzvkOPfWZmx2zE6cJY4Qz+Z1dKXTgd6Y2I/RgIc86T";
   systems = [
     LiAlH4-Laptop
     LiAlH4-Server
