@@ -27,7 +27,7 @@
 
   nixpkgs = {
     # We won't sacrifice our experience for FOSS.
-    nixpkgs.config.allowUnfree = true;
+    config.allowUnfree = true;
     overlays = [
       inputs.self.overlays.default
       inputs.rust-overlay.overlays.default
