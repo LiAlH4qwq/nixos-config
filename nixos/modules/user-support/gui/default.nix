@@ -25,7 +25,12 @@
   config = lib.mkIf config.liuxu.nixos.user-support.gui.enable {
     programs = {
       # these programs can't simply be enabled only in the user scope.
-      _1password-gui.enable = true;
+      _1password.enable = true;
+      _1password-gui = {
+        enable = true;
+        polkitPolicyOwners =
+          config.home-manager.users |> lib.filterAttrs (_: cfg: cfg.liuxu.user.gui.enable) |> lib.attrNames;
+      };
       steam.enable = true;
       hyprlock.enable = true;
       hyprland = {
@@ -36,6 +41,7 @@
     };
 
     services = {
+      gnome.gnome-keyring.enable = true;
       pipewire = {
         enable = true;
         socketActivation = true;
@@ -68,7 +74,7 @@
       # Hyprlock supports parallel fingerprint and password auth like GDM.
       # But this default configuration cause a non-paralell and no-prompt auth.
       hyprlock.fprintAuth = false;
-      greetd.enableGnomeKeyring = true;
+      # greetd.enableGnomeKeyring = true;
     };
   };
 }
