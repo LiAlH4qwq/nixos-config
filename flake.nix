@@ -1,6 +1,7 @@
 {
   inputs = {
     systems.url = "github:nix-systems/default-linux";
+    nix-parsec.url = "github:milahu/nix-parsec";
     import-tree.url = "github:denful/import-tree";
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -25,11 +26,11 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence = {
-      url = "github:nix-community/impermanence";
+    nix-prelude = {
+      url = "github:anna328p/nix-prelude";
       inputs = {
-        nixpkgs.follows = "";
-        home-manager.follows = "";
+        systems.follows = "systems";
+        parsec.follows = "nix-parsec";
       };
     };
     optnix = {
@@ -59,6 +60,14 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         noctalia-qs.follows = "noctalia-qs";
+      };
+    };
+    intransience = {
+      url = "github:anna328p/intransience";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        nix-prelude.follows = "nix-prelude";
       };
     };
     deploy-rs = {

@@ -19,10 +19,6 @@
       networkmanager.enable = true;
     };
     # Make network connections persist.
-    environment.persistence."/persist" = {
-      directories = [
-        "/etc/NetworkManager/system-connections"
-      ];
-    };
+    intransience.datastores.persist.dirs = [ "/etc/NetworkManager/system-connections" ];
   };
 }

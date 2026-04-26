@@ -1,15 +1,26 @@
-_: {
-  environment.persistence."/persist" = {
-    hideMounts = true;
+{ inputs, ... }:
+{
+  imports = [ inputs.intransience.nixosModules.default ];
+
+  intransience = {
+    enable = true;
+
+    datastores.persist = {
+      enable = true;
+      path = "/persist";
+    };
+
     # Additonally, modules may define persistent dirs/files is its configs.
-    directories = [
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-    ];
+    datastores.persist = {
+      byPath."/var/lib".dirs = [
+        "nixos"
+        "systemd/coredump"
+      ];
+      etc.files = [
+        "machine-id"
+        "ssh/ssh_host_ed25519_key"
+        "ssh/ssh_host_ed25519_key.pub"
+      ];
+    };
   };
 }

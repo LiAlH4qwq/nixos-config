@@ -27,6 +27,11 @@
     mutableUsers = false;
   };
 
+  # system.etc.overlay = {
+  #   enable = true;
+  #   # mutable = false;
+  # };
+
   security = {
     # replace sudo with run0.
     sudo.enable = false;

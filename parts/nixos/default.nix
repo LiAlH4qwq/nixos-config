@@ -8,7 +8,6 @@
           inputs.ragenix.nixosModules.default
           inputs.nixos-cli.nixosModules.nixos-cli
           inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.impermanence.nixosModules.default
           inputs.home-manager.nixosModules.default
           inputs.libpam-pwdfile-rs.nixosModules.default
           {

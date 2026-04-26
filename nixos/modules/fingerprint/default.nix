@@ -14,9 +14,7 @@
       enable = true;
     };
     # Make enrolled fingerprints persistent.
-    environment.persistence."/persist".directories = [
-      "/var/lib/fprint"
-    ];
+    intransience.datastores.persist.dirs = [ "/var/lib/fprint" ];
     # Why default settings enable fprint auth for it?
     security.pam.services.sshd.fprintAuth = false;
   };

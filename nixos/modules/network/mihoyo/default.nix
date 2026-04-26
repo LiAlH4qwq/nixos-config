@@ -70,8 +70,6 @@
             '.["proxy-providers"].alink.url = $secret' \
             ${cfgFileInShArg} > ${cfgFileShArg}
           rm -f ${cfgFileInShArg}
-          # Fix directory permission error when starting service.
-          chmod 0700 /var/lib/private
         '';
 
       networking = {
@@ -85,8 +83,11 @@
       };
 
       # Make cache persistent.
-      environment.persistence."/persist".directories = [
-        "/var/lib/private/mihomo"
+      intransience.datastores.persist.dirs = [
+        {
+          path = "/var/lib/private/mihomo";
+          parentDirectory.mode = "0700";
+        }
       ];
     };
 }

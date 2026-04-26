@@ -27,10 +27,9 @@
       systemPackages = with pkgs; [
         sbctl
       ];
-      # Make secureboot keys persistent.
-      persistence."/persist".directories = [
-        "/var/lib/sbctl"
-      ];
     };
+    # Make secureboot keys persistent.
+    intransience.datastores.persist.dirs = [ "/var/lib/sbctl" ];
+
   };
 }

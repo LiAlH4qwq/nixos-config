@@ -20,10 +20,8 @@
       systemPackages = with pkgs; [
         brightnessctl
       ];
-      # Prevent brightness setting loss when rebooting.
-      persistence."/persist".directories = [
-        "/var/lib/systemd/backlight"
-      ];
     };
+    # Prevent brightness setting loss when rebooting.
+    intransience.datastores.persist.dirs = [ "/var/lib/systemd/backlight" ];
   };
 }

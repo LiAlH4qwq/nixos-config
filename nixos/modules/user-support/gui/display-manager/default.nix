@@ -76,8 +76,6 @@
       '';
     };
 
-    environment.persistence."/persist".files = [
-      "/var/lib/regreet/state.toml"
-    ];
+    intransience.datastores.persist.files = [ "/var/lib/regreet/state.toml" ];
   };
 }
