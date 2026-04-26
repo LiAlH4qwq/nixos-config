@@ -11,7 +11,6 @@
     ./i18n
     ./noctalia
     ./qt
-    ./vicinae
     ./xcursor
   ];
   config = lib.mkIf config.liuxu.user.gui.enable {
