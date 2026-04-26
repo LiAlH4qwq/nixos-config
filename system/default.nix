@@ -25,11 +25,14 @@
     pkgs.deploy-rs.deploy-rs
   ];
 
-  nixpkgs.overlays = [
-    inputs.self.overlays.default
-    inputs.rust-overlay.overlays.default
-    inputs.ragenix.overlays.default
-    inputs.deploy-rs.overlays.default
-  ];
-
+  nixpkgs = {
+    # We won't sacrifice our experience for FOSS.
+    nixpkgs.config.allowUnfree = true;
+    overlays = [
+      inputs.self.overlays.default
+      inputs.rust-overlay.overlays.default
+      inputs.ragenix.overlays.default
+      inputs.deploy-rs.overlays.default
+    ];
+  };
 }
