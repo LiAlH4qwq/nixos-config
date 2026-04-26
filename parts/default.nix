@@ -3,7 +3,7 @@ _: {
     ./deploy-rs
     ./nixos
     ./nix-on-droid
-    ./packages
+    ./overlays
     ./treefmt
   ];
 }

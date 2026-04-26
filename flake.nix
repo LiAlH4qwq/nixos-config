@@ -2,7 +2,6 @@
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-parsec.url = "github:milahu/nix-parsec";
-    import-tree.url = "github:denful/import-tree";
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils = {
@@ -94,16 +93,6 @@
         flake-parts.follows = "flake-parts";
         flake-compat.follows = "";
         optnix.follows = "optnix";
-      };
-    };
-    bun2nix = {
-      url = "github:nix-community/bun2nix?ref=refs/tags/2.0.8";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        flake-parts.follows = "flake-parts";
-        import-tree.follows = "import-tree";
-        treefmt-nix.follows = "treefmt-nix";
       };
     };
     agenix = {

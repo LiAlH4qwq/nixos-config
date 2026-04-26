@@ -68,12 +68,5 @@
         enable32Bit = true;
       };
     };
-
-    security.pam.services = {
-      # Hyprlock supports parallel fingerprint and password auth like GDM.
-      # But this default configuration cause a non-paralell and no-prompt auth.
-      hyprlock.fprintAuth = false;
-      # greetd.enableGnomeKeyring = true;
-    };
   };
 }
