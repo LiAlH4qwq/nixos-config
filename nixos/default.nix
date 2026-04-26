@@ -3,6 +3,7 @@
   imports = [
     "${inputs.self}/system"
     ./boot
+    ./i18n
     ./modules
     ./nix
     ./persist
