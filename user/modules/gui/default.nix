@@ -51,7 +51,6 @@
         mission-center # taskmgr.exe
         lollypop # Music player
         clapper # Video player
-        wl-clipboard-rs # Clipboard
         wev # Input inspect
         inkscape
         materialgram # Telegram with material design
