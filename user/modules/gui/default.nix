@@ -39,6 +39,12 @@
           SKIP_HOST_UPDATE = true;
         };
       };
+      ssh = {
+        enable = true;
+        # See: https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig
+        enableDefaultConfig = false;
+        matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+      };
     };
 
     home = {
