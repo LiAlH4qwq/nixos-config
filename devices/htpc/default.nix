@@ -24,6 +24,7 @@
           enable = false;
           agl.enable = false;
           display-manager.enable = false;
+          plymouth.enable = false;
         };
       };
       virtualbox.enable = false;

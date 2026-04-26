@@ -9,6 +9,7 @@
     ./agl
     ./display-manager
     ./intel-graphics
+    ./plymouth
   ];
 
   options.liuxu.nixos.user-support.gui.enable = lib.mkOption {

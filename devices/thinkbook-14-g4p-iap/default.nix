@@ -28,6 +28,9 @@
           # Default enable when enabling GUI.
           # Takes no effect when GUI is not enabled.
           intel-graphics.enable = true;
+          # Default enable when enabling GUI.
+          # But can be enabled seperately.
+          plymouth.enable = true;
         };
       };
       virtualbox.enable = true;
