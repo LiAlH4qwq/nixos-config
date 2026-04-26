@@ -16,6 +16,14 @@ _: {
       };
     in
     {
+      optimise = {
+        inherit (commonOpions)
+          automatic
+          persistent
+          randomizedDelaySec
+          dates
+          ;
+      };
       gc = {
         inherit (commonOpions)
           automatic
