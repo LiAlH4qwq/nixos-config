@@ -45,15 +45,6 @@ _: {
             "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
           ];
         };
-      gc = {
-        inherit (commonOpions)
-          automatic
-          persistent
-          randomizedDelaySec
-          dates
-          ;
-        options = "--delete-older-than 7d";
-      };
       optimise = {
         inherit (commonOpions)
           automatic
