@@ -32,7 +32,6 @@
           config.home-manager.users |> lib.filterAttrs (_: cfg: cfg.liuxu.user.gui.enable) |> lib.attrNames;
       };
       steam.enable = true;
-      hyprlock.enable = true;
       hyprland = {
         enable = true;
         withUWSM = true;

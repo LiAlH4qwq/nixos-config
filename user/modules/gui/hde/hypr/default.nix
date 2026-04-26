@@ -7,7 +7,6 @@
 {
   imports = [
     ./hyprland
-    ./hyprlock
     ./hyprshot
     ./hyprtoolkit
   ];
