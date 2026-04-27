@@ -27,6 +27,7 @@
       ".android" # ADB
       ".claude" # Claude Code
       ".config/mozilla/firefox" # Firefox
+      ".config/noctalia/colorschemes" # Noctalia
       ".config/obs-studio" # OBS
       ".local/state/nvim" # LazyVim
       ".local/state/syncthing" # Syncthing
