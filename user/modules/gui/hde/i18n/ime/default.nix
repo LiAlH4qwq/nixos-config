@@ -76,6 +76,7 @@
             pinyin.globalSection = {
               ShuangpinProfile = "MS";
               CloudPinyinEnabled = "True";
+              PreeditCursorPositionAtBeginning = "False";
             };
           };
         };
