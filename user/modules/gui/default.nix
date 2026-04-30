@@ -66,5 +66,48 @@
         wpsoffice-cn
       ];
     };
+
+    liuxu.user.internal.intransience = {
+      dirs = [
+        ".config/mozilla/firefox" # Firefox
+        ".config/noctalia/colorschemes" # Noctalia
+        ".config/obs-studio" # OBS
+        ".local/share/keyrings" # Gnome Keyring
+        ".local/share/materialgram" # Telegram
+
+        # Steam
+        ".steam"
+        ".local/share/Steam"
+
+        # CEF
+        ".config/1Password"
+        ".config/Code"
+        ".config/discord"
+        ".config/QQ"
+      ];
+
+      files =
+        let
+          mkSymlinkEntry = path: {
+            inherit path;
+            method = "symlink";
+          };
+        in
+        [
+          ".config/gtk-3.0/bookmarks" # Gtk file bookmarks
+          ".config/uwsm/default-id" # UWSM
+
+          # Noctalia
+          (mkSymlinkEntry ".cache/noctalia/notifications.json") # Notification history
+          (mkSymlinkEntry ".cache/noctalia/shell-state.json") # Launcher sorting
+          (mkSymlinkEntry ".cache/noctalia/wallpapers.json") # Wallpaper select
+
+          # Fcitx5
+          ".local/share/fcitx5/pinyin/user.dict" # New Word
+          ".local/share/fcitx5/pinyin/user.history" # Word frequency
+        ]
+        ++ lib.optional osConfig.liuxu.nixos.virtualbox.enable ".config/VirtualBox/VirtualBox.xml" # Virtualbox
+        ++ lib.optional osConfig.liuxu.nixos.user-support.gui.agl.enable ".local/share/honkers-railway-launcher/config.json";
+    };
   };
 }
