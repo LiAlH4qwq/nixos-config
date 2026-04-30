@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   users.extraUsers.lialh4 = {
     isNormalUser = true;
