@@ -27,6 +27,7 @@
         };
         ui = {
           boxBorderEnabled = true;
+          panelBackgroundOpacity = 1;
         };
         colorSchemes = {
           darkMode = false;
