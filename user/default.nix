@@ -6,8 +6,9 @@
     ./git
     ./lazyvim
     ./modules
-    ./syncthing
+    ./persist
     ./shell
+    ./syncthing
     ./uv
     ./yazi
   ];
