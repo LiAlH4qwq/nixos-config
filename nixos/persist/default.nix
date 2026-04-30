@@ -51,14 +51,31 @@
           (lib.nameValuePair absPath { inherit d; })
           (lib.nameValuePair "/persist${absPath}" { inherit d; })
         ];
+      mkHomeEntries =
+        name:
+        let
+          d = {
+            user = name;
+            group = "users";
+            mode = "0700";
+          };
+        in
+        {
+          "/home/${name}" = { inherit d; };
+          "/persist/home/${name}" = { inherit d; };
+        };
       mkUserEntries =
         name: userCfg:
-        userCfg.dirs ++ userCfg.files
-        |> map getFullPath
-        |> lib.concatMap getAncestors
-        |> lib.unique
-        |> lib.concatMap (mkEntries name)
-        |> lib.listToAttrs;
+        { }
+        // (
+          userCfg.dirs ++ userCfg.files
+          |> map getFullPath
+          |> lib.concatMap getAncestors
+          |> lib.unique
+          |> lib.concatMap (mkEntries name)
+          |> lib.listToAttrs
+        )
+        // mkHomeEntries name;
     in
     lib.mapAttrsToList mkUserEntries cfg |> lib.mergeAttrsList;
 }

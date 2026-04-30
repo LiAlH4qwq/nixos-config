@@ -1,37 +1,41 @@
-{
-  config,
-  lib,
-  options,
-  ...
-}:
+{ lib, ... }:
 {
   options.liuxu.user.internal.intransience =
     let
-      src =
-        (options.intransience.type.getSubOptions { })
-        |> (opts: opts.datastores.type.getSubOptions { })
-        |> (opts: opts.users.type.getSubOptions { });
+      t = lib.types;
+      entry =
+        t.coercedTo t.str
+          (path: {
+            inherit path;
+            method = "bind";
+          })
+          (
+            t.submodule {
+              options = {
+                path = lib.mkOption { type = t.str; };
+                method = lib.mkOption {
+                  type = t.enum [
+                    "bind"
+                    "symlink"
+                  ];
+                  default = "bind";
+                };
+              };
+            }
+          );
     in
     {
-      dirs = {
-        inherit (src.dir)
-          type
-          default
-          example
-          description
-          ;
+      dirs = lib.mkOption {
+        type = t.listOf entry;
+        default = [ ];
       };
-      files = {
-        inherit (src.files)
-          type
-          default
-          example
-          description
-          ;
+      files = lib.mkOption {
+        type = t.listOf entry;
+        default = [ ];
       };
     };
 
-  config = {
+  config.liuxu.user.internal.intransience = {
     dirs = [
       "Documents"
       "Downloads"
