@@ -32,7 +32,11 @@
                 nil_ls = {
                   enabled = false,
                 },
-                nixd = {},
+                nixd = {
+                  cmd_env = {
+                    NIX_CONFIG = "extra-experimental-features = pipe-operators",
+                  },
+                },
               },
             },
           },
