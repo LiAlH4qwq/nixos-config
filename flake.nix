@@ -4,6 +4,7 @@
     nix-parsec.url = "github:milahu/nix-parsec";
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";

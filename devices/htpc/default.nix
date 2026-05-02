@@ -19,6 +19,7 @@
       podman.enable = true;
       secureboot.enable = true;
       ssh-access.enable = true;
+      tlp.enable = false;
       user-support = {
         gui = {
           enable = false;

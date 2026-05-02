@@ -20,6 +20,14 @@
       podman.enable = true;
       secureboot.enable = true;
       ssh-access.enable = true;
+      tlp = {
+        # Default enable when enabling laptop.
+        enable = true;
+        disks = [
+          "nvme-Micron_MTFDKBA512TFH_222138471762"
+          "nvme-WD_Blue_SN5000_1TB_251308802891"
+        ];
+      };
       user-support = {
         gui = {
           enable = true;
