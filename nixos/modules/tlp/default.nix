@@ -57,7 +57,7 @@
             config.liuxu.nixos.tlp.disks
             |> builtins.length
             |> builtins.genList (_: "mq-deadline")
-            |> builtins.concatStringsSep "";
+            |> builtins.concatStringsSep " ";
           NMI_WATCHDOG = 0;
           CPU_BOOST_ON_AC = 1;
           CPU_BOOST_ON_BAT = 1;
