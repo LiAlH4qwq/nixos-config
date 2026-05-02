@@ -1,10 +1,13 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 {
+  imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
+
   options.liuxu.nixos.secureboot.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;

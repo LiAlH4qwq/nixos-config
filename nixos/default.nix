@@ -8,6 +8,7 @@
   imports = [
     "${inputs.self}/system"
     ./boot
+    ./home-manager
     ./i18n
     ./modules
     ./nix

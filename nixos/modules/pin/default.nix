@@ -1,5 +1,12 @@
-{ config, lib, ... }:
 {
+  config,
+  inputs,
+  lib,
+  ...
+}:
+{
+  imports = [ inputs.libpam-pwdfile-rs.nixosModules.default ];
+
   options.liuxu.nixos.pin.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;

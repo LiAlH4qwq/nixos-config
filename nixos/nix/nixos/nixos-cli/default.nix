@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }:
 {
+  imports = [ inputs.nixos-cli.nixosModules.nixos-cli ];
+
   programs.nixos-cli = {
     enable = true;
     # The wrapped package insist on calling nix instead of lix,

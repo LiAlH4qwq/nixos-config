@@ -1,4 +1,7 @@
-_: {
+{ inputs, ... }:
+{
+  imports = [ inputs.ragenix.nixosModules.default ];
+
   age = {
     # Fix conflicting with impermanence.
     # Otherwise, the agenix will try to do decryption
