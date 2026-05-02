@@ -52,12 +52,9 @@
           # Power off optical devices on BAT
           BAY_POWEROFF_ON_AC = 0;
           BAY_POWEROFF_ON_BAT = 1;
-          DISK_DEVICES = config.liuxu.nixos.tlp.disks;
+          DISK_DEVICES = config.liuxu.nixos.tlp.disks |> builtins.concatStringsSep " ";
           DISK_IOSCHED =
-            config.liuxu.nixos.tlp.disks
-            |> builtins.length
-            |> builtins.genList (_: "mq-deadline")
-            |> builtins.concatStringsSep " ";
+            config.liuxu.nixos.tlp.disks |> map (_: "mq-deadline") |> builtins.concatStringsSep " ";
           NMI_WATCHDOG = 0;
           CPU_BOOST_ON_AC = 1;
           CPU_BOOST_ON_BAT = 1;
