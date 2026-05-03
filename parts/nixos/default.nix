@@ -11,7 +11,10 @@
         mkHost =
           cfg:
           inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs; };
+            specialArgs = {
+              inherit inputs;
+              inherit (self) lib;
+            };
             modules = lib.singleton "${self}/nixos" ++ lib.singleton cfg;
           };
       in

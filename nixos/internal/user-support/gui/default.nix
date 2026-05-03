@@ -1,0 +1,65 @@
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
+let
+  users = config.home-manager.users;
+in
+{
+  options.liuxu.nixos.internal.user-support.gui.enable = lib.mkOption {
+    type = lib.types.bool;
+    internal = true;
+    readOnly = true;
+    default =
+      users |> builtins.attrValues |> map (cfg: cfg.liuxu.user.gui.enable) |> builtins.any lib.id;
+  };
+
+  config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {
+    programs = {
+      # these programs can't simply be enabled only in the user scope.
+      _1password.enable = true;
+      _1password-gui = {
+        enable = true;
+        polkitPolicyOwners = users |> lib.filterAttrs (_: cfg: cfg.liuxu.user.gui.enable) |> lib.attrNames;
+      };
+      steam.enable = true;
+      hyprland = {
+        enable = true;
+        withUWSM = true;
+        xwayland.enable = true;
+      };
+    };
+
+    services = {
+      gnome.gnome-keyring.enable = true;
+      pipewire = {
+        enable = true;
+        socketActivation = true;
+        audio.enable = true;
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+      };
+    };
+
+    environment.etc = {
+      wallpaper = {
+        target = "wallpapers/rainy-everything-in-the-night.png";
+        source = "${inputs.self}/assets/rainy-everything-in-the-night.png";
+      };
+    };
+
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+    };
+  };
+}

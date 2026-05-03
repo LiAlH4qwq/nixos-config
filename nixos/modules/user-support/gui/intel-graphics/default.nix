@@ -12,19 +12,25 @@
     description = ''
       Liuxu: Whether to enable the Intel Graphics support.
         Currently enables VAAPI and QSV drivers for Intel graphics cards.
-        Takes no effect when GUI is not enabled.
+        Won't be actually enabled when no user has GUI enabled.
     '';
   };
 
-  config =
-    let
-      cfgSuper = config.liuxu.nixos.internal.user-support.gui;
-      cfgSelf = config.liuxu.nixos.user-support.gui.intel-graphics;
-    in
-    lib.mkIf (cfgSuper.enable && cfgSelf.enable) {
-      hardware.graphics.extraPackages = with pkgs; [
-        intel-media-driver # VAAPI
-        vpl-gpu-rt # QSV
-      ];
-    };
+  config = lib.mkIf config.liuxu.nixos.user-support.gui.intel-graphics (
+    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui
+      {
+        hardware.graphics.extraPackages = with pkgs; [
+          intel-media-driver # VAAPI
+          vpl-gpu-rt # QSV
+        ];
+      }
+      {
+        warnings = builtins.singleton ''
+          Liuxu: Intel Graphics support is enabled,
+            which is to support GUI,
+            but no user has GUI enabled,
+            so it won't be actually enabled.
+        '';
+      }
+  );
 }

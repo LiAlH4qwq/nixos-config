@@ -10,5 +10,11 @@ lib
     {
       inherit compose;
       o = compose;
+      mkIfElse =
+        cond: onTrue: onFalse:
+        lib.mkMerge [
+          (lib.mkIf cond onTrue)
+          (lib.mkIf (!cond) onFalse)
+        ];
     };
 }

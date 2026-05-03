@@ -10,6 +10,7 @@
     ./boot
     ./home-manager
     ./i18n
+    ./internal
     ./modules
     ./nix
     ./persist
