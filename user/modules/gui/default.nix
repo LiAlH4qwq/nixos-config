@@ -48,7 +48,7 @@
       packages = with pkgs; [
         nautilus # explorer.exe
         mission-center # taskmgr.exe
-        lollypop # Music player
+        clementine # Music player
         clapper # Video player
         wev # Input inspect
         inkscape
@@ -65,6 +65,7 @@
         ".config/mozilla/firefox" # Firefox
         ".config/noctalia/colorschemes" # Noctalia
         ".config/obs-studio" # OBS
+        ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram
 
