@@ -12,10 +12,5 @@
 
   config = {
     system.stateVersion = config.liuxu.system.version-when-installed;
-    home-manager.sharedModules = [
-      {
-        home.stateVersion = config.liuxu.system.version-when-installed;
-      }
-    ];
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ osConfig, pkgs, ... }:
 {
   imports = [
     ./bun
@@ -14,12 +14,15 @@
   ];
 
   # these hasn't been available as a program in release 25.11.
-  home.packages = with pkgs; [
-    android-tools
-    cargo
-    fastfetch
-    reptyr # Re-attach programs to pty
-  ];
+  home = {
+    stateVersion = osConfig.liuxu.system.version-when-installed;
+    packages = with pkgs; [
+      android-tools
+      cargo
+      fastfetch
+      reptyr # Re-attach programs to pty
+    ];
+  };
 
   programs = {
     zellij.enable = true;
