@@ -12,17 +12,22 @@
     ./plymouth
   ];
 
-  options.liuxu.nixos.user-support.gui.enable = lib.mkOption {
+  options.liuxu.nixos.internal.user-support.gui.enable = lib.mkOption {
     type = lib.types.bool;
-    default = false;
-    example = true;
+    internal = true;
+    readOnly = true;
+    default =
+      config.home-manager.users
+      |> builtins.attrValues
+      |> map (cfg: cfg.liuxu.user.gui.enable)
+      |> builtins.any lib.id;
     description = ''
       Liuxu: Whether to enable the GUI support for users.
         Note: If there's user uses GUI, this should be enabled.
     '';
   };
 
-  config = lib.mkIf config.liuxu.nixos.user-support.gui.enable {
+  config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {
     programs = {
       # these programs can't simply be enabled only in the user scope.
       _1password.enable = true;

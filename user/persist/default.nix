@@ -1,39 +1,50 @@
 { lib, osConfig, ... }:
 {
-  options.liuxu.user.internal.intransience =
-    let
-      t = lib.types;
-      entry =
-        t.coercedTo t.str
-          (path: {
-            inherit path;
-            method = "bind";
-          })
-          (
-            t.submodule {
-              options = {
-                path = lib.mkOption { type = t.str; };
-                method = lib.mkOption {
-                  type = t.enum [
-                    "bind"
-                    "symlink"
-                  ];
-                  default = "bind";
+  options.liuxu.user.internal = lib.mkOption {
+    internal = true;
+    type = lib.types.submodule {
+      options = {
+        intransience = lib.mkOption {
+          type = lib.types.submodule {
+            options =
+              let
+                t = lib.types;
+                entry =
+                  t.coercedTo t.str
+                    (path: {
+                      inherit path;
+                      method = "bind";
+                    })
+                    (
+                      t.submodule {
+                        options = {
+                          path = lib.mkOption { type = t.str; };
+                          method = lib.mkOption {
+                            type = t.enum [
+                              "bind"
+                              "symlink"
+                            ];
+                            default = "bind";
+                          };
+                        };
+                      }
+                    );
+              in
+              {
+                dirs = lib.mkOption {
+                  type = t.listOf entry;
+                  default = [ ];
+                };
+                files = lib.mkOption {
+                  type = t.listOf entry;
+                  default = [ ];
                 };
               };
-            }
-          );
-    in
-    {
-      dirs = lib.mkOption {
-        type = t.listOf entry;
-        default = [ ];
-      };
-      files = lib.mkOption {
-        type = t.listOf entry;
-        default = [ ];
+          };
+        };
       };
     };
+  };
 
   config.liuxu.user.internal.intransience = {
     dirs = [

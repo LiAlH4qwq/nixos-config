@@ -15,6 +15,6 @@
       enable = true;
       powerOnBoot = false;
     };
-    services.blueman.enable = config.liuxu.nixos.user-support.gui.enable;
+    services.blueman.enable = config.liuxu.nixos.internal.user-support.gui.enable;
   };
 }

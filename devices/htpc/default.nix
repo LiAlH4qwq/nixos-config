@@ -22,7 +22,6 @@
       tlp.enable = false;
       user-support = {
         gui = {
-          enable = false;
           agl.enable = false;
           display-manager.enable = false;
           plymouth.enable = false;

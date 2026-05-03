@@ -7,7 +7,7 @@
 {
   options.liuxu.nixos.user-support.gui.plymouth.enable = lib.mkOption {
     type = lib.types.bool;
-    default = config.liuxu.nixos.user-support.gui.enable;
+    default = config.liuxu.nixos.internal.user-support.gui.enable;
     example = false;
     description = ''
       Liuxu: Whether to enable the Plymouth, which is boot animation.

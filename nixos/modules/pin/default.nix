@@ -14,7 +14,7 @@
     description = ''
       Liuxu: Whether to enable the Windows-Like PIN code support,
         which uses an alter simple password for local auth,
-        currently for tty-login, dm-login, hyprlock and polkit(run0 and etc.).
+        currently for tty-login, dm-login and polkit(run0 and etc.).
     '';
   };
 
@@ -25,7 +25,6 @@
           "login"
           "polkit-1"
         ]
-        ++ lib.optional config.liuxu.nixos.user-support.gui.enable "hyprlock"
         ++ lib.optional config.liuxu.nixos.user-support.gui.display-manager.enable "greetd";
       };
     };

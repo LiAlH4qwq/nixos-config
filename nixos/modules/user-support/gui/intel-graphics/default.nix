@@ -7,7 +7,7 @@
 {
   options.liuxu.nixos.user-support.gui.intel-graphics.enable = lib.mkOption {
     type = lib.types.bool;
-    default = config.liuxu.nixos.user-support.gui.enable;
+    default = config.liuxu.nixos.internal.user-support.gui.enable;
     example = false;
     description = ''
       Liuxu: Whether to enable the Intel Graphics support.
@@ -18,8 +18,8 @@
 
   config =
     let
-      cfgSuper = config.liuxu.nixos.user-support.gui;
-      cfgSelf = cfgSuper.intel-graphics;
+      cfgSuper = config.liuxu.nixos.internal.user-support.gui;
+      cfgSelf = config.liuxu.nixos.user-support.gui.intel-graphics;
     in
     lib.mkIf (cfgSuper.enable && cfgSelf.enable) {
       hardware.graphics.extraPackages = with pkgs; [
