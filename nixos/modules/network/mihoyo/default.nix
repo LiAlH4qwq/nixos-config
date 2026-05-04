@@ -5,15 +5,28 @@
   ...
 }:
 {
-  options.liuxu.nixos.network.mihoyo.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to enable Mihoyo.
-        Network should be enable first.
-        Genshin, Impact! (x
-    '';
+  options.liuxu.nixos.network.mihoyo = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      example = true;
+      description = ''
+        Liuxu: Whether to enable Mihoyo.
+          Network should be enable first.
+          Genshin, Impact! (x
+      '';
+    };
+    settingsOverride = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      example = {
+        external-controller = "[::]:9090";
+      };
+      description = ''
+        Liuxu: Settings override for Mihoyo.
+          Will be deep merged.
+      '';
+    };
   };
 
   config = lib.mkMerge [
@@ -51,7 +64,9 @@
         system.activationScripts.mihoyo.text =
           let
             cfgFileIn = "${cfgFile}.in";
-            settings = import ./settings { inherit lib; };
+            settings = lib.recursiveUpdate
+              (import ./settings { inherit lib; })
+              config.liuxu.nixos.network.mihoyo.settingsOverride;
             cfgDirShArg = cfgDir |> lib.escapeShellArg;
             cfgFileShArg = cfgFile |> lib.escapeShellArg;
             cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
