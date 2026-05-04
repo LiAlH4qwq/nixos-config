@@ -3,8 +3,11 @@ _: {
     # agenix depends on sshd, so it couldn't be fully disabled.
     enable = true;
     openFirewall = true;
-    # No password login
-    settings.KbdInteractiveAuthentication = false;
+    settings = {
+      # No password login
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
     # Disable RSA.
     hostKeys = [
       {
