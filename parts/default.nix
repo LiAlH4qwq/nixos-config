@@ -2,7 +2,8 @@ _: {
   imports = [
     ./deploy-rs
     ./lib
-    ./nixos
+    ./nixos-hosts
+    ./nixos-modules
     ./nix-on-droid
     ./overlays
     ./treefmt

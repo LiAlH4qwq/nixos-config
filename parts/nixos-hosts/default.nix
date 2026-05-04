@@ -12,10 +12,10 @@
           cfg:
           inputs.nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit inputs;
+              inherit inputs self;
               inherit (self) lib;
             };
-            modules = lib.singleton "${self}/nixos" ++ lib.singleton cfg;
+            modules = lib.singleton self.nixosModules.default ++ lib.singleton cfg;
           };
       in
       {

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   imports = [ inputs.home-manager.nixosModules.default ];
   home-manager = {
@@ -6,7 +6,7 @@
     useUserPackages = true;
     overwriteBackup = true;
     backupFileExtension = "bak";
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs self; };
     sharedModules = [
       "${inputs.self}/user"
     ];
