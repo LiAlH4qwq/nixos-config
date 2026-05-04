@@ -45,26 +45,6 @@ _: {
       ];
     };
 
-    "/home" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "compress=zstd"
-        "subvol=@home"
-      ];
-    };
-
-    "/root" = {
-      device = "/dev/mapper/root";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "compress=zstd"
-        "subvol=@root"
-      ];
-    };
-
     "/boot" = {
       device = "/dev/disk/by-uuid/1BC6-98E4";
       fsType = "vfat";
