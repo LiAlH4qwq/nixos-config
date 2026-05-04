@@ -2,8 +2,6 @@
 {
   flake = {
     deploy = {
-      sudo = "run0 -u";
-      interactiveSudo = true;
       fastConnection = true;
       nodes = {
         LiAlH4-Server = {
