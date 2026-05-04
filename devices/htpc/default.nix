@@ -13,7 +13,12 @@ _: {
       network = {
         enable = true;
         firewalld.enable = true;
-        mihoyo.enable = true;
+        mihoyo = {
+          enable = true;
+          settingsOverride = {
+            external-controller = "[::]:9090";
+          };
+        };
       };
       pin.enable = true;
       podman.enable = true;

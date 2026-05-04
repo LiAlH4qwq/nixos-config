@@ -14,7 +14,10 @@ _: {
       network = {
         enable = true; # Default enable
         firewalld.enable = true; # Default enable
-        mihoyo.enable = true;
+        mihoyo = {
+          enable = true;
+          settingsOverride = { };
+        };
       };
       pin.enable = true; # Default enable
       podman.enable = true;
