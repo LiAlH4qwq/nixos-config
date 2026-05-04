@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+_: {
   imports = [
     ./fs
     ./users
@@ -13,12 +12,12 @@
       laptop.enable = false;
       network = {
         enable = true;
+        firewalld.enable = true;
         mihoyo.enable = true;
       };
       pin.enable = true;
       podman.enable = true;
       secureboot.enable = true;
-      ssh-access.enable = true;
       tlp.enable = false;
       user-support = {
         gui = {

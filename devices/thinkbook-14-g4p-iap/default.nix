@@ -13,12 +13,12 @@ _: {
       laptop.enable = true;
       network = {
         enable = true; # Default enable
+        firewalld.enable = true; # Default enable
         mihoyo.enable = true;
       };
       pin.enable = true; # Default enable
       podman.enable = true;
       secureboot.enable = true;
-      ssh-access.enable = true;
       tlp = {
         # Default enable when enabling laptop.
         enable = true;

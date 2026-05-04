@@ -2,6 +2,9 @@ _: {
   services.openssh = {
     # agenix depends on sshd, so it couldn't be fully disabled.
     enable = true;
+    openFirewall = true;
+    # No password login
+    settings.KbdInteractiveAuthentication = false;
     # Disable RSA.
     hostKeys = [
       {
