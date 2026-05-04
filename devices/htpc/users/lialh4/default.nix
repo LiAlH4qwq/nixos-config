@@ -3,6 +3,7 @@
   users.extraUsers.lialh4 = {
     isNormalUser = true;
     useDefaultShell = true;
+    linger = true;
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.age.secrets."devices.LiAlH4-Server.users.lialh4.password".path;
     openssh.authorizedKeys.keys = [
@@ -13,6 +14,7 @@
     liuxu.user = {
       gui.enable = false;
     };
+    services.syncthing.guiAddress = "[::]:8384";
   };
   libpam-pwdfile-rs = {
     pin.users.lialh4.secret = "$y$j9T$bjCgDKQCZmMhnca0Jw54X1$x4iqH6CXtKuBnFAPaO9M2Cdv6YMB.kPnFUBeGM4vUV4";
