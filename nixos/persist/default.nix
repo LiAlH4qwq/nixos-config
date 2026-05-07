@@ -23,7 +23,7 @@
         "ssh/ssh_host_ed25519_key.pub"
       ];
       users = lib.flip lib.mapAttrs config.home-manager.users (
-        _: cfg: cfg.liuxu.user.internal.intransience
+        _: cfg: cfg.liuxu.home.internal.intransience
       );
     };
   };

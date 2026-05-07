@@ -10,7 +10,7 @@
     ];
   };
   home-manager.users.lialh4 = {
-    liuxu.user = {
+    liuxu.home = {
       gui.enable = true;
     };
   };

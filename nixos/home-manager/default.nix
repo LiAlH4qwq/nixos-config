@@ -8,7 +8,7 @@
     backupFileExtension = "bak";
     extraSpecialArgs = { inherit inputs self; };
     sharedModules = [
-      "${inputs.self}/user"
+      self.homeModules.liuxu
     ];
   };
 }

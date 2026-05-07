@@ -13,7 +13,7 @@ in
     internal = true;
     readOnly = true;
     default =
-      users |> builtins.attrValues |> map (cfg: cfg.liuxu.user.gui.enable) |> builtins.any lib.id;
+      users |> builtins.attrValues |> map (cfg: cfg.liuxu.home.gui.enable) |> builtins.any lib.id;
   };
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {
@@ -22,7 +22,7 @@ in
       _1password.enable = true;
       _1password-gui = {
         enable = true;
-        polkitPolicyOwners = users |> lib.filterAttrs (_: cfg: cfg.liuxu.user.gui.enable) |> lib.attrNames;
+        polkitPolicyOwners = users |> lib.filterAttrs (_: cfg: cfg.liuxu.home.gui.enable) |> lib.attrNames;
       };
       steam.enable = true;
       hyprland = {

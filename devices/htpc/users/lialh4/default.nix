@@ -11,7 +11,7 @@
     ];
   };
   home-manager.users.lialh4 = {
-    liuxu.user = {
+    liuxu.home = {
       gui.enable = false;
     };
     services.syncthing.guiAddress = "[::]:8384";
