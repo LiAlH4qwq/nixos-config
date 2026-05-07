@@ -69,4 +69,13 @@ _: {
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=30min
   '';
+
+  boot.kernelParams =
+    let
+      id = "46a6";
+    in
+    [
+      "i915.force_probe=!${id}"
+      "xe.force_probe=${id}"
+    ];
 }
