@@ -15,7 +15,7 @@
               inherit inputs self;
               inherit (self) lib;
             };
-            modules = lib.singleton self.nixosModules.default ++ lib.singleton cfg;
+            modules = lib.singleton self.nixosModules.liuxu ++ lib.singleton cfg;
           };
       in
       {

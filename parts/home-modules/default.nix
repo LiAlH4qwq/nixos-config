@@ -1,9 +1,9 @@
 { self, ... }:
 {
-  flake.nixosModules =
+  flake.homeModules =
     let
       module = {
-        imports = [ "${self}/nixos" ];
+        imports = [ "${self}/home" ];
       };
     in
     {
