@@ -136,6 +136,9 @@
                 id = "NotificationHistory";
               }
               {
+                id = "Network";
+              }
+              {
                 id = "Volume";
               }
               {
