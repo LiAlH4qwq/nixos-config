@@ -1,4 +1,19 @@
+let
+  nixConfig = {
+    extra-substituters = [
+      "https://mirrors.nju.edu.cn/nix-channels/store"
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://noctalia.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
+in
 {
+  inherit nixConfig;
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-parsec.url = "github:milahu/nix-parsec";
@@ -164,6 +179,7 @@
         ./parts
       ];
       systems = import inputs.systems;
+      flake.nixConfig = nixConfig;
       flatFlake.config.allowed = [
         # Not possible to flatten.
         # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
