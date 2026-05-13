@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 {
   users.extraUsers.lialh4 = {
     isNormalUser = true;
@@ -12,6 +12,11 @@
   home-manager.users.lialh4 = {
     liuxu.home = {
       gui.enable = true;
+      internal.intransience.dirs = [ ".local/share/fonts" ];
+    };
+    services.podman = {
+      enable = true;
+      settings.storage.storage.graphRoot = "/mnt/data/lialh4/ProgramFiles/Podman";
     };
   };
   libpam-pwdfile-rs = {
