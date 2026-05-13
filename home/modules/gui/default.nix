@@ -55,7 +55,7 @@
         materialgram # Telegram with material design
         qq
         wechat
-        wemeet
+        unstable.wemeet
         wpsoffice-cn
       ];
     };
