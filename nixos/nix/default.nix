@@ -42,7 +42,8 @@
           ];
         in
         {
-          inherit (self.nixConfig) extra-substituters extra-trusted-public-keys;
+          substituters = self.nixConfig.extra-substituters;
+          trusted-public-keys = self.nixConfig.extra-trusted-public-keys;
           experimental-features = [
             "flakes"
             "nix-command"
