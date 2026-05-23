@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
   imports = [
+    ./autostart
     ./noctalia
     ./gesture
     ./wrule
@@ -9,12 +10,9 @@
   config = lib.mkIf config.liuxu.home.gui.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      # Due to conflict with home-manager
-      systemd.enable = false;
       settings =
         let
           mod = "SUPER";
-          startBg = target: "uwsm-app -s b -t service -u uwsm-bg-${target}.service -- ${target}";
           terminal = "kitty";
           explorer = "nautilus -w";
           taskmgr = "missioncenter";
@@ -41,17 +39,17 @@
             ", preferred, auto, 2"
           ];
           exec-once = [
-            (startBg pwd)
+            pwd
           ];
           bind = [
             "${mod}, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
             "${mod}, Q, killactive"
             "${mod} SHIFT, Q, forcekillactive"
             "${mod}, F, togglefloating"
-            "${mod}, T, execr, uwsm-app -- ${terminal}"
-            "${mod}, E, execr, uwsm-app -- ${explorer}"
-            "${mod}, Escape, execr, uwsm-app -- ${taskmgr}"
-            "${mod}, B, execr, uwsm-app -- ${browser}"
+            "${mod}, T, execr, ${terminal}"
+            "${mod}, E, execr, ${explorer}"
+            "${mod}, Escape, execr, ${taskmgr}"
+            "${mod}, B, execr, ${browser}"
             "${mod} SHIFT, Tab, execr, hyprnome -mc"
             "${mod} ALT SHIFT, Tab, execr, hyprnome -mcp"
             "${mod}, grave, workspace, empty"

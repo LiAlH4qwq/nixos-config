@@ -77,7 +77,6 @@
           density = "comfortable";
           enableClipboardHistory = true;
           customLaunchPrefixEnabled = true;
-          customLaunchPrefix = "uwsm-app --";
           terminalCommand = "kitty -e";
         };
         osd = {

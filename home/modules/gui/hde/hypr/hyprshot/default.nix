@@ -4,7 +4,7 @@
     programs.hyprshot.enable = true;
     wayland.windowManager.hyprland.settings.bind =
       let
-        cmd = "uwsm-app -- hyprshot -o ${loc}";
+        cmd = "hyprshot -o ${loc}";
         loc = "$HOME/Pictures/Screenshots -zm";
       in
       [

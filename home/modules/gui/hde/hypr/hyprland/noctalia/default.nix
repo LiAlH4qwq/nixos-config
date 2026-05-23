@@ -8,7 +8,7 @@
         ipc = "${noctalia} ipc call";
       in
       {
-        execr-once = [ "uwsm-app -s s -t service -u uwsm-service-noctalia.service -- ${noctalia}" ];
+        execr-once = [ "${noctalia}" ];
         bind = [
           "${mod}, R, execr, ${ipc} launcher toggle"
           "${mod}, V, execr, ${ipc} launcher clipboard"
