@@ -14,6 +14,7 @@
     ./modules
     ./nix
     ./persist
+    ./userborn
   ];
 
   programs = {
@@ -24,12 +25,6 @@
     };
   };
   services = {
-    # Piece of perl-less thing.
-    userborn = {
-      enable = true;
-      # It's strange, without it, login will be failed.
-      passwordFilesLocation = "/var/lib/nixos";
-    };
     # Better D-Bus implemention.
     dbus.implementation = "broker";
     power-profiles-daemon.enable = lib.mkDefault true;
