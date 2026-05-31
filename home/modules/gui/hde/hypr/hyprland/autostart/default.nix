@@ -2,7 +2,7 @@
 {
   config = lib.mkIf config.liuxu.home.gui.enable {
     wayland.windowManager.hyprland.settings.execr-once = [
-      "fcitx5 -rd"
+      "systemctl --user start xdg-autostart-if-no-desktop-manager.target"
     ];
   };
 }
