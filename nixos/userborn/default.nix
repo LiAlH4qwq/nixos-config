@@ -1,11 +1,6 @@
-{ lib, ... }:
-let
-  dir = "/var/lib/userborn";
-in
-{
+_: {
   services.userborn = {
     enable = true;
-    passwordFilesLocation = dir;
+    passwordFilesLocation = "/persist/var/lib/userborn";
   };
-  intransience.datastores.persist.dirs = lib.singleton dir;
 }
