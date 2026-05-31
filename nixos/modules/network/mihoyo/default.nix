@@ -29,85 +29,94 @@
     };
   };
 
-  config = lib.mkMerge [
-    (
-      let
-        cfgDir = "/run/mihoyo";
-        cfgFile = "${cfgDir}/config.yaml";
-      in
-      lib.mkIf config.liuxu.nixos.network.mihoyo.enable {
-        assertions = [
-          {
-            assertion = config.liuxu.nixos.network.enable;
-            message = "Network should be enable first in order to enable Mihoyo!";
-          }
-        ];
+  config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable (
+    let
+      cfgDir = "/run/mihoyo";
+      cfgFile = "${cfgDir}/config.yaml";
+    in
+    {
+      assertions = [
+        {
+          assertion = config.liuxu.nixos.network.enable;
+          message = "Network should be enable first in order to enable Mihoyo!";
+        }
+      ];
 
-        services.mihomo = {
-          enable = true;
-          tunMode = true;
-          webui = pkgs.metacubexd;
-          configFile = cfgFile;
-        };
+      services.mihomo = {
+        enable = true;
+        tunMode = true;
+        webui = pkgs.metacubexd;
+        configFile = cfgFile;
+      };
 
-        # Fix can't find process name.
-        # Source: https://github.com/MetaCubeX/mihomo/issues/961#issuecomment-1879610568
-        systemd.services.mihomo.serviceConfig =
+      # Fix can't find process name.
+      # Source: https://github.com/MetaCubeX/mihomo/issues/961#issuecomment-1879610568
+      systemd.services = {
+        mihomo.serviceConfig =
           let
-            abilities = lib.mkForce "CAP_NET_ADMIN CAP_SYS_PTRACE CAP_DAC_READ_SEARCH";
+            abilities =
+              [
+                "CAP_NET_ADMIN"
+                "CAP_SYS_PTRACE"
+                "CAP_DAC_READ_SEARCH"
+              ]
+              |> lib.concatStringsSep " "
+              |> lib.mkForce;
           in
           {
             AmbientCapabilities = abilities;
             CapabilityBoundingSet = abilities;
           };
 
-        system.activationScripts.mihoyo.text =
+        mihoyo =
           let
-            cfgFileIn = "${cfgFile}.in";
-            settings = lib.recursiveUpdate
-              (import ./settings { inherit lib; })
-              config.liuxu.nixos.network.mihoyo.settingsOverride;
-            cfgDirShArg = cfgDir |> lib.escapeShellArg;
-            cfgFileShArg = cfgFile |> lib.escapeShellArg;
-            cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
-            settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
-            secretShArg = config.age.secrets.mihoyo-alink.path |> lib.escapeShellArg;
+            before = lib.singleton "mihomo.service";
           in
-          ''
-            SECRET=$(cat ${secretShArg})
-            mkdir -p ${cfgDirShArg}
-            chmod 0700 ${cfgDirShArg}
-            touch ${cfgFileInShArg}
-            chmod 0600 ${cfgFileInShArg}
-            echo -ne ${settingsShArg} > ${cfgFileInShArg}
-            ${pkgs.jq}/bin/jq \
-              -c \
-              --arg secret "$SECRET" \
-              '.["proxy-providers"].alink.url = $secret' \
-              ${cfgFileInShArg} > ${cfgFileShArg}
-            rm -f ${cfgFileInShArg}
-          '';
-
-        # Make cache persistent.
-        intransience.datastores.persist.dirs = [
           {
-            path = "/var/lib/private/mihomo";
-            parentDirectory.mode = "0700";
-          }
-        ];
-      }
-    )
-    # allow tun mode traffic.
-    (lib.liuxu.mkIfElse config.liuxu.nixos.network.firewalld.enable
-      { services.firewalld.zones.trusted.interfaces = lib.singleton "mihoyo"; }
-      {
-        networking.firewall = {
-          checkReversePath = false;
-          trustedInterfaces = [
-            "mihoyo"
-          ];
-        };
-      }
-    )
-  ];
+            inherit before;
+            requiredBy = before;
+            after = lib.singleton "agenix-install-secrets.service";
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+            };
+            script =
+              let
+                cfgFileIn = "${cfgFile}.in";
+                settings = lib.recursiveUpdate (import ./settings {
+                  inherit lib;
+                }) config.liuxu.nixos.network.mihoyo.settingsOverride;
+                secrets = config.age.secrets.mihoyo-alink.path;
+                cfgDirShArg = cfgDir |> lib.escapeShellArg;
+                cfgFileShArg = cfgFile |> lib.escapeShellArg;
+                cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
+                settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
+                secretShArg = secrets |> lib.escapeShellArg;
+              in
+              ''
+                install -dm 0700 ${cfgDirShArg}
+                install -m 0600 /dev/null ${cfgFileInShArg}
+                printf '%s' ${settingsShArg} > ${cfgFileInShArg}
+                install -m 0600 /dev/null ${cfgFileShArg}
+                SECRET=$(cat ${secretShArg})
+                ${pkgs.jq}/bin/jq \
+                  -c \
+                  --arg secret "$SECRET" \
+                  '.["proxy-providers"].alink.url = $secret' \
+                  ${cfgFileInShArg} > ${cfgFileShArg}
+                rm -f ${cfgFileInShArg}
+              '';
+          };
+      };
+      # allow tun mode traffic.
+      services.firewalld.zones.trusted.interfaces = lib.singleton "mihoyo";
+      # Make cache persistent.
+      intransience.datastores.persist.dirs = [
+        {
+          path = "/var/lib/private/mihomo";
+          parentDirectory.mode = "0700";
+        }
+      ];
+    }
+  );
 }
