@@ -12,7 +12,6 @@ _: {
       laptop.enable = false;
       network = {
         enable = true;
-        firewalld.enable = true;
         mihoyo = {
           enable = true;
           settingsOverride = {

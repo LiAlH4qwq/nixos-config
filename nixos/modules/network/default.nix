@@ -18,7 +18,11 @@
   config = lib.mkIf config.liuxu.nixos.network.enable {
     networking = {
       networkmanager.enable = true;
+      nftables.enable = true;
+      # We use firewalld instead.
+      firewall.enable = false;
     };
+    services.firewalld.enable = true;
     # Make network connections persist.
     intransience.datastores.persist.dirs = [ "/etc/NetworkManager/system-connections" ];
   };
