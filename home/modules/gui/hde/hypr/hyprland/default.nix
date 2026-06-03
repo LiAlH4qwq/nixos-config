@@ -10,6 +10,7 @@
   config = lib.mkIf config.liuxu.home.gui.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "hyprlang";
       settings =
         let
           mod = "SUPER";

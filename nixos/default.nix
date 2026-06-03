@@ -11,6 +11,7 @@
     ./home-manager
     ./i18n
     ./internal
+    ./kmscon
     ./modules
     ./nix
     ./persist

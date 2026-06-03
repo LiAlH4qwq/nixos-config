@@ -24,7 +24,10 @@
 
   config = lib.mkIf config.liuxu.home.gui.enable {
     programs = {
-      firefox.enable = true;
+      firefox = {
+        enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
+      };
       obs-studio.enable = true;
       discord = {
         enable = true;
@@ -36,7 +39,7 @@
         enable = true;
         # See: https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig
         enableDefaultConfig = false;
-        matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+        settings."*".identityAgent = "~/.1password/agent.sock";
       };
     };
 
@@ -55,7 +58,7 @@
         materialgram # Telegram with material design
         qq
         wechat
-        unstable.wemeet
+        wemeet
         wpsoffice-cn
       ];
     };

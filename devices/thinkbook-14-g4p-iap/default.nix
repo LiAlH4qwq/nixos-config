@@ -65,9 +65,7 @@ _: {
     HandleLidSwitchExternalPower = "suspend-then-hibernate";
     HandleLidSwitchDocked = "suspend-then-hibernate";
   };
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30min
-  '';
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
 
   boot.kernelParams =
     let

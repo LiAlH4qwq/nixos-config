@@ -4,8 +4,6 @@
   ...
 }:
 {
-  imports = [ ./backports ];
-
   options.liuxu.nixos.tlp = {
     enable = lib.mkOption {
       type = lib.types.bool;
