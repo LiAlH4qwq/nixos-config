@@ -65,7 +65,10 @@
       # Zoxide
       # Whole dir needs persist,
       # since there will be temp files.
-      ".local/share/zoxide" # Zoxide
+      {
+        path = ".local/share/zoxide";
+        method = "symlink";
+      }
     ];
 
     files = [
