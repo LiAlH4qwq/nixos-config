@@ -60,24 +60,22 @@
       # Lazyvim
       ".local/share/nvim"
       ".local/state/nvim"
+    ]
+    ++ lib.optionals osConfig.liuxu.system.better-shell.enable [
+      # Zoxide
+      # Whole dir needs persist,
+      # since there will be temp files.
+      ".local/share/zoxide" # Zoxide
     ];
 
-    files =
-      let
-        mkSymlinkEntry = path: {
-          inherit path;
-          method = "symlink";
-        };
-      in
-      [
-        ".bash_history" # Bash
-        ".claude.json" # Claude Code
-        ".ssh/known_hosts" # SSH
-        ".local/state/lazygit/state.yml"
-      ]
-      ++ lib.optionals osConfig.liuxu.system.better-shell.enable [
-        ".local/share/fish/fish_history" # Fish
-        (mkSymlinkEntry ".local/share/zoxide/db.zo") # Zoxide
-      ];
+    files = [
+      ".bash_history" # Bash
+      ".claude.json" # Claude Code
+      ".ssh/known_hosts" # SSH
+      ".local/state/lazygit/state.yml"
+    ]
+    ++ lib.optionals osConfig.liuxu.system.better-shell.enable [
+      ".local/share/fish/fish_history" # Fish
+    ];
   };
 }
