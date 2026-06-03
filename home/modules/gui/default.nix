@@ -62,15 +62,15 @@
 
     liuxu.home.internal.intransience = {
       dirs = [
+        ".config/mozilla/firefox" # Firefox
+        ".config/noctalia/colorschemes" # Noctalia
+        ".config/obs-studio" # OBS
+        ".config/Clementine" # Clementine
         # Fcitx5
         # It will be tmpfiles here,
         # so this dir should be intransienced,
         # otherwise it will failed to update dict files.
         ".local/share/fcitx5/pinyin"
-        ".config/mozilla/firefox" # Firefox
-        ".config/noctalia/colorschemes" # Noctalia
-        ".config/obs-studio" # OBS
-        ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram
 
