@@ -71,7 +71,10 @@
           '';
         };
 
-        intransience.datastores.persist.files = [ "/var/lib/regreet/state.toml" ];
+        intransience.datastores.persist.files = lib.singleton {
+          path = "/var/lib/regreet/state.toml";
+          user = "greeter";
+        };
       }
       {
         warnings = builtins.singleton ''
