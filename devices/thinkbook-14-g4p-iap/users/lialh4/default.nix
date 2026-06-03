@@ -1,5 +1,20 @@
 { config, ... }:
 {
+  systemd.tmpfiles.settings."10-subuid" = {
+    "/etc/subuid".F = {
+      argument = "lialh4:100000:65536";
+      mode = "0644";
+      user = "root";
+      group = "root";
+    };
+    "/etc/subgid".F = {
+      argument = "lialh4:100000:65536";
+      mode = "0644";
+      user = "root";
+      group = "root";
+    };
+  };
+
   users.extraUsers.lialh4 = {
     isNormalUser = true;
     useDefaultShell = true;
