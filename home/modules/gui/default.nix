@@ -77,6 +77,10 @@
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram
 
+        # WPS
+        ".config/Kingsoft"
+        ".local/share/Kingsoft"
+
         # Steam
         ".steam"
         ".local/share/Steam"
