@@ -10,26 +10,22 @@
       windowrule = [
         # No border, rounding, shadow when only one window,
         # mimics the maximize of Windows.
-        "noborder, floating:0, onworkspace:w[tv1]"
-        "noborder, floating:0, onworkspace:f[1]"
-        "norounding, floating:0, onworkspace:w[tv1]"
-        "norounding, floating:0, onworkspace:f[1]"
-        "noshadow, floating:0, onworkspace:w[tv1]"
-        "noshadow, floating:0, onworkspace:f[1]"
+        "border_size 0, rounding 0, no_shadow on, match:float 0, match:workspace w[tv1]"
+        "border_size 0, rounding 0, no_shadow on, match:float 0, match:workspace f[1]"
         # Ignore maximize request of all windows.
-        "suppressevent maximize, class:.*"
+        "suppress_event maximize, match:initial_class .*"
         # Pin Firefox PIP window to the right buttom cornor.
         # I don't know why,
         # but calced position like 100%-w(weight) 100%-h(height)
         # just doesn't work,
         # maybe it doesn't support lazy evaluation like nix :(
-        "float, pin, size 25% 25%, move 75% 75%, initialClass:^firefox$, initialTitle:^Picture-in-Picture$"
+        "float on, pin on, size 25% 25%, move 75% 75%, match:initial_class ^firefox$, match:initial_title ^Picture-in-Picture$"
         # Make settings window of Clementine float,
         # otherwise it'll misbehave.
-        "float, initialClass:^org.clementine_player.Clementine$, initialTitle:^Preferences$"
+        "float on, match:initial_class ^org.clementine_player.Clementine$, match:initial_title ^Preferences$"
         # File selection window of WPS will strangely
         # move itself to the right buttom cornor in Hyprland💩.
-        "move 50%-50%w 50%-50%h, initialClass:^wpsoffice$, initialTitle:^wpsoffice$"
+        "move 50%-50%w 50%-50%h, match:initial_class ^wpsoffice$, match:initial_title ^wpsoffice$"
       ];
     };
   };
