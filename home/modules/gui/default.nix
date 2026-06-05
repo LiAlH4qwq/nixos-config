@@ -56,8 +56,8 @@
         wev # Input inspect
         inkscape
         materialgram # Telegram with material design
-        qq
-        wechat
+        # qq
+        # wechat
         wemeet
         wpsoffice-cn
       ];
