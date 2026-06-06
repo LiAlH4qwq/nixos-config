@@ -129,6 +129,7 @@
                 id = "Tray";
                 pinned = [
                   "Fcitx"
+                  "Keyboard - English (US)" # Fcitx 5
                 ];
               }
               {

@@ -2,6 +2,7 @@
 {
   imports = [
     ./autostart
+    ./bind
     ./noctalia
     ./gesture
     ./wrule
@@ -10,17 +11,13 @@
   config = lib.mkIf config.liuxu.home.gui.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      configType = "hyprlang";
-      settings =
-        let
-          mod = "SUPER";
-          terminal = "kitty";
-          explorer = "nautilus -w";
-          taskmgr = "missioncenter";
-          browser = "firefox";
-          pwd = "1password";
-        in
-        {
+      configType = "lua";
+      systemd = {
+        enable = true;
+        enableXdgAutostart = true;
+      };
+      settings = {
+        config = {
           misc = {
             # Fallback to anime wallpaper when hyprpaper fails.
             force_default_wallpaper = 2;
@@ -36,50 +33,8 @@
             natural_scroll = true;
             touchpad.natural_scroll = true;
           };
-          monitor = [
-            ", preferred, auto, 2"
-          ];
-          exec-once = [
-            pwd
-          ];
-          bind = [
-            "${mod}, Delete, execr, loginctl kill-session $XDG_SESSION_ID"
-            "${mod}, Q, killactive"
-            "${mod} SHIFT, Q, forcekillactive"
-            "${mod}, F, togglefloating"
-            "${mod}, T, execr, ${terminal}"
-            "${mod}, E, execr, ${explorer}"
-            "${mod}, Escape, execr, ${taskmgr}"
-            "${mod}, B, execr, ${browser}"
-            "${mod} SHIFT, Tab, execr, hyprnome -mc"
-            "${mod} ALT SHIFT, Tab, execr, hyprnome -mcp"
-            "${mod}, grave, workspace, empty"
-            "${mod} SHIFT, grave, movetoworkspace, empty"
-            "${mod}, XF86Favorites, workspace, name:Password"
-            "${mod} SHIFT, XF86Favorites, movetoworkspace, name:Password"
-          ]
-          ++ (lib.concatMap (
-            k:
-            let
-              ks = toString k;
-              w = if k == 0 then 10 else k;
-              ws = toString w;
-            in
-            [
-              "${mod}, ${ks}, workspace, ${ws}"
-              "${mod} SHIFT, ${ks}, movetoworkspace, ${ws}"
-            ]
-          ) (lib.range 0 9));
-          binde = [
-            "${mod}, Tab, execr, hyprnome -c"
-            "${mod} ALT, Tab, execr, hyprnome -cp"
-          ];
-          bindm = [
-            "${mod}, mouse:272, movewindow"
-            "${mod} ALT, mouse:272, resizewindow 1" # Keep aspect ratio
-            "${mod} ALT SHIFT, mouse:272, resizewindow 2" # Ignore aspect ratio
-          ];
         };
+      };
     };
   };
 }

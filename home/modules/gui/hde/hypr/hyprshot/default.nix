@@ -2,21 +2,23 @@
 {
   config = lib.mkIf config.liuxu.home.gui.enable {
     programs.hyprshot.enable = true;
-    wayland.windowManager.hyprland.settings.bind =
+    wayland.windowManager.hyprland.settings =
       let
-        cmd = "hyprshot -o ${loc}";
-        loc = "$HOME/Pictures/Screenshots -zm";
+        cmd = "hyprshot -o ${loc} -zm";
+        loc = "$HOME/Pictures/Screenshots";
       in
-      [
-        # Screenshot keys on Thinkbook 14 G4+ IAP.
-        # Screenshot key of this device is hardcoded to Win + Shift + S.
-        # Fn + Screenshot key is Screen/Sysrq
-        # Screenshot key.
-        "SUPER SHIFT, S, execr, ${cmd} region"
-        # Fn + Screenshot key.
-        ", Print, execr, ${cmd} window"
-        # Fn + Ctrl + Screenshot key.
-        "CTRL, Print, execr, ${cmd} output"
-      ];
+      {
+        gesture = [
+          {
+            fingers = 3;
+            direction = "down";
+            action = lib.generators.mkLuaInline ''
+              function()
+                hl.dsp.exec_raw("${cmd} output -m active")
+              end
+            '';
+          }
+        ];
+      };
   };
 }
