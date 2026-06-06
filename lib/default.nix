@@ -28,25 +28,23 @@ lib
             ++ lib.optional (o != { }) o;
           };
           mkLuaBind =
-            o: v: k:
-            mkBind o (lib.generators.mkLuaInline v) k;
+            o: v:
+            mkBind o (lib.generators.mkLuaInline v);
           mkExecrBind =
-            o: v: k:
-            mkLuaBind o ''hl.dsp.exec_raw("${v}")'' k;
+            o: v:
+            mkLuaBind o ''hl.dsp.exec_raw("${v}")'';
         in
         {
           inherit mkBind mkLuaBind mkExecrBind;
-          mkNormalLuaBind = v: k: mkLuaBind { } v k;
-          mkNormalExecrBind = v: k: mkExecrBind { } v k;
-          mkMouseLuaBind = v: k: mkLuaBind { mouse = true; } v k;
-          mkLockedExecrBind = v: k: mkExecrBind { locked = true; } v k;
-          mkRepeatingExecrBind = v: k: mkExecrBind { repeating = true; } v k;
-          mkLockedRepeatingExecrBind =
-            v: k:
-            mkExecrBind {
-              locked = true;
-              repeating = true;
-            } v k;
+          mkNormalLuaBind = mkLuaBind { };
+          mkNormalExecrBind = mkExecrBind { };
+          mkMouseLuaBind = mkLuaBind { mouse = true; };
+          mkLockedExecrBind = mkExecrBind { locked = true; };
+          mkRepeatingExecrBind = mkExecrBind { repeating = true; };
+          mkLockedRepeatingExecrBind = mkExecrBind {
+            locked = true;
+            repeating = true;
+          };
         };
     };
 }
