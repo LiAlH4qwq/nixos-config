@@ -52,7 +52,7 @@
           useTextGreeter = true;
           settings = {
             default_session = {
-              command = "${pkgs.dbus}/bin/dbus-run-session ${lib.getExe pkgs.hyprland} -c /etc/greetd/hyprland.conf > /dev/null 2>&1";
+              command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.hyprland}/bin/start-hyprland -- -c /etc/greetd/hyprland.conf > /dev/null 2>&1";
             };
           };
         };
