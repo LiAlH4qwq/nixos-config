@@ -1,4 +1,4 @@
-{ self, ... }:
+{ lib, self, ... }:
 {
   imports = [
     ./nixos
@@ -54,4 +54,5 @@
           trusted-users = admins;
         };
     };
+  intransience.datastores.persist.filess = lib.singleton "/root/.local/share/nix/trusted-settings.json";
 }

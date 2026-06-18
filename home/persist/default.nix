@@ -63,6 +63,7 @@
       ".bash_history" # Bash
       ".claude.json" # Claude Code
       ".ssh/known_hosts" # SSH
+      ".local/share/nix/trusted-settings.json"
       ".local/state/lazygit/state.yml"
     ]
     ++ lib.optionals osConfig.liuxu.system.better-shell.enable [
