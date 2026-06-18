@@ -110,4 +110,11 @@
           '';
     };
   };
+
+  # Fix rebuild failed due to man pages 404.
+  documentation.man.man-db.skipPackages = [
+    pkgs.coreutils-full
+    pkgs.diffutils
+    pkgs.findutils
+  ];
 }
