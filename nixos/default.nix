@@ -32,6 +32,7 @@
     # Use Chrony for better experience, especially on laptop.
     timesyncd.enable = false;
     chrony.enable = true;
+    udisks2.enable = true;
   };
 
   environment.systemPackages = [
