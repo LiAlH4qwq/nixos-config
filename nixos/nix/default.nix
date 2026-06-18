@@ -54,5 +54,5 @@
           trusted-users = admins;
         };
     };
-  intransience.datastores.persist.filess = lib.singleton "/root/.local/share/nix/trusted-settings.json";
+  intransience.datastores.persist.files = lib.singleton "/root/.local/share/nix/trusted-settings.json";
 }
