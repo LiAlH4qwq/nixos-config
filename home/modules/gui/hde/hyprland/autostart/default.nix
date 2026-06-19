@@ -6,7 +6,7 @@
     default = [ ];
   };
 
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.gui.hyprland.enable {
     liuxu.home.internal.gui.autostart = [
       # Fix fcitx5 won't work.
       "fcitx5 -rd"

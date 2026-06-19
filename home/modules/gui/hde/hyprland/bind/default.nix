@@ -4,7 +4,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.gui.hyprland.enable {
     wayland.windowManager.hyprland.settings.bind =
       let
         taskmgr = "missioncenter";

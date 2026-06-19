@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.vscode = {
       enable = true;
       mutableExtensionsDir = false;
@@ -56,9 +56,5 @@
         };
       };
     };
-    home.packages = with pkgs; [
-      nixd # Nix LSP
-      nixfmt # Nix formatter
-    ];
   };
 }

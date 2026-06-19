@@ -15,7 +15,7 @@ in
     default =
       users
       |> builtins.attrValues
-      |> map (cfg: cfg.liuxu.home.gui.enable)
+      |> map (cfg: cfg.liuxu.home.internal.gui.enable)
       |> builtins.any lib.id;
   };
 
@@ -25,7 +25,8 @@ in
       _1password.enable = true;
       _1password-gui = {
         enable = true;
-        polkitPolicyOwners = users |> lib.filterAttrs (_: cfg: cfg.liuxu.home.gui.enable) |> lib.attrNames;
+        polkitPolicyOwners =
+          users |> lib.filterAttrs (_: cfg: cfg.liuxu.home.internal.gui.enable) |> lib.attrNames;
       };
       steam.enable = true;
       hyprland = {

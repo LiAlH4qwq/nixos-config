@@ -12,17 +12,14 @@
     ./vscode
   ];
 
-  options.liuxu.home.gui.enable = lib.mkOption {
+  options.liuxu.home.internal.gui.enable = lib.mkOption {
     type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu (User): Whether to enable GUI.
-        Provides a full functional Hyprland Desktop Environment
-    '';
+    internal = true;
+    readOnly = true;
+    default = config.liuxu.home.gui.hyprland.enable || config.liuxu.home.gui.niri.enable;
   };
 
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs = {
       firefox = {
         enable = true;
@@ -56,8 +53,8 @@
         wev # Input inspect
         inkscape
         materialgram # Telegram with material design
-        # qq
-        # wechat
+        qq
+        wechat
         wemeet
         wpsoffice-cn
       ];
@@ -68,11 +65,6 @@
         ".config/mozilla/firefox" # Firefox
         ".config/obs-studio" # OBS
         ".config/Clementine" # Clementine
-        # Fcitx5
-        # It will be tmpfiles here,
-        # so this dir should be intransienced,
-        # otherwise it will failed to update dict files.
-        ".local/share/fcitx5/pinyin"
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram
 

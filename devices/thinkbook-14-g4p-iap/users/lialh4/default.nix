@@ -26,7 +26,7 @@
   };
   home-manager.users.lialh4 = {
     liuxu.home = {
-      gui.enable = true;
+      gui.hyprland.enable = true;
       internal.intransience.dirs = [ ".local/share/fonts" ];
     };
     services.podman = {

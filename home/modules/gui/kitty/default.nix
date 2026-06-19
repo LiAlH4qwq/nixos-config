@@ -3,7 +3,7 @@
 
 { config, lib, ... }:
 {
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.kitty = {
       enable = true;
       settings =

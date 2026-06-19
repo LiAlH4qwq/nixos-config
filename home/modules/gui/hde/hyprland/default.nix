@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./autostart
@@ -8,7 +13,16 @@
     ./wrule
   ];
 
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  options.liuxu.home.gui.hyprland.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    example = true;
+    description = ''
+      Liuxu (Home): Whether to enable the Hyprland GUI.
+    '';
+  };
+
+  config = lib.mkIf config.liuxu.home.gui.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";
@@ -36,5 +50,8 @@
         };
       };
     };
+    home.packages = with pkgs; [
+      hyprnome
+    ];
   };
 }

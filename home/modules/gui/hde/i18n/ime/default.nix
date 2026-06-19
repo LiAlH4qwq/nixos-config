@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
@@ -88,5 +88,10 @@
       source = ./punctuations.kv;
       target = ".local/share/fcitx5/punctuation/punc.mb.zh_CN";
     };
+    # Fcitx5
+    # It will be tmpfiles here,
+    # so this dir should be intransienced,
+    # otherwise it will failed to update dict files.
+    liuxu.home.internal.intransience.dirs = lib.singleton ".local/share/fcitx5/pinyin";
   };
 }

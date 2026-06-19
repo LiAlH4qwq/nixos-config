@@ -11,7 +11,7 @@
     ./power
   ];
 
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.noctalia = {
       enable = true;
       settings = {

@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  config = lib.mkIf config.liuxu.home.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.noctalia.settings =
       let
         mkEnabledEntry = e: e // { enabled = true; };
