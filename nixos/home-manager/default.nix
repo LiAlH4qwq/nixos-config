@@ -13,7 +13,15 @@
     backupFileExtension = "bak";
     extraSpecialArgs = {
       inherit inputs self;
-      lib' = lib;
+      # It's strange that it needs explictly written like this.
+      # Looks like `lib` here already has `liuxu` prop.
+      # But without written it again, it will failed.
+      lib = lib.extend (
+        _: _: {
+          inherit (inputs.home-manager.lib) hm;
+          inherit (lib) liuxu;
+        }
+      );
     };
     sharedModules = [
       self.homeModules.liuxu

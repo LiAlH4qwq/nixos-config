@@ -1,32 +1,42 @@
 {
   config,
   lib,
-  lib',
   ...
 }:
 {
   config = lib.mkIf config.liuxu.home.gui.enable (
     let
-      noctalia = "noctalia-shell";
+      noctalia = "noctalia";
     in
     {
       liuxu.home.internal.gui.autostart = lib.singleton noctalia;
       wayland.windowManager.hyprland.settings =
         let
-          ipc = "${noctalia} ipc call";
+          ipc = "${noctalia} msg";
         in
         {
-          bind = with lib'.liuxu.hyprland; [
-            (mkNormalExecrBind "${ipc} launcher toggle" "SUPER + R")
-            (mkNormalExecrBind "${ipc} launcher clipboard" "SUPER + V")
-            (mkNormalExecrBind "${ipc} lockScreen lock" "SUPER + L")
-            (mkNormalExecrBind "${ipc} powerProfile cycle" "Help")
-            (mkLockedExecrBind "${ipc} volume muteOutput" "XF86AudioMute")
-            (mkLockedExecrBind "${ipc} volume muteInput" "XF86AudioMicMute")
-            (mkLockedRepeatingExecrBind "${ipc} volume increase" "XF86AudioRaiseVolume")
-            (mkLockedRepeatingExecrBind "${ipc} volume decrease" "XF86AudioLowerVolume")
-            (mkLockedRepeatingExecrBind "${ipc} brightness increase" "XF86MonBrightnessUp")
-            (mkLockedRepeatingExecrBind "${ipc} brightness decrease" "XF86MonBrightnessDown")
+          bind = with lib.liuxu.hyprland; [
+            (mkNormalExecrBind "${ipc} panel-toggle launcher" "SUPER + R")
+            (mkNormalExecrBind "${ipc} panel-toggle clipboard" "SUPER + V")
+            (mkNormalExecrBind "${ipc} session lock" "SUPER + L")
+            (mkNormalExecrBind "${ipc} power-cycle" "Help")
+            (mkLockedExecrBind "${ipc} volume-mute" "XF86AudioMute")
+            (mkLockedExecrBind "${ipc} mic-mute" "XF86AudioMicMute")
+            (mkLockedRepeatingExecrBind "${ipc} volume-up" "XF86AudioRaiseVolume")
+            (mkLockedRepeatingExecrBind "${ipc} volume-down" "XF86AudioLowerVolume")
+            (mkLockedRepeatingExecrBind "${ipc} brightness-up" "XF86MonBrightnessUp")
+            (mkLockedRepeatingExecrBind "${ipc} brightness-down" "XF86MonBrightnessDown")
+          ];
+          gesture = [
+            {
+              fingers = 3;
+              direction = "down";
+              action = lib.generators.mkLuaInline ''
+                function()
+                  hl.exec_cmd("${ipc} screenshot-fullscreen")
+                end
+              '';
+            }
           ];
         };
     }

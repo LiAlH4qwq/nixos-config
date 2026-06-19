@@ -66,7 +66,6 @@
     liuxu.home.internal.intransience = {
       dirs = [
         ".config/mozilla/firefox" # Firefox
-        ".config/noctalia/colorschemes" # Noctalia
         ".config/obs-studio" # OBS
         ".config/Clementine" # Clementine
         # Fcitx5
@@ -92,23 +91,11 @@
         ".config/QQ"
       ];
 
-      files =
-        let
-          mkSymlinkEntry = path: {
-            inherit path;
-            method = "symlink";
-          };
-        in
-        [
-          ".config/gtk-3.0/bookmarks" # Gtk file bookmarks
-
-          # Noctalia
-          (mkSymlinkEntry ".cache/noctalia/notifications.json") # Notification history
-          (mkSymlinkEntry ".cache/noctalia/shell-state.json") # Launcher sorting
-          (mkSymlinkEntry ".cache/noctalia/wallpapers.json") # Wallpaper select
-        ]
-        ++ lib.optional osConfig.liuxu.nixos.virtualbox.enable ".config/VirtualBox/VirtualBox.xml" # Virtualbox
-        ++ lib.optional osConfig.liuxu.nixos.user-support.gui.agl.enable ".local/share/honkers-railway-launcher/config.json";
+      files = [
+        ".config/gtk-3.0/bookmarks" # Gtk file bookmarks
+      ]
+      ++ lib.optional osConfig.liuxu.nixos.virtualbox.enable ".config/VirtualBox/VirtualBox.xml" # Virtualbox
+      ++ lib.optional osConfig.liuxu.nixos.user-support.gui.agl.enable ".local/share/honkers-railway-launcher/config.json";
     };
   };
 }

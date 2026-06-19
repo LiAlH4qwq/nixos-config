@@ -7,15 +7,10 @@
 {
   imports = [
     ./hyprland
-    ./hyprshot
     ./hyprtoolkit
   ];
 
   config = lib.mkIf config.liuxu.home.gui.enable {
-    services = {
-      hyprpolkitagent.enable = true;
-    };
-
     home.packages = with pkgs; [
       hyprnome
       hyprshutdown

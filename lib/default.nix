@@ -27,12 +27,8 @@ lib
             ]
             ++ lib.optional (o != { }) o;
           };
-          mkLuaBind =
-            o: v:
-            mkBind o (lib.generators.mkLuaInline v);
-          mkExecrBind =
-            o: v:
-            mkLuaBind o ''hl.dsp.exec_raw("${v}")'';
+          mkLuaBind = o: v: mkBind o (lib.generators.mkLuaInline v);
+          mkExecrBind = o: v: mkLuaBind o ''hl.dsp.exec_raw("${v}")'';
         in
         {
           inherit mkBind mkLuaBind mkExecrBind;

@@ -1,12 +1,12 @@
 {
-  inputs,
   lib,
   pkgs,
+  self,
   ...
 }:
 {
   imports = [
-    "${inputs.self}/system"
+    "${self}/system"
     ./boot
     ./home-manager
     ./i18n

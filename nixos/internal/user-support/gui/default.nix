@@ -13,7 +13,10 @@ in
     internal = true;
     readOnly = true;
     default =
-      users |> builtins.attrValues |> map (cfg: cfg.liuxu.home.gui.enable) |> builtins.any lib.id;
+      users
+      |> builtins.attrValues
+      |> map (cfg: cfg.liuxu.home.gui.enable)
+      |> builtins.any lib.id;
   };
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {

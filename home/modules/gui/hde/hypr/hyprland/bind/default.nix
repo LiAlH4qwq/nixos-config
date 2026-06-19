@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  lib',
   ...
 }:
 {
@@ -14,7 +13,7 @@
         browser = "firefox";
         pwd = "1password";
       in
-      with lib'.liuxu.hyprland;
+      with lib.liuxu.hyprland;
       [
         (mkNormalExecrBind "hyprshutdown" "SUPER + Delete")
         (mkNormalLuaBind "hl.dsp.window.close()" "SUPER + Q")
@@ -42,7 +41,7 @@
           ws = toString w;
         in
         [
-          (mkNormalLuaBind "hl.dsp.focus({ workspace = ${ws} })" "SUPER + ${ks}")
+          (mkNormalLuaBind ''hl.dsp.focus({ workspace = "${ws}" })'' "SUPER + ${ks}")
           (mkNormalLuaBind ''hl.dsp.window.move({ workspace = "${ws}" })'' "SUPER + SHIFT + ${ks}")
         ]
       ));

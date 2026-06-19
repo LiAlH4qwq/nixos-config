@@ -62,19 +62,10 @@ in
         flake-utils.follows = "flake-utils";
       };
     };
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        treefmt-nix.follows = "";
-      };
-    };
     noctalia = {
-      url = "github:noctalia-dev/noctalia/legacy-v4";
+      url = "github:noctalia-dev/noctalia";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        noctalia-qs.follows = "noctalia-qs";
       };
     };
     intransience = {

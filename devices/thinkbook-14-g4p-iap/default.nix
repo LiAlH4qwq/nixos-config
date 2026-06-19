@@ -1,4 +1,4 @@
-_: {
+{ lib, ... }: {
   imports = [
     ./fs
     ./fingerprint
@@ -75,4 +75,15 @@ _: {
       "i915.force_probe=!${id}"
       "xe.force_probe=${id}"
     ];
+
+  home-manager.sharedModules = [
+    {
+      wayland.windowManager.hyprland.settings.bind = with lib.liuxu.hyprland; [
+        # Screenshot key on this laptop.
+        # Yes, it's hard-coded as Win + Shift + S.
+        # That's definately WinBook.
+        (mkNormalExecrBind "noctalia msg screenshot-region" "SUPER + SHIFT + S")
+      ];
+    }
+  ];
 }
