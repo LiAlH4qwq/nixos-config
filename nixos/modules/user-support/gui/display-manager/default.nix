@@ -1,10 +1,12 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 {
+  imports = [ inputs.noctalia-greeter.nixosModules.default ];
   options.liuxu.nixos.user-support.gui.display-manager.enable = lib.mkOption {
     type = lib.types.bool;
     default = config.liuxu.nixos.internal.user-support.gui.enable;
@@ -18,66 +20,26 @@
   config = lib.mkIf config.liuxu.nixos.user-support.gui.display-manager.enable (
     lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
-        programs.regreet = {
+        programs.noctalia-greeter = {
           enable = true;
-          settings = {
-            application_prefer_dark_theme = false;
-            background = {
-              fit = "Cover";
-              path = "/etc/wallpapers/rainy-everything-in-the-night.png";
-            };
-            widget.clock.format = "%a %d %b %H:%M";
-          };
-          font = {
-            size = 14;
-            name = "Noto Sans CJK SC";
-            package = pkgs.noto-fonts-cjk-sans;
-          };
-          theme = {
-            name = "rose-pine-dawn";
-            package = pkgs.rose-pine-gtk-theme;
-          };
-          iconTheme = {
-            name = "rose-pine-dawn";
-            package = pkgs.rose-pine-icon-theme;
-          };
-          cursorTheme = {
-            name = "BreezeX-RosePineDawn-Linux";
+          package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          settings.cursor = {
+            theme = "BreezeX-RosePineDawn-Linux";
             package = pkgs.rose-pine-cursor;
           };
         };
-
-        services.greetd = {
-          enable = true;
-          useTextGreeter = true;
-          settings = {
-            default_session = {
-              command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.hyprland}/bin/start-hyprland -- -c /etc/greetd/hyprland.conf > /dev/null 2>&1";
-            };
-          };
-        };
-
-        systemd.tmpfiles.settings.regreet."/etc/greetd/hyprland.conf".f = {
-          argument = ''
-            exec-once = ${lib.getExe pkgs.regreet}; hyprctl dispatch exit
-            env = GTK_USE_PORTAL,0
-            env = GDK_DEBUG,no-portals
-            env = XCURSOR_THEME, BreezeX-RosePineDawn-Linux
-            misc {
-              disable_hyprland_logo = true
-              disable_splash_rendering = true
-              disable_hyprland_guiutils_check = true
-            }
-          '';
-        };
-
-        intransience.datastores.persist.files = lib.singleton {
-          path = "/var/lib/regreet/state.toml";
+        # When sync styles from noctalia shell,
+        # it will try to remove previous wallpaper file,
+        # so the whole dir needs persist.
+        # Besides, the state and config share same file,
+        # so it can only be treated as state file.
+        intransience.datastores.persist.dirs = lib.singleton {
+          path = "/var/lib/noctalia-greeter";
           user = "greeter";
         };
       }
       {
-        warnings = builtins.singleton ''
+        warnings = lib.singleton ''
           Liuxu: Display Manager is enabled,
             which is for logining to GUI easilier,
             but no user has enabled GUI,
