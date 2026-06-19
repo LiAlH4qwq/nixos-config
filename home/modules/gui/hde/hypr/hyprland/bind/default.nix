@@ -15,7 +15,6 @@
       in
       with lib.liuxu.hyprland;
       [
-        (mkNormalExecrBind "hyprshutdown" "SUPER + Delete")
         (mkNormalLuaBind "hl.dsp.window.close()" "SUPER + Q")
         (mkNormalLuaBind "hl.dsp.window.kill()" "SUPER + SHIFT + Q")
         (mkNormalLuaBind "hl.dsp.window.float()" "SUPER + F")

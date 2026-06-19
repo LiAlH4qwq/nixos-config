@@ -16,6 +16,7 @@
         in
         {
           bind = with lib.liuxu.hyprland; [
+            (mkNormalExecrBind "${ipc} panel-toggle session" "SUPER + Delete")
             (mkNormalExecrBind "${ipc} panel-toggle launcher" "SUPER + R")
             (mkNormalExecrBind "${ipc} panel-toggle clipboard" "SUPER + V")
             (mkNormalExecrBind "${ipc} session lock" "SUPER + L")
