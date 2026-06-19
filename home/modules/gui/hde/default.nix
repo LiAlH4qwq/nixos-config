@@ -11,6 +11,7 @@
     ./i18n
     ./noctalia
     ./qt
+    ./udiskie
     ./xcursor
   ];
   config = lib.mkIf config.liuxu.home.gui.enable {
