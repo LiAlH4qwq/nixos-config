@@ -20,21 +20,11 @@
         platformTheme.name = "qtct";
         qt5ctSettings = qtctSettings;
         qt6ctSettings = qtctSettings;
-      };
-    xdg.configFile =
-      let
-        theme = "rose-pine-dawn-iris";
-      in
-      {
-        "Kvantum/kvantum.kvconfig".text = lib.generators.toINI { } {
-          General = {
-            inherit theme;
-          };
+        kvantum = {
+          enable = true;
+          settings.General.theme = "rose-pine-dawn-iris";
+          themes = with pkgs; [ rose-pine-kvantum ];
         };
-        "Kvantum/${theme}".source = "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/${theme}";
       };
-    home.packages = with pkgs; [
-      kdePackages.qtstyleplugin-kvantum
-    ];
   };
 }

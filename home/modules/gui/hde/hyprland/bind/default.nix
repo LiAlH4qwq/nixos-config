@@ -6,13 +6,6 @@
 {
   config = lib.mkIf config.liuxu.home.gui.hyprland.enable {
     wayland.windowManager.hyprland.settings.bind =
-      let
-        taskmgr = "missioncenter";
-        terminal = "kitty";
-        explorer = "nautilus -w";
-        browser = "firefox";
-        pwd = "1password";
-      in
       with lib.liuxu.hyprland;
       [
         (mkNormalLuaBind "hl.dsp.window.close()" "SUPER + Q")
@@ -26,11 +19,6 @@
         (mkNormalLuaBind ''hl.dsp.window.move({ workspace = "emptymn" })'' "SUPER + SHIFT + grave")
         (mkMouseLuaBind "hl.dsp.window.drag()" "SUPER + mouse:272")
         (mkMouseLuaBind "hl.dsp.window.resize()" "SUPER + ALT+ mouse:272")
-        (mkNormalExecrBind taskmgr "SUPER + Escape")
-        (mkNormalExecrBind terminal "SUPER + T")
-        (mkNormalExecrBind explorer "SUPER + E")
-        (mkNormalExecrBind browser "SUPER + B")
-        (mkNormalExecrBind pwd "XF86Favorites")
       ]
       ++ (lib.flip builtins.concatMap (lib.range 0 9) (
         k:

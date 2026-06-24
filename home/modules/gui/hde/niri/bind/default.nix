@@ -6,9 +6,6 @@
       "Mod+Equal" = mkRepeatingBind { set-column-width = "+5%"; };
       "Mod+Minus" = mkRepeatingBind { set-column-width = "-5%"; };
       "Mod+M" = mkNormalBind { maximize-column = [ ]; };
-      "Mod+Escape" = mkNormalExecrBind [ "missioncenter" ];
-      "Mod+T" = mkNormalExecrBind [ "kitty" ];
-      "Mod+B" = mkNormalExecrBind [ "firefox" ];
     };
   };
 }

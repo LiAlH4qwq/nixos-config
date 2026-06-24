@@ -6,25 +6,25 @@
     default = [ ];
   };
 
-  config =
-    let
-      cfg = config.liuxu.home.internal.gui.autostart;
-    in
-    lib.mkMerge [
-      (lib.mkIf config.liuxu.home.internal.gui.enable {
-        liuxu.home.internal.gui.autostart = [
-          # Fix fcitx5 won't work.
-          [
-            "fcitx5"
-            "-rd"
-          ]
-          [
-            "1password"
-            "--silent"
-          ]
-        ];
-      })
-      (lib.mkIf (cfg != [ ]) (
+  config = lib.mkMerge [
+    (lib.mkIf config.liuxu.home.internal.gui.enable {
+      liuxu.home.internal.gui.autostart = [
+        # Fix fcitx5 won't work.
+        [
+          "fcitx5"
+          "-rd"
+        ]
+        [
+          "1password"
+          "--silent"
+        ]
+      ];
+    })
+    (
+      let
+        cfg = config.liuxu.home.internal.gui.autostart;
+      in
+      lib.mkIf (cfg != [ ]) (
         lib.mkMerge [
           (lib.mkIf config.liuxu.home.gui.hyprland.enable {
             wayland.windowManager = {
@@ -47,6 +47,7 @@
             wayland.windowManager.niri.settings.spawn-at-startup = cfg;
           })
         ]
-      ))
-    ];
+      )
+    )
+  ];
 }
