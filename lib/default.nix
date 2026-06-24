@@ -3,15 +3,23 @@ lib
 // {
   liuxu =
     let
+      inherit (lib) flip;
+      o = compose;
       compose =
         f: g: x:
         x |> g |> f;
+      oo = compose2;
       compose2 = compose compose compose;
+      on2 = o (o flip) (o o flip);
     in
     {
-      inherit compose compose2;
-      o = compose;
-      oo = compose2;
+      inherit
+        o
+        oo
+        compose
+        compose2
+        on2
+        ;
       mkIfElse =
         cond: onTrue: onFalse:
         lib.mkMerge [
@@ -20,22 +28,19 @@ lib
         ];
       hyprland =
         let
-          mkBind' = v: o: k: {
+          mkBind = o: v: k: {
             _args = [
               k
               v
             ]
             ++ lib.optional (o != { }) o;
           };
-          mkLuaBind' = compose mkBind' lib.generators.mkLuaInline;
-          mkExecrBind' =
+          mkLuaBind = on2 mkBind lib.generators.mkLuaInline;
+          mkExecrBind =
             let
               f = v: ''hl.dsp.exec_raw("${v}")'';
             in
-            compose mkLuaBind' f;
-          mkBind = lib.flip mkBind';
-          mkLuaBind = lib.flip mkLuaBind';
-          mkExecrBind = lib.flip mkExecrBind';
+            on2 mkLuaBind f;
         in
         {
           inherit mkBind mkLuaBind mkExecrBind;
@@ -51,14 +56,12 @@ lib
         };
       niri =
         let
-          mkBind' = v: o: v // lib.optionalAttrs (o != { }) { _props = o; };
-          mkExecrBind' =
+          mkBind = o: v: v // lib.optionalAttrs (o != { }) { _props = o; };
+          mkExecrBind =
             let
               f = v: { spawn = v; };
             in
-            compose mkBind' f;
-          mkBind = lib.flip mkBind';
-          mkExecrBind = lib.flip mkExecrBind';
+            on2 mkBind f;
         in
         {
           inherit mkBind mkExecrBind;
@@ -88,7 +91,7 @@ lib
           inherit mkExecrBind;
           mkNormalExecrBind = mkExecrBind { };
           mkLockedExecrBind = mkExecrBind { lock = true; };
-          mkRepeatingExexrBind = mkExecrBind { repeat = true; };
+          mkRepeatingExecrBind = mkExecrBind { repeat = true; };
           mkLockedRepeatingExecrBind = mkExecrBind {
             lock = true;
             repeat = true;

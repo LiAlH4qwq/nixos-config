@@ -87,6 +87,11 @@
           "SHIFT"
         ])
       ];
+      xresources.properties."Xft.dpi" = 192;
+      wayland.windowManager.niri.settings.environment = {
+        QT_ENABLE_HIGHDPI_SCALING = "1";
+        QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      };
     }
   ];
 }

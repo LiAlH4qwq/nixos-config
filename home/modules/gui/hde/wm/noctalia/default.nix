@@ -13,14 +13,15 @@
         internal.gui.autostart = lib.singleton noctalia;
         gui.keybinds.execr =
           let
-            ipc = noctalia ++ [ "msg" ];
-            mkExecrBind' = lib.flip lib.liuxu.wm.mkExecrBind;
-            mkIpcBind' =
+            mkIpcBind =
               let
-                f = v: ipc ++ v;
+                f =
+                  let
+                    ipc = noctalia ++ [ "msg" ];
+                  in
+                  v: ipc ++ v;
               in
-              lib.liuxu.compose mkExecrBind' f;
-            mkIpcBind = lib.flip mkIpcBind';
+              lib.liuxu.on2 lib.liuxu.wm.mkExecrBind f;
             mkNormalIpcBind = mkIpcBind { };
             mkLockedIpcBind = mkIpcBind { lock = true; };
             mkLockedRepeatingIpcBind = mkIpcBind {

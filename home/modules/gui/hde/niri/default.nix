@@ -29,7 +29,7 @@
         xwayland-satellite.path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
         prefer-no-csd = [ ];
         hotkey-overlay.skip-at-startup = [ ];
-        layout.gaps = 0;
+        layout.empty-workspace-above-first = [ ];
         input = {
           disable-power-key-handling = [ ];
           touchpad = {
