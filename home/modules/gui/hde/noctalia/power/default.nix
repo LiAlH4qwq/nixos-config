@@ -34,7 +34,7 @@
           }
           {
             action = "logout";
-            command = "hyprshutdown";
+            command = "hyprshutdown || niri msg action quit";
             shortcut = "2";
             variant = "default";
           }
@@ -53,13 +53,13 @@
           }
           {
             action = "reboot";
-            command = "hyprshutdown -p reboot";
+            command = "hyprshutdown -p reboot || reboot";
             shortcut = "5";
             variant = "default";
           }
           {
             action = "shutdown";
-            command = "hyprshutdown -p poweroff";
+            command = "hyprshutdown -p poweroff || poweroff";
             shortcut = "6";
             variant = "destructive";
           }

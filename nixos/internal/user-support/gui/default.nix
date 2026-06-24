@@ -4,19 +4,19 @@
   lib,
   ...
 }:
-let
-  users = config.home-manager.users;
-in
 {
+  imports = [
+    ./hyprland
+    ./niri
+  ];
+
   options.liuxu.nixos.internal.user-support.gui.enable = lib.mkOption {
     type = lib.types.bool;
     internal = true;
     readOnly = true;
     default =
-      users
-      |> builtins.attrValues
-      |> map (cfg: cfg.liuxu.home.internal.gui.enable)
-      |> builtins.any lib.id;
+      config.liuxu.nixos.internal.user-support.gui.hyprland.enable
+      || config.liuxu.nixos.internal.user-support.gui.niri.enable;
   };
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {
@@ -26,13 +26,11 @@ in
       _1password-gui = {
         enable = true;
         polkitPolicyOwners =
-          users |> lib.filterAttrs (_: cfg: cfg.liuxu.home.internal.gui.enable) |> lib.attrNames;
+          config.home-manager.users
+          |> lib.filterAttrs (_: cfg: cfg.liuxu.home.internal.gui.enable)
+          |> lib.attrNames;
       };
       steam.enable = true;
-      hyprland = {
-        enable = true;
-        xwayland.enable = true;
-      };
     };
 
     services = {

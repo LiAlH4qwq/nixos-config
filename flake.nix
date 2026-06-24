@@ -5,10 +5,12 @@ let
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
+      "https://niri-nix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
     ];
   };
 in
@@ -49,6 +51,17 @@ in
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri = {
+      url = "github:niri-wm/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    xwayland-satellite = {
+      url = "github:Supreeeme/xwayland-satellite";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "";
+      };
+    };
     nix-prelude = {
       url = "github:anna328p/nix-prelude";
       inputs = {
@@ -68,6 +81,14 @@ in
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
+      };
+    };
+    niri-nix = {
+      url = "git+https://codeberg.org/BANanaD3V/niri-nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        niri-unstable.follows = "niri";
+        xwayland-satellite-unstable.follows = "xwayland-satellite";
       };
     };
     intransience = {

@@ -6,9 +6,7 @@
 }:
 {
   imports = [
-    ./autostart
     ./bind
-    ./noctalia
     ./gesture
     ./wrule
   ];
@@ -52,6 +50,7 @@
     };
     home.packages = with pkgs; [
       hyprnome
+      hyprshutdown
     ];
   };
 }

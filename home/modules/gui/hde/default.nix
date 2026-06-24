@@ -14,11 +14,11 @@
     ./noctalia
     ./qt
     ./udiskie
+    ./wm
     ./xcursor
   ];
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     home.packages = with pkgs; [
-      hyprshutdown
       wl-clipboard-rs # Clipboard
     ];
   };

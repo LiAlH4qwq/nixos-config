@@ -78,11 +78,14 @@
 
   home-manager.sharedModules = [
     {
-      wayland.windowManager.hyprland.settings.bind = with lib.liuxu.hyprland; [
+      liuxu.home.gui.keybinds.execr = with lib.liuxu.wm; [
         # Screenshot key on this laptop.
         # Yes, it's hard-coded as Win + Shift + S.
         # That's definately WinBook.
-        (mkNormalExecrBind "noctalia msg screenshot-region" "SUPER + SHIFT + S")
+        (mkNormalExecrBind [ "noctalia" "msg" "screenshot-region" ] "S" [
+          "SUPER"
+          "SHIFT"
+        ])
       ];
     }
   ];
