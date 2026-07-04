@@ -22,4 +22,8 @@ in
     publicKeys = alls;
     armor = true;
   };
+  "devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile.age" = {
+    publicKeys = alls;
+    armor = true;
+  };
 }

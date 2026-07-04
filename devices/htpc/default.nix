@@ -1,4 +1,4 @@
-_: {
+{ config, ... }: {
   imports = [
     ./fs
     ./users
@@ -8,6 +8,19 @@ _: {
     nixos = {
       bluetooth.enable = true;
       brightness.enable = false;
+      cloudflared = {
+        enable = true;
+        tunnels = {
+          a00f657a-254c-496a-bc41-6cb0d6ec4535 = {
+            default = "http_status:404";
+            credentialsFile =
+              config.age.secrets."devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile.age".path;
+            ingress = {
+              "genshin.lialh4.cyou" = "ssh://localhost:22";
+            };
+          };
+        };
+      };
       fingerprint.enable = false;
       laptop.enable = false;
       network = {

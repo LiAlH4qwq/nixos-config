@@ -2,6 +2,7 @@ _: {
   imports = [
     ./bluetooth
     ./brightness
+    ./cloudflared
     ./fingerprint
     ./laptop
     ./network
