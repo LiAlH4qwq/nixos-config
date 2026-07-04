@@ -5,6 +5,33 @@
         open-maximized = true;
         open-fullscreen = false;
       }
+      {
+        match = [
+          {
+            _props = {
+              app-id = "steam_proton";
+            };
+          }
+          {
+            _props = {
+              title = "崩坏：星穹铁道";
+            };
+          }
+        ];
+        #_children = [
+        #  {
+        #    match._props = {
+        #      app-id = "steam_proton";
+        #    };
+        #  }
+        #  {
+        #    match._props = {
+        #      title = "崩坏：星穹铁道";
+        #    };
+        #  }
+        #];
+        open-fullscreen = true;
+      }
     ];
   };
 }
