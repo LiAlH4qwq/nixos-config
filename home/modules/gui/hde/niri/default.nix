@@ -30,6 +30,7 @@
         prefer-no-csd = [ ];
         hotkey-overlay.skip-at-startup = [ ];
         layout.empty-workspace-above-first = [ ];
+        overview.backdrop-color = "#faf4ed";
         input = {
           disable-power-key-handling = [ ];
           touchpad = {
