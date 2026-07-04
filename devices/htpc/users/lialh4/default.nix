@@ -11,9 +11,6 @@
     ];
   };
   home-manager.users.lialh4 = {
-    liuxu.home = {
-      gui.enable = false;
-    };
     services.syncthing.guiAddress = "[::]:8384";
   };
   libpam-pwdfile-rs = {
