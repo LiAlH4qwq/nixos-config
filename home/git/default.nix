@@ -1,4 +1,6 @@
 _: {
+  imports = [ ./gh ];
+
   programs.git = {
     enable = true;
     settings = {
