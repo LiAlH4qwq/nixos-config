@@ -23,6 +23,7 @@
       nixd # Nix LSP
       nixfmt # Nix formatter
       reptyr # Re-attach programs to pty
+      typescript
     ];
   };
 
