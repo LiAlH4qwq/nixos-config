@@ -44,9 +44,12 @@
     mutableUsers = false;
   };
 
-  system.etc.overlay = {
-    enable = true;
-    #   # mutable = false;
+  system = {
+    nixos-init.enable = true;
+    etc.overlay = {
+      enable = true;
+      #   # mutable = false;
+    };
   };
 
   security = {
