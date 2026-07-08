@@ -5,12 +5,10 @@
         "liuxu"
         "nixos"
         "cloudflared"
-        #"tunnels"
       ]
       [
         "services"
         "cloudflared"
-        #"tunnels"
       ]
     )
   ];

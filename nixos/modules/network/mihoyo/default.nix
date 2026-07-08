@@ -71,11 +71,12 @@
         mihoyo =
           let
             before = lib.singleton "mihomo.service";
+            after = lib.singleton "agenix-install-secrets.service";
           in
           {
-            inherit before;
+            inherit before after;
             requiredBy = before;
-            after = lib.singleton "agenix-install-secrets.service";
+            requires = after;
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
