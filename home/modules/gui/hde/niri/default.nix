@@ -9,7 +9,6 @@
   imports = [
     inputs.niri-nix.homeModules.default
     ./bind
-    ./gesture
     ./wrule
   ];
 
@@ -25,7 +24,7 @@
   config = lib.mkIf config.liuxu.home.gui.niri.enable {
     wayland.windowManager.niri = {
       enable = true;
-      extraConfig = lib.kdl.formats.v1 (
+      finalConfig = lib.kdl.formats.v1 (
         with lib.kdl.extras.niri;
         [
           (xwayland-satellite [
