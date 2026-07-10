@@ -54,30 +54,6 @@ lib
             repeating = true;
           };
         };
-      niri =
-        let
-          mkBind = o: v: v // lib.optionalAttrs (o != { }) { _props = o; };
-          mkExecrBind =
-            let
-              f = v: { spawn = v; };
-            in
-            on2 mkBind f;
-        in
-        {
-          inherit mkBind mkExecrBind;
-          mkNormalBind = mkBind { repeat = false; };
-          mkRepeatingBind = mkBind { repeat = true; };
-          mkNormalExecrBind = mkExecrBind { repeat = false; };
-          mkLockedExecrBind = mkExecrBind {
-            allow-when-locked = true;
-            repeat = false;
-          };
-          mkRepeatingExecrBind = mkExecrBind { repeat = true; };
-          mkLockedRepeatingExecrBind = mkExecrBind {
-            allow-when-locked = true;
-            repeat = true;
-          };
-        };
       wm =
         let
           mkExecrBind = o: v: k: m: {
