@@ -19,7 +19,7 @@
     isNormalUser = true;
     useDefaultShell = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = config.age.secrets."devices.LiAlH4-Laptop.users.lialh4.password".path;
+    hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Laptop.users.lialh4.password;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPzvkOPfWZmx2zE6cJY4Qz+Z1dKXTgd6Y2I/RgIc86T"
     ];

@@ -87,7 +87,7 @@
                 settings = lib.recursiveUpdate (import ./settings {
                   inherit lib;
                 }) config.liuxu.nixos.network.mihoyo.settingsOverride;
-                secrets = config.age.secrets.mihoyo-alink.path;
+                secrets = config.age.secretsV2.mihoyo.alink;
                 cfgDirShArg = cfgDir |> lib.escapeShellArg;
                 cfgFileShArg = cfgFile |> lib.escapeShellArg;
                 cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
