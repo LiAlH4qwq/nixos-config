@@ -18,6 +18,7 @@ in
   inherit nixConfig;
   inputs = {
     systems.url = "github:nix-systems/default-linux";
+    nix-kdl.url = "github:Lhcfl/nix-kdl";
     nix-parsec.url = "github:milahu/nix-parsec";
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";

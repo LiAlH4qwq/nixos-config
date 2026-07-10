@@ -19,6 +19,7 @@
       lib = lib.extend (
         _: _: {
           inherit (inputs.home-manager.lib) hm;
+          inherit (inputs.nix-kdl) kdl;
           inherit (lib) liuxu;
         }
       );

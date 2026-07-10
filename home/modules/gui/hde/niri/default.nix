@@ -25,20 +25,25 @@
   config = lib.mkIf config.liuxu.home.gui.niri.enable {
     wayland.windowManager.niri = {
       enable = true;
-      settings = {
-        xwayland-satellite.path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
-        prefer-no-csd = [ ];
-        hotkey-overlay.skip-at-startup = [ ];
-        layout.empty-workspace-above-first = [ ];
-        overview.backdrop-color = "#faf4ed";
-        input = {
-          disable-power-key-handling = [ ];
-          touchpad = {
-            tap = [ ];
-            natural-scroll = [ ];
-          };
-        };
-      };
+      extraConfig = lib.kdl.formats.v1 (
+        with lib.kdl.extras.niri;
+        [
+          (xwayland-satellite [
+            (path "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite")
+          ])
+          prefer-no-csd
+          (hotkey-overlay [ skip-at-startup ])
+          (layout [ empty-workspace-above-first ])
+          (overview [ (backdrop-color "#faf4ed") ])
+          (input [
+            disable-power-key-handling
+            (touchpad [
+              tap
+              natural-scroll
+            ])
+          ])
+        ]
+      );
     };
   };
 }

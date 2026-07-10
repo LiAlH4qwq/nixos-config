@@ -333,6 +333,21 @@
         "url": "https://codeberg.org/BANanaD3V/niri-nix"
       }
     },
+    "nix-kdl": {
+      "locked": {
+        "lastModified": 1783407416,
+        "narHash": "sha256-c1tLwdiZ1iMEhUbaV+I69GNfOAwjnLUre/+aabUZ6/4=",
+        "owner": "Lhcfl",
+        "repo": "nix-kdl",
+        "rev": "0057a33bb545e4a1e9ef06f56df99e359ebd2b00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lhcfl",
+        "repo": "nix-kdl",
+        "type": "github"
+      }
+    },
     "nix-on-droid": {
       "inputs": {
         "home-manager": [
@@ -585,6 +600,7 @@
         "libpam-pwdfile-rs": "libpam-pwdfile-rs",
         "niri": "niri",
         "niri-nix": "niri-nix",
+        "nix-kdl": "nix-kdl",
         "nix-on-droid": "nix-on-droid",
         "nix-parsec": "nix-parsec",
         "nix-prelude": "nix-prelude",
