@@ -25,7 +25,7 @@ let
   traverseAttrs = traverseAttrs' [ ];
   traverseAttrs' =
     path: attrs:
-    if (o not isAttrs attrs) then
+    if (!(isAttrs attrs)) then
       [ (valueNamePair attrs path) ]
     else
       pipe attrs [
@@ -44,7 +44,6 @@ let
     f: a: b:
     f b a;
   id = x: x;
-  not = x: !x;
   foldl = builtins.foldl';
   inherit (builtins)
     isAttrs

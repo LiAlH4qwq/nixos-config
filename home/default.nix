@@ -2,7 +2,6 @@
 {
   imports = [
     ./bun
-    ./claude-code
     ./git
     ./lazyvim
     ./modules
