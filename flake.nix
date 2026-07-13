@@ -78,13 +78,6 @@ in
         parsec.follows = "nix-parsec";
       };
     };
-    optnix = {
-      url = "github:water-sucks/optnix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "";
-      };
-    };
     lazyvim = {
       url = "github:pfassina/lazyvim-nix/v15.15.0";
       inputs = {
@@ -130,15 +123,6 @@ in
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
         rust-overlay.follows = "rust-overlay";
-      };
-    };
-    nixos-cli = {
-      url = "github:nix-community/nixos-cli";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        flake-compat.follows = "";
-        optnix.follows = "optnix";
       };
     };
     agenix = {
