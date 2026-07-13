@@ -21,9 +21,7 @@
   programs = {
     # Used by `nixos-rebuild`
     git.enable = true;
-    nix-ld = {
-      enable = true;
-    };
+    nix-ld.enable = true;
   };
   services = {
     # Better D-Bus implemention.
@@ -46,9 +44,12 @@
 
   system = {
     nixos-init.enable = true;
+    # It needs perl and almost unused,
+    # since most hardware settings work out of box.
+    tools.nixos-generate-config.enable = false;
     etc.overlay = {
       enable = true;
-      #   # mutable = false;
+      # mutable = false;
     };
   };
 
