@@ -10,6 +10,7 @@
       bluetooth.enable = true;
       brightness.enable = true;
       fingerprint.enable = true;
+      # measured-boot.enable = true;
       laptop.enable = true;
       network = {
         enable = true; # Default enable

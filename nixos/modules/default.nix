@@ -6,6 +6,7 @@ _: {
     ./fingerprint
     ./hermes
     ./laptop
+    ./measured-boot
     ./network
     ./pin
     ./podman
