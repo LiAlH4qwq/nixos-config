@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   imports = [
-    ./nixos-cli
+    ./nh
   ];
 
   environment.etc.nixos = {
