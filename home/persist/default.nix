@@ -42,7 +42,6 @@
       "Videos"
 
       ".android" # ADB
-      ".claude" # Claude Code
       ".local/state/syncthing" # Syncthing
 
       # Lazyvim
@@ -61,7 +60,6 @@
 
     files = [
       ".bash_history" # Bash
-      ".claude.json" # Claude Code
       ".ssh/known_hosts" # SSH
       ".local/share/nix/trusted-settings.json"
       ".local/state/lazygit/state.yml"
