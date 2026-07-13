@@ -12,6 +12,12 @@
     ./uutils
   ];
 
+  programs = {
+    # Used when rebuilding.
+    git.enable = true;
+    nix-ld.enable = true;
+  };
+
   environment.systemPackages = [
     pkgs.ragenix
     pkgs.deploy-rs.deploy-rs
