@@ -70,8 +70,8 @@
 
         mihoyo =
           let
-            before = lib.singleton "mihomo.service";
-            after = lib.singleton "agenix-install-secrets.service";
+            before = [ "mihomo.service" ];
+            after = [ "agenix-install-secrets.service" ];
           in
           {
             inherit before after;
