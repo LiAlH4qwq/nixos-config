@@ -146,8 +146,8 @@ in
       inputs = {
         systems.follows = "systems";
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "";
         home-manager.follows = "home-manager";
+        darwin.follows = "";
       };
     };
     ragenix = {
@@ -161,7 +161,7 @@ in
       };
     };
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         crane.follows = "crane";
@@ -190,8 +190,9 @@ in
         flake-parts.follows = "flake-parts";
         pyproject-nix.follows = "pyproject-nix";
         uv2nix.follows = "uv2nix";
-        pyproject-build-systems.follows = "";
         npm-lockfile-fix.follows = "npm-lockfile-fix";
+        # Tested, null-ok.
+        pyproject-build-systems.follows = "";
       };
     };
     flat-flake = {
