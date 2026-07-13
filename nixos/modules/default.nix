@@ -4,6 +4,7 @@ _: {
     ./brightness
     ./cloudflared
     ./fingerprint
+    ./hermes
     ./laptop
     ./network
     ./pin

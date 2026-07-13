@@ -6,6 +6,7 @@ let
       LiAlH4-Server = {
         users.lialh4.password = true;
         cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
+        hermes.environmentFile = true;
       };
     };
   };

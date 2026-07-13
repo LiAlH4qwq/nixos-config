@@ -22,7 +22,11 @@
         };
       };
       fingerprint.enable = false;
-      laptop.enable = false;
+      hermes = {
+        enable = true;
+        allowNixAccess = true;
+        environmentFiles = [ config.age.secretsV2.devices.LiAlH4-Server.hermes.environmentFile ];
+      };
       network = {
         enable = true;
         mihoyo = {

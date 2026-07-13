@@ -36,6 +36,14 @@ in
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    npm-lockfile-fix = {
+      url = "github:jeslie0/npm-lockfile-fix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pyproject-nix = {
+      url = "github:pyproject-nix/pyproject.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,6 +90,13 @@ in
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
+      };
+    };
+    uv2nix = {
+      url = "github:pyproject-nix/uv2nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        pyproject-nix.follows = "pyproject-nix";
       };
     };
     niri-nix = {
@@ -166,6 +181,17 @@ in
         home-manager.follows = "home-manager";
         nmd.follows = "";
         nix-formatter-pack.follows = "";
+      };
+    };
+    hermes = {
+      url = "github:NousResearch/hermes-agent";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        pyproject-nix.follows = "pyproject-nix";
+        uv2nix.follows = "uv2nix";
+        pyproject-build-systems.follows = "";
+        npm-lockfile-fix.follows = "npm-lockfile-fix";
       };
     };
     flat-flake = {
