@@ -28,7 +28,8 @@
         autoEnrollKeys = {
           enable = true;
           autoReboot = true;
-          includeFirmwareBuiltinKeys = true;
+          # Unspported in v1.1.0 😭.
+          # includeFirmwareBuiltinKeys = true;
         };
       };
     };
