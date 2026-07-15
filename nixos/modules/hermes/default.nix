@@ -15,6 +15,10 @@
       [ "liuxu" "nixos" "hermes" "environmentFiles" ]
       [ "services" "hermes-agent" "environmentFiles" ]
     )
+    (lib.mkAliasOptionModule
+      [ "liuxu" "nixos" "hermes" "settings" ]
+      [ "services" "hermes-agent" "settings" ]
+    )
   ];
 
   options.liuxu.nixos.hermes.allowNixAccess = lib.mkOption {

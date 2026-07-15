@@ -26,6 +26,12 @@
         enable = true;
         allowNixAccess = true;
         environmentFiles = [ config.age.secretsV2.devices.LiAlH4-Server.hermes.environmentFile ];
+        settings = {
+          cron = {
+            wrap_response = false;
+            mirror_delivery = true;
+          };
+        };
       };
       network = {
         enable = true;
