@@ -31,6 +31,16 @@
             wrap_response = false;
             mirror_delivery = true;
           };
+          model = {
+            provider = "kimi-coding";
+            default = "kimi-k2.7-code";
+          };
+          fallback_providers = [
+            {
+              provider = "minimax-cn";
+              model = "MiniMax-M3";
+            }
+          ];
         };
       };
       network = {
