@@ -8,6 +8,7 @@
   imports = [
     ./hyprland
     ./niri
+    ./zen
   ];
 
   options.liuxu.nixos.internal.user-support.gui.enable = lib.mkOption {

@@ -32,6 +32,7 @@
       inputs.ragenix.overlays.default
       inputs.deploy-rs.overlays.default
       inputs.niri-nix.overlays.niri-nix
+      inputs.firefox-addons.overlays.default
     ];
   };
 }

@@ -91,6 +91,28 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1784001764,
+        "narHash": "sha256-vf1MXsM49y/Du0tMvSCuRkItYaBgj+pOyB3T3Q9EQc4=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "a3569b6df9a8071c156af09c2b3f1ffc32d758b9",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -663,6 +685,7 @@
         "agl": "agl",
         "crane": "crane",
         "deploy-rs": "deploy-rs",
+        "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "flat-flake": "flat-flake",
@@ -691,7 +714,8 @@
         "systems": "systems",
         "treefmt-nix": "treefmt-nix",
         "uv2nix": "uv2nix",
-        "xwayland-satellite": "xwayland-satellite"
+        "xwayland-satellite": "xwayland-satellite",
+        "zen": "zen"
       }
     },
     "rust-overlay": {
@@ -790,6 +814,29 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zen": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784043413,
+        "narHash": "sha256-ivzs0uV2D7hYY6FcG+j5EpDfkWGof/6q3pCzdMBJOSA=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "0191c6fb7e607574a6725c9681e511fccc96cb8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }
