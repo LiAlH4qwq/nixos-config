@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   imports = [
-    lib.mkAliasOptionModule
+    (lib.mkAliasOptionModule
     [
       "environment"
       "systemPackages"
@@ -9,6 +9,6 @@
     [
       "environment"
       "packages"
-    ]
+    ])
   ];
 }
