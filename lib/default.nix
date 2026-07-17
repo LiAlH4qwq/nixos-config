@@ -1,24 +1,54 @@
-{ lib, ... }:
+{
+  lib ? { },
+  ...
+}:
 lib
 // {
   liuxu =
     let
-      inherit (lib) flip;
-      o = compose;
-      compose =
+      inherit (builtins) genList;
+      foldl = builtins.foldl';
+      I = x: x;
+      id = I;
+      K = x: _: x;
+      const = K;
+      C =
+        f: a: b:
+        f b a;
+      flip = C;
+      B =
         f: g: x:
         x |> g |> f;
+      o = B;
+      compose = B;
       oo = compose2;
-      compose2 = compose compose compose;
-      on2 = o (o flip) (o o flip);
+      o2 = compose2;
+      compose2 = B B B;
+      oN = composeN;
+      composeN = n: if n < 1 then I else foldl (C I) o (genList (_: B B) (n - 1));
+      on = B;
+      on2 = B (B C) B B;
+      onN = n: if n < 1 then K else foldl (C I) B (genList (_: B (B C) B) (n - 1));
     in
     {
       inherit
+        I
+        id
+        K
+        const
+        C
+        flip
+        B
         o
-        oo
         compose
+        oo
+        o2
         compose2
+        oN
+        composeN
+        on
         on2
+        onN
         ;
       mkIfElse =
         cond: onTrue: onFalse:
