@@ -7,10 +7,10 @@
 }:
 {
   imports = [
+    ./firefox-like
     ./hde
     ./kitty
     ./vscode
-    ./zen
   ];
 
   options.liuxu.home.internal.gui.enable = lib.mkOption {

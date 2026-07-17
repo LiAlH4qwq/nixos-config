@@ -23,7 +23,9 @@ in
   config = lib.mkIf (cfgSuper && config.liuxu.home.gui.zen.enable) {
     programs.zen-browser = {
       enable = true;
-      profiles.default.extensions.packages = with pkgs.firefox-addons; [ onepassword-password-manager ];
+      profiles.default = {
+        extensions.packages = with pkgs.firefox-addons; [ onepassword-password-manager ];
+      };
     };
   };
 }
