@@ -50,12 +50,14 @@ lib
         on2
         onN
         ;
-      mkIfElse =
-        cond: onTrue: onFalse:
-        lib.mkMerge [
-          (lib.mkIf cond onTrue)
-          (lib.mkIf (!cond) onFalse)
-        ];
+      modules = {
+        mkIfElse =
+          cond: onTrue: onFalse:
+          lib.mkMerge [
+            (lib.mkIf cond onTrue)
+            (lib.mkIf (!cond) onFalse)
+          ];
+      };
       hyprland =
         let
           mkBind = o: v: k: {

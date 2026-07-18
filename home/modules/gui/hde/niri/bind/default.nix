@@ -34,12 +34,32 @@
         ]
       )
     );
-    liuxu.home.gui.niri.keybinds = with lib.kdl.extras.niri; [
-      (n "Mod+Q" [ close-window ])
-      (n "Mod+F" [ toggle-window-floating ])
-      (n "Mod+Equal" [ (set-column-width "+5%") ])
-      (n "Mod+Minus" [ (set-column-width "-5%") ])
-      (n "Mod+M" [ maximize-column ])
-    ];
+    liuxu.home.gui.niri.keybinds =
+      with lib.kdl.extras.niri;
+      [
+        (n "Mod+Q" [ close-window ])
+        (n "Mod+F" [ toggle-window-floating ])
+        (n "Mod+Equal" [ (set-column-width "+5%") ])
+        (n "Mod+Minus" [ (set-column-width "-5%") ])
+        (n "Mod+M" [ maximize-column ])
+      ]
+      ++ (
+        builtins.genList lib.id 10
+        |> builtins.concatMap (
+          x:
+          let
+            key = toString x;
+            ws = if x == 0 then 10 else x;
+          in
+          [
+            (n "Mod+${key}" [
+              (focus-workspace ws)
+            ])
+            (n "Mod+Shift+${key}" [
+              (move-window-to-workspace ws)
+            ])
+          ]
+        )
+      );
   };
 }

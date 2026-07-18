@@ -17,7 +17,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.intel-graphics.enable (
-    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.modules.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
         hardware.graphics.extraPackages = with pkgs; [
           intel-media-driver # VAAPI
@@ -25,12 +25,14 @@
         ];
       }
       {
-        warnings = builtins.singleton ''
-          Liuxu: Intel Graphics support is enabled,
-            which is to support GUI,
-            but no user has GUI enabled,
-            so it won't be actually enabled.
-        '';
+        warnings = [
+          ''
+            Liuxu: Intel Graphics support is enabled,
+              which is to support GUI,
+              but no user has GUI enabled,
+              so it won't be actually enabled.
+          ''
+        ];
       }
   );
 }

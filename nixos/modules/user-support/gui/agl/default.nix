@@ -19,7 +19,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.agl.enable (
-    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.modules.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
         nix.settings = inputs.agl.nixConfig;
         # 😭 It doesn't support *** now.
@@ -27,12 +27,14 @@
         programs.honkers-railway-launcher.enable = true;
       }
       {
-        warnings = builtins.singleton ''
-          Liuxu: AGL is a GUI program and is enabled,
-            but no user has GUI enabled,
-            AGL won't have any effect,
-            so it won't be installed.
-        '';
+        warnings = [
+          ''
+            Liuxu: AGL is a GUI program and is enabled,
+              but no user has GUI enabled,
+              AGL won't have any effect,
+              so it won't be installed.
+          ''
+        ];
       }
   );
 }

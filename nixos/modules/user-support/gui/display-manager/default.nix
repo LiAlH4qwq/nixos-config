@@ -18,7 +18,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.display-manager.enable (
-    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.modules.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
         programs.noctalia-greeter = {
           enable = true;
