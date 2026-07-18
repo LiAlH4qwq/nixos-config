@@ -87,6 +87,7 @@
           "SUPER"
           "SHIFT"
         ])
+        (mkNormalExecrBind [ "noctalia" "msg" "screenshot-fullscreen" ] "Print" [ ])
       ];
     }
   ];
