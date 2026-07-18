@@ -22,10 +22,6 @@
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs = {
-      firefox = {
-        enable = true;
-        configPath = "${config.xdg.configHome}/mozilla/firefox";
-      };
       obs-studio.enable = true;
       discord = {
         enable = true;
@@ -63,7 +59,6 @@
 
     liuxu.home.internal.intransience = {
       dirs = [
-        ".config/mozilla/firefox" # Firefox
         ".config/obs-studio" # OBS
         ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring

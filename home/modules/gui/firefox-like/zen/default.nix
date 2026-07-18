@@ -27,5 +27,6 @@ in
         extensions.packages = with pkgs.firefox-addons; [ onepassword-password-manager ];
       };
     };
+    liuxu.home.internal.intransience.dirs = [ ".config/zen/default" ];
   };
 }

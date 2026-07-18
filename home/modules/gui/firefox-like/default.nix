@@ -1,7 +1,7 @@
 { config, lib, ... }: {
   imports = [ ./zen ];
 
-  config.programs = lib.mkIf config.liuxu.home.internal.gui.enable (
+  config = lib.mkIf config.liuxu.home.internal.gui.enable (
     let
       searchSettings = {
         force = true;
@@ -51,8 +51,16 @@
       };
     in
     {
-      firefox.profiles.default.search = searchSettings;
-      zen-browser.profiles.default.search = lib.mkIf config.liuxu.home.gui.zen.enable searchSettings;
+      programs = {
+        firefox = {
+          enable = true;
+          # 26.05's default, to suppress warning when state version is 25.11.
+          configPath = "${config.xdg.configHome}/mozilla/firefox";
+          profiles.default.search = searchSettings;
+        };
+        zen-browser.profiles.default.search = lib.mkIf config.liuxu.home.gui.zen.enable searchSettings;
+      };
+      liuxu.home.internal.intransience.dirs = [ ".config/mozilla/firefox/default" ];
     }
   );
 }
