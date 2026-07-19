@@ -1,4 +1,4 @@
-{ lib, self, ... }:
+{ lib, ... }:
 {
   imports = [
     ./nixos
@@ -13,13 +13,6 @@
         ];
       in
       {
-        substituters = self.nixConfig.extra-substituters;
-        trusted-public-keys = self.nixConfig.extra-trusted-public-keys;
-        experimental-features = [
-          "flakes"
-          "nix-command"
-          "pipe-operator"
-        ];
         allowed-users = admins;
         trusted-users = admins;
       };

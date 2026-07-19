@@ -1,5 +1,10 @@
 let
   nixConfig = {
+    extra-experimental-features = [
+      "flakes"
+      "nix-command"
+      "pipe-operator"
+    ];
     extra-substituters = [
       "https://mirrors.nju.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
