@@ -127,15 +127,6 @@ in
         nix-prelude.follows = "nix-prelude";
       };
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        # `flake-utils`.
-        utils.follows = "flake-utils";
-        flake-compat.follows = "";
-      };
-    };
     agl = {
       url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
       inputs = {

@@ -20,7 +20,6 @@
 
   environment.systemPackages = [
     pkgs.ragenix
-    pkgs.deploy-rs.deploy-rs
   ];
 
   nixpkgs = {
@@ -29,7 +28,6 @@
     overlays = [
       inputs.self.overlays.default
       inputs.ragenix.overlays.default
-      inputs.deploy-rs.overlays.default
       inputs.niri-nix.overlays.niri-nix
       inputs.firefox-addons.overlays.default
     ];
