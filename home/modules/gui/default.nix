@@ -9,6 +9,7 @@
   imports = [
     ./agl
     ./firefox-like
+    ./flatpak
     ./hde
     ./kitty
     ./vscode
@@ -53,7 +54,6 @@
         materialgram # Telegram with material design
         qq
         wechat
-        wemeet
         wpsoffice-cn
       ];
     };

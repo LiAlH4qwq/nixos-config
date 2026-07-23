@@ -30,6 +30,7 @@ in
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flatpak.url = "github:gmodena/nix-flatpak/latest";
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";

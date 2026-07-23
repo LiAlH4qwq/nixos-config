@@ -1,4 +1,10 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   options.programs.zoxide = {
     enable = lib.mkOption {
       type = lib.types.bool;

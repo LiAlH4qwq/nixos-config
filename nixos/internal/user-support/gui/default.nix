@@ -7,6 +7,7 @@
 {
   imports = [
     ./agl
+    ./flatpak
     ./hyprland
     ./niri
     ./zen
