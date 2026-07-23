@@ -6,8 +6,6 @@ lib
 // {
   liuxu =
     let
-      inherit (builtins) genList;
-      foldl = builtins.foldl';
       I = x: x;
       id = I;
       K = x: _: x;
@@ -25,10 +23,19 @@ lib
       o2 = compose2;
       compose2 = B B B;
       oN = composeN;
-      composeN = n: if n < 1 then I else foldl (C I) o (genList (_: B B) (n - 1));
+      composeN = n: if n < 1 then I else B B (composeN (n - 1));
       on = B;
       on2 = B (B C) B B;
-      onN = n: if n < 1 then K else foldl (C I) B (genList (_: B (B C) B) (n - 1));
+      onN =
+        n:
+        if n < 1 then
+          K
+        else if n < 2 then
+          B
+        else
+          B (B C) B (onN (n - 1));
+      rN = n: if n < 2 then I else oN (n - 1) C (rN (n - 1));
+      arN = n: if n < 2 then I else B (B C) B (arN (n - 1));
     in
     {
       inherit
@@ -49,6 +56,8 @@ lib
         on
         on2
         onN
+        rN
+        arN
         ;
       modules = {
         mkIfElse =
