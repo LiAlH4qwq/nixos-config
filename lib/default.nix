@@ -34,8 +34,8 @@ lib
           B
         else
           B (B C) B (onN (n - 1));
-      rN = n: if n < 2 then I else oN (n - 1) C (rN (n - 1));
-      arN = n: if n < 2 then I else B (B C) B (arN (n - 1));
+      rN = n: if n < 2 then I else B (B C) B (rN (n - 1));
+      arN = n: if n < 2 then I else oN (n - 1) C (arN (n - 1));
     in
     {
       inherit
