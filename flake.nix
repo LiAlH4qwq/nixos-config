@@ -11,11 +11,13 @@ let
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
       "https://niri-nix.cachix.org"
+      "https://ezkea.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
 in
@@ -77,6 +79,7 @@ in
       url = "github:Supreeeme/xwayland-satellite";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        # Tested, null-ok.
         rust-overlay.follows = "";
       };
     };
@@ -137,8 +140,8 @@ in
       url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "";
         rust-overlay.follows = "rust-overlay";
+        flake-compat.follows = "";
       };
     };
     agenix = {
@@ -179,7 +182,9 @@ in
         # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L23
         nixpkgs-docs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
+        # Tested, null-ok.
         nmd.follows = "";
+        # Tested, null-ok.
         nix-formatter-pack.follows = "";
       };
     };
@@ -203,7 +208,8 @@ in
         flake-parts.follows = "flake-parts";
         treefmt-nix.follows = "treefmt-nix";
         crane.follows = "crane";
-        rust-overlay.follows = "rust-overlay";
+        # Tested, null-ok.
+        rust-overlay.follows = "";
         flake-compat.follows = "";
       };
     };

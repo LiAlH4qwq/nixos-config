@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ./agl
     ./hyprland
     ./niri
     ./zen

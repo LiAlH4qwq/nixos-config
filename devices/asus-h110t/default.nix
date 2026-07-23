@@ -58,7 +58,6 @@
       tlp.enable = false;
       user-support = {
         gui = {
-          agl.enable = false;
           display-manager.enable = false;
           plymouth.enable = false;
         };

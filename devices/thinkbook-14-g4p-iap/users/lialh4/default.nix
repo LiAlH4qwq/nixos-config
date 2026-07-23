@@ -29,6 +29,7 @@
       gui = {
         hyprland.enable = true;
         niri.enable = true;
+        agl.enable = true;
       };
       opencode.enable = true;
       internal.intransience.dirs = [ ".local/share/fonts" ];

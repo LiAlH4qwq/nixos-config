@@ -4,13 +4,10 @@
     readOnly = true;
     type = lib.types.bool;
     default =
-      config.liuxu.nixos.internal.user-support.gui.enable
-      && (
-        config.home-manager.users
-        |> builtins.attrValues
-        |> map (cfg: cfg.liuxu.home.gui.zen.enable)
-        |> builtins.any lib.id
-      );
+      config.home-manager.users
+      |> builtins.attrValues
+      |> map (cfg: cfg.liuxu.home.gui.zen.enable)
+      |> builtins.any lib.id;
   };
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.zen.enable {

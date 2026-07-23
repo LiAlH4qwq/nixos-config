@@ -20,7 +20,16 @@ in
     '';
   };
 
-  config = lib.mkIf (cfgSuper && config.liuxu.home.gui.zen.enable) {
+  config = lib.mkIf config.liuxu.home.gui.zen.enable {
+    assertions = [
+      {
+        assertion = cfgSuper;
+        message = ''
+          Liuxu (Home): Zen browser can't be enabled without gui.
+        '';
+      }
+    ];
+
     programs.zen-browser = {
       enable = true;
       profiles.default = {

@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    ./agl
     ./firefox-like
     ./hde
     ./kitty
@@ -82,8 +83,7 @@
       files = [
         ".config/gtk-3.0/bookmarks" # Gtk file bookmarks
       ]
-      ++ lib.optional osConfig.liuxu.nixos.virtualbox.enable ".config/VirtualBox/VirtualBox.xml" # Virtualbox
-      ++ lib.optional osConfig.liuxu.nixos.user-support.gui.agl.enable ".local/share/honkers-railway-launcher/config.json";
+      ++ lib.optional osConfig.liuxu.nixos.virtualbox.enable ".config/VirtualBox/VirtualBox.xml"; # Virtualbox
     };
   };
 }

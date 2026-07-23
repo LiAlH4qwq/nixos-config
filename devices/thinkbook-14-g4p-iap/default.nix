@@ -32,7 +32,6 @@
       };
       user-support = {
         gui = {
-          agl.enable = true;
           display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
           # Default enable when enabling GUI.
           # Takes no effect when GUI is not enabled.
