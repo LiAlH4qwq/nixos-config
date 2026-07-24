@@ -1,4 +1,10 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [ ./zen ];
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable (
@@ -6,48 +12,66 @@
       searchSettings = {
         force = true;
         default = "ddg";
-        engines = {
-          nixos-packages = {
-            name = "NixOS Packages";
-            definedAliases = [ "@pack" ];
-            urls = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  (lib.nameValuePair "query" "{searchTerms}")
-                ];
-              }
-            ];
-          };
-          nixos-options = {
-            name = "NixOS Options";
-            definedAliases = [ "@os" ];
-            urls = [
-              {
-                template = "https://search.nixos.org/options";
-                params = [
-                  (lib.nameValuePair "type" "options")
-                  (lib.nameValuePair "query" "{searchTerms}")
-                ];
-              }
-            ];
+        engines =
+          let
+            flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          in
+          {
+            nixos-packages = {
+              name = "NixOS Packages";
+              definedAliases = [ "@pack" ];
+              icon = flake-icon;
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    (lib.nameValuePair "query" "{searchTerms}")
+                  ];
+                }
+              ];
+            };
+            nixos-options = {
+              name = "NixOS Options";
+              definedAliases = [ "@os" ];
+              icon = flake-icon;
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    (lib.nameValuePair "type" "options")
+                    (lib.nameValuePair "query" "{searchTerms}")
+                  ];
+                }
+              ];
 
+            };
+            home-manager-options = {
+              name = "Home Manager Options";
+              definedAliases = [ "@home" ];
+              icon = flake-icon;
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    (lib.nameValuePair "type" "options")
+                    (lib.nameValuePair "source" "home_manager")
+                    (lib.nameValuePair "query" "{searchTerms}")
+                  ];
+                }
+              ];
+            };
+            noogle = {
+              name = "Noogle";
+              definedAliases = [ "@noogle" ];
+              icon = flake-icon;
+              urls = [
+                {
+                  template = "https://noogle.dev/q";
+                  params = [ (lib.nameValuePair "term" "{searchTerms}") ];
+                }
+              ];
+            };
           };
-          home-manager-options = {
-            name = "Home Manager Options";
-            definedAliases = [ "@home" ];
-            urls = [
-              {
-                template = "https://search.nixos.org/options";
-                params = [
-                  (lib.nameValuePair "type" "options")
-                  (lib.nameValuePair "source" "home_manager")
-                  (lib.nameValuePair "query" "{searchTerms}")
-                ];
-              }
-            ];
-          };
-        };
       };
     in
     {
