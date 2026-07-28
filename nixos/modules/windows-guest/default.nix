@@ -21,7 +21,8 @@
       enable = true;
       qemu.package = pkgs.qemu_kvm;
     };
-    systemd.tmpfiles.settings.sr-iov."/sys/devices/pci0000:00/0000:00:02.0/sriov_numvfs".w.argument = 1;
+    systemd.tmpfiles.settings.sr-iov."/sys/devices/pci0000:00/0000:00:02.0/sriov_numvfs".w.argument =
+      "1";
     boot.kernelParams = [
       "intel_iommu=on"
       "xe.max_vfs=1"

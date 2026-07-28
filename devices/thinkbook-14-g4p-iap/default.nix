@@ -41,7 +41,7 @@
           plymouth.enable = true;
         };
       };
-      virtualbox.enable = true;
+      windows-guest.enable = true;
     };
     system = {
       better-shell.enable = true; # Default enable
