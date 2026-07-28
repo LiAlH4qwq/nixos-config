@@ -10,8 +10,8 @@ _: {
   };
 
   security = {
-    # replace sudo with run0.
     sudo.enable = false;
+    sudo-rs.enable = true;
     polkit = {
       enable = true;
       # allow users to shutdown or reboot computer.
