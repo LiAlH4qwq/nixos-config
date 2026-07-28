@@ -39,6 +39,7 @@
           {
             directory = dir;
             default.path = file;
+            last.path = file;
           };
         control_center.shortcuts = map (e: { type = e; }) [
           "wifi"
