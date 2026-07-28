@@ -23,8 +23,9 @@
     udisks2.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.usbutils # `lsusb`
+  environment.systemPackages = with pkgs; [
+    pciutils # `lspci`
+    usbutils # `lsusb`
   ];
 
   hardware = {

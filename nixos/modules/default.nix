@@ -14,5 +14,6 @@ _: {
     ./tlp
     ./user-support
     ./virtualbox
+    ./windows-guest
   ];
 }
