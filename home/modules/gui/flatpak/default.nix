@@ -18,7 +18,10 @@
 
   config = lib.mkMerge [
     (lib.mkIf config.liuxu.home.internal.gui.enable {
-      liuxu.home.gui.flatpaks = [ "com.tencent.wemeet" ];
+      liuxu.home.gui.flatpaks = [
+        "com.qq.QQ"
+        "com.tencent.wemeet"
+      ];
     })
     (
       let
