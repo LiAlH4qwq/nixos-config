@@ -59,7 +59,7 @@
             };
           })
           (lib.mkIf config.liuxu.home.gui.niri.enable {
-            wayland.windowManager.niri.finalConfig = lib.mkAfter (
+            liuxu.home.gui.niri.settings = lib.mkAfter (
               lib.kdl.formats.v1 (
                 lib.singleton (
                   lib.kdl.extras.niri.include (

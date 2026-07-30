@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -17,9 +16,6 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.hyprland.enable {
-    programs.niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
-    };
+    programs.niri.enable = true;
   };
 }
