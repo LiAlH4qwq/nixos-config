@@ -72,18 +72,6 @@ in
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:niri-wm/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xwayland-satellite = {
-      url = "github:Supreeeme/xwayland-satellite";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        # Tested, null-ok.
-        rust-overlay.follows = "";
-      };
-    };
     nix-prelude = {
       url = "github:anna328p/nix-prelude";
       inputs = {
@@ -110,14 +98,6 @@ in
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
-      };
-    };
-    niri-nix = {
-      url = "git+https://codeberg.org/BANanaD3V/niri-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        niri-unstable.follows = "niri";
-        xwayland-satellite-unstable.follows = "xwayland-satellite";
       };
     };
     intransience = {
