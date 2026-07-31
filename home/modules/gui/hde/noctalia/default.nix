@@ -52,11 +52,14 @@
       };
     };
     liuxu.home.internal.intransience = {
-      dirs = [
-        # Keep it to supress the welcome dialog.
-        ".local/state/noctalia/community-palettes"
+      dirs = [ ".local/state/noctalia/clipboard" ];
+      files = [
+        ".local/state/noctalia/notification_history.json"
+        ".local/state/noctalia/recently_used.json"
+        ".local/state/noctalia/screen_time.json"
+        ".local/state/noctalia/usage_counts.json"
       ];
-      files = [ ".local/state/noctalia/screen_time.json" ];
     };
+    systemd.user.tmpfiles.rules = [ "f %h/.local/state/noctalia/.setup-complete - - - - -" ];
   };
 }
