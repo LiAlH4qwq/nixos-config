@@ -12,6 +12,13 @@
         providedSessions = builtins.filter (s: s != "hyprland-uwsm") (old.passthru.providedSessions or [ ]);
       };
     });
+    qq = prev.qq.overrideAttrs (old: {
+      version = "3.2.32-2026-07-30";
+      src = prev.fetchurl {
+        url = "https://qqdl.gtimg.cn/qqfile/QQNT/9.9.33/release/c97651b2/QQ_3.2.32_260730_amd64_01.deb";
+        hash = "sha256-ga4rhULvUxH8cuz1PJpSOSPINFacew2lLgv0Nguctfk=";
+      };
+    });
     wechat = prev.wechat.overrideAttrs (old: {
       nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ prev.makeWrapper ];
       postFixup = ''
