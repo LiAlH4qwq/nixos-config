@@ -23,6 +23,8 @@
       pin = {
         services = [
           "login"
+          "sudo"
+          "sudo-i"
           "polkit-1"
         ]
         ++ lib.optional config.liuxu.nixos.user-support.gui.display-manager.enable "greetd";
