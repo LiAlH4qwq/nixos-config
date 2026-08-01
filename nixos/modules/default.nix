@@ -4,6 +4,7 @@ _: {
     ./brightness
     ./cloudflared
     ./fingerprint
+    ./flatpak
     ./hermes
     ./laptop
     ./measured-boot

@@ -9,7 +9,6 @@
   imports = [
     ./agl
     ./firefox-like
-    ./flatpak
     ./hde
     ./kitty
     ./vscode
@@ -52,6 +51,7 @@
         wev # Input inspect
         inkscape
         materialgram # Telegram with material design
+        qq
         wechat
         wpsoffice-cn
       ];
@@ -76,6 +76,7 @@
         ".config/1Password"
         ".config/Code"
         ".config/discord"
+        ".config/QQ"
       ];
 
       files = [

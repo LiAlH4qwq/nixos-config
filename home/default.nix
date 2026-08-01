@@ -3,6 +3,7 @@
   imports = [
     ./bun
     ./git
+    ./flatpak
     ./lazyvim
     ./modules
     ./persist
