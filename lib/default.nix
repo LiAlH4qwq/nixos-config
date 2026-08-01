@@ -1,9 +1,4 @@
-{
-  lib ? { },
-  ...
-}:
-lib
-// {
+prev: {
   liuxu =
     let
       I = x: x;
@@ -62,9 +57,9 @@ lib
       modules = {
         mkIfElse =
           cond: onTrue: onFalse:
-          lib.mkMerge [
-            (lib.mkIf cond onTrue)
-            (lib.mkIf (!cond) onFalse)
+          prev.mkMerge [
+            (prev.mkIf cond onTrue)
+            (prev.mkIf (!cond) onFalse)
           ];
       };
       hyprland =
@@ -74,9 +69,9 @@ lib
               k
               v
             ]
-            ++ lib.optional (o != { }) o;
+            ++ prev.optional (o != { }) o;
           };
-          mkLuaBind = on2 mkBind lib.generators.mkLuaInline;
+          mkLuaBind = on2 mkBind prev.generators.mkLuaInline;
           mkExecrBind =
             let
               f = v: ''hl.dsp.exec_raw("${v}")'';

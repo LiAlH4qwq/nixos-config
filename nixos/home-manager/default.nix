@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   self,
   ...
 }:
@@ -13,16 +12,7 @@
     backupFileExtension = "bak";
     extraSpecialArgs = {
       inherit inputs self;
-      # It's strange that it needs explictly written like this.
-      # Looks like `lib` here already has `liuxu` prop.
-      # But without written it again, it will failed.
-      lib = lib.extend (
-        _: _: {
-          inherit (inputs.home-manager.lib) hm;
-          inherit (inputs.nix-kdl) kdl;
-          inherit (lib) liuxu;
-        }
-      );
+      inherit (self) lib;
     };
     sharedModules = [
       self.homeModules.liuxu
