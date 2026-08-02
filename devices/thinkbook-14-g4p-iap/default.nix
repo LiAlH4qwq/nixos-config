@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./fs
     ./fingerprint
@@ -89,6 +89,20 @@
         ])
         (mkNormalExecrBind [ "noctalia" "msg" "screenshot-fullscreen" ] "Print" [ ])
       ];
+    }
+    {
+      liuxu.home.gui.niri.settings = lib.mkAfter (
+        lib.kdl.formats.v1 (
+          with lib.kdl.extras.niri;
+          [
+            (include (
+              lib.liuxu.o2 toString pkgs.writeText "niri-laptop-screen.kdl" (
+                lib.kdl.formats.v1 [ (output "eDP-1" [ (scale 2) ]) ]
+              )
+            ))
+          ]
+        )
+      );
     }
   ];
 }
