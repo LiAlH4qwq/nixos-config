@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v31
+      - uses: samueldr/lix-gha-installer-action
       - run: nix build .#doc
       - name: Setup Pages
         uses: actions/configure-pages@v5
