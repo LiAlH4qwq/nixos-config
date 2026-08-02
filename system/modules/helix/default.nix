@@ -5,15 +5,10 @@
   ...
 }:
 {
-  options.liuxu.system.helix.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    example = false;
-    description = ''
-      Whether to enable helix,
-        a modern cli text editor.
-    '';
-  };
+  options.liuxu.system.helix.enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+    Whether to enable helix,
+      a modern cli text editor.
+  '';
 
   config =
     let

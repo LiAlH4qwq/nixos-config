@@ -64,6 +64,16 @@ prev: {
               readOnly = true;
               default = by;
             };
+          mkSwitchOption =
+            default: description:
+            prev.mkOption {
+              inherit default description;
+              type = prev.types.bool;
+              example = !default;
+            };
+          mkSwitchOnOption = mkSwitchOnOption false;
+          mkSwitchOffOption = mkSwitchOption true;
+          mkLiuxuDesc = desc: "Liuxu: ${desc}";
         in
         {
           inherit mkComputedOption;
@@ -74,6 +84,8 @@ prev: {
               (prev.mkIf (!cond) onFalse)
             ];
           mkComputedSwitchOption = mkComputedOption prev.types.bool;
+          mkLiuxuSwitchOnOption = o mkSwitchOnOption mkLiuxuDesc;
+          mkLiuxuSwitchOffOption = o mkSwitchOffOption mkLiuxuDesc;
         };
       hyprland =
         let

@@ -5,15 +5,10 @@
   ...
 }:
 {
-  options.liuxu.nixos.windows-guest.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to include a Windows guest configuration,
-        by virt-manager, qemu, kvm, with SR-IOV.
-    '';
-  };
+  options.liuxu.nixos.windows-guest.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to include a Windows guest configuration,
+      by virt-manager, qemu, kvm, with SR-IOV.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.windows-guest.enable {
     programs.virt-manager.enable = true;

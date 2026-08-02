@@ -4,15 +4,10 @@
     ./mihoyo
   ];
 
-  options.liuxu.nixos.network.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    example = false;
-    description = ''
-      Liuxu: Whether to enable network support.
-        Currently enables NetworkManager and firewalld.
-    '';
-  };
+  options.liuxu.nixos.network.enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+    Whether to enable network support.
+      Currently enables NetworkManager and firewalld.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.network.enable {
     networking = {

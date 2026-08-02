@@ -8,15 +8,10 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  options.liuxu.nixos.secureboot.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to enable the secure boot support.
-        Currently enables lanzaboote.
-    '';
-  };
+  options.liuxu.nixos.secureboot.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to enable the secure boot support.
+      Currently enables lanzaboote.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.secureboot.enable {
     boot = {

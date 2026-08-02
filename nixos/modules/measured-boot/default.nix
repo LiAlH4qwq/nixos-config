@@ -4,16 +4,11 @@
   ...
 }:
 {
-  options.liuxu.nixos.measured-boot.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to enable measured-boot.
-        See: https://nix-community.github.io/lanzaboote/explanation/measured-boot.html
-        And: https://nix-community.github.io/lanzaboote/how-to-guides/enable-measured-boot.html
-    '';
-  };
+  options.liuxu.nixos.measured-boot.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to enable measured-boot.
+      See: https://nix-community.github.io/lanzaboote/explanation/measured-boot.html
+      And: https://nix-community.github.io/lanzaboote/how-to-guides/enable-measured-boot.html
+  '';
 
   config = lib.mkIf config.liuxu.nixos.measured-boot.enable {
     boot.lanzaboote = {

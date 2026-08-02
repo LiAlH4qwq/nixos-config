@@ -6,16 +6,11 @@
 }:
 {
   options.liuxu.nixos.network.mihoyo = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = ''
-        Liuxu: Whether to enable Mihoyo.
-          Network should be enable first.
-          Genshin, Impact! (x
-      '';
-    };
+    enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+      Whether to enable Mihoyo.
+        Network should be enable first.
+        Genshin, Impact! (x
+    '';
     settingsOverride = lib.mkOption {
       type = lib.types.attrs;
       default = { };

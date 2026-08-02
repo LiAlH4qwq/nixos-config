@@ -5,16 +5,11 @@
   ...
 }:
 {
-  options.liuxu.nixos.podman.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to enable Podman,
-        a container management tool,
-        drop-in replacement of docker.
-    '';
-  };
+  options.liuxu.nixos.podman.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to enable Podman,
+      a container management tool,
+      drop-in replacement of docker.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.podman.enable {
     virtualisation = {

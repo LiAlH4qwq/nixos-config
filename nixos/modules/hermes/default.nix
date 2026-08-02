@@ -21,15 +21,10 @@
     )
   ];
 
-  options.liuxu.nixos.hermes.allowNixAccess = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to allow hermes to access nix daemon,
-        just allow to access, not trusted users.
-    '';
-  };
+  options.liuxu.nixos.hermes.allowNixAccess = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to allow hermes to access nix daemon,
+      just allow to access, not trusted users.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.hermes.enable {
     services.hermes-agent = {

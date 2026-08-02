@@ -4,15 +4,10 @@
   ...
 }:
 {
-  options.liuxu.nixos.virtualbox.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu: Whether to enable Virtualbox,
-        an easy to use virtual machines manager.
-    '';
-  };
+  options.liuxu.nixos.virtualbox.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+    Whether to enable Virtualbox,
+      an easy to use virtual machines manager.
+  '';
 
   config = lib.mkIf config.liuxu.nixos.virtualbox.enable {
     virtualisation.virtualbox.host = {
