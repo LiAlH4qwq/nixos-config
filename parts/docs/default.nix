@@ -5,31 +5,33 @@
   ...
 }:
 {
-  perSystem =
-    { pkgs, system, ... }:
-    let
-      eval = lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs self;
-          inherit (self) lib;
-        };
-        modules = [
-          self.nixosModules.liuxu
-          { _module.check = false; }
-        ];
-      };
-      optionsDoc = pkgs.nixosOptionsDoc {
-        options = eval.options;
-        transformOptions =
-          opt:
-          opt
-          // {
-            visible = lib.hasPrefix "liuxu" (lib.concatStringsSep "." opt.loc);
+  perSystem = { pkgs, system, ... }: {
+    packages =
+      let
+        eval = lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs self;
+            inherit (self) lib;
           };
+          modules = [
+            self.nixosModules.liuxu
+          ];
+        };
+        optionsDoc = pkgs.nixosOptionsDoc {
+          inherit (eval) options;
+          transformOptions =
+            opt:
+            opt
+            // {
+              visible = (builtins.head opt.loc) == "liuxu";
+            };
+        };
+        doc = optionsDoc.optionsCommonMark;
+      in
+      {
+        inherit doc;
+        default = doc;
       };
-    in
-    {
-      packages.nixos-options-doc = optionsDoc.optionsCommonMark;
-    };
+  };
 }
