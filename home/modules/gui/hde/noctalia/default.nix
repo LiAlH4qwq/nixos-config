@@ -8,6 +8,7 @@
   imports = [
     inputs.noctalia.homeModules.default
     ./bar
+    ./lockscreen
     ./power
   ];
 
