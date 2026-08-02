@@ -33,6 +33,7 @@ jobs:
           extra_nix_config: |
             extra-experimental-features = nix-command flakes pipe-operator
       - run: nix build .#doc
+      - run: mkdir ./_site_build
       - run: cp result ./_site_build/os.md
       - name: Setup Pages
         uses: actions/configure-pages@v5
