@@ -12,14 +12,10 @@
     ./zen
   ];
 
-  options.liuxu.nixos.internal.user-support.gui.enable = lib.mkOption {
-    type = lib.types.bool;
-    internal = true;
-    readOnly = true;
-    default =
-      config.liuxu.nixos.internal.user-support.gui.hyprland.enable
-      || config.liuxu.nixos.internal.user-support.gui.niri.enable;
-  };
+  options.liuxu.nixos.internal.user-support.gui.enable = lib.liuxu.modules.mkComputedSwitchOption (
+    config.liuxu.nixos.internal.user-support.gui.hyprland.enable
+    || config.liuxu.nixos.internal.user-support.gui.niri.enable
+  );
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {
     programs = {

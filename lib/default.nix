@@ -54,14 +54,27 @@ prev: {
         rN
         arN
         ;
-      modules = {
-        mkIfElse =
-          cond: onTrue: onFalse:
-          prev.mkMerge [
-            (prev.mkIf cond onTrue)
-            (prev.mkIf (!cond) onFalse)
-          ];
-      };
+      modules =
+        let
+          mkComputedOption =
+            type: by:
+            prev.mkOption {
+              inherit type;
+              internal = true;
+              readOnly = true;
+              default = by;
+            };
+        in
+        {
+          inherit mkComputedOption;
+          mkIfElse =
+            cond: onTrue: onFalse:
+            prev.mkMerge [
+              (prev.mkIf cond onTrue)
+              (prev.mkIf (!cond) onFalse)
+            ];
+          mkComputedSwitchOption = mkComputedOption prev.types.bool;
+        };
       hyprland =
         let
           mkBind = o: v: k: {

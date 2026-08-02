@@ -1,14 +1,12 @@
 { config, lib, ... }: {
-  options.liuxu.nixos.internal.user-support.gui.zen.enable = lib.mkOption {
-    internal = true;
-    readOnly = true;
-    type = lib.types.bool;
-    default =
-      config.home-manager.users
-      |> builtins.attrValues
-      |> map (cfg: cfg.liuxu.home.gui.zen.enable)
-      |> builtins.any lib.id;
-  };
+  options.liuxu.nixos.internal.user-support.gui.zen.enable =
+    lib.liuxu.modules.mkComputedSwitchOption
+      (
+        config.home-manager.users
+        |> builtins.attrValues
+        |> map (cfg: cfg.liuxu.home.gui.zen.enable)
+        |> builtins.any lib.id
+      );
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.zen.enable {
     environment.etc.zen-1password = {
