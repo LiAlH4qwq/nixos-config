@@ -13,46 +13,15 @@
       flatpak.enable = true;
       # measured-boot.enable = true;
       laptop.enable = true;
-      network = {
-        enable = true; # Default enable
-        mihoyo = {
-          enable = true;
-          settingsOverride = { };
-        };
-      };
-      pin.enable = true; # Default enable
       podman.enable = true;
       secureboot.enable = true;
-      tlp = {
-        # Default enable when enabling laptop.
-        enable = true;
-        disks = [
-          "nvme-Micron_MTFDKBA512TFH_222138471762"
-          "nvme-WD_Blue_SN5000_1TB_251308802891"
-        ];
-      };
-      user-support = {
-        gui = {
-          display-manager.enable = true; # Default enable when enabling GUI and requires enabling GUI
-          # Default enable when enabling GUI.
-          # Takes no effect when GUI is not enabled.
-          intel-graphics.enable = true;
-          # Default enable when enabling GUI.
-          # But can be enabled seperately.
-          plymouth.enable = true;
-        };
-      };
+      tlp.disks = [
+        "nvme-Micron_MTFDKBA512TFH_222138471762"
+        "nvme-WD_Blue_SN5000_1TB_251308802891"
+      ];
       windows-guest.enable = true;
     };
-    system = {
-      better-shell.enable = true; # Default enable
-      helix.enable = true; # Default enable
-
-      # Reflects NixOS version **when system get installed**.
-      # Do not change it after install **unless needed**!
-      version-when-installed = "25.11";
-
-    };
+    system.version-when-installed = "25.11";
   };
 
   networking.hostName = "LiAlH4-Laptop";

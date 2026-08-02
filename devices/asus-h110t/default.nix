@@ -7,7 +7,6 @@
   liuxu = {
     nixos = {
       bluetooth.enable = true;
-      brightness.enable = false;
       cloudflared = {
         enable = true;
         tunnels = {
@@ -21,7 +20,6 @@
           };
         };
       };
-      fingerprint.enable = false;
       hermes = {
         enable = true;
         allowNixAccess = true;
@@ -43,36 +41,11 @@
           ];
         };
       };
-      network = {
-        enable = true;
-        mihoyo = {
-          enable = true;
-          settingsOverride = {
-            external-controller = "[::]:9090";
-          };
-        };
-      };
-      pin.enable = true;
+      network.mihoyo.settingsOverride.external-controller = "[::]:9090";
       podman.enable = true;
       secureboot.enable = true;
-      tlp.enable = false;
-      user-support = {
-        gui = {
-          display-manager.enable = false;
-          plymouth.enable = false;
-        };
-      };
-      virtualbox.enable = false;
     };
-    system = {
-      better-shell.enable = true; # Default enable
-      helix.enable = true; # Default enable
-
-      # Reflects NixOS version **when system get installed**.
-      # Do not change it after install **unless needed**!
-      version-when-installed = "25.11";
-
-    };
+    system.version-when-installed = "25.11";
   };
 
   networking.hostName = "LiAlH4-Server";
