@@ -5,27 +5,27 @@
         mkEnabledEntry = e: e // { enabled = true; };
       in
       {
-        idle = {
-          behavior_order = [
-            "lock"
-            "screen-off"
-            "suspend"
-          ];
-          behavior = builtins.mapAttrs (_: mkEnabledEntry) {
-            lock = {
-              action = "lock";
-              timeout = 300;
+        idle =
+          let
+            behavior = builtins.mapAttrs (_: mkEnabledEntry) {
+              lock = {
+                action = "lock";
+                timeout = 300;
+              };
+              screen-off = {
+                action = "screen_off";
+                timeout = 360;
+              };
+              suspend = {
+                action = "suspend";
+                timeout = 900;
+              };
             };
-            screen-off = {
-              action = "screen_off";
-              timeout = 360;
-            };
-            suspend = {
-              action = "suspend";
-              timeout = 900;
-            };
+          in
+          {
+            inherit behavior;
+            behavior_order = builtins.attrNames behavior;
           };
-        };
         shell.session.actions = map mkEnabledEntry [
           {
             action = "lock";
