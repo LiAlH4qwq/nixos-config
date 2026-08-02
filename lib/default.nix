@@ -71,7 +71,7 @@ prev: {
               type = prev.types.bool;
               example = !default;
             };
-          mkSwitchOnOption = mkSwitchOnOption false;
+          mkSwitchOnOption = mkSwitchOption false;
           mkSwitchOffOption = mkSwitchOption true;
           mkLiuxuDesc = desc: "Liuxu: ${desc}";
         in
