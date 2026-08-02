@@ -29,6 +29,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: samueldr/lix-gha-installer-action@v2026-06-15
+        with:
+          extra_nix_config |
+            extra-experimental-features = nix-command flakes pipe-operator
       - run: nix build .#doc
       - name: Setup Pages
         uses: actions/configure-pages@v5
