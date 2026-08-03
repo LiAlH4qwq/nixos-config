@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.measured-boot.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+  options.liuxu.nixos.measured-boot.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
     Whether to enable measured-boot.
       See: https://nix-community.github.io/lanzaboote/explanation/measured-boot.html
       And: https://nix-community.github.io/lanzaboote/how-to-guides/enable-measured-boot.html

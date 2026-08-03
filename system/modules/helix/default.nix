@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.system.helix.enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+  options.liuxu.system.helix.enable = lib.liuxu.modules.mkOsSwitchOffOption ''
     Whether to enable helix,
       a modern cli text editor.
   '';

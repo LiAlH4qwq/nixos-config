@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.nixos.laptop.enable = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+  options.liuxu.nixos.laptop.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
     Whether to enable the laptop support.
       Currently enables UPower that handles battery usage,
       but lid events are handled by loginctl.

@@ -4,7 +4,7 @@
     ./mihoyo
   ];
 
-  options.liuxu.nixos.network.enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+  options.liuxu.nixos.network.enable = lib.liuxu.modules.mkOsSwitchOffOption ''
     Whether to enable network support.
       Currently enables NetworkManager and firewalld.
   '';

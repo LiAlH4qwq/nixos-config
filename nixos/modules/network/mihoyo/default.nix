@@ -6,7 +6,7 @@
 }:
 {
   options.liuxu.nixos.network.mihoyo = {
-    enable = lib.liuxu.modules.mkLiuxuSwitchOffOption ''
+    enable = lib.liuxu.modules.mkOsSwitchOffOption ''
       Whether to enable Mihoyo.
         Network should be enable first.
         Genshin, Impact! (x

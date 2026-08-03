@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  options.liuxu.nixos.qbittorrent.enable = lib.liuxu.modules.mkSwitchOnModule ''
+  options.liuxu.nixos.qbittorrent.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
     Whether to enable the qbittorrent service.
   '';
 

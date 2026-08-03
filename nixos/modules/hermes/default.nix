@@ -21,7 +21,7 @@
     )
   ];
 
-  options.liuxu.nixos.hermes.allowNixAccess = lib.liuxu.modules.mkLiuxuSwitchOnOption ''
+  options.liuxu.nixos.hermes.allowNixAccess = lib.liuxu.modules.mkOsSwitchOnOption ''
     Whether to allow hermes to access nix daemon,
       just allow to access, not trusted users.
   '';
