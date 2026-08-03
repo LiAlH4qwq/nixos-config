@@ -32,6 +32,7 @@
         agl.enable = true;
       };
       opencode.enable = true;
+      sdk.enable = true;
       internal.intransience.dirs = [ ".local/share/fonts" ];
     };
     services.podman = {
