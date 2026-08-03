@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  self,
   ...
 }:
 {
@@ -23,7 +24,7 @@
           telemetry_enabled = true;
           screen_time_enabled = true;
           settings_show_advanced = true;
-          avatar_path = "~/Pictures/Avatar.jpg";
+          avatar_path = "${self}/assets/lialh4.jpg";
           screenshot = {
             directory = "~/Pictures/Screenshots";
           };
@@ -34,7 +35,7 @@
         };
         wallpaper =
           let
-            dir = "/etc/wallpapers";
+            dir = "~/Pictures/Wallpapers";
             file = "${dir}/rainy-everything-in-the-night.png";
           in
           {
@@ -51,6 +52,10 @@
           "power_profile"
         ];
       };
+    };
+    home.file.wallpaper = {
+      target = "Pictures/Wallpapers/rainy-everything-in-the-night.png";
+      source = "${self}/assets/rainy-everything-in-the-night.png";
     };
     liuxu.home.internal.intransience = {
       dirs = [ ".local/state/noctalia/clipboard" ];

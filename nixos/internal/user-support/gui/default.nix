@@ -47,13 +47,6 @@
       };
     };
 
-    environment.etc = {
-      wallpaper = {
-        target = "wallpapers/rainy-everything-in-the-night.png";
-        source = "${inputs.self}/assets/rainy-everything-in-the-night.png";
-      };
-    };
-
     hardware = {
       graphics = {
         enable = true;

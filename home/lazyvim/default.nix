@@ -21,6 +21,12 @@
               colorscheme = "catppuccin",
             },
           },
+          {
+            "catppuccin/nvim",
+            opts = {
+              flavor = "latte",
+            },
+          },
         }
       '';
       lsp = ''
@@ -35,6 +41,23 @@
                 nixd = {
                   cmd_env = {
                     NIX_CONFIG = "extra-experimental-features = pipe-operators",
+                  },
+                },
+              },
+            },
+          },
+        }
+      '';
+      explorer = ''
+        return {
+          {
+            "folke/snacks.nvim",
+            opts = {
+              picker = {
+                sources = {
+                  explorer = {
+                    hidden = true,
+                    ignored = true,
                   },
                 },
               },
