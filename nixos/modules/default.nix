@@ -11,6 +11,7 @@ _: {
     ./network
     ./pin
     ./podman
+    ./qbittorrent
     ./secureboot
     ./tlp
     ./user-support
