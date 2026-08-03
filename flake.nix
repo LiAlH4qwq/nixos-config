@@ -10,13 +10,12 @@ let
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
-      "https://niri-nix.cachix.org"
+      # inputs.agl
       "https://ezkea.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
@@ -160,7 +159,7 @@ in
       };
     };
     hermes = {
-      url = "github:NousResearch/hermes-agent";
+      url = "github:NousResearch/hermes-agent/v2026.7.30";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
