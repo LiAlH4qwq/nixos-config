@@ -8,6 +8,10 @@
       enable = true;
     };
 
-    intransience.datastores.persist.dirs = [ config.services.qbittorrent.profileDir ];
+    intransience.datastores.persist.dirs = [{
+      path = config.services.qbittorrent.profileDir;
+      user = config.services.qbittorrent.user;
+      group = config.services.qbittorrent.group;
+    }];
   };
 }
