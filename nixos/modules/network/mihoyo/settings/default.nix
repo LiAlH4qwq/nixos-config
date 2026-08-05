@@ -1,238 +1,243 @@
-{ lib, ... }:
-let
-  urlTestArgs = {
-    lazy = true;
-    interval = 300;
-    timeout = 5000;
-    expected-status = 204;
-    url = "https://cp.cloudflare.com";
-  };
-in
+{ config, lib, ... }:
 {
-  allow-lan = false;
-  ipv6 = true;
-  unified-delay = true;
-  tcp-concurrent = true;
-  find-process-mode = "always";
-  external-controller = "[::1]:9090";
-  profile = {
-    store-selected = true;
-    store-fakeip = true;
-  };
-
-  mixed-port = 7890;
-
-  tun = {
-    enable = true;
-    stack = "system";
-    device = "mihoyo";
-    auto-route = true;
-    strict-route = true;
-    auto-redirect = true;
-    auto-detect-interface = true;
-    gso = true;
-    dns-hijack = [
-      "any:53"
-      "tcp://any:53"
-    ];
-  };
-
-  geodata-mode = true;
-  geo-auto-update = true;
-  geo-update-interval = 24;
-  geox-url = {
-    geoip = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat";
-    geosite = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat";
-  };
-
-  sniffer = {
-    enable = true;
-    parse-pure-ip = true;
-    force-dns-mapping = true;
-    override-destination = true;
-    sniff =
+  config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable {
+    liuxu.nixos.network.mihoyo.settings =
       let
-        httpsPort = 443;
+        urlTestArgs = {
+          lazy = true;
+          interval = 300;
+          timeout = 5000;
+          expected-status = 204;
+          url = "https://cp.cloudflare.com";
+        };
       in
       {
-        HTTP = {
-          ports = [
-            80
+        allow-lan = false;
+        ipv6 = true;
+        unified-delay = true;
+        tcp-concurrent = true;
+        find-process-mode = "always";
+        external-controller = "[::1]:9090";
+        profile = {
+          store-selected = true;
+          store-fakeip = true;
+        };
+
+        mixed-port = 7890;
+
+        tun = {
+          enable = true;
+          stack = "system";
+          device = "mihoyo";
+          auto-route = true;
+          strict-route = true;
+          auto-redirect = true;
+          auto-detect-interface = true;
+          gso = true;
+          dns-hijack = [
+            "any:53"
+            "tcp://any:53"
           ];
         };
-        TLS = {
-          ports = [
-            httpsPort
-          ];
+
+        geodata-mode = true;
+        geo-auto-update = true;
+        geo-update-interval = 24;
+        geox-url = {
+          geoip = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat";
+          geosite = "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat";
         };
-        QUIC = {
-          ports = [
-            httpsPort
-          ];
+
+        sniffer = {
+          enable = true;
+          parse-pure-ip = true;
+          force-dns-mapping = true;
+          override-destination = true;
+          sniff =
+            let
+              httpsPort = 443;
+            in
+            {
+              HTTP = {
+                ports = [
+                  80
+                ];
+              };
+              TLS = {
+                ports = [
+                  httpsPort
+                ];
+              };
+              QUIC = {
+                ports = [
+                  httpsPort
+                ];
+              };
+            };
         };
+
+        dns =
+          let
+            doh-cn = [
+              "https://223.5.5.5/dns-query"
+              "https://119.29.29.29/dns-query"
+            ];
+          in
+          {
+            enable = true;
+            ipv6 = true;
+            # According to Genshin Impact Wiki
+            # It's not recommended to enable `prefer-h3` and `respect-rules`
+            # **simultaneously**.
+            prefer-h3 = false;
+            respect-rules = true;
+            cache-algorithm = "arc";
+            enhanced-mode = "fake-ip";
+            fake-ip-filter = [
+              "*"
+              "+.lan"
+            ];
+            default-nameserver = doh-cn;
+            proxy-server-nameserver = doh-cn;
+            direct-nameserver = doh-cn;
+            direct-nameserver-follow-policy = false;
+            nameserver-policy = {
+              "geosite:cn" = doh-cn;
+            };
+            nameserver = [
+              "https://1.1.1.1/dns-query"
+              "https://8.8.8.8/dns-query"
+            ];
+          };
+
+        proxies =
+          let
+            proxyArgs = {
+              udp = true;
+              tfo = true;
+              mptcp = true;
+            };
+          in
+          [
+            {
+              inherit (proxyArgs) udp tfo mptcp;
+              name = "Dns";
+              type = "dns";
+            }
+            {
+              inherit (proxyArgs) udp tfo mptcp;
+              name = "Direct";
+              type = "direct";
+            }
+          ];
+
+        proxy-providers = {
+          alink = {
+            type = "http";
+            interval = 21600;
+            health-check = {
+              enable = true;
+              inherit (urlTestArgs)
+                lazy
+                interval
+                timeout
+                expected-status
+                url
+                ;
+            };
+          };
+        };
+
+        proxy-groups =
+          let
+            regs = [
+              {
+                name = "HK";
+                emoji = "🇭🇰";
+              }
+              {
+                name = "TW";
+                emoji = "🇹🇼";
+              }
+              {
+                name = "JP";
+                emoji = "🇯🇵";
+              }
+              {
+                name = "SG";
+                emoji = "🇸🇬";
+              }
+              {
+                name = "UK";
+                emoji = "🇬🇧";
+              }
+              {
+                name = "US";
+                emoji = "🇺🇸";
+              }
+            ];
+            grpArgs = {
+              inherit (urlTestArgs)
+                lazy
+                interval
+                timeout
+                expected-status
+                url
+                ;
+              include-all = true;
+            };
+            genRegAutoGrp =
+              { name, emoji }:
+              {
+                inherit (grpArgs)
+                  lazy
+                  interval
+                  timeout
+                  expected-status
+                  url
+                  include-all
+                  ;
+                name = "${name} Auto";
+                type = "url-test";
+                exclude-type = "dns|direct";
+                filter = "^${emoji}";
+              };
+            genRouteGrp = name: {
+              inherit (grpArgs)
+                lazy
+                interval
+                timeout
+                expected-status
+                url
+                include-all
+                ;
+              inherit name;
+              type = "select";
+              exclude-type = "dns";
+              proxies = lib.flip map regAutoGrps (x: x.name);
+            };
+            regAutoGrps = map genRegAutoGrp regs;
+          in
+          (map genRouteGrp [
+            "General"
+            "AI Abroad"
+          ])
+          ++ regAutoGrps;
+
+        rules = [
+          "DST-PORT, 53, Dns"
+          "GEOIP, lan, Direct, no-resolve"
+          "GEOSITE, private, Direct, no-resolve"
+          # FIXME: The specific game can't login unless it bypasses tun,
+          # but mihoyo can only see it as `wineserver`, not its real process name,
+          # so this fix this game, but will break further wine programs that needs tun.
+          "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct"
+          "PROCESS-NAME, wineserver, Direct"
+          "GEOSITE, category-ai-!cn, AI Abroad"
+          "GEOSITE, cn, Direct"
+          "GEOIP, cn, Direct"
+          "MATCH, General"
+        ];
       };
   };
-
-  dns =
-    let
-      doh-cn = [
-        "https://223.5.5.5/dns-query"
-        "https://119.29.29.29/dns-query"
-      ];
-    in
-    {
-      enable = true;
-      ipv6 = true;
-      # According to Genshin Impact Wiki
-      # It's not recommended to enable `prefer-h3` and `respect-rules`
-      # **simultaneously**.
-      prefer-h3 = false;
-      respect-rules = true;
-      cache-algorithm = "arc";
-      enhanced-mode = "fake-ip";
-      fake-ip-filter = [
-        "*"
-        "+.lan"
-      ];
-      default-nameserver = doh-cn;
-      proxy-server-nameserver = doh-cn;
-      direct-nameserver = doh-cn;
-      direct-nameserver-follow-policy = false;
-      nameserver-policy = {
-        "geosite:cn" = doh-cn;
-      };
-      nameserver = [
-        "https://1.1.1.1/dns-query"
-        "https://8.8.8.8/dns-query"
-      ];
-    };
-
-  proxies =
-    let
-      proxyArgs = {
-        udp = true;
-        tfo = true;
-        mptcp = true;
-      };
-    in
-    [
-      {
-        inherit (proxyArgs) udp tfo mptcp;
-        name = "Dns";
-        type = "dns";
-      }
-      {
-        inherit (proxyArgs) udp tfo mptcp;
-        name = "Direct";
-        type = "direct";
-      }
-    ];
-
-  proxy-providers = {
-    alink = {
-      type = "http";
-      url = "JIU_BU_GAO_SU_NI";
-      interval = 21600;
-      health-check = {
-        enable = true;
-        inherit (urlTestArgs)
-          lazy
-          interval
-          timeout
-          expected-status
-          url
-          ;
-      };
-    };
-  };
-
-  proxy-groups =
-    let
-      regs = [
-        {
-          name = "HK";
-          emoji = "🇭🇰";
-        }
-        {
-          name = "TW";
-          emoji = "🇹🇼";
-        }
-        {
-          name = "JP";
-          emoji = "🇯🇵";
-        }
-        {
-          name = "SG";
-          emoji = "🇸🇬";
-        }
-        {
-          name = "UK";
-          emoji = "🇬🇧";
-        }
-        {
-          name = "US";
-          emoji = "🇺🇸";
-        }
-      ];
-      grpArgs = {
-        inherit (urlTestArgs)
-          lazy
-          interval
-          timeout
-          expected-status
-          url
-          ;
-        include-all = true;
-      };
-      genRegAutoGrp =
-        { name, emoji }:
-        {
-          inherit (grpArgs)
-            lazy
-            interval
-            timeout
-            expected-status
-            url
-            include-all
-            ;
-          name = "${name} Auto";
-          type = "url-test";
-          exclude-type = "dns|direct";
-          filter = "^${emoji}";
-        };
-      genRouteGrp = name: {
-        inherit (grpArgs)
-          lazy
-          interval
-          timeout
-          expected-status
-          url
-          include-all
-          ;
-        inherit name;
-        type = "select";
-        exclude-type = "dns";
-        proxies = lib.flip map regAutoGrps (x: x.name);
-      };
-      regAutoGrps = map genRegAutoGrp regs;
-    in
-    (map genRouteGrp [
-      "General"
-      "AI Abroad"
-    ])
-    ++ regAutoGrps;
-
-  rules = [
-    "DST-PORT, 53, Dns"
-    "GEOIP, lan, Direct, no-resolve"
-    "GEOSITE, private, Direct, no-resolve"
-    # FIXME: The specific game can't login unless it bypasses tun,
-    # but mihoyo can only see it as `wineserver`, not its real process name,
-    # so this fix this game, but will break further wine programs that needs tun.
-    "PROCESS-NAME, wineserver, Direct"
-    "GEOSITE, category-ai-!cn, AI Abroad"
-    "GEOSITE, cn, Direct"
-    "GEOIP, cn, Direct"
-    "MATCH, General"
-  ];
 }

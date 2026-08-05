@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./settings ];
+
   options.liuxu.nixos.network.mihoyo = {
     enable = lib.liuxu.modules.mkOsSwitchOffOption ''
       Whether to enable Mihoyo.
@@ -22,6 +24,24 @@
           Will be deep merged.
       '';
     };
+    settings = lib.mkOption {
+      type = lib.types.attrs;
+      internal = true;
+      default = { };
+    };
+    finalSettings = lib.mkOption {
+      type = lib.types.attrs;
+      internal = true;
+      readOnly = true;
+      default = lib.recursiveUpdate config.liuxu.nixos.network.mihoyo.settings config.liuxu.nixos.network.mihoyo.settingsOverride;
+    };
+    providerUrlFiles = lib.mkOption {
+      type = lib.types.attrsOf lib.types.path;
+      default = { };
+      description = ''
+        Liuxu: Providers for Mihoyo.
+      '';
+    };
   };
 
   config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable (
@@ -36,6 +56,8 @@
           message = "Network should be enable first in order to enable Mihoyo!";
         }
       ];
+
+      liuxu.nixos.network.mihoyo.providerUrlFiles.alink = config.age.secretsV2.mihoyo.alink;
 
       services.mihomo = {
         enable = true;
@@ -62,11 +84,45 @@
             AmbientCapabilities = abilities;
             CapabilityBoundingSet = abilities;
           };
-
         mihoyo =
           let
             before = [ "mihomo.service" ];
             after = [ "agenix-install-secrets.service" ];
+            script =
+              let
+                cfgFileIn = "${cfgFile}.in";
+                cfgFileIn2 = "${cfgFileIn}.in";
+                settings = config.liuxu.nixos.network.mihoyo.finalSettings;
+                cfgDirShArg = cfgDir |> lib.escapeShellArg;
+                cfgFileShArg = cfgFile |> lib.escapeShellArg;
+                cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
+                cfgFileIn2ShArg = cfgFileIn2 |> lib.escapeShellArg;
+                settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
+                secrets = config.liuxu.nixos.network.mihoyo.providerUrlFiles;
+                secretsEncoded = secrets |> lib.mapAttrsToList (n: v: "${n}\t${v}") |> lib.concatStringsSep "\n";
+                secretsShArg = secretsEncoded |> lib.escapeShellArg;
+              in
+              ''
+                install -dm 0700 ${cfgDirShArg}
+                printf '%s' ${settingsShArg} > ${cfgFileInShArg}
+                set -l lines (string split \n -- ${secretsShArg})
+                for line in $lines
+                  set -l parts (string split \t -- $line)
+                  set -l name $parts[1]
+                  set -l path $parts[2]
+                  set -l secret (cat $path | string collect)
+                  ${pkgs.jq}/bin/jq \
+                    -c \
+                    --arg name "$name" \
+                    --arg secret "$secret" \
+                    '.["proxy-providers"].[$name].url = $secret' \
+                    ${cfgFileInShArg} > ${cfgFileIn2ShArg}
+                   mv ${cfgFileIn2ShArg} ${cfgFileInShArg}
+                   rm -f ${cfgFileIn2ShArg}
+                end
+                mv ${cfgFileInShArg} ${cfgFileShArg}
+                rm -f ${cfgFileInShArg}
+              '';
           in
           {
             inherit before after;
@@ -75,33 +131,10 @@
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
+              ExecStart = "${lib.getExe pkgs.fish} ${
+                script |> pkgs.writeText "mihoyo.fish" |> lib.escapeShellArg
+              }";
             };
-            script =
-              let
-                cfgFileIn = "${cfgFile}.in";
-                settings = lib.recursiveUpdate (import ./settings {
-                  inherit lib;
-                }) config.liuxu.nixos.network.mihoyo.settingsOverride;
-                secrets = config.age.secretsV2.mihoyo.alink;
-                cfgDirShArg = cfgDir |> lib.escapeShellArg;
-                cfgFileShArg = cfgFile |> lib.escapeShellArg;
-                cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
-                settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
-                secretShArg = secrets |> lib.escapeShellArg;
-              in
-              ''
-                install -dm 0700 ${cfgDirShArg}
-                install -m 0600 /dev/null ${cfgFileInShArg}
-                printf '%s' ${settingsShArg} > ${cfgFileInShArg}
-                install -m 0600 /dev/null ${cfgFileShArg}
-                SECRET=$(cat ${secretShArg})
-                ${pkgs.jq}/bin/jq \
-                  -c \
-                  --arg secret "$SECRET" \
-                  '.["proxy-providers"].alink.url = $secret' \
-                  ${cfgFileInShArg} > ${cfgFileShArg}
-                rm -f ${cfgFileInShArg}
-              '';
           };
       };
       # allow tun mode traffic.
