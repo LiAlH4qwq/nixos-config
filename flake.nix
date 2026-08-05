@@ -22,6 +22,24 @@ let
 in
 {
   inherit nixConfig;
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.flat-flake.flakeModules.flatFlake
+        ./parts
+      ];
+      systems = import inputs.systems;
+      flake.nixConfig = nixConfig;
+      flatFlake.config.allowed = [
+        # Not possible to flatten.
+        # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
+        [
+          "nix-on-droid"
+          "nixpkgs-for-bootstrap"
+        ]
+      ];
+    };
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-kdl.url = "github:Lhcfl/nix-kdl";
@@ -96,6 +114,15 @@ in
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
+      };
+    };
+    peer-ban-helper = {
+      # url = "/mnt/data/lialh4/Projects/peer-ban-helper-nix";
+      url = "github:lialh4qwq/peer-ban-helper-nix";
+      inputs = {
+        systems.follows = "systems";
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
       };
     };
     intransience = {
@@ -189,22 +216,4 @@ in
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.flat-flake.flakeModules.flatFlake
-        ./parts
-      ];
-      systems = import inputs.systems;
-      flake.nixConfig = nixConfig;
-      flatFlake.config.allowed = [
-        # Not possible to flatten.
-        # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
-        [
-          "nix-on-droid"
-          "nixpkgs-for-bootstrap"
-        ]
-      ];
-    };
 }
