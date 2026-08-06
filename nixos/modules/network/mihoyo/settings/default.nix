@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable {
-    liuxu.nixos.network.mihoyo.settings =
+    liuxu.nixos.network.mihoyo.extraConfig =
       let
         urlTestArgs = {
           lazy = true;
@@ -228,11 +228,8 @@
           "DST-PORT, 53, Dns"
           "GEOIP, lan, Direct, no-resolve"
           "GEOSITE, private, Direct, no-resolve"
-          # FIXME: The specific game can't login unless it bypasses tun,
-          # but mihoyo can only see it as `wineserver`, not its real process name,
-          # so this fix this game, but will break further wine programs that needs tun.
           "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct"
-          "PROCESS-NAME, wineserver, Direct"
+          "PROCESS-PATH, /mnt/data/lialh4/Game/HSR/runners/spritz-wine-cachyos-wow64-10.0-8/bin/wineserver, Direct"
           "GEOSITE, category-ai-!cn, AI Abroad"
           "GEOSITE, cn, Direct"
           "GEOIP, cn, Direct"

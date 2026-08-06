@@ -41,7 +41,7 @@
           ];
         };
       };
-      network.mihoyo.settingsOverride.external-controller = "[::]:9090";
+      network.mihoyo.extraConfig.external-controller = "[::]:9090";
       podman.enable = true;
       qbittorrent.enable = true;
       secureboot.enable = true;

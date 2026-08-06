@@ -13,27 +13,40 @@
         Network should be enable first.
         Genshin, Impact! (x
     '';
-    settingsOverride = lib.mkOption {
+    settings = {
+      defaults = {
+        urlTest = {
+          url = lib.mkOption {
+            type = lib.types.singleLineStr;
+            default = "https://cp.cloudflare.com";
+            example = "https://www.gstatic.com/generate_204";
+            description = ''
+              Liuxu: Default URL test URL for mihoyo.
+            '';
+          };
+          lazy = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            example = false;
+            description = ''
+              Liuxu: Default URL test lazyness setting for mihoyo.
+            '';
+          };
+
+        };
+      };
+    };
+    extraConfig = lib.mkOption {
       type = lib.types.attrs;
+      internal = true;
       default = { };
       example = {
         external-controller = "[::]:9090";
       };
       description = ''
-        Liuxu: Settings override for Mihoyo.
+        Liuxu: Extra config for Mihoyo.
           Will be deep merged.
       '';
-    };
-    settings = lib.mkOption {
-      type = lib.types.attrs;
-      internal = true;
-      default = { };
-    };
-    finalSettings = lib.mkOption {
-      type = lib.types.attrs;
-      internal = true;
-      readOnly = true;
-      default = lib.recursiveUpdate config.liuxu.nixos.network.mihoyo.settings config.liuxu.nixos.network.mihoyo.settingsOverride;
     };
     providerUrlFiles = lib.mkOption {
       type = lib.types.attrsOf lib.types.path;
@@ -92,7 +105,7 @@
               let
                 cfgFileIn = "${cfgFile}.in";
                 cfgFileIn2 = "${cfgFileIn}.in";
-                settings = config.liuxu.nixos.network.mihoyo.finalSettings;
+                settings = config.liuxu.nixos.network.mihoyo.extraConfig;
                 cfgDirShArg = cfgDir |> lib.escapeShellArg;
                 cfgFileShArg = cfgFile |> lib.escapeShellArg;
                 cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
