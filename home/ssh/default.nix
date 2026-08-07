@@ -5,7 +5,7 @@
     enableDefaultConfig = false;
   };
 
-  home.files = {
+  home.file = {
     ssh-id-pub = {
       target = ".ssh/id_ed25519.pub";
       source = "${self}/assets/id_ed25519.pub";
