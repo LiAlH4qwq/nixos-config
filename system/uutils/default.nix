@@ -16,7 +16,7 @@
           p.version
           |> builtins.stringLength
           |> lib.flip lib.replicate "_"
-          |> builtins.concatStringsSep;
+          |> builtins.concatStringsSep "";
 
         coreutils-full-name = "coreuutils-full" + (mkPadding pkgs.coreutils-full);
 
