@@ -11,29 +11,20 @@
   system = {
     replaceDependencies.replacements =
       let
-        coreutils-full-name =
-          "coreuutils-full"
-          + builtins.concatStringsSep "" (
-            builtins.genList (_: "_") (builtins.stringLength pkgs.coreutils-full.version)
-          );
+        mkPadding =
+          p:
+          p.version
+          |> builtins.stringLength
+          |> lib.flip lib.replicate "_"
+          |> builtins.concatStringsSep;
 
-        coreutils-name =
-          "coreuutils"
-          + builtins.concatStringsSep "" (
-            builtins.genList (_: "_") (builtins.stringLength pkgs.coreutils.version)
-          );
+        coreutils-full-name = "coreuutils-full" + (mkPadding pkgs.coreutils-full);
 
-        findutils-name =
-          "finduutils"
-          + builtins.concatStringsSep "" (
-            builtins.genList (_: "_") (builtins.stringLength pkgs.findutils.version)
-          );
+        coreutils-name = "coreuutils" + (mkPadding pkgs.coreutils);
 
-        diffutils-name =
-          "diffuutils"
-          + builtins.concatStringsSep "" (
-            builtins.genList (_: "_") (builtins.stringLength pkgs.diffutils.version)
-          );
+        findutils-name = "finduutils" + (mkPadding pkgs.findutils);
+
+        diffutils-name = "diffuutils" + (mkPadding pkgs.diffutils);
       in
       [
         # coreutils
