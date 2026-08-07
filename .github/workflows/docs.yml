@@ -27,7 +27,7 @@ jobs:
         uses: samueldr/lix-gha-installer-action@v2026-06-15
         with:
           extra_nix_config: |
-            extra-experimental-features = nix-command flakes pipe-operator
+            accept-flake-config = true
 
       - name: Build Doc Package
         run: nix build .#doc

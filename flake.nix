@@ -12,11 +12,13 @@ let
       "https://noctalia.cachix.org"
       # inputs.agl
       "https://ezkea.cachix.org"
+      "https://lialh4.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "lialh4.cachix.org-1:4j2YJj81SVMTyZWnEnMFnQ/I5j2g2IdFinQ8m9dv5c4="
     ];
   };
 in
