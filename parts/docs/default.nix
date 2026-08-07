@@ -42,7 +42,22 @@
           pkgs.nixosOptionsDoc {
             inherit (modules) options;
             warningsAreErrors = false;
-            transformOptions = o: if (builtins.head o.loc) == "liuxu" then o else o // { visible = false; };
+            transformOptions =
+              o:
+              o
+              // {
+                visible = "liuxu" == builtins.head o.loc;
+                declarations = map (
+                  x:
+                  let
+                    path = x |> lib.removePrefix "${self}" |> lib.removePrefix "/";
+                  in
+                  {
+                    name = path;
+                    url = "https://github.com/lialh4qwq/nixos-config/blob/main/${path}";
+                  }
+                ) o.declarations;
+              };
           };
         toMdDoc = doc: doc.optionsCommonMark;
         osMdDoc = osModules |> toDoc |> toMdDoc;
@@ -66,7 +81,7 @@
             EOF
 
             mdbook init . \
-              --title="liuxu options" \
+              --title="Liuxu Options" \
               --ignore=none
 
             cp ${osMdDoc} ./src/os-options.md
