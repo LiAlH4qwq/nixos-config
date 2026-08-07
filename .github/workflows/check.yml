@@ -1,0 +1,28 @@
+name: Check
+
+on:
+  push:
+    branches: 
+      - main
+
+  workflow_dispatch:
+
+concurrency:
+  group: "checks"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install Lix
+        uses: samueldr/lix-gha-installer-action@v2026-06-15
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes pipe-operator
+
+      - name: Run checks
+        run: nix flake check
