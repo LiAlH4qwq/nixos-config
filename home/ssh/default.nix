@@ -1,0 +1,14 @@
+{ self, ... }: {
+  programs.ssh = {
+    enable = true;
+    # See: https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig
+    enableDefaultConfig = false;
+  };
+
+  home.files = {
+    ssh-id-pub = {
+      target = ".ssh/id_ed25519.pub";
+      source = "${self}/assets/id_ed25519.pub";
+    };
+  };
+}

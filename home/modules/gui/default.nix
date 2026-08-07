@@ -26,16 +26,9 @@
       obs-studio.enable = true;
       discord = {
         enable = true;
-        settings = {
-          SKIP_HOST_UPDATE = true;
-        };
+        settings.SKIP_HOST_UPDATE = true;
       };
-      ssh = {
-        enable = true;
-        # See: https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig
-        enableDefaultConfig = false;
-        settings."*".identityAgent = "~/.1password/agent.sock";
-      };
+      ssh.settings."*".identityAgent = "~/.1password/agent.sock";
     };
 
     home = {
@@ -53,6 +46,7 @@
         materialgram # Telegram with material design
         qq
         wechat
+        wemeet
         wpsoffice-cn
       ];
     };

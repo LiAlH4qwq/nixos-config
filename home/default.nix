@@ -8,6 +8,7 @@
     ./modules
     ./persist
     ./shell
+    ./ssh
     ./syncthing
     ./uv
     ./yazi
