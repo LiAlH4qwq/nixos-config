@@ -98,7 +98,7 @@ in
       };
     };
     lazyvim = {
-      url = "github:pfassina/lazyvim-nix/v15.15.0";
+      url = "github:pfassina/lazyvim-nix/v16.0.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
