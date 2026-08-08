@@ -12,6 +12,14 @@
         providedSessions = builtins.filter (s: s != "hyprland-uwsm") (old.passthru.providedSessions or [ ]);
       };
     });
+    niri = prev.niri.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [
+        (prev.fetchpatch {
+          url = "https://patch-diff.githubusercontent.com/raw/niri-wm/niri/pull/1791.patch";
+          hash = "sha256-dyB6BMnrFi+DRI0q+sP4L17WvsxDmMjcV2ZVsCiGLis=";
+        })
+      ];
+    });
     qq = prev.qq.overrideAttrs (old: {
       version = "3.2.32-2026-07-30";
       src = prev.fetchurl {
