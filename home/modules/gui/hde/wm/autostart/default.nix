@@ -25,10 +25,10 @@
     (lib.mkIf config.liuxu.home.internal.gui.enable {
       liuxu.home.internal.gui.autostart = [
         # Fix fcitx5 won't work.
-        [
-          "fcitx5"
-          "-rd"
-        ]
+        # [
+        #   "fcitx5"
+        #   "-rd"
+        # ]
         [
           "1password"
           "--silent"
