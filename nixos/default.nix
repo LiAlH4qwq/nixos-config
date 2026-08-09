@@ -18,6 +18,13 @@
     ./persist
   ];
 
+  systemd.oomd = {
+    enable = true;
+    enableRootSlice = true;
+    enableSystemSlice = true;
+    enableUserSlices = true;
+  };
+
   services = {
     power-profiles-daemon.enable = lib.mkDefault true;
     udisks2.enable = true;
@@ -28,7 +35,5 @@
     usbutils # `lsusb`
   ];
 
-  hardware = {
-    enableRedistributableFirmware = true;
-  };
+  hardware.enableRedistributableFirmware = true;
 }
