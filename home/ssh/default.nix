@@ -11,4 +11,6 @@
       source = "${self}/assets/id_ed25519.pub";
     };
   };
+
+  liuxu.home.internal.intransience.files = [ ".ssh/id_ed25519" ];
 }
