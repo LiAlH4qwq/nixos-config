@@ -28,6 +28,7 @@
     overlays = [
       inputs.self.overlays.default
       inputs.ragenix.overlays.default
+      inputs.tg-transient.overlays.default
       inputs.firefox-addons.overlays.default
     ];
   };

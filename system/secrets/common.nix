@@ -1,5 +1,9 @@
 let
   items = {
+    smartd.bot = {
+      target = true;
+      token = true;
+    };
     mihoyo.alink = true;
     devices = {
       LiAlH4-Laptop.users.lialh4.password = true;
