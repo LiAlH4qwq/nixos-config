@@ -2,6 +2,7 @@ _: {
   boot.initrd.luks.devices = {
     root.device = "/dev/disk/by-uuid/1ea06db1-0115-47b0-8bd8-baaf9745edb1";
     swap.device = "/dev/disk/by-uuid/2efe8aea-f37f-49ea-9aef-4a4e802718bc";
+    data.device = "/dev/disk/by-uuid/61c1c772-ad1f-4e8f-843f-8474bd1ae8c9";
   };
 
   fileSystems = {
@@ -42,6 +43,16 @@ _: {
         "noatime"
         "compress=zstd"
         "subvol=@log"
+      ];
+    };
+
+    "/mnt/data" = {
+      device = "/dev/mapper/data";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+        "subvol=@data"
       ];
     };
 
