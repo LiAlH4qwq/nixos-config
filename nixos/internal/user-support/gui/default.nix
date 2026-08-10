@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -33,6 +32,7 @@
 
     services = {
       gnome.gnome-keyring.enable = true;
+      gvfs.enable = true;
       pipewire = {
         enable = true;
         socketActivation = true;
