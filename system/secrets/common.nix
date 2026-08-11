@@ -11,6 +11,7 @@ let
         users.lialh4.password = true;
         cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
         hermes.environmentFile = true;
+        samba.users.lialh4.passwordFile = true;
       };
     };
   };

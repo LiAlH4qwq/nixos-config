@@ -12,6 +12,7 @@ _: {
     ./pin
     ./podman
     ./qbittorrent
+    ./samba
     ./secureboot
     ./tlp
     ./user-support

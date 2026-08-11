@@ -44,6 +44,16 @@
       network.mihoyo.extraConfig.external-controller = "[::]:9090";
       podman.enable = true;
       qbittorrent.enable = true;
+      samba = {
+        enable = true;
+        passwordFiles.lialh4 = config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile;
+        shares.data = {
+          path = "/mnt/data/lialh4";
+          readOnly = false;
+          user = "lialh4";
+          group = "users";
+        };
+      };
       secureboot.enable = true;
     };
     system.version-when-installed = "25.11";
