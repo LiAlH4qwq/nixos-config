@@ -706,11 +706,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786311057,
-        "narHash": "sha256-iQ6pQNybLQ9bhpRvDnj//vuW862j57dikkgqD+ep5kU=",
+        "lastModified": 1786413156,
+        "narHash": "sha256-djICyfqVSCOffQWfR8vUrHI6WM8+07vI9JFjw55CBfk=",
         "owner": "lialh4qwq",
         "repo": "tg-transient",
-        "rev": "8b124f1e3f20fb1b66f8e3d20dccced6f3e0250c",
+        "rev": "cd1276ae6d94a64fc25d4ccc2283c921338d38e8",
         "type": "github"
       },
       "original": {
