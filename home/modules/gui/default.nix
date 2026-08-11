@@ -37,6 +37,7 @@
       };
       # These programs hasn't been availible as programs config. :(
       packages = with pkgs; [
+        bottles
         nautilus # explorer.exe
         mission-center # taskmgr.exe
         clementine # Music player
@@ -57,6 +58,7 @@
         ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram
+        ".local/share/bottles" # Bottles
 
         # WPS
         ".config/Kingsoft"
