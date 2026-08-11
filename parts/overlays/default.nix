@@ -4,6 +4,7 @@
     unstable = import inputs.nixpkgs-unstable {
       inherit (prev) config system;
     };
+    bottles = prev.bottles.override { removeWarningPopup = true; };
     hyprland = prev.hyprland.overrideAttrs (old: {
       cmakeFlags =
         (builtins.filter (f: !(final.lib.hasPrefix "-DNO_UWSM=" f)) (old.cmakeFlags or [ ]))
