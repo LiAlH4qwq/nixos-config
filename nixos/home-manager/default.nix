@@ -1,5 +1,6 @@
 {
   inputs,
+  options,
   self,
   ...
 }:
@@ -13,6 +14,7 @@
     extraSpecialArgs = {
       inherit inputs self;
       inherit (self) lib;
+      osOptions = options;
     };
     sharedModules = [
       self.homeModules.liuxu
