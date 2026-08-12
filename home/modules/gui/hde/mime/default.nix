@@ -6,12 +6,12 @@
         web = {
           handler = "zen-beta.desktop";
           formats =
-            (withPrefix "application/x-extension-" [
+            (withPrefix "x-scheme-handler/" [
               "http"
               "https"
               "chrome"
             ])
-            ++ (withPrefix "x-scheme-handler/" [
+            ++ (withPrefix "application/x-extension-" [
               "htm"
               "html"
               "shtml"
