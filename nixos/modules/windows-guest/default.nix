@@ -22,5 +22,6 @@
       "intel_iommu=on"
       "xe.max_vfs=1"
     ];
+    intransience.datastores.persist.dirs = [ "/var/lib/libvirt" ];
   };
 }
