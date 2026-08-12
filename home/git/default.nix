@@ -6,6 +6,7 @@ _: {
     settings = {
       init.defaultBranch = "main";
       pull.rebase = false;
+      commit.gpgsign = true;
       gpg.format = "ssh";
       user = {
         name = "LiAlH4";
