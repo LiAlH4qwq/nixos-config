@@ -1,5 +1,8 @@
 _: {
-  imports = [ ./perl-less ];
+  imports = [
+    ./perl-less
+    ./python-less
+  ];
 
   services = {
     # Better D-Bus implemention.
