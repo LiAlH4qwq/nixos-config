@@ -116,7 +116,7 @@ in
         (mkNormalExecrBind "missioncenter" "Escape" "Mod")
         (mkNormalExecrBind "kitty" "T" "Mod")
         (mkNormalExecrBind "nautilus" "E" "Mod")
-        (mkNormalExecrBind "firefox" "B" "Mod")
+        (mkNormalExecrBind "zen-beta" "B" "Mod")
         (mkNormalExecrBind "1password" "XF86Favorites" [ ])
       ];
     })

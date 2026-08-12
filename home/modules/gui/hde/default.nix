@@ -10,6 +10,7 @@
     ./hyprland
     ./hyprtoolkit
     ./i18n
+    ./mime
     ./niri
     ./noctalia
     ./qt
