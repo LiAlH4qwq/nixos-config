@@ -20,6 +20,7 @@
         };
     in
     {
+      Live-CD = mkHost "live-cd";
       LiAlH4-Laptop = mkHost "thinkbook-14-g4p-iap";
       LiAlH4-Server = mkHost "asus-h110t";
     };

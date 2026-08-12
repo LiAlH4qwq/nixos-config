@@ -5,7 +5,7 @@
 {
   boot = {
     loader = {
-      timeout = 0;
+      timeout = lib.mkDefault 0;
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = lib.mkDefault true;
     };
