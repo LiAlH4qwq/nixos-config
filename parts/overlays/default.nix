@@ -5,6 +5,18 @@
       inherit (prev) config system;
     };
     bottles = prev.bottles.override { removeWarningPopup = true; };
+    cloudflare-ddns = prev.cloudflare-ddns.overrideAttrs (
+      new: old: {
+        version = "1.17.0";
+        src = prev.fetchFromGitHub {
+          owner = "favonia";
+          repo = "cloudflare-ddns";
+          tag = "v${new.version}";
+          hash = "sha256-03aXACmEXX75CGvnf1vuXhsMEcLb1W8/LL6GrdPORWE=";
+        };
+        vendorHash = "sha256-/vo5msKJ9J6Ga7BqGwavLlUGUSvkaCtmYFDI/2zBCv4=";
+      }
+    );
     hyprland = prev.hyprland.overrideAttrs (old: {
       cmakeFlags =
         (builtins.filter (f: !(final.lib.hasPrefix "-DNO_UWSM=" f)) (old.cmakeFlags or [ ]))

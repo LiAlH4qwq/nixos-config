@@ -5,7 +5,7 @@
     useDefaultShell = true;
     linger = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Server.users.lialh4.password;
+    hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Server.users.lialh4.password.path;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPzvkOPfWZmx2zE6cJY4Qz+Z1dKXTgd6Y2I/RgIc86T"
     ];

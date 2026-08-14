@@ -5,7 +5,32 @@
   ...
 }:
 let
-  common = import ./common.nix;
+  libSelf = import ./lib.nix;
+  partialConfigSelf = import ./config.nix;
+  configSelf = libSelf.evalConfig {
+    lib = libSelf;
+    partialConfig = partialConfigSelf;
+  };
+  itemsSelf = configSelf.items;
+  finalItemsSelf = libSelf.pipe itemsSelf [
+    (libSelf.mapAttrsUntilArgs (
+      p: v:
+      {
+        _isArgs = true;
+        file = ./. + "/${libSelf.pathToStr p}.age";
+      }
+      // (
+        if v == true then
+          { }
+        else
+          {
+            owner = v.user or "root";
+            group = v.group or "root";
+          }
+      )
+    ))
+  ];
+  flatItemsSelf = libSelf.pipe finalItemsSelf [ libSelf.attrsToFlatAttrs ];
 in
 {
   imports = [ inputs.ragenix.nixosModules.default ];
@@ -20,12 +45,11 @@ in
       # in
       # pathTree;
       lib.types.anything;
-    default =
-      common.items
-      |> lib.mapAttrsRecursive (
-        p: _:
-        config.age.secrets |> builtins.getAttr (builtins.concatStringsSep "." p) |> builtins.getAttr "path"
-      );
+    default = libSelf.pipe finalItemsSelf [
+      (libSelf.mapAttrsUntilArgs (
+        p: v: { _isArgs = true; } // builtins.getAttr (libSelf.pathToStr p) config.age.secrets
+      ))
+    ];
     description = ''
       Liuxu: Read only wrapper of config.age.\$\{name}.path.
         For example:
@@ -39,6 +63,6 @@ in
     # before impermanence mounts keys in `/etc/ssh`
     # which results in decryption failed.
     identityPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-    secrets = common.module;
+    secrets = flatItemsSelf;
   };
 }

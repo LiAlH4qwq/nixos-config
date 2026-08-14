@@ -7,15 +7,27 @@
   liuxu = {
     nixos = {
       bluetooth.enable = true;
+      cloudflare-ddns = {
+        enable = true;
+        credentialsFile = config.age.secretsV2.devices.LiAlH4-Server.cloudflare-ddns.credentialsFile.path;
+        provider = {
+          ipv4 = "none";
+          ipv6 = "local.iface:enp0s31f6";
+        };
+        proxied = "!is(genshin.lialh4.cyou)";
+        ip6Domains = [
+          "genshin.lialh4.cyou{hostid6=[::10,::20]}"
+        ];
+      };
       cloudflared = {
         enable = true;
         tunnels = {
           a00f657a-254c-496a-bc41-6cb0d6ec4535 = {
             default = "http_status:404";
             credentialsFile =
-              config.age.secretsV2.devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile;
+              config.age.secretsV2.devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile.path;
             ingress = {
-              "genshin.lialh4.cyou" = "ssh://localhost:22";
+              "hsr.lialh4.cyou" = "ssh://localhost:22";
             };
           };
         };
@@ -23,7 +35,7 @@
       hermes = {
         enable = true;
         allowNixAccess = true;
-        environmentFiles = [ config.age.secretsV2.devices.LiAlH4-Server.hermes.environmentFile ];
+        environmentFiles = [ config.age.secretsV2.devices.LiAlH4-Server.hermes.environmentFile.path ];
         settings = {
           cron = {
             wrap_response = false;
@@ -46,7 +58,8 @@
       qbittorrent.enable = true;
       samba = {
         enable = true;
-        passwordFiles.lialh4 = config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile;
+        passwordFiles.lialh4 =
+          config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile.path;
         shares.data = {
           path = "/mnt/data/lialh4";
           readOnly = false;
@@ -59,11 +72,14 @@
     system.version-when-installed = "25.11";
   };
 
+  systemd.services.cloudflare-ddns = {
+    environment = {
+      IP6_DETECTION_FILTER = "!addr-in(fd00::/64)";
+    };
+    serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
+  };
+
   networking.hostName = "LiAlH4-Server";
   time.timeZone = "Asia/Shanghai";
   nixpkgs.hostPlatform = "x86_64-linux";
-
-  services.logind.settings.Login = {
-    HandlePowerKey = "ignore";
-  };
 }
