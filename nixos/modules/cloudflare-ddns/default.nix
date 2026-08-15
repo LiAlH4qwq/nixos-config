@@ -12,16 +12,19 @@
     '';
   };
 
-  config = lib.mkMerge [
-    {
-      # Fix finding network interfaces.
-      systemd.services.cloudflare-ddns.serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
-    }
-    (
-      let
-        cfg = config.liuxu.nixos.cloudflare-ddns.ip6Filter;
-      in
-      lib.mkIf (cfg != null) { systemd.services.cloudflare-ddns.environment.IP6_DETECTION_FILTER = cfg; }
-    )
-  ];
+  config =
+    let
+      cfg = config.liuxu.nixos.cloudflare-ddns;
+    in
+    lib.mkIf cfg.enable (
+      lib.mkMerge [
+        {
+          # Fix finding network interfaces.
+          systemd.services.cloudflare-ddns.serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
+        }
+        (lib.mkIf (cfg.ip6Filter != null) {
+          systemd.services.cloudflare-ddns.environment.IP6_DETECTION_FILTER = cfg;
+        })
+      ]
+    );
 }
