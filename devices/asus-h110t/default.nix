@@ -83,7 +83,7 @@
           }
         ];
         samba-lialh4.ports =
-          config.liuxu.nixos.samba.ports.tmp.alts
+          config.liuxu.nixos.samba.ports.tcp.alts
           |> map (x: {
             port = x;
             protocol = "tcp";
