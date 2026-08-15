@@ -58,6 +58,7 @@
       qbittorrent.enable = true;
       samba = {
         enable = true;
+        ports.tcp.alts = [ 26535 ];
         passwordFiles.lialh4 =
           config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile.path;
         shares.data = {
@@ -73,17 +74,25 @@
   };
 
   services = {
-    samba.settings.global.port = 14159;
     firewalld = {
-      services.samba-lialh4.ports = [
-        {
-          port = 14159;
-          protocol = "tcp";
-        }
-      ];
+      services = {
+        ssh-lialh4.ports = [
+          {
+            port = "14159";
+            protocol = "tcp";
+          }
+        ];
+        samba-lialh4.ports =
+          config.liuxu.nixos.samba.ports.tmp.alts
+          |> map (x: {
+            port = x;
+            protocol = "tcp";
+          });
+      };
       zones = {
         public.services = [
           "dhcpv6-client"
+          "ssh-lialh4"
           "samba-lialh4"
         ];
         trusted.sources = [
@@ -92,6 +101,10 @@
         ];
       };
     };
+    openssh.ports = [
+      22
+      14159
+    ];
   };
 
   systemd.services.cloudflare-ddns = {

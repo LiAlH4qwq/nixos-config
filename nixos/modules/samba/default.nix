@@ -10,6 +10,68 @@
       Whether to enable samba,
         file sharing server.
     '';
+    ports = {
+      tcp = {
+        main = lib.mkOption {
+          type = lib.types.int;
+          default = 445;
+          example = 10445;
+          description = ''
+            Liuxu: Main tcp port of samba,
+              used for mDns registry.
+          '';
+        };
+        alts = lib.mkOption {
+          type = lib.types.ints;
+          default = [ ];
+          example = [
+            20445
+            30445
+          ];
+          description = ''
+            Liuxu: Alt tcp ports of samba,
+              can be left empty.
+          '';
+        };
+      };
+      nbt = {
+        main = lib.mkOption {
+          type = with lib.types; nullOr int;
+          default = 139;
+          example = 10139;
+          description = ''
+            Liuxu: Main nbt port of samba,
+              used for mDns registry,
+              can be left null.
+          '';
+        };
+        alts = lib.mkOption {
+          type = lib.types.ints;
+          default = [ ];
+          example = [
+            20139
+            30139
+          ];
+          description = ''
+            Liuxu: Alt nbt ports of samba,
+              can be left empty.
+          '';
+        };
+      };
+      quic.alts = lib.mkOption {
+        type = lib.types.ints;
+        default = [ ];
+        example = [
+          10443
+          20443
+          30443
+        ];
+        description = ''
+          Liuxu: Alt quic ports of samba,
+            can be left empty.
+        '';
+      };
+    };
     shares = lib.mkOption {
       default = { };
       example.data = {
@@ -67,60 +129,80 @@
     };
   };
 
-  config = lib.mkIf config.liuxu.nixos.samba.enable {
-    services.samba = {
-      enable = true;
-      settings =
-        config.liuxu.nixos.samba.shares
-        |> builtins.mapAttrs (
-          _: v: {
-            inherit (v) path;
-            "read only" = if v.readOnly then "yes" else "no";
-            "force user" = v.user;
-            "force group" = v.group;
-            browseable = "yes";
-            "guest ok" = "no";
-            "create mask" = "0644";
-            "directory mask" = "0755";
-          }
-        );
-    };
-    systemd.services.samba-set-password =
-      let
-        before = [ "samba.target" ];
-        after = [ "agenix-install-secrets.service" ];
-      in
-      {
-        inherit before after;
-        requiredBy = before;
-        requires = after;
-        serviceConfig.ExecStart =
-          pkgs.writers.writeFishBin "samba-set-password" (
+  config =
+    let
+      cfg = config.liuxu.nixos.samba;
+    in
+    lib.mkIf cfg.enable {
+      services.samba = {
+        enable = true;
+        settings = lib.mkMerge [
+          (
             let
-              cat = "cat" |> lib.getExe' pkgs.uutils-coreutils-noprefix;
-              catShArg = cat |> lib.escapeShellArg;
-              smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
-              smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
-              upt =
-                config.liuxu.nixos.samba.passwordFiles
-                |> lib.attrsToList
-                |> map (x: "${x.name}\t${x.value}")
-                |> builtins.concatStringsSep "\n";
-              uptShArg = lib.escapeShellArg upt;
+              portsTaint = t: ps: ps |> map toString |> map (x: "${t}:${x}");
+              tcpPorts = [ cfg.ports.tcp.main ] ++ cfg.ports.tcp.alts |> portsTaint "tcp";
+              nbtPorts =
+                (if cfg.ports.nbt.main == null then [ ] else [ cfg.ports.nbt.main ]) ++ cfg.ports.nbt.alts
+                |> portsTaint "nbt";
+              quicPorts = cfg.ports.quic.alts |> portsTaint "quic";
+              ports = tcpPorts ++ nbtPorts ++ quicPorts;
+
             in
-            ''
-              set -l upt ${uptShArg}
-              set -l ups (string split \n "$upt")
-              for up in $ups
-                set -l upp (string split \t "$up")
-                set -l u "$upp[1]"
-                set -l p "$upp[2]"
-                set -l rp (${catShArg} "$p" | string collect)
-                echo "$rp"\n"$rp" | string collect | ${smbpasswdShArg} -sa "$u"
-              end
-            ''
+            {
+              global."server smb transports" = ports |> builtins.concatStringsSep ", ";
+            }
           )
-          |> lib.getExe;
+          (
+            cfg.shares
+            |> builtins.mapAttrs (
+              _: v: {
+                inherit (v) path;
+                "read only" = if v.readOnly then "yes" else "no";
+                "force user" = v.user;
+                "force group" = v.group;
+                "create mask" = "0644";
+                "directory mask" = "0755";
+              }
+            )
+          )
+        ];
       };
-  };
+      systemd.services.samba-set-password =
+        let
+          before = [ "samba.target" ];
+          after = [ "agenix-install-secrets.service" ];
+        in
+        {
+          inherit before after;
+          requiredBy = before;
+          requires = after;
+          serviceConfig.ExecStart =
+            pkgs.writers.writeFishBin "samba-set-password" (
+              let
+                cat = "cat" |> lib.getExe' pkgs.uutils-coreutils-noprefix;
+                catShArg = cat |> lib.escapeShellArg;
+                smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
+                smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
+                upt =
+                  cfg.passwordFiles
+                  |> lib.attrsToList
+                  |> map (x: "${x.name}\t${x.value}")
+                  |> builtins.concatStringsSep "\n";
+                uptShArg = lib.escapeShellArg upt;
+              in
+              ''
+                set -l upt ${uptShArg}
+                set -l ups (string split \n "$upt")
+                for up in $ups
+                  set -l upp (string split \t "$up")
+                  set -l u "$upp[1]"
+                  set -l p "$upp[2]"
+                  set -l rp (${catShArg} "$p" | string collect)
+                  echo "$rp"\n"$rp" | string collect | ${smbpasswdShArg} -sa "$u"
+                end
+              ''
+            )
+            |> lib.getExe;
+        };
+    };
 }
