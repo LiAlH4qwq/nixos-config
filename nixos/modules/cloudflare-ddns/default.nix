@@ -23,7 +23,7 @@
           systemd.services.cloudflare-ddns.serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
         }
         (lib.mkIf (cfg.ip6Filter != null) {
-          systemd.services.cloudflare-ddns.environment.IP6_DETECTION_FILTER = cfg;
+          systemd.services.cloudflare-ddns.environment.IP6_DETECTION_FILTER = cfg.ip6Filter;
         })
       ]
     );
