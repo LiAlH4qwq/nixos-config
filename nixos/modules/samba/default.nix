@@ -10,7 +10,7 @@
       Whether to enable samba,
         file sharing server.
     '';
-    ports = {
+    port = {
       tcp = {
         main = lib.mkOption {
           type = lib.types.ints.u16;
@@ -72,7 +72,7 @@
         '';
       };
     };
-    shares = lib.mkOption {
+    share = lib.mkOption {
       default = { };
       example.data = {
         path = "/mnt/data/lialh4";
@@ -117,7 +117,7 @@
         }
       );
     };
-    passwordFiles = lib.mkOption {
+    passwordFile = lib.mkOption {
       type = lib.types.attrsOf lib.types.singleLineStr;
       default = { };
       example = {
@@ -140,11 +140,11 @@
           (
             let
               portsTaint = t: ps: ps |> map toString |> map (x: "${t}:${x}");
-              tcpPorts = ([ cfg.ports.tcp.main ] ++ cfg.ports.tcp.alts) |> portsTaint "tcp";
+              tcpPorts = ([ cfg.port.tcp.main ] ++ cfg.port.tcp.alts) |> portsTaint "tcp";
               nbtPorts =
-                ((if cfg.ports.nbt.main == null then [ ] else [ cfg.ports.nbt.main ]) ++ cfg.ports.nbt.alts)
+                ((if cfg.port.nbt.main == null then [ ] else [ cfg.port.nbt.main ]) ++ cfg.port.nbt.alts)
                 |> portsTaint "nbt";
-              quicPorts = cfg.ports.quic.alts |> portsTaint "quic";
+              quicPorts = cfg.port.quic.alts |> portsTaint "quic";
               ports = tcpPorts ++ nbtPorts ++ quicPorts;
 
             in
@@ -153,7 +153,7 @@
             }
           )
           (
-            cfg.shares
+            cfg.share
             |> builtins.mapAttrs (
               _: v: {
                 inherit (v) path;
@@ -184,7 +184,7 @@
                 smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
                 smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
                 upt =
-                  cfg.passwordFiles
+                  cfg.passwordFile
                   |> lib.attrsToList
                   |> map (x: "${x.name}\t${x.value}")
                   |> builtins.concatStringsSep "\n";

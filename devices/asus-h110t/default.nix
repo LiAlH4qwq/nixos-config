@@ -14,6 +14,7 @@
           ipv4 = "none";
           ipv6 = "local.iface:enp0s31f6";
         };
+        ip6Filter = "!addr-in(fd00::/64)";
         proxied = "!is(genshin.lialh4.cyou)";
         ip6Domains = [
           "genshin.lialh4.cyou{hostid6=[::10,::20]}"
@@ -30,6 +31,33 @@
               "hsr.lialh4.cyou" = "ssh://localhost:22";
             };
           };
+        };
+      };
+      firewalld = {
+        services = {
+          ssh-lialh4.ports = [
+            {
+              port = 14159;
+              protocol = "tcp";
+            }
+          ];
+          samba-lialh4.ports = [
+            {
+              port = 26535;
+              protocol = "tcp";
+            }
+          ];
+        };
+        zones = {
+          public.services = [
+            "dhcpv6-client"
+            "ssh-lialh4"
+            "samba-lialh4"
+          ];
+          trusted.sources = [
+            { address = "fd00::/64"; }
+            { address = "192.168.1.0/24"; }
+          ];
         };
       };
       hermes = {
@@ -58,10 +86,10 @@
       qbittorrent.enable = true;
       samba = {
         enable = true;
-        ports.tcp.alts = [ 26535 ];
-        passwordFiles.lialh4 =
+        port.tcp.alts = [ 26535 ];
+        passwordFile.lialh4 =
           config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile.path;
-        shares.data = {
+        share.data = {
           path = "/mnt/data/lialh4";
           readOnly = false;
           user = "lialh4";
@@ -73,48 +101,11 @@
     system.version-when-installed = "25.11";
   };
 
-  services = {
-    firewalld = {
-      services = {
-        ssh-lialh4.ports = [
-          {
-            port = 14159;
-            protocol = "tcp";
-          }
-        ];
-        samba-lialh4.ports = [
-          {
-            port = 26535;
-            protocol = "tcp";
-          }
-        ];
-      };
-      zones = {
-        public.services = [
-          "dhcpv6-client"
-          "ssh-lialh4"
-          "samba-lialh4"
-        ];
-        trusted.sources = [
-          { address = "fd00::/64"; }
-          { address = "192.168.1.0/24"; }
-        ];
-      };
-    };
-    openssh.ports = [
-      22
-      14159
-    ];
-  };
+  services.openssh.ports = [
+    22
+    14159
+  ];
 
-  systemd.services.cloudflare-ddns = {
-    environment = {
-      IP6_DETECTION_FILTER = "!addr-in(fd00::/64)";
-    };
-    serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
-  };
-
-  networking.hostName = "LiAlH4-Server";
   time.timeZone = "Asia/Shanghai";
   nixpkgs.hostPlatform = "x86_64-linux";
 }

@@ -23,25 +23,35 @@ let
   };
 in
 {
-  inherit nixConfig;
   outputs =
     inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.flat-flake.flakeModules.flatFlake
-        ./parts
-      ];
-      systems = import inputs.systems;
-      flake.nixConfig = nixConfig;
-      flatFlake.config.allowed = [
-        # Not possible to flatten.
-        # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
-        [
-          "nix-on-droid"
-          "nixpkgs-for-bootstrap"
-        ]
-      ];
-    };
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { config, ... }: {
+        liuxu.fp.nixos = {
+          sharedModules = [ config.flake.nixosModules.liuxu ];
+          hosts = {
+            LiAlH4-Laptop.modules = [ ./devices/thinkbook-14-g4p-iap ];
+            LiAlH4-Server.modules = [ ./devices/asus-h110t ];
+          };
+        };
+        flatFlake.config.allowed = [
+          # Not possible to flatten.
+          # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
+          [
+            "nix-on-droid"
+            "nixpkgs-for-bootstrap"
+          ]
+        ];
+        imports = [
+          inputs.flat-flake.flakeModules.flatFlake
+          ./parts
+        ];
+        systems = import inputs.systems;
+        _module.specialArgs.root = ./.;
+        flake.nixConfig = nixConfig;
+      }
+    );
+  inherit nixConfig;
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-kdl.url = "github:Lhcfl/nix-kdl";
