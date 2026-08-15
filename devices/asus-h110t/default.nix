@@ -33,33 +33,6 @@
           };
         };
       };
-      firewalld = {
-        services = {
-          ssh-lialh4.ports = [
-            {
-              port = 14159;
-              protocol = "tcp";
-            }
-          ];
-          samba-lialh4.ports = [
-            {
-              port = 26535;
-              protocol = "tcp";
-            }
-          ];
-        };
-        zones = {
-          public.services = [
-            "dhcpv6-client"
-            "ssh-lialh4"
-            "samba-lialh4"
-          ];
-          trusted.sources = [
-            { address = "fd00::/64"; }
-            { address = "192.168.1.0/24"; }
-          ];
-        };
-      };
       hermes = {
         enable = true;
         allowNixAccess = true;
@@ -81,7 +54,36 @@
           ];
         };
       };
-      network.mihoyo.extraConfig.external-controller = "[::]:9090";
+      network = {
+        firewalld = {
+          services = {
+            ssh-lialh4.ports = [
+              {
+                port = 14159;
+                protocol = "tcp";
+              }
+            ];
+            samba-lialh4.ports = [
+              {
+                port = 26535;
+                protocol = "tcp";
+              }
+            ];
+          };
+          zones = {
+            public.services = [
+              "dhcpv6-client"
+              "ssh-lialh4"
+              "samba-lialh4"
+            ];
+            trusted.sources = [
+              { address = "fd00::/64"; }
+              { address = "192.168.1.0/24"; }
+            ];
+          };
+        };
+        mihoyo.extraConfig.external-controller = "[::]:9090";
+      };
       podman.enable = true;
       qbittorrent.enable = true;
       samba = {
