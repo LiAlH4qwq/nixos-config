@@ -13,7 +13,7 @@
     ports = {
       tcp = {
         main = lib.mkOption {
-          type = lib.types.int;
+          type = lib.types.ints.u16;
           default = 445;
           example = 10445;
           description = ''
@@ -22,7 +22,7 @@
           '';
         };
         alts = lib.mkOption {
-          type = lib.types.ints;
+          type = with lib.types; listOf ints.u16;
           default = [ ];
           example = [
             20445
@@ -36,7 +36,7 @@
       };
       nbt = {
         main = lib.mkOption {
-          type = with lib.types; nullOr int;
+          type = with lib.types; nullOr ints.u16;
           default = 139;
           example = 10139;
           description = ''
@@ -46,7 +46,7 @@
           '';
         };
         alts = lib.mkOption {
-          type = lib.types.ints;
+          type = with lib.types; listOf ints.u16;
           default = [ ];
           example = [
             20139
@@ -59,7 +59,7 @@
         };
       };
       quic.alts = lib.mkOption {
-        type = lib.types.ints;
+        type = with lib.types; listOf ints.u16;
         default = [ ];
         example = [
           10443
@@ -140,9 +140,9 @@
           (
             let
               portsTaint = t: ps: ps |> map toString |> map (x: "${t}:${x}");
-              tcpPorts = [ cfg.ports.tcp.main ] ++ cfg.ports.tcp.alts |> portsTaint "tcp";
+              tcpPorts = ([ cfg.ports.tcp.main ] ++ cfg.ports.tcp.alts) |> portsTaint "tcp";
               nbtPorts =
-                (if cfg.ports.nbt.main == null then [ ] else [ cfg.ports.nbt.main ]) ++ cfg.ports.nbt.alts
+                ((if cfg.ports.nbt.main == null then [ ] else [ cfg.ports.nbt.main ]) ++ cfg.ports.nbt.alts)
                 |> portsTaint "nbt";
               quicPorts = cfg.ports.quic.alts |> portsTaint "quic";
               ports = tcpPorts ++ nbtPorts ++ quicPorts;

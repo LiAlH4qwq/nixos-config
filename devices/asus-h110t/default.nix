@@ -78,16 +78,16 @@
       services = {
         ssh-lialh4.ports = [
           {
-            port = "14159";
+            port = 14159;
             protocol = "tcp";
           }
         ];
-        samba-lialh4.ports =
-          config.liuxu.nixos.samba.ports.tcp.alts
-          |> map (x: {
-            port = x;
+        samba-lialh4.ports = [
+          {
+            port = 26535;
             protocol = "tcp";
-          });
+          }
+        ];
       };
       zones = {
         public.services = [
