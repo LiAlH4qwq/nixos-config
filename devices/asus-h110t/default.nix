@@ -72,6 +72,25 @@
     system.version-when-installed = "25.11";
   };
 
+  services = {
+    samba.settings.global.port = 14159;
+    firewalld = {
+      services.samba-lialh4.ports = [
+        {
+          port = 14159;
+          protocol = "tcp";
+        }
+      ];
+      zones = {
+        public.services = [ "samba-lialh4" ];
+        trusted.sources = [
+          { address = "fd00::/64"; }
+          { address = "192.168.1.0/24"; }
+        ];
+      };
+    };
+  };
+
   systemd.services.cloudflare-ddns = {
     environment = {
       IP6_DETECTION_FILTER = "!addr-in(fd00::/64)";
