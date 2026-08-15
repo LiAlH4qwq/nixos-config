@@ -82,7 +82,10 @@
         }
       ];
       zones = {
-        public.services = [ "samba-lialh4" ];
+        public.services = [
+          "dhcpv6-client"
+          "samba-lialh4"
+        ];
         trusted.sources = [
           { address = "fd00::/64"; }
           { address = "192.168.1.0/24"; }
