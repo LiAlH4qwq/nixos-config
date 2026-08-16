@@ -25,7 +25,6 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  nixpkgs.hostPlatform = "x86_64-linux";
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.

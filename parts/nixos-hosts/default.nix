@@ -40,6 +40,15 @@
                       defaults to `<name>`.
                   '';
                 };
+                arch = lib.mkOption {
+                  type = lib.types.singleLineStr;
+                  default = "x86_64-linux";
+                  example = "aarch64-linux";
+                  description = ''
+                    Liuxu (FP): Arch of device,
+                      default to `x86_64-linux`.
+                  '';
+                };
                 modules = lib.mkOption {
                   type = lib.types.unspecified;
                   default = [ ];
@@ -59,13 +68,23 @@
     config.liuxu.fp.nixos.hosts
     |> builtins.mapAttrs (
       _:
-      { name, modules }:
+      {
+        name,
+        arch,
+        modules,
+      }:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs self;
           inherit (self) lib;
         };
-        modules = modules ++ config.liuxu.fp.nixos.sharedModules ++ [ { networking.hostName = name; } ];
+        modules =
+          modules
+          ++ config.liuxu.fp.nixos.sharedModules
+          ++ [
+            { networking.hostName = name; }
+            { nixpkgs.hostPlatform.system = arch; }
+          ];
       }
     );
 }
