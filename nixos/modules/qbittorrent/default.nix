@@ -18,7 +18,7 @@
     services = {
       qbittorrent = {
         enable = true;
-        package = pkgs.qbittorrent-enhanced-nox;
+        package = pkgs.unstable.qbittorrent-enhanced-nox;
       };
       peer-ban-helper.enable = true;
     };
