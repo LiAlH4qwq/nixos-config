@@ -117,6 +117,4 @@
     22
     14159
   ];
-
-  time.timeZone = "Asia/Shanghai";
 }

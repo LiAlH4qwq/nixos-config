@@ -24,8 +24,6 @@
     system.version-when-installed = "25.11";
   };
 
-  time.timeZone = "Asia/Shanghai";
-
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.
     HandlePowerKey = "ignore";
@@ -35,6 +33,7 @@
   };
   systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
 
+  # Use Xe for better performance, maybe(?)
   boot.kernelParams =
     let
       id = "46a6";

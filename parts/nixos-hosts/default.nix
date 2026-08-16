@@ -49,6 +49,14 @@
                       default to `x86_64-linux`.
                   '';
                 };
+                tz = lib.mkOption {
+                  type = lib.types.singleLineStr;
+                  default = "Asia/Shanghai";
+                  example = "Asia/Taipei";
+                  description = ''
+                    Liuxu (FP): Timezone of device.
+                  '';
+                };
                 modules = lib.mkOption {
                   type = lib.types.unspecified;
                   default = [ ];
@@ -71,6 +79,7 @@
       {
         name,
         arch,
+        tz,
         modules,
       }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -84,6 +93,7 @@
           ++ [
             { networking.hostName = name; }
             { nixpkgs.hostPlatform.system = arch; }
+            { time.timeZone = tz; }
           ];
       }
     );
