@@ -38,7 +38,6 @@
       };
       # These programs hasn't been availible as programs config. :(
       packages = with pkgs; [
-        _1password-gui
         bottles
         nautilus # explorer.exe
         mission-center # taskmgr.exe
