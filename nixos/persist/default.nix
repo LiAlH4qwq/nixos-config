@@ -8,7 +8,7 @@
   imports = [ inputs.intransience.nixosModules.default ];
 
   intransience = {
-    enable = true;
+    enable = lib.mkDefault true;
     datastores.persist = {
       enable = true;
       path = "/persist";
