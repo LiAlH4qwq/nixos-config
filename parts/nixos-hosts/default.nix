@@ -6,13 +6,13 @@
   ...
 }:
 {
-  options.liuxu.fp.nixos = {
+  options.liuxu.fp.nixos = with lib.liuxu.modules; {
     sharedModules = lib.mkOption {
       type = lib.types.unspecified;
       default = [ ];
       example = [ (lib.literalMD "`./nixos`") ];
-      description = ''
-        Liuxu (FP): Common modules for NixOS hosts.
+      description = mkLiuxuFpDesc ''
+        Common modules for NixOS hosts.
       '';
     };
     hosts = lib.mkOption {
@@ -23,8 +23,8 @@
           (lib.literalMD "`./devices/thinkbook-14-g4p-iap`")
         ];
       };
-      description = ''
-        Liuxu (FP): NixOS hosts.
+      description = mkLiuxuFpDesc ''
+        NixOS hosts.
       '';
       type =
         with lib.types;
@@ -35,8 +35,8 @@
                 name = lib.mkOption {
                   type = lib.types.singleLineStr;
                   default = name;
-                  description = ''
-                    Liuxu (FP): Host name of device,
+                  description = mkLiuxuFpDesc ''
+                    Host name of device,
                       defaults to `<name>`.
                   '';
                 };
@@ -44,8 +44,8 @@
                   type = lib.types.singleLineStr;
                   default = "x86_64-linux";
                   example = "aarch64-linux";
-                  description = ''
-                    Liuxu (FP): Arch of device,
+                  description = mkLiuxuFpDesc ''
+                    Arch of device,
                       default to `x86_64-linux`.
                   '';
                 };
@@ -53,16 +53,16 @@
                   type = lib.types.singleLineStr;
                   default = "Asia/Shanghai";
                   example = "Asia/Taipei";
-                  description = ''
-                    Liuxu (FP): Timezone of device.
+                  description = mkLiuxuFpDesc ''
+                    Timezone of device.
                   '';
                 };
                 modules = lib.mkOption {
                   type = lib.types.unspecified;
                   default = [ ];
                   example = [ (lib.literalMD "`./devices/thinkbook-14-g4p-iap`") ];
-                  description = ''
-                    Liuxu (FP): Modules of devices.
+                  description = mkLiuxuFpDesc ''
+                    Modules of devices.
                   '';
                 };
               };
@@ -85,7 +85,7 @@
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs self;
-          inherit (self) lib;
+          inherit (config._module.args) lib;
         };
         modules =
           modules

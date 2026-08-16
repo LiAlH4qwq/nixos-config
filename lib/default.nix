@@ -75,9 +75,15 @@ prev: {
           mkSwitchOffOption = mkSwitchOption true;
           mkLiuxuDesc = desc: "Liuxu: ${desc}";
           mkLiuxuHomeDesc = desc: "Liuxu (Home): ${desc}";
+          mkLiuxuFpDesc = desc: "Liuxu (FP): ${desc}";
         in
         {
-          inherit mkComputedOption;
+          inherit
+            mkComputedOption
+            mkLiuxuDesc
+            mkLiuxuHomeDesc
+            mkLiuxuFpDesc
+            ;
           mkIfElse =
             cond: onTrue: onFalse:
             prev.mkMerge [
@@ -91,6 +97,9 @@ prev: {
           mkHomeSwitchOption = on2 mkSwitchOption mkLiuxuHomeDesc;
           mkHomeSwitchOnOption = o mkSwitchOnOption mkLiuxuHomeDesc;
           mkHomeSwitchOffOption = o mkSwitchOffOption mkLiuxuHomeDesc;
+          mkFpSwitchOption = on2 mkSwitchOption mkLiuxuFpDesc;
+          mkFpSwitchOnOption = o mkSwitchOnOption mkLiuxuFpDesc;
+          mkFpSwitchOffOption = o mkSwitchOffOption mkLiuxuFpDesc;
         };
       hyprland =
         let

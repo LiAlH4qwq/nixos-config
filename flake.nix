@@ -1,3 +1,4 @@
+# Use Lix to eval.
 let
   nixConfig = {
     extra-experimental-features = [
@@ -47,8 +48,11 @@ in
           inputs.flat-flake.flakeModules.flatFlake
           ./parts
         ];
+        _module = {
+          args.lib = config.flake.lib;
+          specialArgs.root = ./.;
+        };
         systems = import inputs.systems;
-        _module.specialArgs.root = ./.;
         flake.nixConfig = nixConfig;
       }
     );
