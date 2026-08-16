@@ -1,17 +1,13 @@
 { config, ... }:
 {
-  systemd.tmpfiles.settings."10-subuid" = {
-    "/etc/subuid".F = {
-      argument = "lialh4:100000:65536";
-      mode = "0644";
-      user = "root";
-      group = "root";
+  environment.etc = {
+    subuid = {
+      target = "subuid";
+      text = "lialh4:100000:65536";
     };
-    "/etc/subgid".F = {
-      argument = "lialh4:100000:65536";
-      mode = "0644";
-      user = "root";
-      group = "root";
+    subgid = {
+      target = "subgid";
+      text = "lialh4:100000:65536";
     };
   };
 
