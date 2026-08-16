@@ -69,6 +69,16 @@
                 protocol = "tcp";
               }
             ];
+            qbittorrent-lialh4.ports =
+              map
+                (x: {
+                  port = 23846;
+                  protocol = x;
+                })
+                [
+                  "tcp"
+                  "udp"
+                ];
           };
           zones = {
             public.services = [
