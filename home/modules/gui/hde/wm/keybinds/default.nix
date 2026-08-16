@@ -117,7 +117,7 @@ in
         (mkNormalExecrBind "kitty" "T" "Mod")
         (mkNormalExecrBind "nautilus" "E" "Mod")
         (mkNormalExecrBind "zen-beta" "B" "Mod")
-        (mkNormalExecrBind "1password" "XF86Favorites" [ ])
+        (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
       ];
     })
     (
