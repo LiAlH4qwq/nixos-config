@@ -22,7 +22,7 @@
       {
         programs.noctalia-greeter = {
           enable = true;
-          package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          package = pkgs.unstable.noctalia-greeter;
           settings.cursor = {
             theme = "BreezeX-RosePineDawn-Linux";
             package = pkgs.rose-pine-cursor;

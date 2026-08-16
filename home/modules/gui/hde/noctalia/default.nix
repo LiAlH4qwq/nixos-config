@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   self,
   ...
 }:
@@ -16,6 +17,7 @@
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.noctalia = {
       enable = true;
+      package = pkgs.unstable.noctalia;
       settings = {
         weather.enabled = false;
         osd.position = "bottom_center";
