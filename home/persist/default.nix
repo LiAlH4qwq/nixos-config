@@ -2,31 +2,9 @@
 {
   options.liuxu.home.internal.intransience =
     let
-      t = lib.types;
-      e =
-        t.coercedTo t.str
-          (path: {
-            inherit path;
-            method = "bind";
-          })
-          (
-            t.submodule {
-              options = {
-                path = lib.mkOption { type = t.str; };
-                method = lib.mkOption {
-                  type = t.enum [
-                    "bind"
-                    "symlink"
-                  ];
-                  default = "bind";
-                };
-              };
-            }
-          );
       o = {
         internal = true;
-        type = t.listOf e;
-        default = [ ];
+        type = with lib.types; listOf unspecified;
       };
     in
     {

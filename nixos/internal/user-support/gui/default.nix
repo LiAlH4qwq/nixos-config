@@ -27,7 +27,6 @@
           |> lib.filterAttrs (_: cfg: cfg.liuxu.home.internal.gui.enable)
           |> lib.attrNames;
       };
-      steam.enable = true;
     };
 
     services = {
@@ -42,15 +41,7 @@
         wireplumber.enable = true;
         alsa = {
           enable = true;
-          support32Bit = true;
         };
-      };
-    };
-
-    hardware = {
-      graphics = {
-        enable = true;
-        enable32Bit = true;
       };
     };
   };

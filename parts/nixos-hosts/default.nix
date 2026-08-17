@@ -58,11 +58,12 @@
                   '';
                 };
                 modules = lib.mkOption {
-                  type = lib.types.unspecified;
+                  type = with lib.types; coercedTo path lib.singleton (listOf path);
                   default = [ ];
                   example = [ (lib.literalMD "`./devices/thinkbook-14-g4p-iap`") ];
                   description = mkLiuxuFpDesc ''
-                    Modules of devices.
+                    Modules of devices,
+                      in path or list of path.
                   '';
                 };
               };

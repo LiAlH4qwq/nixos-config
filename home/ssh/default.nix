@@ -12,5 +12,10 @@
     };
   };
 
-  liuxu.home.internal.intransience.files = [ ".ssh/id_ed25519" ];
+  liuxu.home.internal.intransience.files = [
+    {
+      path = ".ssh/id_ed25519";
+      mode = "0600";
+    }
+  ];
 }

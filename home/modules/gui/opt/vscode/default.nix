@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.opt.enable {
     programs.vscode = {
       enable = true;
       mutableExtensionsDir = false;
@@ -56,5 +56,8 @@
         };
       };
     };
+    liuxu.home.internal.intransience.dirs = [
+      ".config/Code"
+    ];
   };
 }

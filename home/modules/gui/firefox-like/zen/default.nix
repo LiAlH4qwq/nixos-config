@@ -5,31 +5,19 @@
   pkgs,
   ...
 }:
-let
-  cfgSuper = config.liuxu.home.internal.gui.enable;
-in
 {
   imports = [ inputs.zen.homeModules.beta ];
 
-  options.liuxu.home.gui.zen.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = cfgSuper;
-    example = false;
-    description = ''
-      Liuxu (Home): Whether to enable the Zen browser.
+  options.liuxu.home = {
+    gui.zen.enable = lib.liuxu.mkHomeSwitchOffOption ''
+      Whether to enable the Zen browser.
     '';
+    internal.final.gui.zen.enable = lib.liuxu.mkComputedSwitchOption (
+      config.liuxu.home.internal.gui.enable && config.liuxu.home.gui.zen.enable
+    );
   };
 
-  config = lib.mkIf config.liuxu.home.gui.zen.enable {
-    assertions = [
-      {
-        assertion = cfgSuper;
-        message = ''
-          Liuxu (Home): Zen browser can't be enabled without gui.
-        '';
-      }
-    ];
-
+  config = lib.mkIf config.liuxu.home.internal.final.gui.zen.enable {
     programs.zen-browser = {
       enable = true;
       profiles.default = {

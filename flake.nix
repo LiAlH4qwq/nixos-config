@@ -7,7 +7,7 @@ let
       "pipe-operator"
     ];
     extra-substituters = [
-      "https://mirrors.nju.edu.cn/nix-channels/store"
+      # "https://mirrors.nju.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
@@ -31,9 +31,9 @@ in
         liuxu.fp.nixos = {
           sharedModules = [ config.flake.nixosModules.liuxu ];
           hosts = {
-            LiAlH4-Laptop.modules = [ ./devices/thinkbook-14-g4p-iap ];
-            LiAlH4-Server.modules = [ ./devices/asus-h110t ];
-            LiAlH4-LiveCD.modules = [ ./devices/live-cd ];
+            LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
+            LiAlH4-Server.modules = ./devices/asus-h110t;
+            LiAlH4-LiveCD.modules = ./devices/live-cd;
           };
         };
         flatFlake.config.allowed = [

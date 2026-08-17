@@ -1,6 +1,7 @@
-prev: {
+lib: {
   liuxu =
     let
+      # BEGIN toplevel
       I = x: x;
       id = I;
       K = x: _: x;
@@ -31,9 +32,50 @@ prev: {
           B (B C) B (onN (n - 1));
       rN = n: if n < 2 then I else B (B C) B (rN (n - 1));
       arN = n: if n < 2 then I else oN (n - 1) C (arN (n - 1));
+      # END toplevel
+
+      # BEGIN .modules
+      mkIfElse =
+        cond: onTrue: onFalse:
+        lib.mkMerge [
+          (lib.mkIf cond onTrue)
+          (lib.mkIf (!cond) onFalse)
+        ];
+      mkOsDesc = desc: "Liuxu (OS): ${desc}";
+      mkHomeDesc = desc: "Liuxu (Home): ${desc}";
+      mkFpDesc = desc: "Liuxu (FP): ${desc}";
+      mkComputedOption =
+        type: by:
+        lib.mkOption {
+          inherit type;
+          internal = true;
+          readOnly = true;
+          default = by;
+        };
+      mkSwitchOption =
+        default: description:
+        lib.mkOption {
+          inherit default description;
+          type = lib.types.bool;
+          example = !default;
+        };
+      mkComputedSwitchOption = mkComputedOption lib.types.bool;
+      mkSwitchOnOption = mkSwitchOption false;
+      mkSwitchOffOption = mkSwitchOption true;
+      mkOsSwitchOption = on2 mkSwitchOption mkOsDesc;
+      mkOsSwitchOnOption = o mkSwitchOnOption mkOsDesc;
+      mkOsSwitchOffOption = o mkSwitchOffOption mkOsDesc;
+      mkHomeSwitchOption = on2 mkSwitchOption mkHomeDesc;
+      mkHomeSwitchOnOption = o mkSwitchOnOption mkHomeDesc;
+      mkHomeSwitchOffOption = o mkSwitchOffOption mkHomeDesc;
+      mkFpSwitchOption = on2 mkSwitchOption mkFpDesc;
+      mkFpSwitchOnOption = o mkSwitchOnOption mkFpDesc;
+      mkFpSwitchOffOption = o mkSwitchOffOption mkFpDesc;
+      # END .modules
     in
     {
       inherit
+        # BEGIN toplevel
         I
         id
         K
@@ -53,54 +95,51 @@ prev: {
         onN
         rN
         arN
+        # END toplevel
+
+        # BEGIN .modules
+        mkIfElse
+        mkOsDesc
+        mkHomeDesc
+        mkFpDesc
+        mkComputedOption
+        mkSwitchOption
+        mkComputedSwitchOption
+        mkSwitchOnOption
+        mkSwitchOffOption
+        mkOsSwitchOption
+        mkOsSwitchOnOption
+        mkOsSwitchOffOption
+        mkHomeSwitchOption
+        mkHomeSwitchOnOption
+        mkHomeSwitchOffOption
+        mkFpSwitchOption
+        mkFpSwitchOnOption
+        mkFpSwitchOffOption
+        # END .modules
         ;
-      modules =
-        let
-          mkComputedOption =
-            type: by:
-            prev.mkOption {
-              inherit type;
-              internal = true;
-              readOnly = true;
-              default = by;
-            };
-          mkSwitchOption =
-            default: description:
-            prev.mkOption {
-              inherit default description;
-              type = prev.types.bool;
-              example = !default;
-            };
-          mkSwitchOnOption = mkSwitchOption false;
-          mkSwitchOffOption = mkSwitchOption true;
-          mkLiuxuDesc = desc: "Liuxu: ${desc}";
-          mkLiuxuHomeDesc = desc: "Liuxu (Home): ${desc}";
-          mkLiuxuFpDesc = desc: "Liuxu (FP): ${desc}";
-        in
-        {
-          inherit
-            mkComputedOption
-            mkLiuxuDesc
-            mkLiuxuHomeDesc
-            mkLiuxuFpDesc
-            ;
-          mkIfElse =
-            cond: onTrue: onFalse:
-            prev.mkMerge [
-              (prev.mkIf cond onTrue)
-              (prev.mkIf (!cond) onFalse)
-            ];
-          mkComputedSwitchOption = mkComputedOption prev.types.bool;
-          mkOsSwitchOption = on2 mkSwitchOption mkLiuxuDesc;
-          mkOsSwitchOnOption = o mkSwitchOnOption mkLiuxuDesc;
-          mkOsSwitchOffOption = o mkSwitchOffOption mkLiuxuDesc;
-          mkHomeSwitchOption = on2 mkSwitchOption mkLiuxuHomeDesc;
-          mkHomeSwitchOnOption = o mkSwitchOnOption mkLiuxuHomeDesc;
-          mkHomeSwitchOffOption = o mkSwitchOffOption mkLiuxuHomeDesc;
-          mkFpSwitchOption = on2 mkSwitchOption mkLiuxuFpDesc;
-          mkFpSwitchOnOption = o mkSwitchOnOption mkLiuxuFpDesc;
-          mkFpSwitchOffOption = o mkSwitchOffOption mkLiuxuFpDesc;
-        };
+      modules = {
+        inherit
+          mkIfElse
+          mkOsDesc
+          mkHomeDesc
+          mkFpDesc
+          mkComputedOption
+          mkSwitchOption
+          mkComputedSwitchOption
+          mkSwitchOnOption
+          mkSwitchOffOption
+          mkOsSwitchOption
+          mkOsSwitchOnOption
+          mkOsSwitchOffOption
+          mkHomeSwitchOption
+          mkHomeSwitchOnOption
+          mkHomeSwitchOffOption
+          mkFpSwitchOption
+          mkFpSwitchOnOption
+          mkFpSwitchOffOption
+          ;
+      };
       hyprland =
         let
           mkBind = o: v: k: {
@@ -108,9 +147,9 @@ prev: {
               k
               v
             ]
-            ++ prev.optional (o != { }) o;
+            ++ lib.optional (o != { }) o;
           };
-          mkLuaBind = on2 mkBind prev.generators.mkLuaInline;
+          mkLuaBind = on2 mkBind lib.generators.mkLuaInline;
           mkExecrBind =
             let
               f = v: ''hl.dsp.exec_raw("${v}")'';

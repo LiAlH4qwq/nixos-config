@@ -4,7 +4,7 @@
       (
         config.home-manager.users
         |> builtins.attrValues
-        |> map (cfg: cfg.liuxu.home.gui.zen.enable)
+        |> map (cfg: cfg.liuxu.home.internal.final.gui.zen.enable)
         |> builtins.any lib.id
       );
 

@@ -10,7 +10,7 @@ _: {
       gui = {
         hyprland.enable = true;
         niri.enable = true;
-        zen.enable = true;
+        opt.enable = false;
       };
       opencode.enable = true;
     };
