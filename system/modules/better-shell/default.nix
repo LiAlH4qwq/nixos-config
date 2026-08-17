@@ -2,8 +2,11 @@
 {
   imports = [
     ./bat
+    ./fd
     ./eza
     ./fish
+    ./fzf
+    ./ripgrep
     ./starship
     ./zoxide
   ];
@@ -16,5 +19,6 @@
       enables bat, eza, and set fish and bash aliases:
       cat --> bat
       ls --> eza
+      enables fd, fzf, ripgrep.
   '';
 }
