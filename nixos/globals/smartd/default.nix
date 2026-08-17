@@ -21,4 +21,8 @@
       in
       "-a -m dummy -M test -M exec ${notify-sh-arg}";
   };
+  systemd.services.smartd.after = [
+    "network-online.target"
+    "agenix-install-secrets.service"
+  ];
 }
