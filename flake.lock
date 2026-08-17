@@ -193,6 +193,28 @@
         "type": "github"
       }
     },
+    "github-actions-nix": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780538232,
+        "narHash": "sha256-4fAohjPxuyg7m9iK1A9j/bLgsrNf7Nkqsl9BUks02SE=",
+        "rev": "9068b31c3acd21b5d3354268faf182dafb21f5a5",
+        "revCount": 23,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/synapdeck/github-actions-nix/0.2.0/019e905f-2473-7672-bfd4-3e70f1fceb4b/source.tar.gz?rev=9068b31c3acd21b5d3354268faf182dafb21f5a5&revCount=23"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/synapdeck/github-actions-nix/%2A"
+      }
+    },
     "hermes": {
       "inputs": {
         "flake-parts": [
@@ -626,6 +648,7 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "flat-flake": "flat-flake",
+        "github-actions-nix": "github-actions-nix",
         "hermes": "hermes",
         "home-manager": "home-manager",
         "intransience": "intransience",

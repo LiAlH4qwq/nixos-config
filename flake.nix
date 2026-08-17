@@ -46,6 +46,7 @@ in
         ];
         imports = [
           inputs.flat-flake.flakeModules.flatFlake
+          inputs.github-actions-nix.flakeModules.default
           ./parts
         ];
         _module = {
@@ -54,6 +55,7 @@ in
         };
         systems = import inputs.systems;
         flake.nixConfig = nixConfig;
+        debug = true;
       }
     );
   inherit nixConfig;
@@ -110,6 +112,13 @@ in
       inputs = {
         systems.follows = "systems";
         parsec.follows = "nix-parsec";
+      };
+    };
+    github-actions-nix = {
+      url = "https://flakehub.com/f/synapdeck/github-actions-nix/*";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
       };
     };
     lazyvim = {
