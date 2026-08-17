@@ -1,9 +1,9 @@
-_: {
+{ lib, ... }: {
   perSystem = { config, pkgs, ... }: {
     githubActions = {
       enable = true;
-      workflows.check = {
-        name = "Check";
+      workflows.ci = {
+        name = "CI";
         on = {
           push.branches = [ "main" ];
           workflowDispatch = { };
@@ -12,32 +12,86 @@ _: {
           group = "check";
           cancelInProgress = true;
         };
-        jobs.check = {
-          runsOn = "ubuntu-latest";
-          steps = [
-            {
-              name = "Checkout";
-              uses = "actions/checkout@v4";
-            }
-            {
-              name = "Install Lix";
-              uses = "samueldr/lix-gha-installer-action@v2026-06-15";
-              with_.extra_nix_config = ''
-                accept-flake-config = true
-              '';
-            }
-            {
-              name = "Run checks";
-              run = "nix flake check";
-            }
-          ];
-        };
+        jobs =
+          let
+            stepsCommonLix = [
+              {
+                name = "Checkout";
+                uses = "actions/checkout@v4";
+              }
+              {
+                name = "Install Lix";
+                uses = "samueldr/lix-gha-installer-action@v2026-06-15";
+                with_.extra_nix_config = ''
+                  accept-flake-config = true
+                '';
+              }
+            ];
+          in
+          {
+            check = {
+              runsOn = "ubuntu-latest";
+              steps = stepsCommonLix ++ [
+                {
+                  name = "Run checks";
+                  run = "nix flake check";
+                }
+              ];
+            };
+            build-doc = {
+              runsOn = "ubuntu-latest";
+              needs = [ "check" ];
+              steps = stepsCommonLix ++ [
+                {
+                  name = "Build doc package";
+                  run = "nix build .#doc";
+                }
+                {
+                  name = "Setup pages";
+                  uses = "actions/configure-pages@v5";
+                }
+                {
+                  name = "Upload artifact";
+                  uses = "actions/upload-pages-artifact@v3";
+                  with_.path = "./result";
+                }
+              ];
+            };
+            deploy-doc = {
+              runsOn = "ubuntu-latest";
+              needs = [ "build-doc" ];
+              environment = {
+                name = "github-pages";
+                url = "\${{ steps.deployment.outputs.page_url }}";
+              };
+              steps = [
+                {
+                  id = "deployment";
+                  name = "Deploy to GitHub Pages";
+                  uses = "actions/deploy-pages@v5";
+                }
+              ];
+            };
+          };
       };
     };
 
-    packages.gh-workflows = pkgs.runCommand "gh-workflows" { } ''
-      mkdir -p $out/.github/workflows
-      cp -r ${config.githubActions.workflowsDir}/* $out/.github/workflows/
-    '';
+    packages.ci-yml = config.githubActions.workflowFiles."ci.yml";
+
+    apps.update-ci-yml = {
+      type = "app";
+      program =
+        pkgs.writers.writeFishBin "update-ci-yml" (
+          let
+            lixShArg = pkgs.lix |> lib.getExe |> lib.escapeShellArg;
+            catShArg = "cat" |> lib.getExe' pkgs.uutils-coreutils-noprefix |> lib.escapeShellArg;
+          in
+          ''
+            set -l yml (${lixShArg} build .#ci-yml --no-link --print-out-paths)
+            ${catShArg} "$yml" > .github/workflows/ci.yml
+          ''
+        )
+        |> lib.getExe;
+    };
   };
 }
