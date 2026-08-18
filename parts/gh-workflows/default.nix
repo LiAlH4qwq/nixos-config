@@ -27,6 +27,14 @@
                   access-tokens = github.com=''${{ secrets.GH_TOKEN }}
                 '';
               }
+              {
+                name = "Setup Cachix";
+                uses = "cachix/cachix-action@v17";
+                with_ = {
+                  name = "lialh4";
+                  authToken = "\${{ secrets.CACHIX_TOKEN }}";
+                };
+              }
             ];
           in
           {
