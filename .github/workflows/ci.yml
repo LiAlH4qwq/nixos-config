@@ -17,6 +17,11 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             access-tokens = github.com=${{ secrets.GH_TOKEN }}
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v17
+        with:
+          authToken: ${{ secrets.CACHIX_TOKEN }}
+          name: lialh4
       - name: Build doc package
         run: nix build .#doc
       - name: Setup pages
@@ -36,6 +41,11 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             access-tokens = github.com=${{ secrets.GH_TOKEN }}
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v17
+        with:
+          authToken: ${{ secrets.CACHIX_TOKEN }}
+          name: lialh4
       - name: Run checks
         run: nix flake check
   deploy-doc:
