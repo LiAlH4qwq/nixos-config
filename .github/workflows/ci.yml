@@ -54,6 +54,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     needs:
       - build-doc
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - id: deployment
