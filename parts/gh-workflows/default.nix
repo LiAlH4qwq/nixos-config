@@ -24,6 +24,7 @@
                 uses = "samueldr/lix-gha-installer-action@v2026-06-15";
                 with_.extra_nix_config = ''
                   accept-flake-config = true
+                  access-tokens = github.com=''${{ secrets.GH_TOKEN }}
                 '';
               }
             ];
