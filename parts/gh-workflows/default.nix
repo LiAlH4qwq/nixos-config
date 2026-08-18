@@ -69,7 +69,10 @@
             deploy-doc = {
               runsOn = "ubuntu-latest";
               needs = [ "build-doc" ];
-              permissions.id-token = "write";
+              permissions = {
+                id-token = "write";
+                pages = "write";
+              };
               environment = {
                 name = "github-pages";
                 url = "\${{ steps.deployment.outputs.page_url }}";
