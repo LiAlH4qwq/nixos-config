@@ -324,30 +324,6 @@
         "type": "github"
       }
     },
-    "lazyvim": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780594829,
-        "narHash": "sha256-uWfhrU3xJzha7DQ+i21NlymE9LDqXYxmAwgk5TPYp2g=",
-        "owner": "pfassina",
-        "repo": "lazyvim-nix",
-        "rev": "4028c6c369881a95efcd6559627cc53ccfd06875",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pfassina",
-        "ref": "v16.0.0",
-        "repo": "lazyvim-nix",
-        "type": "github"
-      }
-    },
     "libpam-pwdfile-rs": {
       "inputs": {
         "nixpkgs": [
@@ -653,7 +629,6 @@
         "home-manager": "home-manager",
         "intransience": "intransience",
         "lanzaboote": "lanzaboote",
-        "lazyvim": "lazyvim",
         "libpam-pwdfile-rs": "libpam-pwdfile-rs",
         "nix-kdl": "nix-kdl",
         "nix-on-droid": "nix-on-droid",

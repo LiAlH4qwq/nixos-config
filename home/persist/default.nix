@@ -21,10 +21,6 @@
 
       ".android" # ADB
       ".local/state/syncthing" # Syncthing
-
-      # Lazyvim
-      ".local/share/nvim"
-      ".local/state/nvim"
     ]
     ++ lib.optionals osConfig.liuxu.system.better-shell.enable [
       # Zoxide

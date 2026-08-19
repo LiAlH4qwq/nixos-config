@@ -121,13 +121,6 @@ in
         flake-parts.follows = "flake-parts";
       };
     };
-    lazyvim = {
-      url = "github:pfassina/lazyvim-nix/v16.0.0";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
     uv2nix = {
       url = "github:pyproject-nix/uv2nix";
       inputs = {
