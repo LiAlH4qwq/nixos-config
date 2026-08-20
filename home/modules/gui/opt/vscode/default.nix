@@ -26,13 +26,10 @@
           userSettings = {
             "workbench.secondarySideBar.defaultVisibility" = "hidden"; # No copilot
             "workbench.colorTheme" = "Default Light Modern";
-            "workbench.tree.indent" = 16;
-            "workbench.tree.renderIndentGuides" = "always";
             "window.zoomLevel" = 0.25;
             "editor.formatOnSave" = true;
             "editor.formatOnPaste" = true;
             "editor.fontFamily" = ''"Maple Mono NF CN", monospace'';
-            "editor.fontSize" = 16;
             "editor.fontLigatures" = true;
             "terminal.integrated.fontLigatures.enabled" = true;
             "git.suggestSmartCommit" = false;

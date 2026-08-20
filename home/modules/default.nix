@@ -1,5 +1,7 @@
 _: {
   imports = [
-    ./opt-in
+    ./gui
+    ./opencode
+    ./sdk
   ];
 }
