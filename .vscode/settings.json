@@ -1,4 +1,24 @@
 {
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"nix.enableLanguageServer": true,
+	"nix.serverPath": ["nixd"],
+	"nix.serverSettings": {
+		"nixd": {
+			"options": {
+				"nixos": {
+					"expr": "(builtins.getFlake (toString ./.)).nixosConfigurations.LiAlH4-Laptop.options"
+				},
+				"home-manager": {
+					"expr": "(builtins.getFlake (toString ./.)).nixosConfigurations.LiAlH4-Laptop.options.home-manager.users.type.getSubOptions []"
+				},
+                "flake-parts": {
+					"expr": "(builtins.getFlake (toString ./.)).debug.options"
+				},
+                "flake-parts-per-system": {
+					"expr": "(builtins.getFlake (toString ./.)).currentSystem.options"
+				}
+			}
+		}
+	}
 }
