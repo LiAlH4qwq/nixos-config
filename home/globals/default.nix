@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./bun
     ./pnpm
   ];
 }

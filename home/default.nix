@@ -1,7 +1,6 @@
 { osConfig, pkgs, ... }:
 {
   imports = [
-    ./bun
     ./git
     ./flatpak
     ./globals
