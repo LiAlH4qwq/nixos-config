@@ -17,41 +17,53 @@
         };
         default = {
           extensions = with pkgs.vscode-extensions; [
-            eamodio.gitlens
-            seatonjiang.gitmoji-vscode
-            redhat.vscode-yaml
-            jnoortheen.nix-ide
             biomejs.biome
+            eamodio.gitlens
+            redhat.vscode-yaml
+            seatonjiang.gitmoji-vscode
+            jnoortheen.nix-ide
           ];
           userSettings = {
-            "workbench.secondarySideBar.defaultVisibility" = "hidden"; # No copilot
-            "workbench.colorTheme" = "Default Light Modern";
-            "window.zoomLevel" = 0.25;
-            "editor.formatOnSave" = true;
-            "editor.formatOnPaste" = true;
+            # Fix Biome binary not found
+            "biome.lsp.bin" = "${pkgs.biome}/bin/biome";
+
             "editor.fontFamily" = ''"Maple Mono NF CN", monospace'';
             "editor.fontLigatures" = true;
-            "terminal.integrated.fontLigatures.enabled" = true;
-            "git.suggestSmartCommit" = false;
+            "editor.formatOnPaste" = true;
+            "editor.formatOnSave" = true;
+
+            "git.confirmSync" = false;
             "git.enableSmartCommit" = true;
             "git.smartCommitChanges" = "all";
-            "git.confirmSync" = false;
+            "git.suggestSmartCommit" = false;
+
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = "nixd";
-            "[typescript]" = {
-              "editor.defaultFormatter" = "biomejs.biome";
-            };
+
+            "terminal.integrated.cursorStyle" = "line";
+            "terminal.integrated.fontLigatures.enabled" = true;
+
+            "window.zoomLevel" = 0.375;
+
+            "workbench.colorTheme" = "Default Light Modern";
+            "workbench.secondarySideBar.defaultVisibility" = "hidden"; # No copilot
+            "workbench.tree.indent" = 24;
+            "workbench.tree.renderIndentGuides" = "always";
+
             "[json]" = {
               "editor.defaultFormatter" = "biomejs.biome";
             };
+
+            "[typescript]" = {
+              "editor.defaultFormatter" = "biomejs.biome";
+            };
+
             # Biome rearrange imports.
             # Source: https://biomejs.dev/reference/vscode/#import-sorting
             # Why did it belongs to `assist` but not `formatter`?
             "editor.codeActionsOnSave" = {
               "source.organizeImports.biome" = "explicit";
             };
-            # Fix Biome binary not found
-            "biome.lsp.bin" = "${pkgs.biome}/bin/biome";
           };
         };
       };
