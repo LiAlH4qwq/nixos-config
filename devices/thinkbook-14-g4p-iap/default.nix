@@ -24,7 +24,7 @@
     system.version-when-installed = "25.11";
   };
 
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.
