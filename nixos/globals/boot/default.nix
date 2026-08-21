@@ -4,6 +4,10 @@
   ...
 }:
 {
+  imports = [
+    (lib.mkAliasOptionModule [ "liuxu" "nixos" "kernel" "package" ] [ "boot" "kernelPackages" ])
+  ];
+
   boot = {
     loader = {
       timeout = lib.mkDefault 0;

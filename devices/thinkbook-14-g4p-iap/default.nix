@@ -11,6 +11,7 @@
       brightness.enable = true;
       fingerprint.enable = true;
       flatpak.enable = true;
+      kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
       # measured-boot.enable = true;
       laptop.enable = true;
       podman.enable = true;
@@ -23,8 +24,6 @@
     };
     system.version-when-installed = "25.11";
   };
-
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.
