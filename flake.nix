@@ -191,15 +191,6 @@ in
         pre-commit.follows = "";
       };
     };
-    bun2nix = {
-      url = "github:nix-community/bun2nix/2.1.2";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        flake-parts.follows = "flake-parts";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
     tg-transient = {
       url = "github:lialh4qwq/tg-transient";
       inputs = {
@@ -207,7 +198,6 @@ in
         systems.follows = "systems";
         flake-parts.follows = "flake-parts";
         treefmt-nix.follows = "treefmt-nix";
-        bun2nix.follows = "bun2nix";
       };
     };
     nix-on-droid = {
