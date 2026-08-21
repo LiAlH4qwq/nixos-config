@@ -4,6 +4,7 @@
     ./bun
     ./git
     ./flatpak
+    ./globals
     ./modules
     ./persist
     ./shell
