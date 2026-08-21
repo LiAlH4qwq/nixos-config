@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }:
 {
@@ -11,5 +12,6 @@
     };
     initrd.systemd.enable = true;
     kernel.sysctl."kernel.sysrq" = 1;
+    kernelPackages = lib.mkDefault pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
   };
 }

@@ -7,7 +7,6 @@
 {
   imports = [
     "${self}/system"
-    ./boot
     ./globals
     ./home-manager
     ./i18n

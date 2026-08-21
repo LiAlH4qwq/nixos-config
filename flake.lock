@@ -52,6 +52,30 @@
         "type": "github"
       }
     },
+    "cachyos-kernel": {
+      "inputs": {
+        "flake-compat": [],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787248950,
+        "narHash": "sha256-eq5FwprGyjytM68pitTTFT3fi0cSsF1M6v7h3rdcqj0=",
+        "owner": "xddxdd",
+        "repo": "nix-cachyos-kernel",
+        "rev": "c69c33c24148defbcc34ab25456cc460bc33fdbb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xddxdd",
+        "repo": "nix-cachyos-kernel",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1787275140,
@@ -588,6 +612,7 @@
       "inputs": {
         "agenix": "agenix",
         "agl": "agl",
+        "cachyos-kernel": "cachyos-kernel",
         "crane": "crane",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",

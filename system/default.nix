@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  self,
   ...
 }:
 {
@@ -26,9 +27,10 @@
     # We won't sacrifice our experience for FOSS.
     config.allowUnfree = true;
     overlays = [
-      inputs.self.overlays.default
+      self.overlays.default
       inputs.ragenix.overlays.default
       inputs.tg-transient.overlays.default
+      inputs.cachyos-kernel.overlays.pinned
       inputs.firefox-addons.overlays.default
     ];
   };

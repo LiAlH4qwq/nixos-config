@@ -1,3 +1,6 @@
 _: {
-  imports = [ ./smartd ];
+  imports = [
+    ./boot
+    ./smartd
+  ];
 }

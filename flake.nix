@@ -13,12 +13,17 @@ let
       "https://noctalia.cachix.org"
       # inputs.agl
       "https://ezkea.cachix.org"
+      # inputs.cachyos-kernel
+      "https://attic.xuyh0120.win/lantian"
+      "https://cache.xinux.uz"
       "https://lialh4.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
       "lialh4.cachix.org-1:4j2YJj81SVMTyZWnEnMFnQ/I5j2g2IdFinQ8m9dv5c4="
     ];
   };
@@ -134,6 +139,14 @@ in
         # Error when follows stable.
         nixpkgs.follows = "nixpkgs-unstable";
         home-manager.follows = "home-manager";
+      };
+    };
+    cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        flake-compat.follows = "";
       };
     };
     peer-ban-helper = {
