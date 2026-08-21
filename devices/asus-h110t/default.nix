@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./fs
     ./users
@@ -54,6 +54,7 @@
           ];
         };
       };
+      kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
       network = {
         firewalld = {
           services = {
