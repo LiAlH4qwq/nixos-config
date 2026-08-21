@@ -42,6 +42,11 @@ in
           };
         };
         flatFlake.config.allowed = [
+          # Shouldn't override.
+          [
+            "cachyos-kernel"
+            "nixpkgs"
+          ]
           # Not possible to flatten.
           # See: https://github.com/nix-community/nix-on-droid/blob/55b6449b4582a4ba3ce712543c973360a026db7d/flake.nix#L7
           [
