@@ -6,6 +6,7 @@ _: {
         disabled = false;
         fish_indicator = "󰈺";
         bash_indicator = "";
+        nu_indicator = "󰟢";
       };
       shlvl = {
         disabled = false;
@@ -14,6 +15,119 @@ _: {
         symbol = "❯";
         repeat_offset = 1;
       };
+      status = {
+        disabled = false;
+        map_symbol = true;
+        format = "[$signal_name$symbol$common_meaning$maybe_int]($style)";
+      };
+      format =
+        builtins.concatStringsSep ""
+        <| map (x: "\$${x}")
+        <| [
+          "username"
+          "hostname"
+          "localip"
+          "shlvl"
+          "singularity"
+          "kubernetes"
+          "nats"
+          "directory"
+          "vcsh"
+          "fossil_branch"
+          "fossil_metrics"
+          "git_branch"
+          "git_commit"
+          "git_state"
+          "git_metrics"
+          "git_status"
+          "hg_branch"
+          "hg_state"
+          "pijul_channel"
+          "docker_context"
+          "package"
+          "bun"
+          "c"
+          "cmake"
+          "cobol"
+          "cpp"
+          "daml"
+          "dart"
+          "deno"
+          "dotnet"
+          "elixir"
+          "elm"
+          "erlang"
+          "fennel"
+          "fortran"
+          "gleam"
+          "golang"
+          "gradle"
+          "haskell"
+          "haxe"
+          "helm"
+          "java"
+          "julia"
+          "kotlin"
+          "lua"
+          "maven"
+          "mojo"
+          "nim"
+          "nodejs"
+          "ocaml"
+          "odin"
+          "opa"
+          "perl"
+          "php"
+          "pulumi"
+          "purescript"
+          "python"
+          "quarto"
+          "raku"
+          "rlang"
+          "red"
+          "ruby"
+          "rust"
+          "scala"
+          "solidity"
+          "swift"
+          "terraform"
+          "typst"
+          "vlang"
+          "vagrant"
+          "xmake"
+          "zig"
+          "buf"
+          "guix_shell"
+          "nix_shell"
+          "conda"
+          "pixi"
+          "meson"
+          "spack"
+          "memory_usage"
+          "aws"
+          "gcloud"
+          "openstack"
+          "azure"
+          "direnv"
+          "env_var"
+          "mise"
+          "crystal"
+          "custom"
+          "sudo"
+          "status"
+          "cmd_duration"
+
+          "line_break"
+
+          "jobs"
+          "battery"
+          "time"
+          "container"
+          "netns"
+          "os"
+          "shell"
+          "character"
+        ];
     };
   };
 }
