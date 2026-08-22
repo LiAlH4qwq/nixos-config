@@ -19,7 +19,15 @@
           {
             nixos-packages = {
               name = "NixOS Packages";
-              definedAliases = [ "@pack" ];
+              definedAliases = [
+                "@pkg"
+                "@pkgs"
+                "@nixpkgs"
+                "@package"
+                "@packages"
+                "@pack"
+                "@packs"
+              ];
               icon = flake-icon;
               urls = [
                 {
@@ -32,7 +40,11 @@
             };
             nixos-options = {
               name = "NixOS Options";
-              definedAliases = [ "@os" ];
+              definedAliases = [
+                "@os"
+                "@nixos"
+                "@system"
+              ];
               icon = flake-icon;
               urls = [
                 {
