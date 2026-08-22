@@ -14,7 +14,13 @@
     };
   };
 
+  home.sessionPath = [
+    "$HOME/.local/share/npm/bin"
+    "$HOME/.local/share/npm/bin/pnpm"
+  ];
+
   liuxu.home.internal.intransience.dirs = [
+    ".cache/node/corepack"
     ".local/share/npm"
     ".local/share/pnpm/store"
   ];
