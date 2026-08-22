@@ -12,8 +12,8 @@
       fingerprint.enable = true;
       flatpak.enable = true;
       kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
-      # measured-boot.enable = true;
       laptop.enable = true;
+      nh.flake = "/mnt/data/lialh4/Projects/nixos-config";
       podman.enable = true;
       secureboot.enable = true;
       tlp.disks = [

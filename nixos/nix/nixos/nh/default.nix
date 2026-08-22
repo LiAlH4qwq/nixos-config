@@ -1,4 +1,20 @@
-_: {
+{ lib, ... }: {
+  imports = [
+    (lib.mkAliasOptionModule (
+      [
+        "liuxu"
+        "nixos"
+        "nh"
+        "flake"
+      ]
+        [
+          "programs"
+          "nh"
+          "flake"
+        ]
+    ))
+  ];
+
   programs.nh = {
     enable = true;
     clean = {
