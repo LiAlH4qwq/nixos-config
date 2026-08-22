@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   environment.etc = {
     subuid = {
@@ -13,7 +13,8 @@
 
   users.extraUsers.lialh4 = {
     isNormalUser = true;
-    useDefaultShell = true;
+    # useDefaultShell = true;
+    shell = pkgs.nushell;
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Laptop.users.lialh4.password.path;
     openssh.authorizedKeys.keys = [
