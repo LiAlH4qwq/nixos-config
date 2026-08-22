@@ -6,7 +6,6 @@
     ./globals
     ./modules
     ./persist
-    ./shell
     ./ssh
     ./syncthing
     ./uv

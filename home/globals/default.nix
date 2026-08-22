@@ -3,5 +3,6 @@ _: {
     ./bun
     ./deno
     ./node
+    ./shell
   ];
 }
