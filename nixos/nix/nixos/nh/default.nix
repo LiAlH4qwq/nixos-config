@@ -1,18 +1,18 @@
 { lib, ... }: {
   imports = [
-    (lib.mkAliasOptionModule (
+    (lib.mkAliasOptionModule
       [
         "liuxu"
         "nixos"
         "nh"
         "flake"
       ]
-        [
-          "programs"
-          "nh"
-          "flake"
-        ]
-    ))
+      [
+        "programs"
+        "nh"
+        "flake"
+      ]
+    )
   ];
 
   programs.nh = {
