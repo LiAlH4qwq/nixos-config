@@ -103,38 +103,30 @@
             after = [ "agenix-install-secrets.service" ];
             script =
               let
-                cfgFileIn = "${cfgFile}.in";
-                cfgFileIn2 = "${cfgFileIn}.in";
-                settings = config.liuxu.nixos.network.mihoyo.extraConfig;
                 cfgDirShArg = cfgDir |> lib.escapeShellArg;
                 cfgFileShArg = cfgFile |> lib.escapeShellArg;
-                cfgFileInShArg = cfgFileIn |> lib.escapeShellArg;
-                cfgFileIn2ShArg = cfgFileIn2 |> lib.escapeShellArg;
-                settingsShArg = settings |> builtins.toJSON |> lib.escapeShellArg;
+                mkYaml = (pkgs.formats.yaml_1_2 { }).generate;
+                settings = config.liuxu.nixos.network.mihoyo.extraConfig;
+                settingsYaml = mkYaml "mihoyo-settings" settings;
+                settingsShArg = settingsYaml |> lib.escapeShellArg;
                 secrets = config.liuxu.nixos.network.mihoyo.providerUrlFiles;
-                secretsEncoded = secrets |> lib.mapAttrsToList (n: v: "${n}\t${v}") |> lib.concatStringsSep "\n";
-                secretsShArg = secretsEncoded |> lib.escapeShellArg;
+                secretsYaml = mkYaml "mihoyo-secrets" secrets;
+                secretsShArg = secretsYaml |> lib.escapeShellArg;
               in
               ''
+                let partialSettings = open ${settingsShArg} | from yaml
+                let originalSecrets = open ${secretsShArg} | from yaml
+                let mappedSecrets = $originalSecrets | items { |name, secretPath|
+                  let secret = open $secretPath | str trim
+                  { ($name): { url: ($secret) } }
+                } | reduce --fold {} { |cur, acc|
+                  $acc | merge deep $cur
+                }
+                let wrappedSecrets = { proxy-providers: ($mappedSecrets) }
+                let finalSettings = $partialSettings | merge deep $wrappedSecrets
                 install -dm 0700 ${cfgDirShArg}
-                printf '%s' ${settingsShArg} > ${cfgFileInShArg}
-                set -l lines (string split \n -- ${secretsShArg})
-                for line in $lines
-                  set -l parts (string split \t -- $line)
-                  set -l name $parts[1]
-                  set -l path $parts[2]
-                  set -l secret (cat $path | string collect)
-                  ${pkgs.jq}/bin/jq \
-                    -c \
-                    --arg name "$name" \
-                    --arg secret "$secret" \
-                    '.["proxy-providers"].[$name].url = $secret' \
-                    ${cfgFileInShArg} > ${cfgFileIn2ShArg}
-                   mv ${cfgFileIn2ShArg} ${cfgFileInShArg}
-                   rm -f ${cfgFileIn2ShArg}
-                end
-                mv ${cfgFileInShArg} ${cfgFileShArg}
-                rm -f ${cfgFileInShArg}
+                install -m 0600 /dev/null ${cfgFileShArg}
+                $finalSettings | save -f ${cfgFileShArg}
               '';
           in
           {
@@ -144,9 +136,7 @@
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
-              ExecStart = "${lib.getExe pkgs.fish} ${
-                script |> pkgs.writeText "mihoyo.fish" |> lib.escapeShellArg
-              }";
+              ExecStart = lib.getExe <| pkgs.writers.writeNuBin "mihoyo-secrets" script;
             };
           };
       };

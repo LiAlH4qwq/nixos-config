@@ -177,29 +177,20 @@
           requiredBy = before;
           requires = after;
           serviceConfig.ExecStart =
-            pkgs.writers.writeFishBin "samba-set-password" (
+            pkgs.writers.writeNuBin "samba-set-password" (
               let
-                cat = "cat" |> lib.getExe' pkgs.uutils-coreutils-noprefix;
-                catShArg = cat |> lib.escapeShellArg;
                 smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
                 smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
-                upt =
-                  cfg.passwordFile
-                  |> lib.attrsToList
-                  |> map (x: "${x.name}\t${x.value}")
-                  |> builtins.concatStringsSep "\n";
-                uptShArg = lib.escapeShellArg upt;
+                mkYaml = (pkgs.formats.yaml_1_2 { }).generate;
+                passwordsYaml = mkYaml "samba-passwords" cfg.passwordFile;
+                passwordsYamlShArg = passwordsYaml |> lib.escapeShellArg;
               in
               ''
-                set -l upt ${uptShArg}
-                set -l ups (string split \n "$upt")
-                for up in $ups
-                  set -l upp (string split \t "$up")
-                  set -l u "$upp[1]"
-                  set -l p "$upp[2]"
-                  set -l rp (${catShArg} "$p" | string collect)
-                  echo "$rp"\n"$rp" | string collect | ${smbpasswdShArg} -sa "$u"
-                end
+                let passwordFiles = open ${passwordsYamlShArg} | from yaml
+                $passwordFiles | items {|user, passwordFile|
+                  let password = open ($passwordFile) | str trim
+                  echo $"($password)\n($password)" | ${smbpasswdShArg} -sa ($user) 
+                } | ignore
               ''
             )
             |> lib.getExe;
