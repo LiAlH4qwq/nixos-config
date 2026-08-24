@@ -7,6 +7,19 @@
     };
   };
   items = {
+    ai.accessToken =
+      let
+        args = {
+          _isArgs = true;
+          keys = lib.attrValuesRecursive config.keys;
+          user = "lialh4";
+          group = "users";
+        };
+      in
+      {
+        kimi = args;
+        mimo = args;
+      };
     mihoyo.alink = true;
     smartd.bot = {
       target = true;
@@ -16,6 +29,7 @@
       LiAlH4-Laptop.users.lialh4.password = true;
       LiAlH4-Server = {
         users.lialh4.password = true;
+        samba.users.lialh4.passwordFile = true;
         cloudflare-ddns.credentialsFile = {
           _isArgs = true;
           keys = lib.attrValuesRecursive config.keys;
@@ -24,7 +38,6 @@
         };
         cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
         hermes.environmentFile = true;
-        samba.users.lialh4.passwordFile = true;
       };
     };
   };
