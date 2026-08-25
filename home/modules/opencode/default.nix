@@ -16,10 +16,17 @@
   };
 
   config = lib.mkIf config.liuxu.home.opencode.enable {
-    programs.opencode = {
-      enable = true;
-      settings = {
-        autoupdate = false;
+    programs = {
+      opencode = {
+        enable = true;
+        enableMcpIntegration = true;
+        settings = {
+          autoupdate = false;
+        };
+      };
+      mcp = {
+        enable = true;
+        servers.nixos.command = lib.getExe <| pkgs.mcp-nixos;
       };
     };
 
