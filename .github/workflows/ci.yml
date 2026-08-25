@@ -25,7 +25,7 @@ jobs:
       - name: Build doc package
         run: nix build .#doc
       - name: Setup pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
