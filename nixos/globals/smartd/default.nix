@@ -21,8 +21,15 @@
       in
       "-a -m dummy -M test -M exec ${notify-sh-arg}";
   };
-  systemd.services.smartd.after = [
-    "network-online.target"
-    "agenix-install-secrets.service"
-  ];
+  systemd.services.smartd =
+    let
+      after = [
+        "network-online.target"
+        "agenix-install-secrets.service"
+      ];
+    in
+    {
+      inherit after;
+      wants = after;
+    };
 }

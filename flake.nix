@@ -216,6 +216,7 @@ in
         systems.follows = "systems";
         flake-parts.follows = "flake-parts";
         treefmt-nix.follows = "treefmt-nix";
+        github-actions-nix.follows = "github-actions-nix";
       };
     };
     nix-on-droid = {

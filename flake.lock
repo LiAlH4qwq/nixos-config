@@ -208,31 +208,6 @@
         "url": "https://flakehub.com/f/synapdeck/github-actions-nix/%2A"
       }
     },
-    "github-actions-nix_2": {
-      "inputs": {
-        "flake-parts": [
-          "tg-transient",
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "tg-transient",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780538232,
-        "narHash": "sha256-4fAohjPxuyg7m9iK1A9j/bLgsrNf7Nkqsl9BUks02SE=",
-        "owner": "synapdeck",
-        "repo": "github-actions-nix",
-        "rev": "9068b31c3acd21b5d3354268faf182dafb21f5a5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "synapdeck",
-        "repo": "github-actions-nix",
-        "type": "github"
-      }
-    },
     "hermes": {
       "inputs": {
         "flake-parts": [
@@ -724,7 +699,9 @@
         "flake-parts": [
           "flake-parts"
         ],
-        "github-actions-nix": "github-actions-nix_2",
+        "github-actions-nix": [
+          "github-actions-nix"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
