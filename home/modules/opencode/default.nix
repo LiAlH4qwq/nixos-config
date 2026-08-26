@@ -41,6 +41,7 @@
         <| pkgs.writers.writeNuBin "opencode-secrets" ''
           let kimi = open /run/agenix/ai.accessToken.kimi | str trim
           let mimo = open /run/agenix/ai.accessToken.mimo | str trim
+          let deepseek = open /run/agenix/ai.accessToken.deepseek | str trim
           let secrets = {
             kimi-for-coding: {
               type: api
@@ -49,6 +50,10 @@
             xiaomi-token-plan-cn: {
               type: api
               key: ($mimo)
+            }
+            deepseek: {
+              type: api
+              key: ($deepseek)
             }
           }
           mkdir ~/.local/share/opencode/

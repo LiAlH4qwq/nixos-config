@@ -12,12 +12,13 @@ let
     partialConfig = partialConfigSelf;
   };
   itemsSelf = configSelf.items;
-  finalItemsSelf = libSelf.pipe itemsSelf [
+  osItemsSelf = itemsSelf.os;
+  finalOsItemsSelf = libSelf.pipe osItemsSelf [
     (libSelf.mapAttrsUntilArgs (
       p: v:
       {
         _isArgs = true;
-        file = ./. + "/${libSelf.pathToStr p}.age";
+        file = ./. + "/os/${libSelf.pathToStr p}";
       }
       // (
         if v == true then
@@ -30,7 +31,7 @@ let
       )
     ))
   ];
-  flatItemsSelf = libSelf.pipe finalItemsSelf [ libSelf.attrsToFlatAttrs ];
+  flatOsItemsSelf = libSelf.pipe finalOsItemsSelf [ libSelf.attrsToFlatAttrs ];
 in
 {
   imports = [ inputs.ragenix.nixosModules.default ];
@@ -45,7 +46,7 @@ in
       # in
       # pathTree;
       lib.types.anything;
-    default = libSelf.pipe finalItemsSelf [
+    default = libSelf.pipe finalOsItemsSelf [
       (libSelf.mapAttrsUntilArgs (
         p: v: { _isArgs = true; } // builtins.getAttr (libSelf.pathToStr p) config.age.secrets
       ))
@@ -63,6 +64,6 @@ in
     # before impermanence mounts keys in `/etc/ssh`
     # which results in decryption failed.
     identityPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-    secrets = flatItemsSelf;
+    secrets = flatOsItemsSelf;
   };
 }

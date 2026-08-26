@@ -7,37 +7,40 @@
     };
   };
   items = {
-    ai.accessToken =
-      let
-        args = {
-          _isArgs = true;
-          keys = lib.attrValuesRecursive config.keys;
-          user = "lialh4";
-          group = "users";
+    os = {
+      ai.accessToken =
+        let
+          args = {
+            _isArgs = true;
+            keys = lib.attrValuesRecursive config.keys;
+            user = "lialh4";
+            group = "users";
+          };
+        in
+        {
+          kimi = args;
+          mimo = args;
+          deepseek = args;
         };
-      in
-      {
-        kimi = args;
-        mimo = args;
+      mihoyo.alink = true;
+      smartd.bot = {
+        target = true;
+        token = true;
       };
-    mihoyo.alink = true;
-    smartd.bot = {
-      target = true;
-      token = true;
-    };
-    devices = {
-      LiAlH4-Laptop.users.lialh4.password = true;
-      LiAlH4-Server = {
-        users.lialh4.password = true;
-        samba.users.lialh4.passwordFile = true;
-        cloudflare-ddns.credentialsFile = {
-          _isArgs = true;
-          keys = lib.attrValuesRecursive config.keys;
-          user = "cloudflare-ddns";
-          group = "cloudflare-ddns";
+      devices = {
+        LiAlH4-Laptop.users.lialh4.password = true;
+        LiAlH4-Server = {
+          users.lialh4.password = true;
+          samba.users.lialh4.passwordFile = true;
+          cloudflare-ddns.credentialsFile = {
+            _isArgs = true;
+            keys = lib.attrValuesRecursive config.keys;
+            user = "cloudflare-ddns";
+            group = "cloudflare-ddns";
+          };
+          cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
+          hermes.environmentFile = true;
         };
-        cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
-        hermes.environmentFile = true;
       };
     };
   };
