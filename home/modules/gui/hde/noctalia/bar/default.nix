@@ -7,7 +7,6 @@
       radius = 0;
       shadow = false;
       scale = 1.2;
-      thicknes = 36;
       start = [ "workspaces" ];
       center = [
         "clock"
