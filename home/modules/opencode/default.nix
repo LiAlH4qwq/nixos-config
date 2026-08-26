@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
@@ -38,27 +39,33 @@
       Install.WantedBy = [ "default.target" ];
       Service.ExecStart =
         lib.getExe
-        <| pkgs.writers.writeNuBin "opencode-secrets" ''
-          let kimi = open /run/agenix/ai.accessToken.kimi | str trim
-          let mimo = open /run/agenix/ai.accessToken.mimo | str trim
-          let deepseek = open /run/agenix/ai.accessToken.deepseek | str trim
-          let secrets = {
-            kimi-for-coding: {
-              type: api
-              key: ($kimi)
-            }
-            xiaomi-token-plan-cn: {
-              type: api
-              key: ($mimo)
-            }
-            deepseek: {
-              type: api
-              key: ($deepseek)
-            }
-          }
-          mkdir ~/.local/share/opencode/
-          $secrets | save -f ~/.local/share/opencode/auth.json
-        '';
+        <| pkgs.writers.writeNuBin "opencode-secrets" (
+          let
+            secretsPathShArg =
+              osConfig.age.secretsV2.ai.accessToken
+              |> lib.mapAttrs' (
+                n: v: {
+                  name =
+                    if n == "kimi" then
+                      "kimi-for-coding"
+                    else if n == "mimo" then
+                      "xiaomi-token-plan-cn"
+                    else
+                      n;
+                  value = {
+                    type = "api";
+                    key = v.path;
+                  };
+                }
+              )
+              |> (pkgs.formats.json { }).generate "opencode-secrets"
+              |> lib.escapeShellArg;
+          in
+          ''
+            mkdir ~/.local/share/opencode/
+            open ${secretsPathShArg} | save -f ~/.local/share/opencode/auth.json
+          ''
+        );
     };
   };
 }

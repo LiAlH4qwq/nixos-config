@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -24,10 +25,12 @@ let
         if v == true then
           { }
         else
-          {
-            owner = v.user or "root";
-            group = v.group or "root";
-          }
+          (
+            { }
+            // (if (v ? perm) then { mode = v.perm; } else { })
+            // (if (v ? user) then { owner = v.user; } else { })
+            // (if (v ? group) then { inherit (v) group; } else { })
+          )
       )
     ))
   ];
@@ -59,6 +62,7 @@ in
   };
 
   config.age = {
+    ageBin = lib.getExe pkgs.rage;
     # Fix conflicting with impermanence.
     # Otherwise, the agenix will try to do decryption
     # before impermanence mounts keys in `/etc/ssh`

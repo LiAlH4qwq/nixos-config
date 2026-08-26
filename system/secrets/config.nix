@@ -13,7 +13,7 @@
           args = {
             _isArgs = true;
             keys = lib.attrValuesRecursive config.keys;
-            user = "lialh4";
+            perm = "0440";
             group = "users";
           };
         in
