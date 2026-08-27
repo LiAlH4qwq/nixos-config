@@ -28,6 +28,7 @@
     config.allowUnfree = true;
     overlays = [
       self.overlays.default
+      inputs.dsh.overlays.default
       inputs.ragenix.overlays.default
       inputs.tg-transient.overlays.default
       inputs.cachyos-kernel.overlays.pinned

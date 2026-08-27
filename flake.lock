@@ -90,6 +90,32 @@
         "type": "github"
       }
     },
+    "dsh": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787810425,
+        "narHash": "sha256-8XpbW4diqb19Lx0Aq85BgdZuGTF1B79kl6O+hCchRm8=",
+        "owner": "moraxyc",
+        "repo": "deepseek-harness.nix",
+        "rev": "c5da77d858923688069722878017be7eb7072408",
+        "type": "github"
+      },
+      "original": {
+        "owner": "moraxyc",
+        "repo": "deepseek-harness.nix",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -629,6 +655,7 @@
         "agl": "agl",
         "cachyos-kernel": "cachyos-kernel",
         "crane": "crane",
+        "dsh": "dsh",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",

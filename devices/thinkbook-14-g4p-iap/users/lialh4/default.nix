@@ -23,6 +23,7 @@
   };
   home-manager.users.lialh4 = {
     liuxu.home = {
+      dsh.enable = true;
       gui = {
         hyprland.enable = true;
         niri.enable = true;

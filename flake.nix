@@ -10,6 +10,7 @@ let
       # "https://mirrors.nju.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
+      "https://deepseek-harness-nix.cachix.org"
       "https://noctalia.cachix.org"
       # inputs.agl
       "https://ezkea.cachix.org"
@@ -20,6 +21,7 @@ let
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "deepseek-harness-nix.cachix.org-1:5NrkwLN9veNMhiINtU5ZeV4isXFhFsOwn6Ms7J1M+TA="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
@@ -152,6 +154,14 @@ in
         # Shouldn't override nixpkgs.
         flake-parts.follows = "flake-parts";
         flake-compat.follows = "";
+      };
+    };
+    dsh = {
+      url = "github:moraxyc/deepseek-harness.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
       };
     };
     peer-ban-helper = {
