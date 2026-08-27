@@ -10,13 +10,12 @@
   xdg.configFile.pnpm-global-config = {
     target = "pnpm/config.yaml";
     text = builtins.toJSON {
-      storeDir = "~/.local/share/pnpm/store";
+      storeDir = "\${HOME}/.local/share/pnpm/store";
     };
   };
 
   home.sessionPath = [
-    "$HOME/.local/share/npm/bin"
-    "$HOME/.local/share/npm/bin/pnpm"
+    "\${HOME}/.local/share/npm/bin"
   ];
 
   liuxu.home.internal.intransience.dirs = [
