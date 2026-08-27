@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.npm = {
     enable = true;
     package = pkgs.nodejs_latest;
@@ -19,9 +19,7 @@
   ];
 
   # Fix non-posix shell don't load path
-  programs.nushell.extraEnv = [
-    ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]''
-  ];
+  programs.nushell.extraEnv = lib.mkAfter ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]'';
 
   liuxu.home.internal.intransience.dirs = [
     ".cache/node/corepack"
