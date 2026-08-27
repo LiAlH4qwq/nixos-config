@@ -28,38 +28,48 @@
       extraArguments = [ "--no-open" ];
       environmentFile = "${config.programs.dsh.home}/.env";
     };
-    systemd.user.services = {
-      dsh-web.Service =
-        let
-          cfg = config.services.dsh;
-          escapeHome = lib.replaceString "\${HOME}" "%h";
-        in
-        {
-          Environment = "DSH_HOME=${cfg.dataDir}";
-          EnvironmentFile = cfg.environmentFile;
-          WorkingDirectory = lib.mkForce <| escapeHome cfg.workspace;
-        };
-      dsh-secrets =
-        let
-          before = [ "dsh-web.service" ];
-        in
-        {
-          Unit.Before = before;
-          Install.WantedBy = before;
-          Service = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            ExecStart =
-              lib.getExe
-              <| pkgs.writers.writeNuBin "dsh-secrets" ''
-                let secret = open ${
-                  lib.escapeShellArg <| osConfig.age.secretsV2.ai.accessToken.deepseek.path
-                } | str trim
-                $"DEEPSEEK_API_KEY=($secret)" | save -f ${lib.escapeShellArg <| config.services.dsh.environmentFile}
-              '';
+    systemd.user.services =
+      let
+        cfg = config.services.dsh;
+      in
+      {
+        dsh-web.Service = builtins.mapAttrs (lib.liuxu.const lib.mkForce) (
+          let
+            escapeHome = lib.replaceString "\${HOME}" "%h";
+          in
+          {
+            Environment = "DSH_HOME=${escapeHome cfg.dataDir}";
+            EnvironmentFile = escapeHome cfg.environmentFile;
+            WorkingDirectory = escapeHome cfg.workspace;
+          }
+        );
+        dsh-secrets =
+          let
+            before = [ "dsh-web.service" ];
+          in
+          {
+            Unit.Before = before;
+            Install.WantedBy = before;
+            Service = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+              ExecStart =
+                lib.getExe
+                <| pkgs.writers.writeNuBin "dsh-secrets" (
+                  let
+                    escapeHome = lib.liuxu.o lib.escapeShellArg (lib.replaceString "\${HOME}" "~");
+                  in
+                  ''
+                    let secret = open ${
+                      lib.escapeShellArg <| osConfig.age.secretsV2.ai.accessToken.deepseek.path
+                    } | str trim
+                    mkdir ${escapeHome <| config.services.dsh.dataDir}
+                    $"DEEPSEEK_API_KEY=($secret)" | save -f ${escapeHome <| config.services.dsh.environmentFile}
+                  ''
+                );
+            };
           };
-        };
-    };
+      };
     liuxu.home.internal.intransience.dirs = [ ".local/share/dsh" ];
   };
 }

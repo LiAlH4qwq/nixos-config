@@ -114,7 +114,7 @@ _: {
           "crystal"
           "custom"
           "sudo"
-          "status"
+          "status "
           "cmd_duration"
 
           "line_break"
