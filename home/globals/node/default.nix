@@ -19,7 +19,7 @@
   ];
 
   # Fix non-posix shell don't load path
-  programs.nushell.environmentVariables.extraEnv = [
+  programs.nushell.extraEnv = [
     ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]''
   ];
 
