@@ -30,10 +30,14 @@
     udisks2.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    pciutils # `lspci`
-    usbutils # `lsusb`
-  ];
+  environment = {
+    defaultPackages = lib.mkForce [ ];
+    systemPackages = with pkgs; [
+      nushell
+      pciutils # `lspci`
+      usbutils # `lsusb`
+    ];
+  };
 
   hardware.enableRedistributableFirmware = true;
 }
