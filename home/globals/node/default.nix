@@ -18,6 +18,11 @@
     "\${HOME}/.local/share/npm/bin"
   ];
 
+  # Fix non-posix shell don't load path
+  programs.nushell.environmentVariables.extraEnv = [
+    ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]''
+  ];
+
   liuxu.home.internal.intransience.dirs = [
     ".cache/node/corepack"
     ".local/share/npm"
