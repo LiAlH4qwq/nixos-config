@@ -129,15 +129,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1787895526,
-        "narHash": "sha256-jUPBK6MzJkO2Ba1SgeZtCyMs9WlC8x3VFPdPjvzL0As=",
+        "lastModified": 1787849574,
+        "narHash": "sha256-IohB7NgtDxPpPmKV6BpwqT/9qvi6CEhKEagUjB32rsI=",
         "owner": "moraxyc",
         "repo": "deepseek-harness.nix",
-        "rev": "5b5f28e9ff67d4411ebd519eb4ad4a1fe3ec79c8",
+        "rev": "3a2e464f4b79b09c45abc7eff985d3d9ec74efdd",
         "type": "github"
       },
       "original": {
         "owner": "moraxyc",
+        "ref": "auto-update/web-ui",
         "repo": "deepseek-harness.nix",
         "type": "github"
       }

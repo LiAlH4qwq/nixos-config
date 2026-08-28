@@ -157,7 +157,7 @@ in
       };
     };
     dsh = {
-      url = "github:moraxyc/deepseek-harness.nix";
+      url = "github:moraxyc/deepseek-harness.nix/auto-update/web-ui";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
