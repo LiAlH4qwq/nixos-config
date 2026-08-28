@@ -20,7 +20,7 @@
       home = "\${HOME}/.local/share/dsh";
       defaultProfile = config.programs.dsh.profiles.web.materializedName;
       profiles.web = {
-        bundles = [ pkgs.dsh.bundles.web-app ];
+        bundles = [ pkgs.dsh.bundles.web-ui ];
       };
     };
     services.dsh = {
