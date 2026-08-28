@@ -1,5 +1,12 @@
-{ lib, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
+    inputs.aml-flash-tool.nixosModules.default
     ./fs
     ./fingerprint
     ./users
@@ -24,6 +31,8 @@
     };
     system.version-when-installed = "25.11";
   };
+
+  programs.aml-flash-tool.enable = true;
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.

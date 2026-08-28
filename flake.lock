@@ -52,6 +52,32 @@
         "type": "github"
       }
     },
+    "aml-flash-tool": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787908456,
+        "narHash": "sha256-L0ShMljWi9F3cthULCwXrBGge32viBVnwjfWcGthTW4=",
+        "owner": "lialh4qwq",
+        "repo": "aml-flash-tool-nix",
+        "rev": "d05fd99a7120353906e7fca86d1b5fb7a51240ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lialh4qwq",
+        "repo": "aml-flash-tool-nix",
+        "type": "github"
+      }
+    },
     "cachyos-kernel": {
       "inputs": {
         "flake-compat": [],
@@ -653,6 +679,7 @@
       "inputs": {
         "agenix": "agenix",
         "agl": "agl",
+        "aml-flash-tool": "aml-flash-tool",
         "cachyos-kernel": "cachyos-kernel",
         "crane": "crane",
         "dsh": "dsh",
