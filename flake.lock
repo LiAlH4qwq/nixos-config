@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787908456,
-        "narHash": "sha256-L0ShMljWi9F3cthULCwXrBGge32viBVnwjfWcGthTW4=",
+        "lastModified": 1787909594,
+        "narHash": "sha256-QMzwDJ+sGwGt54dLKEE2sk4MYMKDDzQWeFE0MDIbhiY=",
         "owner": "lialh4qwq",
         "repo": "aml-flash-tool-nix",
-        "rev": "d05fd99a7120353906e7fca86d1b5fb7a51240ff",
+        "rev": "12e3f8dea320c4eebc2fe52dc864a239da9127e4",
         "type": "github"
       },
       "original": {
