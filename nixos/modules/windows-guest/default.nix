@@ -12,9 +12,12 @@
 
   config = lib.mkIf config.liuxu.nixos.windows-guest.enable {
     programs.virt-manager.enable = true;
-    virtualisation.libvirtd = {
-      enable = true;
-      qemu.package = pkgs.qemu_kvm;
+    virtualisation = {
+      spiceUSBRedirection.enable = true;
+      libvirtd = {
+        enable = true;
+        qemu.package = pkgs.qemu_kvm;
+      };
     };
     systemd.tmpfiles.settings.sr-iov."/sys/devices/pci0000:00/0000:00:02.0/sriov_numvfs".w.argument =
       "1";
