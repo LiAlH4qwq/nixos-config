@@ -33,6 +33,7 @@
         })
       ];
     });
+    pnpm_11 = final.unstable.pnpm_11;
     qq = prev.qq.overrideAttrs (old: {
       version = "3.2.32-2026-07-30";
       src = prev.fetchurl {
