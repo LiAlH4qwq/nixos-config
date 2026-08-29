@@ -10,6 +10,7 @@
     ./hyprland
     ./hyprtoolkit
     ./i18n
+    ./kdeconnect
     ./mime
     ./niri
     ./noctalia
