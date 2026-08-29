@@ -43,7 +43,7 @@
               steps = stepsCommonLix ++ [
                 {
                   name = "Run checks";
-                  run = "nix flake check";
+                  run = "nix flake check --repair --all-systems";
                 }
               ];
             };

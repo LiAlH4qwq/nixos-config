@@ -47,7 +47,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_TOKEN }}
           name: lialh4
       - name: Run checks
-        run: nix flake check
+        run: nix flake check --repair --all-systems
   deploy-doc:
     environment:
       name: github-pages
