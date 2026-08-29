@@ -32,6 +32,7 @@
       packages = with pkgs; [
         nautilus # explorer.exe
         mission-center # taskmgr.exe
+        gnome-text-editor # notepad.exe
         clementine # Music player
         clapper # Video player
         wev # Input inspect
