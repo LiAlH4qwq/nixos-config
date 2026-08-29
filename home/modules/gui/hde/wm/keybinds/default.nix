@@ -24,101 +24,139 @@ in
         |> lib.singleton
         |> lib.kdl.formats.v1;
     };
-    gui.keybinds.execr = lib.mkOption {
-      default = [ ];
-      example = [
-        {
-          mod = "Mod";
-          key = "R";
-          cmd = [
-            "noctalia"
-            "msg"
-            "panel-toggle"
-            "launcher"
-          ];
-          opt = {
-            lock = false;
-            repeat = false;
+    gui.keybinds =
+      let
+        inherit (lib.types)
+          bool
+          coercedTo
+          listOf
+          str
+          submodule
+          ;
+        tStrList = coercedTo str lib.singleton (listOf str);
+        desc = lib.liuxu.mkHomeDesc;
+        commonOpts = {
+          mod = lib.mkOption {
+            type = tStrList;
+            default = [ ];
+            example = "Mod";
+            description = desc ''
+              Keybind's modkey,
+                can be a single string or a list of string.
+            '';
           };
-        }
-      ];
-      description = ''
-        Liuxu (Home): Keybinds that exec a cmd,
-          apply to both Hyprland and Niri.
-      '';
-      type =
-        with lib.types;
-        listOf (submodule {
-          options =
-            let
-              strOrListOfStr = coercedTo str lib.singleton (listOf str);
-            in
+          key = lib.mkOption {
+            type = str;
+            example = "R";
+            description = desc ''
+              Keybind's key,
+                must not be empty.
+            '';
+          };
+          opt = {
+            lock = lib.mkOption {
+              type = bool;
+              default = false;
+              example = true;
+              description = desc ''
+                Whether or not the keybind
+                  is effective in lockscreen.
+              '';
+            };
+            repeat = lib.mkOption {
+              type = bool;
+              default = false;
+              example = true;
+              description = desc ''
+                Whether or not the keybind
+                  will do effect repeatly when long-pressed.
+              '';
+            };
+          };
+        };
+      in
+      {
+        keys = lib.mkOption {
+          default = [ ];
+          example = [
             {
-              mod = lib.mkOption {
-                type = strOrListOfStr;
-                default = [ ];
-                example = "Mod";
-                description = ''
-                  Liuxu (Home): Keybind's modkey,
-                    can be a single string or a list of string.
-                '';
+              type = "execr";
+              mod = "Mod";
+              key = "R";
+              cmd = [
+                "noctalia"
+                "msg"
+                "panel-toggle"
+                "launcher"
+              ];
+              opt = {
+                lock = false;
+                repeat = false;
               };
-              key = lib.mkOption {
-                type = str;
-                example = "R";
-                description = ''
-                  Liuxu (Home): Keybind's key,
-                    must not be empty.
-                '';
+            }
+          ];
+          description = desc ''
+            Keybinds apply to both Hyprland and Niri.
+          '';
+          type = listOf (submodule {
+            options = commonOpts;
+          });
+        };
+        execr = lib.mkOption {
+          default = [ ];
+          example = [
+            {
+              mod = "Mod";
+              key = "R";
+              cmd = [
+                "noctalia"
+                "msg"
+                "panel-toggle"
+                "launcher"
+              ];
+              opt = {
+                lock = false;
+                repeat = false;
               };
+            }
+          ];
+          description = desc ''
+            Keybinds that exec a cmd,
+              apply to both Hyprland and Niri.
+          '';
+          type = listOf (submodule {
+            options = commonOpts // {
               cmd = lib.mkOption {
-                type = strOrListOfStr;
+                type = tStrList;
                 example = [
                   "noctalia"
                   "msg"
                   "panel-toggle"
                   "launcher"
                 ];
-                description = ''
-                  Liuxu (Home): Keybind's cmd to exec,
+                description = desc ''
+                  Keybind's cmd to exec,
                     must not be empty,
                     can be a single str if there's no args.
                 '';
               };
-              opt = {
-                lock = lib.mkOption {
-                  type = bool;
-                  default = false;
-                  example = true;
-                  description = ''
-                    Liuxu (Home): Whether or not the keybind
-                      is effective in lockscreen.
-                  '';
-                };
-                repeat = lib.mkOption {
-                  type = bool;
-                  default = false;
-                  example = true;
-                  description = ''
-                    Liuxu (Home): Whether or not the keybind
-                      will do effect repeatly when long-pressed.
-                  '';
-                };
-              };
             };
-        });
-    };
+          });
+        };
+      };
   };
 
   config = lib.mkMerge [
     (lib.mkIf config.liuxu.home.internal.gui.enable {
-      liuxu.home.gui.keybinds.execr = with lib.liuxu.wm; [
-        (mkNormalExecrBind "missioncenter" "Escape" "Mod")
-        (mkNormalExecrBind "kitty" "T" "Mod")
-        (mkNormalExecrBind "nautilus" "E" "Mod")
-        (mkNormalExecrBind "zen-beta" "B" "Mod")
-        (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
-      ];
+      liuxu.home.gui.keybinds = {
+        execr = with lib.liuxu.wm; [
+          (mkNormalExecrBind "missioncenter" "Escape" "Mod")
+          (mkNormalExecrBind "kitty" "T" "Mod")
+          (mkNormalExecrBind "nautilus" "E" "Mod")
+          (mkNormalExecrBind "zen-beta" "B" "Mod")
+          (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
+        ];
+      };
     })
     (
       let
