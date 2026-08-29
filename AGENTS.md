@@ -1,3 +1,3 @@
 # Agents
 
-Read `./NO_AGENTS.md` **first**.
+Read `./NO-AGENTS.md` **first**.
