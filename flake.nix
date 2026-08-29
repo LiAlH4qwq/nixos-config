@@ -100,8 +100,7 @@ in
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs = {
-        # Avoid building locally.
-        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs";
         lix.follows = "lix";
         flake-utils.follows = "flake-utils";
         flakey-profile.follows = "";

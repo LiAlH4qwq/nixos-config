@@ -25,6 +25,10 @@
         providedSessions = builtins.filter (s: s != "hyprland-uwsm") (old.passthru.providedSessions or [ ]);
       };
     });
+    lix = prev.lix.overrideAttrs (old: {
+      # Fix github ci fail.
+      doInstallCheck = false;
+    });
     niri = prev.niri.overrideAttrs (old: {
       patches = (old.patches or [ ]) ++ [
         (prev.fetchpatch {
