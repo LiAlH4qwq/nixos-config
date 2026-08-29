@@ -17,7 +17,7 @@
             stepsCommonLix = [
               {
                 name = "Checkout";
-                uses = "actions/checkout@v4";
+                uses = "actions/checkout@v5";
               }
               {
                 name = "Install Lix";
