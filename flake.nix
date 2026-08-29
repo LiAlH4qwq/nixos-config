@@ -2,9 +2,17 @@
 let
   nixConfig = {
     extra-experimental-features = [
+      "auto-allocate-uids"
+      "cgroups"
+      "coerce-integers"
+      #"daemon-trust-override"
+      "flake-self-attrs"
       "flakes"
+      "lix-custom-sub-commands"
       "nix-command"
       "pipe-operator"
+      "read-only-local-store"
+      "repl-automation"
     ];
     extra-substituters = [
       # "https://mirrors.nju.edu.cn/nix-channels/store"
@@ -12,6 +20,7 @@ let
       "https://nix-community.cachix.org"
       "https://deepseek-harness-nix.cachix.org"
       "https://noctalia.cachix.org"
+      "https://afnix-hydra.s3-bulk-web.afnix.fr/"
       # inputs.agl
       "https://ezkea.cachix.org"
       # inputs.cachyos-kernel
@@ -23,6 +32,7 @@ let
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "deepseek-harness-nix.cachix.org-1:5NrkwLN9veNMhiINtU5ZeV4isXFhFsOwn6Ms7J1M+TA="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "afnix:oqt801y+IwJ09XRtNDQYCKb7zuCw9DQXQk8fDWPkwxM="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
@@ -35,13 +45,16 @@ in
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
       { config, ... }: {
-        liuxu.fp.nixos = {
-          sharedModules = [ config.flake.nixosModules.liuxu ];
-          hosts = {
-            LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
-            LiAlH4-Server.modules = ./devices/asus-h110t;
-            LiAlH4-LiveCD.modules = ./devices/live-cd;
+        liuxu.fp = {
+          nixos = {
+            sharedModules = [ config.flake.nixosModules.liuxu ];
+            hosts = {
+              LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
+              LiAlH4-Server.modules = ./devices/asus-h110t;
+              LiAlH4-LiveCD.modules = ./devices/live-cd;
+            };
           };
+          disallowed-inputs-deps = [ ];
         };
         flatFlake.config.allowed = [
           # Shouldn't override.
@@ -62,8 +75,10 @@ in
           ./parts
         ];
         _module = {
-          args.lib = config.flake.lib;
-          specialArgs.root = ./.;
+          args = {
+            lib = config.flake.lib;
+            root = ./.;
+          };
         };
         systems = import inputs.systems;
         flake.nixConfig = nixConfig;
@@ -78,6 +93,19 @@ in
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        lix.follows = "lix";
+        flake-utils.follows = "flake-utils";
+        flakey-profile.follows = "";
+      };
+    };
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";

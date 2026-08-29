@@ -1,7 +1,4 @@
 { self, ... }: {
-  imports = [
-    ./lix
-  ];
   nix.settings =
     let
       substituters = self.nixConfig.extra-substituters;
