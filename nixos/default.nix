@@ -33,6 +33,7 @@
   environment = {
     defaultPackages = lib.mkForce [ ];
     systemPackages = with pkgs; [
+      btdu
       nushell
       pciutils # `lspci`
       usbutils # `lsusb`
