@@ -16,6 +16,7 @@
     ./noctalia
     ./qt
     ./udiskie
+    ./umbriel
     ./wm
     ./xcursor
   ];

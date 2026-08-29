@@ -8,12 +8,14 @@
     ./agl
     ./hyprland
     ./niri
+    ./umbriel
     ./zen
   ];
 
-  options.liuxu.nixos.internal.user-support.gui.enable = lib.liuxu.modules.mkComputedSwitchOption (
+  options.liuxu.nixos.internal.user-support.gui.enable = lib.liuxu.mkComputedSwitchOption (
     config.liuxu.nixos.internal.user-support.gui.hyprland.enable
     || config.liuxu.nixos.internal.user-support.gui.niri.enable
+    || config.liuxu.nixos.internal.user-support.gui.umbriel.enable
   );
 
   config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.enable {

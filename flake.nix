@@ -100,7 +100,8 @@ in
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        # Avoid building locally.
+        nixpkgs.follows = "nixpkgs-unstable";
         lix.follows = "lix";
         flake-utils.follows = "flake-utils";
         flakey-profile.follows = "";
@@ -142,6 +143,17 @@ in
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    xdg-desktop-portal-umbriel = {
+      url = "github:noctalia-dev/xdg-desktop-portal-umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    umbriel = {
+      url = "git+https://github.com/noctalia-dev/umbriel";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        xdg-desktop-portal-umbriel.follows = "xdg-desktop-portal-umbriel";
+      };
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

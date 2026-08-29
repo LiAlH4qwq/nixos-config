@@ -15,7 +15,9 @@
   ];
 
   options.liuxu.home.internal.gui.enable = lib.liuxu.mkComputedSwitchOption (
-    config.liuxu.home.gui.hyprland.enable || config.liuxu.home.gui.niri.enable
+    config.liuxu.home.gui.hyprland.enable
+    || config.liuxu.home.gui.niri.enable
+    || config.liuxu.home.gui.umbriel.enable
   );
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {

@@ -194,6 +194,15 @@ in
               ]
             );
           })
+          (lib.mkIf config.liuxu.home.gui.umbriel.enable {
+            programs.umbriel.settings.keybinds =
+              cfg
+              |> map (e: {
+                name = "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}";
+                value = e.cmd |> builtins.concatStringsSep " ";
+              })
+              |> builtins.listToAttrs;
+          })
         ]
       )
     )

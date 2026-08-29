@@ -70,6 +70,9 @@
               )
             );
           })
+          (lib.mkIf config.liuxu.home.gui.umbriel.enable {
+            programs.umbriel.settings.autostart = cfg |> map (builtins.concatStringsSep " ");
+          })
         ]
       )
     )

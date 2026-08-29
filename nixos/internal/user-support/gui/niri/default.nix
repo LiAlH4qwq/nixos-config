@@ -13,7 +13,7 @@
         |> builtins.any lib.id
       );
 
-  config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.hyprland.enable {
+  config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.niri.enable {
     programs.niri.enable = true;
   };
 }
