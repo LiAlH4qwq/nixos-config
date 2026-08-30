@@ -7,19 +7,17 @@
 {
   imports = [
     ./gtk
-    ./hyprland
     ./hyprtoolkit
     ./i18n
     ./kdeconnect
     ./mime
-    ./niri
     ./noctalia
     ./qt
     ./udiskie
-    ./umbriel
     ./wm
     ./xcursor
   ];
+
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     home.packages = with pkgs; [
       wl-clipboard-rs # Clipboard

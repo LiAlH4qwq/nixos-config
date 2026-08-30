@@ -1,6 +1,5 @@
 _: {
   imports = [
-    ./generic
     ./hyprland
     ./niri
     ./umbriel

@@ -9,9 +9,9 @@
       noctalia = [ "noctalia" ];
     in
     {
-      liuxu.home = {
-        internal.gui.autostart = lib.singleton noctalia;
-        gui.keybinds.execr =
+      liuxu.home.gui = {
+        autostart = lib.singleton noctalia;
+        keybinds.execr =
           let
             mkIpcBind =
               let
