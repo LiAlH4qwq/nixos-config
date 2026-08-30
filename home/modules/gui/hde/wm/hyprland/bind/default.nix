@@ -17,6 +17,8 @@
         (mkNormalLuaBind ''hl.dsp.window.move({ workspace = "emptymn" })'' "SUPER + SHIFT + grave")
         (mkMouseLuaBind "hl.dsp.window.drag()" "SUPER + mouse:272")
         (mkMouseLuaBind "hl.dsp.window.resize()" "SUPER + ALT+ mouse:272")
+        (mkNormalLuaBind ''hl.dsp.layout("colresize +0.05")'' "SUPER + Equal")
+        (mkNormalLuaBind ''hl.dsp.layout("colresize -0.05")'' "SUPER + Minus")
       ]
       ++ (lib.flip builtins.concatMap (lib.range 0 9) (
         k:

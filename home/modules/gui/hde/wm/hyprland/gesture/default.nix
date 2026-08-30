@@ -5,18 +5,13 @@
       {
         fingers = 3;
         direction = "horizontal";
-        action = "workspace";
+        action = "scroll_move";
       }
       {
         fingers = 3;
-        direction = "down";
-        action = lib.generators.mkLuaInline ''
-          function()
-            hl.exec_cmd("noctalia msg screenshot-fullscreen")
-          end
-        '';
+        direction = "vertical";
+        action = "workspace";
       }
-
     ];
   };
 }
