@@ -60,8 +60,8 @@
         # Yes, it's hard-coded as Win + Shift + S.
         # That's definately WinBook.
         (mkNormalExecrBind [ "noctalia" "msg" "screenshot-region" ] "S" [
-          "SUPER"
-          "SHIFT"
+          "Mod"
+          "Shift"
         ])
         (mkNormalExecrBind [ "noctalia" "msg" "screenshot-fullscreen" ] "Print" [ ])
       ];

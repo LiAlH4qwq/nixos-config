@@ -37,7 +37,7 @@
                 };
                 k = (
                   e
-                  |> (e: e // { mod = map (m: if m == "Mod" then "SUPER" else m) e.mod; })
+                  |> (e: e // { mod = map (m: if m == "Mod" then "SUPER" else lib.toUpper m) e.mod; })
                   |> (e: "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}")
                 );
               in
