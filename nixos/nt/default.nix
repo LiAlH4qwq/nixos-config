@@ -5,8 +5,6 @@ _: {
   ];
 
   services = {
-    # Better D-Bus implemention.
-    dbus.implementation = "broker";
     # Use Chrony for better experience, especially on laptop.
     timesyncd.enable = false;
     chrony.enable = true;
