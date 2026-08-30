@@ -16,6 +16,16 @@
     programs.umbriel = {
       enable = true;
       settings = {
+        input =
+          let
+            pointing = {
+              natural_scroll = true;
+            };
+          in
+          {
+            mouse = pointing;
+            touchpad = pointing;
+          };
         keybinds = {
           "Mod+Q" = "window-close";
         };
