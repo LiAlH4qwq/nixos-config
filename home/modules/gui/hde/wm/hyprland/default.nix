@@ -35,6 +35,7 @@
             force_default_wallpaper = 2;
           };
           general = {
+            layout = "scrolling";
             border_size = 4;
             gaps_in = 0;
             gaps_out = 0;
