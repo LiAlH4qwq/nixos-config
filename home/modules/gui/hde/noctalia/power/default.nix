@@ -2,12 +2,12 @@
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.noctalia.settings = {
       idle.behavior = {
-        lock = {
-          action = "lock";
-          timeout = 300;
-        };
         screen-off = {
           action = "screen_off";
+          timeout = 300;
+        };
+        lock = {
+          action = "lock";
           timeout = 360;
         };
         suspend = {
@@ -22,7 +22,7 @@
         }
         {
           action = "logout";
-          command = "hyprshutdown || niri msg action quit";
+          command = "hyprshutdown || niri msg action quit || umbriel msg session-quit";
           shortcut = "2";
         }
         {
