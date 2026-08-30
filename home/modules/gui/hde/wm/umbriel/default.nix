@@ -27,7 +27,10 @@
             touchpad = pointing;
           };
         keybinds = {
-
+          "Mod+Equal" = "window-modify-width:0.05";
+          "Mod+Minus" = "window-modify-width:-0.05";
+          "Mod+M" = "window-set-width:1";
+          "Mod+F" = "window-toggle-floating";
         };
       };
     };
