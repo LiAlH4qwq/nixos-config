@@ -25,9 +25,9 @@
                   if e.type == "close-window" then
                     "window-close"
                   else if e.type == "execr" then
-                    e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
+                    e.args.cmd |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
                   else if e.type == "focus-workspace" then
-                    "workspace-switch:${e.args}"
+                    "workspace-switch:${e.args.id}"
                   else if e.type == "move-window-to-workspace" then
                     "window-move-to-workspace:${e.args.id}"
                   else

@@ -49,9 +49,9 @@
                     lib.liuxu.hyprland.mkLuaBind o "hl.dsp.window.close()" k
                 )
               else if e.type == "execr" then
-                lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args) k
+                lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args.cmd) k
               else if e.type == "focus-workspace" then
-                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.focus({workspace="${e.args}"})'' k
+                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.focus({workspace="${e.args.id}"})'' k
               else if e.type == "move-window-to-workspace" then
                 lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.window.move({workspace="${e.args.id}"})'' k
               else

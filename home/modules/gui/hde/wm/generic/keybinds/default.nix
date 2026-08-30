@@ -255,40 +255,20 @@
       internal.gui.keybinds =
         let
           cfg = config.liuxu.home.gui.keybinds;
+          toCommon = t: e: {
+            inherit (e) mod key opt;
+            type = t;
+            args = removeAttrs e [
+              "mod"
+              "key"
+              "opt"
+            ];
+          };
         in
-        [ ]
-        ++ (
-          cfg.close-window
-          |> map (e: {
-            inherit (e) mod key opt;
-            type = "close-window";
-            args = { inherit (e) force target; };
-          })
-        )
-        ++ (
-          cfg.execr
-          |> map (e: {
-            inherit (e) mod key opt;
-            type = "execr";
-            args = e.cmd;
-          })
-        )
-        ++ (
-          cfg.focus-workspace
-          |> map (e: {
-            inherit (e) mod key opt;
-            type = "focus-workspace";
-            args = e.id;
-          })
-        )
-        ++ (
-          cfg.move-window-to-workspace
-          |> map (e: {
-            inherit (e) mod key opt;
-            type = "move-window-to-workspace";
-            args = { inherit (e) id target; };
-          })
-        );
+        cfg
+        |> builtins.mapAttrs (lib.liuxu.o map toCommon)
+        |> builtins.attrValues
+        |> builtins.concatLists;
       gui.keybinds =
         let
           forAllNumkeyWs =

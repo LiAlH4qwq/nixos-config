@@ -45,9 +45,9 @@
                     if e.type == "close-window" then
                       close-window
                     else if e.type == "execr" then
-                      builtins.foldl' lib.id spawn e.args
+                      builtins.foldl' lib.id spawn e.args.cmd
                     else if e.type == "focus-workspace" then
-                      focus-workspace e.args
+                      focus-workspace e.args.id
                     else if e.type == "move-window-to-workspace" then
                       move-window-to-workspace e.args.id
                     else
