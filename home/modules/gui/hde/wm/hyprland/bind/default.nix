@@ -8,8 +8,6 @@
     wayland.windowManager.hyprland.settings.bind =
       with lib.liuxu.hyprland;
       [
-        (mkNormalLuaBind "hl.dsp.window.close()" "SUPER + Q")
-        (mkNormalLuaBind "hl.dsp.window.kill()" "SUPER + SHIFT + Q")
         (mkNormalLuaBind "hl.dsp.window.float()" "SUPER + F")
         (mkRepeatingExecrBind "hyprnome -c" "SUPER + Tab")
         (mkRepeatingExecrBind "hyprnome -cp" "SUPER + ALT + Tab")

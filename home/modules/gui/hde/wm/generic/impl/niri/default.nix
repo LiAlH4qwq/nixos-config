@@ -26,7 +26,7 @@
       )
       (
         let
-          cfg = config.liuxu.home.gui.keybinds.execr;
+          cfg = config.liuxu.home.gui.keybinds.generic;
         in
         (lib.mkIf (cfg != [ ]) {
           liuxu.home.gui.niri.settings =
@@ -39,9 +39,16 @@
                   inherit (e.opt) repeat;
                   allow-when-locked = e.opt.lock;
                 }
-                [
-                  (builtins.foldl' lib.id lib.kdl.extras.niri.spawn e.cmd)
-                ]
+                (
+                  if e.type == "close-window" then
+                    [ lib.kdl.extras.niri.close-window ]
+                  else if e.type == "execr" then
+                    [
+                      (builtins.foldl' lib.id lib.kdl.extras.niri.spawn e.args)
+                    ]
+                  else
+                    throw "Unreachable"
+                )
             )
             |> lib.kdl.extras.niri.binds
             |> lib.singleton

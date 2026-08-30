@@ -27,7 +27,7 @@
             touchpad = pointing;
           };
         keybinds = {
-          "Mod+Q" = "window-close";
+
         };
       };
     };

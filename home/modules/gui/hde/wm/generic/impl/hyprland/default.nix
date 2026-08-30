@@ -23,35 +23,37 @@
       )
       (
         let
-          cfg = config.liuxu.home.gui.keybinds.execr;
+          cfg = config.liuxu.home.gui.keybinds.generic;
         in
-        (lib.mkIf (cfg != [ ]) (
-          let
-            e2Hypr =
-              let
-                e2Mod2Super =
-                  let
-                    mod2Super = m: if m == "Mod" then "SUPER" else m;
-                  in
-                  e: e // { mod = map mod2Super e.mod; };
-              in
+        (lib.mkIf (cfg != [ ]) ({
+          wayland.windowManager.hyprland.settings.bind =
+            cfg
+            |> map (
               e:
-              lib.liuxu.hyprland.mkExecrBind
-                {
+              let
+                o = {
                   locked = e.opt.lock;
                   repeating = e.opt.repeat;
-                }
-                (builtins.concatStringsSep " " e.cmd)
-                (
+                };
+                k = (
                   e
-                  |> e2Mod2Super
+                  |> (e: e // { mod = map (m: if m == "Mod" then "SUPER" else m) e.mod; })
                   |> (e: "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}")
                 );
-          in
-          {
-            wayland.windowManager.hyprland.settings.bind = map e2Hypr cfg;
-          }
-        ))
+              in
+              if e.type == "close-window" then
+                (
+                  if e.args.force then
+                    lib.liuxu.hyprland.mkLuaBind o "hl.dsp.window.kill()" k
+                  else
+                    lib.liuxu.hyprland.mkLuaBind o "hl.dsp.window.close()" k
+                )
+              else if e.type == "execr" then
+                lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args) k
+              else
+                throw "Unreachable"
+            );
+        }))
       )
     ]
   );

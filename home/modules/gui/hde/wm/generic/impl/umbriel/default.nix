@@ -11,14 +11,20 @@
       )
       (
         let
-          cfg = config.liuxu.home.gui.keybinds.execr;
+          cfg = config.liuxu.home.gui.keybinds.generic;
         in
         (lib.mkIf (cfg != [ ]) {
           programs.umbriel.settings.keybinds =
             cfg
             |> map (e: {
               name = "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}";
-              value = e.cmd |> builtins.concatStringsSep " " |> (x: "spawn:${x}");
+              value =
+                if e.type == "close-window" then
+                  "window-close"
+                else if e.type == "execr" then
+                  e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
+                else
+                  throw "Unreachable";
             })
             |> builtins.listToAttrs;
         })

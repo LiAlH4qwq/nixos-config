@@ -9,15 +9,19 @@
       inherit (lib.types)
         bool
         coercedTo
+        enum
         listOf
+        nullOr
+        singleLineStr
         str
         submodule
+        unspecified
         ;
-      tStrList = coercedTo str lib.singleton (listOf str);
+      tStrToList = coercedTo str lib.singleton (listOf str);
       desc = lib.liuxu.mkHomeDesc;
       commonOpts = {
         mod = lib.mkOption {
-          type = tStrList;
+          type = tStrToList;
           default = [ ];
           example = "Mod";
           description = desc ''
@@ -56,30 +60,83 @@
       };
     in
     {
-      keys = lib.mkOption {
+      generic = lib.mkOption {
         default = [ ];
         example = [
           {
             type = "execr";
             mod = "Mod";
             key = "R";
-            cmd = [
+            opt = {
+              lock = false;
+              repeat = false;
+            };
+            args = [
               "noctalia"
               "msg"
               "panel-toggle"
               "launcher"
             ];
-            opt = {
-              lock = false;
-              repeat = false;
-            };
           }
         ];
         description = desc ''
           Keybinds apply to both Hyprland and Niri.
         '';
         type = listOf (submodule {
-          options = commonOpts;
+          options = commonOpts // {
+            type = lib.mkOption {
+              type = enum [
+                "execr"
+                "close-window"
+              ];
+              example = "execr";
+              description = desc ''
+                Keybinds's action type.
+              '';
+            };
+            args = lib.mkOption {
+              type = unspecified;
+              example = [
+                "noctalia"
+                "msg"
+                "panel-toggle"
+                "launcher"
+              ];
+              description = desc ''
+                Keybind's args.
+              '';
+            };
+          };
+        });
+      };
+      close-window = lib.mkOption {
+        description = desc ''
+          Keybinds that close window,
+            target null means close active window.
+        '';
+        default = [ ];
+        example = [
+          {
+            mod = "Mod";
+            key = "Q";
+          }
+        ];
+        type = listOf (submodule {
+          options = commonOpts // {
+            force = lib.liuxu.mkHomeSwitchOnOption ''
+              Whether do force close,
+                some wms may don't support it,
+                then it will fallback to normal close.
+            '';
+            target = lib.mkOption {
+              type = nullOr singleLineStr;
+              default = null;
+              description = desc ''
+                Window to close,
+                  null means active window.
+              '';
+            };
+          };
         });
       };
       execr = lib.mkOption {
@@ -88,16 +145,16 @@
           {
             mod = "Mod";
             key = "R";
+            opt = {
+              lock = false;
+              repeat = false;
+            };
             cmd = [
               "noctalia"
               "msg"
               "panel-toggle"
               "launcher"
             ];
-            opt = {
-              lock = false;
-              repeat = false;
-            };
           }
         ];
         description = desc ''
@@ -107,7 +164,7 @@
         type = listOf (submodule {
           options = commonOpts // {
             cmd = lib.mkOption {
-              type = tStrList;
+              type = tStrToList;
               example = [
                 "noctalia"
                 "msg"
@@ -127,6 +184,82 @@
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     liuxu.home.gui.keybinds = {
+      generic =
+        [ ]
+        ++ (
+          config.liuxu.home.gui.keybinds.close-window
+          |> map (
+            e:
+            e
+            |> lib.attrsToList
+            |> (
+              x:
+              x
+              ++ [
+                {
+                  name = "type";
+                  value = "close-window";
+                }
+              ]
+            )
+            |> (
+              x:
+              x
+              ++ [
+                {
+                  name = "args";
+                  value = { inherit (e) force target; };
+                }
+              ]
+            )
+            |> builtins.filter (x: (x.name != "force") && (x.name != "target"))
+            |> builtins.listToAttrs
+          )
+        )
+        ++ (
+          config.liuxu.home.gui.keybinds.execr
+          |> map (
+            e:
+            e
+            |> lib.attrsToList
+            |> (
+              x:
+              x
+              ++ [
+                {
+                  name = "type";
+                  value = "execr";
+                }
+              ]
+            )
+            |> (
+              x:
+              x
+              ++ [
+                {
+                  name = "args";
+                  value = e.cmd;
+                }
+              ]
+            )
+            |> builtins.filter (x: x.name != "cmd")
+            |> builtins.listToAttrs
+          )
+        );
+      close-window = [
+        {
+          mod = "Mod";
+          key = "Q";
+        }
+        {
+          mod = [
+            "Mod"
+            "Shift"
+          ];
+          key = "Q";
+          force = true;
+        }
+      ];
       execr = with lib.liuxu.wm; [
         (mkNormalExecrBind "missioncenter" "Escape" "Mod")
         (mkNormalExecrBind "kitty" "T" "Mod")

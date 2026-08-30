@@ -37,7 +37,6 @@
     liuxu.home.gui.niri.keybinds =
       with lib.kdl.extras.niri;
       [
-        (n "Mod+Q" [ close-window ])
         (n "Mod+F" [ toggle-window-floating ])
         (n "Mod+Equal" [ (set-column-width "+5%") ])
         (n "Mod+Minus" [ (set-column-width "-5%") ])
