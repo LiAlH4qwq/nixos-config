@@ -74,6 +74,34 @@
           float = true;
         }
       ];
+      on = [
+        {
+          _args = [
+            "window.active"
+            (lib.generators.mkLuaInline ''
+              function(w)
+                if w.class == "steam_proton" and w.title == "崩坏：星穹铁道" then
+                  hl.config({
+                    input = {
+                      touchpad = {
+                        disable_while_typing = false
+                      }
+                    }
+                  })
+                else
+                  hl.config({
+                    input = {
+                      touchpad = {
+                        disable_while_typing = true
+                      }
+                    }
+                  })
+                end
+              end
+            '')
+          ];
+        }
+      ];
     };
   };
 }
