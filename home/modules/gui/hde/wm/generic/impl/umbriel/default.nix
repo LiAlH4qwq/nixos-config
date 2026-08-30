@@ -26,6 +26,8 @@
                     "window-close"
                   else if e.type == "execr" then
                     e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
+                  else if e.type == "focus-workspace" then
+                    "workspace-switch:${e.args}"
                   else
                     throw "Unreachable";
               };

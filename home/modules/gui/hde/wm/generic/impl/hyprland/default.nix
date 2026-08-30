@@ -50,6 +50,8 @@
                 )
               else if e.type == "execr" then
                 lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args) k
+              else if e.type == "focus-workspace" then
+                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.focus({workspace="${e.args}"})'' k
               else
                 throw "Unreachable"
             );

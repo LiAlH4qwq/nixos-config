@@ -51,9 +51,6 @@
             ws = if x == 0 then 10 else x;
           in
           [
-            (n "Mod+${key}" [
-              (focus-workspace ws)
-            ])
             (n "Mod+Shift+${key}" [
               (move-window-to-workspace ws)
             ])

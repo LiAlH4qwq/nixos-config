@@ -10,6 +10,7 @@
         bool
         coercedTo
         enum
+        int
         listOf
         nullOr
         singleLineStr
@@ -88,6 +89,7 @@
               type = enum [
                 "execr"
                 "close-window"
+                "focus-workspace"
               ];
               example = "execr";
               description = desc ''
@@ -180,71 +182,62 @@
           };
         });
       };
+      focus-workspace = lib.mkOption {
+        description = desc "Keybinds that focus workspace by id.";
+        default = [ ];
+        example = [
+          {
+            mod = "Mod";
+            key = "1";
+            opt = {
+              lock = false;
+              repeat = false;
+            };
+            id = 1;
+          }
+        ];
+        type = listOf (submodule {
+          options = commonOpts // {
+            id = lib.mkOption {
+              type = int;
+              example = 1;
+              description = desc "Workspace id to switch to.";
+            };
+          };
+        });
+      };
     };
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     liuxu.home.gui.keybinds = {
       generic =
+        let
+          cfg = config.liuxu.home.gui.keybinds;
+        in
         [ ]
         ++ (
-          config.liuxu.home.gui.keybinds.close-window
-          |> map (
-            e:
-            e
-            |> lib.attrsToList
-            |> (
-              x:
-              x
-              ++ [
-                {
-                  name = "type";
-                  value = "close-window";
-                }
-              ]
-            )
-            |> (
-              x:
-              x
-              ++ [
-                {
-                  name = "args";
-                  value = { inherit (e) force target; };
-                }
-              ]
-            )
-            |> builtins.filter (x: (x.name != "force") && (x.name != "target"))
-            |> builtins.listToAttrs
-          )
+          cfg.close-window
+          |> map (e: {
+            inherit (e) mod key opt;
+            type = "close-window";
+            args = { inherit (e) force target; };
+          })
         )
         ++ (
-          config.liuxu.home.gui.keybinds.execr
-          |> map (
-            e:
-            e
-            |> lib.attrsToList
-            |> (
-              x:
-              x
-              ++ [
-                {
-                  name = "type";
-                  value = "execr";
-                }
-              ]
-            )
-            |> (
-              x:
-              x
-              ++ [
-                {
-                  name = "args";
-                  value = e.cmd;
-                }
-              ]
-            )
-            |> builtins.filter (x: x.name != "cmd")
-            |> builtins.listToAttrs
-          )
+          cfg.execr
+          |> map (e: {
+            inherit (e) mod key opt;
+            type = "execr";
+            args = e.cmd;
+          })
+        )
+        ++ (
+          cfg.focus-workspace
+          |> map (e: {
+            inherit (e) mod key opt;
+            type = "focus-workspace";
+            args = e.id;
+          })
         );
       close-window = [
         {
@@ -267,6 +260,20 @@
         (mkNormalExecrBind "zen-beta" "B" "Mod")
         (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
       ];
+      focus-workspace =
+        lib.range 0 9
+        |> map (
+          ki:
+          let
+            ks = toString ki;
+            wi = if ki == 0 then 10 else ki;
+          in
+          {
+            mod = "Mod";
+            key = ks;
+            id = wi;
+          }
+        );
     };
   };
 }

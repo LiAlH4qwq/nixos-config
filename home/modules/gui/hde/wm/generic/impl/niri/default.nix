@@ -40,14 +40,18 @@
                   allow-when-locked = e.opt.lock;
                 }
                 (
-                  if e.type == "close-window" then
-                    [ lib.kdl.extras.niri.close-window ]
-                  else if e.type == "execr" then
-                    [
-                      (builtins.foldl' lib.id lib.kdl.extras.niri.spawn e.args)
-                    ]
-                  else
-                    throw "Unreachable"
+                  with lib.kdl.extras.niri;
+                  (
+                    if e.type == "close-window" then
+                      close-window
+                    else if e.type == "execr" then
+                      builtins.foldl' lib.id spawn e.args
+                    else if e.type == "focus-workspace" then
+                      focus-workspace e.args
+                    else
+                      throw "Unreachable"
+                  )
+                  |> lib.singleton
                 )
             )
             |> lib.kdl.extras.niri.binds

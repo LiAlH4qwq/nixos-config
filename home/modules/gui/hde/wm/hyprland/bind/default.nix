@@ -28,7 +28,6 @@
           ws = toString w;
         in
         [
-          (mkNormalLuaBind ''hl.dsp.focus({ workspace = "${ws}" })'' "SUPER + ${ks}")
           (mkNormalLuaBind ''hl.dsp.window.move({ workspace = "${ws}" })'' "SUPER + SHIFT + ${ks}")
         ]
       ));
