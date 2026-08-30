@@ -25,7 +25,7 @@
         let
           cfg = config.liuxu.home.internal.gui.keybinds;
         in
-        (lib.mkIf (cfg != [ ]) ({
+        (lib.mkIf (cfg != [ ]) {
           wayland.windowManager.hyprland.settings.bind =
             cfg
             |> map (
@@ -52,10 +52,12 @@
                 lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args) k
               else if e.type == "focus-workspace" then
                 lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.focus({workspace="${e.args}"})'' k
+              else if e.type == "move-window-to-workspace" then
+                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.window.move({workspace="${e.args.id}"})'' k
               else
                 throw "Unreachable"
             );
-        }))
+        })
       )
     ]
   );

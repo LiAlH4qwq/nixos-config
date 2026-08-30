@@ -48,6 +48,8 @@
                       builtins.foldl' lib.id spawn e.args
                     else if e.type == "focus-workspace" then
                       focus-workspace e.args
+                    else if e.type == "move-window-to-workspace" then
+                      move-window-to-workspace e.args.id
                     else
                       throw "Unreachable"
                   )

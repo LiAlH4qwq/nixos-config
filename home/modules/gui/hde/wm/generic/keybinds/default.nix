@@ -90,6 +90,7 @@
                 "execr"
                 "close-window"
                 "focus-workspace"
+                "move-window-to-workspace"
               ];
               example = "execr";
               description = desc ''
@@ -207,6 +208,45 @@
             };
           });
         };
+        move-window-to-workspace = lib.mkOption {
+          description = desc ''
+            Keybinds that move window to workspace by id,
+              target null means move focused window.
+          '';
+          default = [ ];
+          example = [
+            {
+              mod = [
+                "Mod"
+                "Shift"
+              ];
+              key = "1";
+              opt = {
+                lock = false;
+                repeat = false;
+              };
+              id = 1;
+              target = null;
+            }
+          ];
+          type = listOf (submodule {
+            options = commonOpts // {
+              id = lib.mkOption {
+                type = int;
+                example = 1;
+                description = desc "Workspace id to switch to.";
+              };
+              target = lib.mkOption {
+                type = nullOr singleLineStr;
+                default = null;
+                description = desc ''
+                  Window to move,
+                    null means focused window.
+                '';
+              };
+            };
+          });
+        };
       };
     };
 
@@ -240,44 +280,63 @@
             type = "focus-workspace";
             args = e.id;
           })
+        )
+        ++ (
+          cfg.move-window-to-workspace
+          |> map (e: {
+            inherit (e) mod key opt;
+            type = "move-window-to-workspace";
+            args = { inherit (e) id target; };
+          })
         );
-      gui.keybinds = {
-        close-window = [
-          {
-            mod = "Mod";
-            key = "Q";
-          }
-          {
+      gui.keybinds =
+        let
+          forAllNumkeyWs =
+            attrs:
+            lib.range 0 9
+            |> map (
+              ki:
+              let
+                ks = toString ki;
+                wi = if ki == 0 then 10 else ki;
+              in
+              {
+                key = ks;
+                id = wi;
+              }
+              // attrs
+            );
+        in
+        {
+          close-window = [
+            {
+              mod = "Mod";
+              key = "Q";
+            }
+            {
+              mod = [
+                "Mod"
+                "Shift"
+              ];
+              key = "Q";
+              force = true;
+            }
+          ];
+          execr = with lib.liuxu.wm; [
+            (mkNormalExecrBind "missioncenter" "Escape" "Mod")
+            (mkNormalExecrBind "kitty" "T" "Mod")
+            (mkNormalExecrBind "nautilus" "E" "Mod")
+            (mkNormalExecrBind "zen-beta" "B" "Mod")
+            (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
+          ];
+          focus-workspace = forAllNumkeyWs { mod = "Mod"; };
+          move-window-to-workspace = forAllNumkeyWs {
             mod = [
               "Mod"
               "Shift"
             ];
-            key = "Q";
-            force = true;
-          }
-        ];
-        execr = with lib.liuxu.wm; [
-          (mkNormalExecrBind "missioncenter" "Escape" "Mod")
-          (mkNormalExecrBind "kitty" "T" "Mod")
-          (mkNormalExecrBind "nautilus" "E" "Mod")
-          (mkNormalExecrBind "zen-beta" "B" "Mod")
-          (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
-        ];
-        focus-workspace =
-          lib.range 0 9
-          |> map (
-            ki:
-            let
-              ks = toString ki;
-              wi = if ki == 0 then 10 else ki;
-            in
-            {
-              mod = "Mod";
-              key = ks;
-              id = wi;
-            }
-          );
-      };
+          };
+        };
     };
   };
 }

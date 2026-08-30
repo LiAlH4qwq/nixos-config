@@ -28,6 +28,8 @@
                     e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
                   else if e.type == "focus-workspace" then
                     "workspace-switch:${e.args}"
+                  else if e.type == "move-window-to-workspace" then
+                    "window-move-to-workspace:${e.args.id}"
                   else
                     throw "Unreachable";
               };
