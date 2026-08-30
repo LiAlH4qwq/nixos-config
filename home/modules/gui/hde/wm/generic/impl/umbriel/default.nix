@@ -11,7 +11,7 @@
       )
       (
         let
-          cfg = config.liuxu.home.gui.keybinds.generic;
+          cfg = config.liuxu.home.internal.gui.keybinds;
         in
         (lib.mkIf (cfg != [ ]) {
           programs.umbriel.settings.keybinds =

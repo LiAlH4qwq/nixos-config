@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.liuxu.home.gui.keybinds =
+  options.liuxu.home =
     let
       inherit (lib.types)
         bool
@@ -61,7 +61,7 @@
       };
     in
     {
-      generic = lib.mkOption {
+      internal.gui.keybinds = lib.mkOption {
         default = [ ];
         example = [
           {
@@ -111,106 +111,108 @@
           };
         });
       };
-      close-window = lib.mkOption {
-        description = desc ''
-          Keybinds that close window,
-            target null means close active window.
-        '';
-        default = [ ];
-        example = [
-          {
-            mod = "Mod";
-            key = "Q";
-          }
-        ];
-        type = listOf (submodule {
-          options = commonOpts // {
-            force = lib.liuxu.mkHomeSwitchOnOption ''
-              Whether do force close,
-                some wms may don't support it,
-                then it will fallback to normal close.
-            '';
-            target = lib.mkOption {
-              type = nullOr singleLineStr;
-              default = null;
-              description = desc ''
-                Window to close,
-                  null means active window.
+      gui.keybinds = {
+        close-window = lib.mkOption {
+          description = desc ''
+            Keybinds that close window,
+              target null means close active window.
+          '';
+          default = [ ];
+          example = [
+            {
+              mod = "Mod";
+              key = "Q";
+            }
+          ];
+          type = listOf (submodule {
+            options = commonOpts // {
+              force = lib.liuxu.mkHomeSwitchOnOption ''
+                Whether do force close,
+                  some wms may don't support it,
+                  then it will fallback to normal close.
               '';
+              target = lib.mkOption {
+                type = nullOr singleLineStr;
+                default = null;
+                description = desc ''
+                  Window to close,
+                    null means active window.
+                '';
+              };
             };
-          };
-        });
-      };
-      execr = lib.mkOption {
-        default = [ ];
-        example = [
-          {
-            mod = "Mod";
-            key = "R";
-            opt = {
-              lock = false;
-              repeat = false;
-            };
-            cmd = [
-              "noctalia"
-              "msg"
-              "panel-toggle"
-              "launcher"
-            ];
-          }
-        ];
-        description = desc ''
-          Keybinds that exec a cmd,
-            apply to both Hyprland and Niri.
-        '';
-        type = listOf (submodule {
-          options = commonOpts // {
-            cmd = lib.mkOption {
-              type = tStrToList;
-              example = [
+          });
+        };
+        execr = lib.mkOption {
+          default = [ ];
+          example = [
+            {
+              mod = "Mod";
+              key = "R";
+              opt = {
+                lock = false;
+                repeat = false;
+              };
+              cmd = [
                 "noctalia"
                 "msg"
                 "panel-toggle"
                 "launcher"
               ];
-              description = desc ''
-                Keybind's cmd to exec,
-                  must not be empty,
-                  can be a single str if there's no args.
-              '';
+            }
+          ];
+          description = desc ''
+            Keybinds that exec a cmd,
+              apply to both Hyprland and Niri.
+          '';
+          type = listOf (submodule {
+            options = commonOpts // {
+              cmd = lib.mkOption {
+                type = tStrToList;
+                example = [
+                  "noctalia"
+                  "msg"
+                  "panel-toggle"
+                  "launcher"
+                ];
+                description = desc ''
+                  Keybind's cmd to exec,
+                    must not be empty,
+                    can be a single str if there's no args.
+                '';
+              };
             };
-          };
-        });
-      };
-      focus-workspace = lib.mkOption {
-        description = desc "Keybinds that focus workspace by id.";
-        default = [ ];
-        example = [
-          {
-            mod = "Mod";
-            key = "1";
-            opt = {
-              lock = false;
-              repeat = false;
+          });
+        };
+        focus-workspace = lib.mkOption {
+          description = desc "Keybinds that focus workspace by id.";
+          default = [ ];
+          example = [
+            {
+              mod = "Mod";
+              key = "1";
+              opt = {
+                lock = false;
+                repeat = false;
+              };
+              id = 1;
+            }
+          ];
+          type = listOf (submodule {
+            options = commonOpts // {
+              id = lib.mkOption {
+                type = int;
+                example = 1;
+                description = desc "Workspace id to switch to.";
+              };
             };
-            id = 1;
-          }
-        ];
-        type = listOf (submodule {
-          options = commonOpts // {
-            id = lib.mkOption {
-              type = int;
-              example = 1;
-              description = desc "Workspace id to switch to.";
-            };
-          };
-        });
+          });
+        };
       };
     };
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
-    liuxu.home.gui.keybinds = {
-      generic =
+    liuxu.home = {
+      internal.gui.keybinds =
         let
           cfg = config.liuxu.home.gui.keybinds;
         in
@@ -239,41 +241,43 @@
             args = e.id;
           })
         );
-      close-window = [
-        {
-          mod = "Mod";
-          key = "Q";
-        }
-        {
-          mod = [
-            "Mod"
-            "Shift"
-          ];
-          key = "Q";
-          force = true;
-        }
-      ];
-      execr = with lib.liuxu.wm; [
-        (mkNormalExecrBind "missioncenter" "Escape" "Mod")
-        (mkNormalExecrBind "kitty" "T" "Mod")
-        (mkNormalExecrBind "nautilus" "E" "Mod")
-        (mkNormalExecrBind "zen-beta" "B" "Mod")
-        (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
-      ];
-      focus-workspace =
-        lib.range 0 9
-        |> map (
-          ki:
-          let
-            ks = toString ki;
-            wi = if ki == 0 then 10 else ki;
-          in
+      gui.keybinds = {
+        close-window = [
           {
             mod = "Mod";
-            key = ks;
-            id = wi;
+            key = "Q";
           }
-        );
+          {
+            mod = [
+              "Mod"
+              "Shift"
+            ];
+            key = "Q";
+            force = true;
+          }
+        ];
+        execr = with lib.liuxu.wm; [
+          (mkNormalExecrBind "missioncenter" "Escape" "Mod")
+          (mkNormalExecrBind "kitty" "T" "Mod")
+          (mkNormalExecrBind "nautilus" "E" "Mod")
+          (mkNormalExecrBind "zen-beta" "B" "Mod")
+          (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
+        ];
+        focus-workspace =
+          lib.range 0 9
+          |> map (
+            ki:
+            let
+              ks = toString ki;
+              wi = if ki == 0 then 10 else ki;
+            in
+            {
+              mod = "Mod";
+              key = ks;
+              id = wi;
+            }
+          );
+      };
     };
   };
 }
