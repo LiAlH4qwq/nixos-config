@@ -18,13 +18,17 @@
             cfg
             |> map (e: {
               name = "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}";
-              value =
-                if e.type == "close-window" then
-                  "window-close"
-                else if e.type == "execr" then
-                  e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
-                else
-                  throw "Unreachable";
+              value = {
+                inherit (e.opt) repeat;
+                allow_when_locked = e.opt.lock;
+                action =
+                  if e.type == "close-window" then
+                    "window-close"
+                  else if e.type == "execr" then
+                    e.args |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
+                  else
+                    throw "Unreachable";
+              };
             })
             |> builtins.listToAttrs;
         })
