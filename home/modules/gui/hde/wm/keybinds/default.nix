@@ -199,7 +199,7 @@ in
               cfg
               |> map (e: {
                 name = "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}";
-                value = e.cmd |> builtins.concatStringsSep " ";
+                value = e.cmd |> builtins.concatStringsSep " " |> (x: "spawn:${x}");
               })
               |> builtins.listToAttrs;
           })
