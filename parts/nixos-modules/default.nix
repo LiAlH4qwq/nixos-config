@@ -1,10 +1,8 @@
-{ self, ... }:
+{ root, ... }:
 {
   flake.nixosModules =
     let
-      module = {
-        imports = [ "${self}/nixos" ];
-      };
+      module.imports = [ (root + "/nixos") ];
     in
     {
       default = module;

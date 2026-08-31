@@ -1,15 +1,15 @@
-{ inputs, self, ... }:
+{ inputs, root, ... }:
 {
   flake = {
     nixOnDroidConfigurations = {
       default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        extraSpecialArgs = { inherit inputs self; };
+        extraSpecialArgs = { inherit inputs; };
         pkgs = import inputs.nixpkgs {
           system = "aarch64-linux";
           overlays = [ inputs.nix-on-droid.overlays.default ];
         };
         modules = [
-          "${self}/nix-on-droid"
+          (root + "/nix-on-droid")
         ];
       };
     };

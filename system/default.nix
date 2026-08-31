@@ -1,7 +1,7 @@
 {
+  flakeConfig,
   inputs,
   pkgs,
-  self,
   ...
 }:
 {
@@ -27,7 +27,7 @@
     # We won't sacrifice our experience for FOSS.
     config.allowUnfree = true;
     overlays = [
-      self.overlays.default
+      flakeConfig.flake.overlays.default
       inputs.dsh.overlays.default
       inputs.ragenix.overlays.default
       inputs.tg-transient.overlays.default

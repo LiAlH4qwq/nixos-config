@@ -1,12 +1,13 @@
-{ self, ... }: {
+{ flakeConfig, ... }: {
   nix.settings =
     let
-      substituters = self.nixConfig.extra-substituters;
+      cfg = flakeConfig.flake.nixConfig;
+      substituters = cfg.extra-substituters;
     in
     {
       inherit substituters;
       trusted-substituters = substituters;
-      trusted-public-keys = self.nixConfig.extra-trusted-public-keys;
-      experimental-features = self.nixConfig.extra-experimental-features;
+      trusted-public-keys = cfg.extra-trusted-public-keys;
+      experimental-features = cfg.extra-experimental-features;
     };
 }

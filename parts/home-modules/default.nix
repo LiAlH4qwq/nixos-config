@@ -1,10 +1,8 @@
-{ self, ... }:
+{ root, ... }:
 {
   flake.homeModules =
     let
-      module = {
-        imports = [ "${self}/home" ];
-      };
+      module.imports = [ (root + "/home") ];
     in
     {
       default = module;

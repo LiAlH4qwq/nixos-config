@@ -1,7 +1,8 @@
 {
+  config,
   inputs,
   lib,
-  self,
+  root,
   ...
 }:
 {
@@ -11,24 +12,25 @@
         osModules = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs self;
-            inherit (self) lib;
+            inherit inputs root;
+            inherit (config.flake) lib;
+            flakeConfig = config;
           };
           modules = [
             { _module.check = false; }
-            self.nixosModules.default
+            config.flake.nixosModules.default
           ];
         };
         homeModules = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           check = false;
           extraSpecialArgs = {
-            inherit inputs self;
-            inherit (self) lib;
+            inherit inputs;
+            inherit (config.flake) lib;
             osConfig = osModules.config;
           };
           modules = [
-            self.homeModules.default
+            config.flake.homeModules.default
             {
               home = {
                 username = "user";
@@ -50,7 +52,7 @@
                 declarations = map (
                   x:
                   let
-                    path = x |> lib.removePrefix "${self}" |> lib.removePrefix "/";
+                    path = x |> lib.removePrefix "${root}" |> lib.removePrefix "/";
                   in
                   {
                     name = path;

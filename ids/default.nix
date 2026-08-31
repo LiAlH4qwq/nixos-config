@@ -6,6 +6,8 @@
       inherit (lib.types)
         attrsOf
         listOf
+        nullOr
+        path
         singleLineStr
         submodule
         ;
@@ -17,6 +19,7 @@
       example.lialh4 = {
         #    username = "lialh4";
         nickname = "LiAlH4";
+        avatar = lib.literalMD "`./avatar.webp`";
         git = {
           name = "LiAlH4";
           email = "lialh4qwq@outlook.com";
@@ -25,7 +28,7 @@
       };
       type = attrsOf (
         submodule (
-          { config, ... }: {
+          { config, name, ... }: {
             options = {
               # username = lib.mkOption {
               #   type = singleLineStr;
@@ -38,11 +41,19 @@
               # };
               nickname = lib.mkOption {
                 type = singleLineStr;
-                default = config.username;
+                default = name;
                 example = "LiAlh4";
                 description = desc ''
                   Nickname of ID,
                     defaults to `username`.
+                '';
+              };
+              avatar = lib.mkOption {
+                type = nullOr path;
+                example = lib.literalMD "`./avatar.webp`";
+                description = desc ''
+                  Path to avatar,
+                    can be left null.
                 '';
               };
               git = {

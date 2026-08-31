@@ -1,10 +1,10 @@
-{ inputs, ... }:
+{ root, ... }:
 {
   imports = [
     ./nh
   ];
 
   environment.etc.nixos = {
-    source = "${inputs.self}";
+    source = "${root}";
   };
 }

@@ -1,7 +1,9 @@
 {
+  flakeConfig,
   inputs,
+  lib,
   options,
-  self,
+  root,
   ...
 }:
 {
@@ -12,12 +14,11 @@
     overwriteBackup = true;
     backupFileExtension = "bak";
     extraSpecialArgs = {
-      inherit inputs self;
-      inherit (self) lib;
+      inherit inputs lib root;
       osOptions = options;
     };
     sharedModules = [
-      self.homeModules.liuxu
+      flakeConfig.flake.homeModules.liuxu
     ];
   };
 }

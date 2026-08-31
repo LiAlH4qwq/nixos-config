@@ -106,6 +106,7 @@ lib: {
         mkOsDesc
         mkHomeDesc
         mkFpDesc
+        mkIdDesc
         mkComputedOption
         mkSwitchOption
         mkComputedSwitchOption
@@ -131,6 +132,7 @@ lib: {
           mkOsDesc
           mkHomeDesc
           mkFpDesc
+          mkIdDesc
           mkComputedOption
           mkSwitchOption
           mkComputedSwitchOption

@@ -1,10 +1,10 @@
 {
-  inputs,
+  root,
   ...
 }:
 {
   imports = [
-    "${inputs.self}/system"
+    (root + "/system")
     ./nixos-shim
     ./proot
   ];

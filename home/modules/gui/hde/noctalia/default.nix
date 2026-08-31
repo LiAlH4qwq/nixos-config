@@ -3,7 +3,7 @@
   inputs,
   lib,
   pkgs,
-  self,
+  root,
   ...
 }:
 {
@@ -26,11 +26,11 @@
           telemetry_enabled = true;
           screen_time_enabled = true;
           settings_show_advanced = true;
-          avatar_path = "${self}/assets/lialh4.jpg";
           screenshot = {
             directory = "~/Pictures/Screenshots";
           };
-        };
+        }
+        // lib.optionalAttrs (config.liuxu.home.id != null) { avatar_path = config.liuxu.home.id.avatar; };
         theme = {
           builtin = "Rosé Pine";
           mode = "auto";
@@ -57,7 +57,7 @@
     };
     home.file.wallpaper = {
       target = "Pictures/Wallpapers/rainy-everything-in-the-night.png";
-      source = "${self}/assets/rainy-everything-in-the-night.png";
+      source = "${root}/assets/rainy-everything-in-the-night.png";
     };
     liuxu.home.internal.intransience = {
       dirs = [ ".local/state/noctalia/clipboard" ];

@@ -10,19 +10,20 @@
       enable = true;
       mutableExtensionsDir = false;
       profiles = {
-        # It's wired but it's definately global settings.
         default = {
+          # It's wired but it's definately global settings.
           enableUpdateCheck = false;
           enableExtensionUpdateCheck = false;
-        };
-        default = {
-          extensions = with pkgs.vscode-extensions; [
-            biomejs.biome
-            eamodio.gitlens
-            redhat.vscode-yaml
-            seatonjiang.gitmoji-vscode
-            jnoortheen.nix-ide
-          ];
+
+          extensions =
+            with pkgs.vscode-extensions;
+            [
+              biomejs.biome
+              eamodio.gitlens
+              redhat.vscode-yaml
+              seatonjiang.gitmoji-vscode
+              jnoortheen.nix-ide
+            ];
           userSettings = {
             # Fix Biome binary not found
             "biome.lsp.bin" = "${pkgs.biome}/bin/biome";

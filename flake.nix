@@ -74,12 +74,7 @@ in
           inputs.github-actions-nix.flakeModules.default
           ./parts
         ];
-        _module = {
-          args = {
-            lib = config.flake.lib;
-            root = ./.;
-          };
-        };
+        _module.args.root = ./.;
         systems = import inputs.systems;
         flake.nixConfig = nixConfig;
         debug = true;
