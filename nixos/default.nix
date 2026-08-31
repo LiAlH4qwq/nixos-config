@@ -1,12 +1,13 @@
 {
   lib,
   pkgs,
-  self,
+  root,
   ...
 }:
 {
   imports = [
-    "${self}/system"
+    (root + "/ids")
+    (root + "/system")
     ./globals
     ./home-manager
     ./i18n

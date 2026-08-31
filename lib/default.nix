@@ -44,6 +44,7 @@ lib: {
       mkOsDesc = desc: "Liuxu (OS): ${desc}";
       mkHomeDesc = desc: "Liuxu (Home): ${desc}";
       mkFpDesc = desc: "Liuxu (FP): ${desc}";
+      mkIdDesc = desc: "Liuxu (ID): ${desc}";
       mkComputedOption =
         type: by:
         lib.mkOption {
@@ -71,6 +72,9 @@ lib: {
       mkFpSwitchOption = on2 mkSwitchOption mkFpDesc;
       mkFpSwitchOnOption = o mkSwitchOnOption mkFpDesc;
       mkFpSwitchOffOption = o mkSwitchOffOption mkFpDesc;
+      mkIdSwitchOption = on2 mkSwitchOption mkIdDesc;
+      mkIdSwitchOnOption = o mkSwitchOnOption mkIdDesc;
+      mkIdSwitchOffOption = o mkSwitchOffOption mkIdDesc;
       # END .modules
     in
     {
@@ -116,6 +120,9 @@ lib: {
         mkFpSwitchOption
         mkFpSwitchOnOption
         mkFpSwitchOffOption
+        mkIdSwitchOption
+        mkIdSwitchOnOption
+        mkIdSwitchOffOption
         # END .modules
         ;
       modules = {
@@ -138,6 +145,9 @@ lib: {
           mkFpSwitchOption
           mkFpSwitchOnOption
           mkFpSwitchOffOption
+          mkIdSwitchOption
+          mkIdSwitchOnOption
+          mkIdSwitchOffOption
           ;
       };
       hyprland =

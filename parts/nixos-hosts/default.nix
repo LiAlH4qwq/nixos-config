@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  root,
   self,
   ...
 }:
@@ -85,7 +86,7 @@
       }:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs self;
+          inherit inputs root self;
           inherit (config._module.args) lib;
         };
         modules =
