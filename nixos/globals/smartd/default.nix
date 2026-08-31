@@ -19,7 +19,7 @@
         '';
         notify-sh-arg = notify |> lib.getExe |> lib.escapeShellArg;
       in
-      "-a -m dummy -M test -M exec ${notify-sh-arg}";
+      "-a -m dummy -M exec ${notify-sh-arg}";
   };
   systemd.services.smartd =
     let
