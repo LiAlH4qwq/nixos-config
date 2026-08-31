@@ -15,15 +15,13 @@
           enableUpdateCheck = false;
           enableExtensionUpdateCheck = false;
 
-          extensions =
-            with pkgs.vscode-extensions;
-            [
-              biomejs.biome
-              eamodio.gitlens
-              redhat.vscode-yaml
-              seatonjiang.gitmoji-vscode
-              jnoortheen.nix-ide
-            ];
+          extensions = with pkgs.vscode-extensions; [
+            biomejs.biome
+            eamodio.gitlens
+            redhat.vscode-yaml
+            seatonjiang.gitmoji-vscode
+            jnoortheen.nix-ide
+          ];
 
           userSettings = {
             # Fix Biome binary not found
