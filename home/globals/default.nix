@@ -5,5 +5,6 @@ _: {
     ./id
     ./node
     ./shell
+    ./ssh
   ];
 }
