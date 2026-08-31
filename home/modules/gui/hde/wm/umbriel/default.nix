@@ -26,6 +26,8 @@
             mouse = pointing;
             touchpad = pointing;
           };
+        general.show_cheatsheet = false;
+        workspaces.empty_above = true;
         keybinds = {
           "Mod+Equal" = "window-modify-width:0.05";
           "Mod+Minus" = "window-modify-width:-0.05";
