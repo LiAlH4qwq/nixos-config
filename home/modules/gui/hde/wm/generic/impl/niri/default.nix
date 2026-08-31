@@ -35,10 +35,19 @@
               e:
               lib.kdl.extras.niri.n
                 "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}"
-                {
-                  inherit (e.opt) repeat;
-                  allow-when-locked = e.opt.lock;
-                }
+                (
+                  {
+                    inherit (e.opt) repeat;
+                  }
+                  // (
+                    if e.type != "execr" then
+                      { }
+                    else
+                      {
+                        allow-when-locked = e.opt.lock;
+                      }
+                  )
+                )
                 (
                   with lib.kdl.extras.niri;
                   (
