@@ -24,6 +24,7 @@
               seatonjiang.gitmoji-vscode
               jnoortheen.nix-ide
             ];
+
           userSettings = {
             # Fix Biome binary not found
             "biome.lsp.bin" = "${pkgs.biome}/bin/biome";
@@ -46,7 +47,7 @@
 
             "window.zoomLevel" = 0.375;
 
-            "workbench.colorTheme" = "Default Light Modern";
+            "workbench.colorTheme" = "Light Modern";
             "workbench.secondarySideBar.defaultVisibility" = "hidden"; # No copilot
             "workbench.tree.indent" = 24;
             "workbench.tree.renderIndentGuides" = "always";
