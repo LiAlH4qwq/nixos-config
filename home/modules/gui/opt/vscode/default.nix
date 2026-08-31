@@ -64,6 +64,22 @@
             "editor.codeActionsOnSave" = {
               "source.organizeImports.biome" = "explicit";
             };
+
+            # Vscode try to save these...
+            "json.schemaDownload.trustedDomains" =
+              [
+                "biomejs.dev"
+                "developer.microsoft.com/json-schemas/"
+                "json-schema.org/"
+                "json.schemastore.org/"
+                "raw.githubusercontent.com/devcontainers/spec/"
+                "raw.githubusercontent.com/microsoft/vscode/"
+                "schemastore.azurewebsites.net/"
+                "www.schemastore.org/"
+              ]
+              |> map (x: "https://${x}")
+              |> lib.flip lib.nameValuePair true
+              |> builtins.listToAttrs;
           };
         };
       };
