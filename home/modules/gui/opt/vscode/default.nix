@@ -78,7 +78,7 @@
                 "www.schemastore.org/"
               ]
               |> map (x: "https://${x}")
-              |> lib.flip lib.nameValuePair true
+              |> map (lib.flip lib.nameValuePair true)
               |> builtins.listToAttrs;
           };
         };
