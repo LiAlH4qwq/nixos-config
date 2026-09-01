@@ -20,9 +20,7 @@
   config = lib.mkIf config.liuxu.home.internal.final.gui.zen.enable {
     programs.zen-browser = {
       enable = true;
-      profiles.default = {
-        extensions.packages = with pkgs.firefox-addons; [ onepassword-password-manager ];
-      };
+      profiles.default = { };
     };
     liuxu.home.internal.intransience.dirs = [ ".config/zen/default" ];
   };
