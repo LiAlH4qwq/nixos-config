@@ -32,9 +32,7 @@ lib: {
           B (B C) B (onN (n - 1));
       rN = n: if n < 2 then I else B (B C) B (rN (n - 1));
       arN = n: if n < 2 then I else oN (n - 1) C (arN (n - 1));
-      # END toplevel
 
-      # BEGIN .modules
       mkIfElse =
         cond: onTrue: onFalse:
         lib.mkMerge [
@@ -75,11 +73,9 @@ lib: {
       mkIdSwitchOption = on2 mkSwitchOption mkIdDesc;
       mkIdSwitchOnOption = o mkSwitchOnOption mkIdDesc;
       mkIdSwitchOffOption = o mkSwitchOffOption mkIdDesc;
-      # END .modules
     in
     {
       inherit
-        # BEGIN toplevel
         I
         id
         K
@@ -99,9 +95,7 @@ lib: {
         onN
         rN
         arN
-        # END toplevel
 
-        # BEGIN .modules
         mkIfElse
         mkOsDesc
         mkHomeDesc
@@ -124,34 +118,8 @@ lib: {
         mkIdSwitchOption
         mkIdSwitchOnOption
         mkIdSwitchOffOption
-        # END .modules
         ;
-      modules = {
-        inherit
-          mkIfElse
-          mkOsDesc
-          mkHomeDesc
-          mkFpDesc
-          mkIdDesc
-          mkComputedOption
-          mkSwitchOption
-          mkComputedSwitchOption
-          mkSwitchOnOption
-          mkSwitchOffOption
-          mkOsSwitchOption
-          mkOsSwitchOnOption
-          mkOsSwitchOffOption
-          mkHomeSwitchOption
-          mkHomeSwitchOnOption
-          mkHomeSwitchOffOption
-          mkFpSwitchOption
-          mkFpSwitchOnOption
-          mkFpSwitchOffOption
-          mkIdSwitchOption
-          mkIdSwitchOnOption
-          mkIdSwitchOffOption
-          ;
-      };
+
       hyprland =
         let
           mkBind = o: v: k: {
@@ -180,6 +148,7 @@ lib: {
             repeating = true;
           };
         };
+
       wm =
         let
           mkExecrBind = o: v: k: m: {

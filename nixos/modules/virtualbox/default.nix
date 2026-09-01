@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.virtualbox.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.virtualbox.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable Virtualbox,
       an easy to use virtual machines manager.
   '';

@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.nixos.fingerprint.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.fingerprint.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable the fingerprint reader support.
   '';
 

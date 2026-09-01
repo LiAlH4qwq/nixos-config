@@ -6,7 +6,7 @@
   ...
 }:
 {
-  options.liuxu.fp.nixos = with lib.liuxu.modules; {
+  options.liuxu.fp.nixos = with lib.liuxu; {
     sharedModules = lib.mkOption {
       type = lib.types.unspecified;
       default = [ ];

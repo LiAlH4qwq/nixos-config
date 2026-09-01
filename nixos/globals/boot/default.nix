@@ -6,6 +6,7 @@
 {
   imports = [
     (lib.mkAliasOptionModule [ "liuxu" "nixos" "kernel" "package" ] [ "boot" "kernelPackages" ])
+    (lib.mkAliasOptionModule [ "liuxu" "nixos" "kernel" "params" ] [ "boot" "kernelParams" ])
   ];
 
   boot = {

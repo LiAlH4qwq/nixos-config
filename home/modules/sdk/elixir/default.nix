@@ -5,10 +5,9 @@
   ...
 }:
 {
-  options.liuxu.home.sdk.elixir.enable =
-    lib.liuxu.modules.mkHomeSwitchOption config.liuxu.home.sdk.enable ''
-      Whether to enable the Elixir SDK.
-    '';
+  options.liuxu.home.sdk.elixir.enable = lib.liuxu.mkHomeSwitchOption config.liuxu.home.sdk.enable ''
+    Whether to enable the Elixir SDK.
+  '';
 
   config = lib.mkIf config.liuxu.home.sdk.elixir.enable {
     assertions = [

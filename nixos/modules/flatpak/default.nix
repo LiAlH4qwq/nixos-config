@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.flatpak.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.flatpak.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable the Flatpak support.
   '';
 

@@ -11,7 +11,7 @@
     ./zoxide
   ];
 
-  options.liuxu.system.better-shell.enable = lib.liuxu.modules.mkOsSwitchOffOption ''
+  options.liuxu.system.better-shell.enable = lib.liuxu.mkOsSwitchOffOption ''
     Whether to enable the better shell.
       Currently enables fish, set it to default shell for all users,
       enables starship, enables its shell integration for all shells,

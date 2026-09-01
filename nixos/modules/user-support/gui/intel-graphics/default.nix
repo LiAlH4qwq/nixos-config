@@ -17,7 +17,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.intel-graphics.enable (
-    lib.liuxu.modules.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
         hardware.graphics.extraPackages = with pkgs; [
           intel-media-driver # VAAPI

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.brightness.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.brightness.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable the brightness control support.
       Currently enables `brightnessctl`.
   '';

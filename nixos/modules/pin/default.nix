@@ -7,7 +7,7 @@
 {
   imports = [ inputs.libpam-pwdfile-rs.nixosModules.default ];
 
-  options.liuxu.nixos.pin.enable = lib.liuxu.modules.mkOsSwitchOffOption ''
+  options.liuxu.nixos.pin.enable = lib.liuxu.mkOsSwitchOffOption ''
     Whether to enable the Windows-Like PIN code support,
       which uses an alter simple password for local auth,
       currently for tty-login, dm-login and polkit(run0 and etc.).

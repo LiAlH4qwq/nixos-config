@@ -6,7 +6,7 @@
 }:
 {
   options.liuxu.nixos.samba = {
-    enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+    enable = lib.liuxu.mkOsSwitchOnOption ''
       Whether to enable samba,
         file sharing server.
     '';

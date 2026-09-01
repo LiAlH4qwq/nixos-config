@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.nixos.bluetooth.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.bluetooth.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable the bluetooth support.
       Currently enables bluez and enables blueman when GUI enabled.
   '';

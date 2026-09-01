@@ -18,7 +18,18 @@
       brightness.enable = true;
       fingerprint.enable = true;
       flatpak.enable = true;
-      kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
+      kernel = {
+        package = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
+        # Use Xe for better performance, maybe (?)
+        params =
+          let
+            id = "46a6";
+          in
+          [
+            "i915.force_probe=!${id}"
+            "xe.force_probe=${id}"
+          ];
+      };
       laptop.enable = true;
       nh.flake = "/mnt/data/lialh4/Projects/nixos-config";
       podman.enable = true;
@@ -43,16 +54,6 @@
   };
   systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
 
-  # Use Xe for better performance, maybe(?)
-  boot.kernelParams =
-    let
-      id = "46a6";
-    in
-    [
-      "i915.force_probe=!${id}"
-      "xe.force_probe=${id}"
-    ];
-
   home-manager.sharedModules = [
     {
       liuxu.home.gui.keybinds.execr = with lib.liuxu.wm; [
@@ -67,18 +68,20 @@
       ];
     }
     {
-      liuxu.home.gui.niri.settings = lib.mkAfter (
-        lib.kdl.formats.v1 (
-          with lib.kdl.extras.niri;
-          [
-            (include (
-              lib.liuxu.o2 toString pkgs.writeText "niri-laptop-screen.kdl" (
-                lib.kdl.formats.v1 [ (output "eDP-1" [ (scale 2) ]) ]
-              )
-            ))
-          ]
-        )
-      );
+      liuxu.home.gui.niri.settings =
+        with lib.kdl.extras.niri;
+        2
+        |> scale
+        |> lib.singleton
+        |> output "eDP-1"
+        |> lib.singleton
+        |> lib.kdl.formats.v1
+        |> pkgs.writeText "niri-laptop-screen.kdl"
+        |> toString
+        |> include
+        |> lib.singleton
+        |> lib.kdl.formats.v1
+        |> lib.mkAfter;
     }
     {
       programs.umbriel.settings.output.eDP-1.scale = 2;

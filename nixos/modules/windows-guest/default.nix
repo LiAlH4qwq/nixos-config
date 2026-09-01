@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.windows-guest.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.windows-guest.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to include a Windows guest configuration,
       by virt-manager, qemu, kvm, with SR-IOV.
   '';

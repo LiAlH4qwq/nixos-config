@@ -8,7 +8,7 @@
   imports = [ ./settings ];
 
   options.liuxu.nixos.network.mihoyo = {
-    enable = lib.liuxu.modules.mkOsSwitchOffOption ''
+    enable = lib.liuxu.mkOsSwitchOffOption ''
       Whether to enable Mihoyo.
         Network should be enable first.
         Genshin, Impact! (x

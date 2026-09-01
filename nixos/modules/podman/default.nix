@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.liuxu.nixos.podman.enable = lib.liuxu.modules.mkOsSwitchOnOption ''
+  options.liuxu.nixos.podman.enable = lib.liuxu.mkOsSwitchOnOption ''
     Whether to enable Podman,
       a container management tool,
       drop-in replacement of docker.
