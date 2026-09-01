@@ -4,11 +4,9 @@ _: {
     ./python-less
   ];
 
-  services = {
-    # Use Chrony for better experience, especially on laptop.
-    timesyncd.enable = false;
-    chrony.enable = true;
-  };
+  # Use Chrony for better experience,
+  #  especially on laptop.
+  services.chrony.enable = true;
 
   security = {
     sudo.enable = false;
