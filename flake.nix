@@ -12,7 +12,7 @@ let
       "nix-command"
       "pipe-operator"
       "read-only-local-store"
-      "repl-automation"
+      # "repl-automation"
     ];
     extra-substituters = [
       # "https://mirrors.nju.edu.cn/nix-channels/store"
