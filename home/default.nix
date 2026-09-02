@@ -16,7 +16,6 @@
     stateVersion = osConfig.liuxu.system.version-when-installed;
     packages = with pkgs; [
       android-tools
-      cargo
       fastfetch
       nixd # Nix LSP
       nixfmt # Nix formatter
