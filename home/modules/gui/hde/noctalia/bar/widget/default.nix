@@ -3,6 +3,10 @@
     programs.noctalia.settings.widget = {
       brightness.show_label = false;
       clock.anchor = true;
+      cpu-temp = {
+        type = "sysmon";
+        stat = "cpu_temp";
+      };
       media.hide_when_no_media = true;
       network.show_label = false;
       notifications.hide_when_no_unread = true;

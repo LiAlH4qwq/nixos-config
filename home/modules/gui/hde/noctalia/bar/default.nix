@@ -7,7 +7,11 @@
       radius = 0;
       shadow = false;
       scale = 1.2;
-      start = [ "workspaces" ];
+      start = [
+        "cpu"
+        "cpu-temp"
+        "workspaces"
+      ];
       center = [
         "clock"
         "notifications"
