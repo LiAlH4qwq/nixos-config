@@ -9,7 +9,6 @@ _: {
   services.chrony.enable = true;
 
   security = {
-    sudo.enable = false;
     sudo-rs.enable = true;
     polkit = {
       enable = true;
