@@ -90,7 +90,7 @@
                   "@bili"
                   "@bilibili"
                 ];
-                iconURL = "https://www.bilibili.com/favicon.ico";
+                icon = "https://www.bilibili.com/favicon.ico";
                 urls = [
                   {
                     template = "https://search.bilibili.com/all";
