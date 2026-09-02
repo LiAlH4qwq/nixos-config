@@ -54,7 +54,12 @@ _: {
 
     "/mnt/data" = {
       device = "/dev/mapper/data";
-      fsType = "xfs";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+        "subvol=@data"
+      ];
     };
 
     "/mnt/fedora" = {
