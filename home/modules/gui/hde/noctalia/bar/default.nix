@@ -11,6 +11,7 @@
         "cpu"
         "cpu-temp"
         "workspaces"
+        "active_window"
       ];
       center = [
         "clock"
