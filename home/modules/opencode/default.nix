@@ -80,7 +80,7 @@
       };
     };
 
-    liuxu.home.intransience =
+    liuxu.home.internal.intransience =
       let
         withOpdir = x: ".local/share/opencode/${x}";
       in
