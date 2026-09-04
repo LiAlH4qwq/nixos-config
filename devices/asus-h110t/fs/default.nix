@@ -56,6 +56,25 @@ _: {
       ];
     };
 
+    "/mnt/btrbk/local" = {
+      device = "/dev/mapper/data";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+        "subvol=@btrbk-local"
+      ];
+    };
+
+    "/mnt/btrbk/root" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+      ];
+    };
+
     "/boot" = {
       device = "/dev/disk/by-uuid/1BC6-98E4";
       fsType = "vfat";
