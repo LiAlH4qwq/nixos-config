@@ -9,6 +9,7 @@ _: {
     ./nixos-modules
     ./nix-on-droid
     ./overlays
+    ./packages
     ./treefmt
   ];
 }
