@@ -79,5 +79,20 @@
           );
       };
     };
+
+    liuxu.home.intransience =
+      let
+        withOpdir = x: ".local/share/opencode/${x}";
+      in
+      {
+        dirs = map withOpdir [
+          "storage"
+          "snapshot"
+        ];
+        files = map withOpdir [
+          "opencode-stable.db"
+          "opencode-stable.db-wal"
+        ];
+      };
   };
 }
