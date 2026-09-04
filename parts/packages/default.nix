@@ -1,3 +1,5 @@
-_: {
-  imports = [ ./dangling-checker ];
+{ root, ... }: {
+  perSystem = { pkgs, ... }: {
+    packages.dangling-checker = pkgs.callPackage (root + "/packages/dangling-checker") { };
+  };
 }
