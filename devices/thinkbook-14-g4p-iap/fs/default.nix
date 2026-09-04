@@ -62,6 +62,25 @@ _: {
       ];
     };
 
+    "/mnt/btrbk/local" = {
+      device = "/dev/mapper/data";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+        "subvol=@btrbk-local"
+      ];
+    };
+
+    "/mnt/btrbk/root" = {
+      device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [
+        "noatime"
+        "compress=zstd"
+      ];
+    };
+
     "/mnt/fedora" = {
       device = "/dev/mapper/fedora";
       fsType = "xfs";
