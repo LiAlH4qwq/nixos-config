@@ -15,11 +15,7 @@ _: {
 
       target = "/mnt/btrbk/local";
 
-      #subvolume = "persist"; # .snapshot_dir = "/mnt/btrbk/local/persist";
-
       volume."/mnt/btrbk/root".subvolume = "@persist";
     };
   };
-
-  # systemd.tmpfiles.settings.btrbk."/mnt/btrbk/local/persist".d = { };
 }
