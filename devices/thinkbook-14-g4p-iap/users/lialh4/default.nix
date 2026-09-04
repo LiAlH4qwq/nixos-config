@@ -19,6 +19,7 @@
     shell = pkgs.nushell;
     extraGroups = [
       "wheel"
+      "dialout"
       "amlusers"
     ];
     hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Laptop.users.lialh4.password.path;
