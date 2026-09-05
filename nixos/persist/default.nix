@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -78,4 +79,34 @@
         // mkHomeEntries name;
     in
     lib.mapAttrsToList mkUserEntries cfg |> lib.mergeAttrsList;
+
+  systemd.services.dangling-checker = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart =
+        let
+          cfg = config.intransience.datastores.persist;
+          transAttrs =
+            attrs:
+            attrs
+            |> map (builtins.getAttr "sourcePath")
+            |> map (lib.splitString "/")
+            |> map (x: [ "/" ] ++ builtins.tail x);
+          dirs = transAttrs (cfg.allDirs ++ cfg.etc.dirs);
+          files = transAttrs (cfg.allFiles ++ cfg.etc.files);
+          allows =
+            {
+              inherit dirs files;
+            }
+            |> (pkgs.formats.json { }).generate "dangling-checker-allows.json"
+            |> toString
+            |> lib.escapeShellArg;
+        in
+        "-${
+          lib.escapeShellArg <| lib.getExe <| pkgs.dangling-checker
+        } ${allows} ${lib.escapeShellArg "/persist"}";
+    };
+  };
 }

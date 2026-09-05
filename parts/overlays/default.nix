@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   flake.overlays.default = final: prev: {
     unstable = import inputs.nixpkgs-unstable {
@@ -17,6 +17,7 @@
         vendorHash = "sha256-/vo5msKJ9J6Ga7BqGwavLlUGUSvkaCtmYFDI/2zBCv4=";
       }
     );
+    dangling-checker = config.flake.packages.${prev.stdenv.hostPlatform.system}.dangling-checker;
     hyprland = prev.hyprland.overrideAttrs (old: {
       cmakeFlags =
         (builtins.filter (f: !(final.lib.hasPrefix "-DNO_UWSM=" f)) (old.cmakeFlags or [ ]))

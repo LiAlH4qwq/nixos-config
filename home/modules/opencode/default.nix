@@ -24,6 +24,7 @@
         settings = {
           autoupdate = false;
           model = "deepseek/deepseek-v4-flash-vision-exp";
+          provider.deepseek.blacklist = [ "deepseek-v4-pro" ];
         };
       };
       mcp = {
@@ -78,5 +79,20 @@
           );
       };
     };
+
+    liuxu.home.internal.intransience =
+      let
+        withOpdir = x: ".local/share/opencode/${x}";
+      in
+      {
+        dirs = map withOpdir [
+          "storage"
+          "snapshot"
+        ];
+        files = map withOpdir [
+          "opencode-stable.db"
+          "opencode-stable.db-wal"
+        ];
+      };
   };
 }

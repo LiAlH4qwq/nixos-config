@@ -8,9 +8,9 @@ _: {
   home-manager.users.live = {
     liuxu.home = {
       gui = {
-        hyprland.enable = true;
-        niri.enable = true;
+        umbriel.enable = true;
         opt.enable = false;
+        zen.enable = false;
       };
       opencode.enable = true;
     };

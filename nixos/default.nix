@@ -35,6 +35,8 @@
     defaultPackages = lib.mkForce [ ];
     systemPackages = with pkgs; [
       btdu
+      btop
+      nix-output-monitor
       nushell
       pciutils # `lspci`
       usbutils # `lsusb`

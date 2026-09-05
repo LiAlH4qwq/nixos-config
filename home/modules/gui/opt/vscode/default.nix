@@ -18,9 +18,10 @@
           extensions = with pkgs.vscode-extensions; [
             biomejs.biome
             eamodio.gitlens
+            jnoortheen.nix-ide
             redhat.vscode-yaml
             seatonjiang.gitmoji-vscode
-            jnoortheen.nix-ide
+            thenuprojectcontributors.vscode-nushell-lang
           ];
 
           userSettings = {
