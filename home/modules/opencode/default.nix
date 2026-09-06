@@ -47,7 +47,7 @@
           <| pkgs.writers.writeNuBin "opencode-secrets" (
             let
               secretPathsShArg =
-                osConfig.age.secretsV2.ai.accessToken
+                osConfig.age.secretsV2.accessToken.ai
                 |> lib.mapAttrs' (
                   n: v: {
                     name =

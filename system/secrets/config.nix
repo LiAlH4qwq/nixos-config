@@ -8,7 +8,7 @@
   };
   items = {
     os = {
-      ai.accessToken =
+      accessToken.ai =
         let
           args = {
             _isArgs = true;
