@@ -6,7 +6,6 @@ _: {
     ./cloudflared
     ./fingerprint
     ./flatpak
-    ./hermes
     ./laptop
     ./measured-boot
     ./network

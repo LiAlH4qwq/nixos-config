@@ -260,40 +260,6 @@
         "url": "https://flakehub.com/f/synapdeck/github-actions-nix/%2A"
       }
     },
-    "hermes": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "npm-lockfile-fix": [
-          "npm-lockfile-fix"
-        ],
-        "pyproject-build-systems": [],
-        "pyproject-nix": [
-          "pyproject-nix"
-        ],
-        "uv2nix": [
-          "uv2nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1785455108,
-        "narHash": "sha256-JVpdkcgrx+TGKayql/hzhTx+zuyaFATGEtVkBo1aPCc=",
-        "owner": "NousResearch",
-        "repo": "hermes-agent",
-        "rev": "cc4cab2f592e60a197e796506de9168f74baf3ea",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NousResearch",
-        "ref": "v2026.7.30",
-        "repo": "hermes-agent",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -616,26 +582,6 @@
         "type": "github"
       }
     },
-    "npm-lockfile-fix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775903712,
-        "narHash": "sha256-2GV79U6iVH4gKAPWYrxUReB0S41ty/Y3dBLquU8AlaA=",
-        "owner": "jeslie0",
-        "repo": "npm-lockfile-fix",
-        "rev": "c6093acb0c0548e0f9b8b3d82918823721930fe8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jeslie0",
-        "repo": "npm-lockfile-fix",
-        "type": "github"
-      }
-    },
     "peer-ban-helper": {
       "inputs": {
         "flake-parts": [
@@ -659,26 +605,6 @@
       "original": {
         "owner": "lialh4qwq",
         "repo": "peer-ban-helper-nix",
-        "type": "github"
-      }
-    },
-    "pyproject-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786031528,
-        "narHash": "sha256-cROiHKO3UbIKqF5FG5NikvydzlfIj4EcR1Cty9qOVt4=",
-        "owner": "pyproject-nix",
-        "repo": "pyproject.nix",
-        "rev": "1b1485546d85f6f6c7aadb10c4923dbc09633263",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pyproject-nix",
-        "repo": "pyproject.nix",
         "type": "github"
       }
     },
@@ -727,7 +653,6 @@
         "flake-utils": "flake-utils",
         "flat-flake": "flat-flake",
         "github-actions-nix": "github-actions-nix",
-        "hermes": "hermes",
         "home-manager": "home-manager",
         "intransience": "intransience",
         "lanzaboote": "lanzaboote",
@@ -742,16 +667,13 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
-        "npm-lockfile-fix": "npm-lockfile-fix",
         "peer-ban-helper": "peer-ban-helper",
-        "pyproject-nix": "pyproject-nix",
         "ragenix": "ragenix",
         "rust-overlay": "rust-overlay",
         "systems": "systems",
         "tg-transient": "tg-transient",
         "treefmt-nix": "treefmt-nix",
         "umbriel": "umbriel",
-        "uv2nix": "uv2nix",
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel",
         "zen": "zen"
       }
@@ -865,29 +787,6 @@
       "original": {
         "type": "git",
         "url": "https://github.com/noctalia-dev/umbriel"
-      }
-    },
-    "uv2nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "pyproject-nix": [
-          "pyproject-nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1788001239,
-        "narHash": "sha256-AELmsXPI546MhbC/ZXC7WRUkCz7d4rqKTHUmliIgPpI=",
-        "owner": "pyproject-nix",
-        "repo": "uv2nix",
-        "rev": "7f9c6b613d2e749e54854b1d60ab6a2192db889e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pyproject-nix",
-        "repo": "uv2nix",
-        "type": "github"
       }
     },
     "xdg-desktop-portal-umbriel": {

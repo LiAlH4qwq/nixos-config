@@ -33,27 +33,6 @@
           };
         };
       };
-      hermes = {
-        enable = true;
-        allowNixAccess = true;
-        environmentFiles = [ config.age.secretsV2.devices.LiAlH4-Server.hermes.environmentFile.path ];
-        settings = {
-          cron = {
-            wrap_response = false;
-            mirror_delivery = true;
-          };
-          model = {
-            provider = "kimi-coding";
-            default = "kimi-k2.7-code";
-          };
-          fallback_providers = [
-            {
-              provider = "minimax-cn";
-              model = "MiniMax-M3";
-            }
-          ];
-        };
-      };
       kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
       network = {
         firewalld = {

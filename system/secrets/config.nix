@@ -39,7 +39,6 @@
             group = "cloudflare-ddns";
           };
           cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
-          hermes.environmentFile = true;
         };
       };
     };
