@@ -8,7 +8,7 @@
   };
   items = {
     os = {
-      accessToken.ai =
+      accessToken =
         let
           args = {
             _isArgs = true;
@@ -18,9 +18,12 @@
           };
         in
         {
-          kimi = args;
-          mimo = args;
-          deepseek = args;
+          ai = {
+            kimi = args;
+            mimo = args;
+            deepseek = args;
+          };
+          github.public-ro = args;
         };
       mihoyo.alink = true;
       smartd.bot = {
