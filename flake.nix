@@ -175,14 +175,6 @@ in
         flake-compat.follows = "";
       };
     };
-    dsh = {
-      url = "github:moraxyc/deepseek-harness.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        systems.follows = "systems";
-      };
-    };
     aml-flash-tool = {
       url = "github:lialh4qwq/aml-flash-tool-nix";
       inputs = {
