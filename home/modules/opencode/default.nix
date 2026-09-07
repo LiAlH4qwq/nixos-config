@@ -25,6 +25,10 @@
           autoupdate = false;
           model = "deepseek/deepseek-v4-flash-vision-exp";
           provider.deepseek.blacklist = [ "deepseek-v4-pro" ];
+          permission = {
+            external_directory."/nix/store/*" = "allow";
+            edit."/nix/store/*" = "deny";
+          };
         };
       };
       mcp = {
