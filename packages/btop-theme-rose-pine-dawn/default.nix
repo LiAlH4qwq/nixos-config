@@ -15,6 +15,6 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p "$out/share/btop/themes"
-    cp "$src/rose-pine-dawn.theme" "$out/share/btop/themes/rose-pine-dawn-theme"
+    cp "$src/rose-pine-dawn.theme" "$out/share/btop/themes/rose-pine-dawn.theme"
   '';
 }
