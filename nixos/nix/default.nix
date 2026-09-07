@@ -1,4 +1,9 @@
-{ lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./lix
@@ -6,6 +11,16 @@
   ];
 
   nix = {
+    channel.enable = false;
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        systems = import inputs.systems;
+        hostName = "genshin.lialh4.cyou:14159";
+        sshUser = "builder";
+        sshKey = config.age.secretsV2.accessToken.ssh.nix-build.path;
+      }
+    ];
     settings =
       let
         admins = [

@@ -2,6 +2,7 @@ _: {
   imports = [
     ./bluetooth
     ./brightness
+    ./builder
     ./cloudflare-ddns
     ./cloudflared
     ./fingerprint

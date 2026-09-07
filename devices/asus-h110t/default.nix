@@ -7,6 +7,7 @@
   liuxu = {
     nixos = {
       bluetooth.enable = true;
+      builder.enable = true;
       cloudflare-ddns = {
         enable = true;
         credentialsFile = config.age.secretsV2.devices.LiAlH4-Server.cloudflare-ddns.credentialsFile.path;

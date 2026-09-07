@@ -24,6 +24,7 @@
             deepseek = args;
           };
           github.public-ro = args;
+          ssh.nix-build = true;
         };
       mihoyo.alink = true;
       smartd.bot = {
