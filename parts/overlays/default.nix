@@ -26,6 +26,7 @@
           }
         );
         dangling-checker = config.packages.dangling-checker;
+        disable-dwt-in-hsr = config.packages.disable-dwt-in-hsr;
         hyprland = prev.hyprland.overrideAttrs (old: {
           cmakeFlags =
             (builtins.filter (f: !(final.lib.hasPrefix "-DNO_UWSM=" f)) (old.cmakeFlags or [ ]))
