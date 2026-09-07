@@ -13,14 +13,21 @@
   nix = {
     channel.enable = false;
     distributedBuilds = true;
-    buildMachines = [
-      {
+    buildMachines =
+      [
+        "fd00::10"
+        "fd00::20"
+        "192.168.1.10"
+        "192.168.1.20"
+        "genshin.lialh4.cyou:14159"
+      ]
+      |> map (x: {
         systems = import inputs.systems;
-        hostName = "genshin.lialh4.cyou:14159";
+        supportedFeatures = config.nix.settings.system-features;
+        hostName = x;
         sshUser = "builder";
         sshKey = config.age.secretsV2.accessToken.ssh.nix-build.path;
-      }
-    ];
+      });
     settings =
       let
         admins = [
