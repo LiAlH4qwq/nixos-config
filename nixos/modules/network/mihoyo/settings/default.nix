@@ -226,12 +226,13 @@
 
         rules = [
           "DST-PORT, 53, Dns"
-          "GEOIP, lan, Direct, no-resolve"
-          "GEOSITE, private, Direct, no-resolve"
           "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct"
           # cloudflare-ddns
           "PROCESS-NAME, ddns, Direct"
-          "PROCESS-PATH, /mnt/data/lialh4/Game/HSR/runners/spritz-wine-cachyos-wow64-10.0-8/bin/wineserver, Direct"
+          "PROCESS-PATH-REGEX, ^/mnt/data/lialh4/Game/HSR/.*/bin/wineserver$, Direct"
+          "DOMAIN, genshin.lialh4.cyou, Direct, no-resolve"
+          "GEOIP, lan, Direct, no-resolve"
+          "GEOSITE, private, Direct, no-resolve"
           "GEOSITE, category-ai-!cn, AI Abroad"
           "GEOSITE, cn, Direct"
           "GEOIP, cn, Direct"
