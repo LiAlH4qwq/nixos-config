@@ -21,6 +21,7 @@
       opencode = {
         enable = true;
         enableMcpIntegration = true;
+        skills.nushell = "${pkgs.nushell-skill}/share/nushell-skill/skills/nushell";
         settings = {
           autoupdate = false;
           model = "deepseek/deepseek-v4-flash-vision-exp";
