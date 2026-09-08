@@ -1,3 +1,4 @@
+mkdir ~/.config/umbriel
 def listen [] {
     let wm = $env.XDG_CURRENT_DESKTOP
     match $wm {
@@ -6,22 +7,24 @@ def listen [] {
     }
 }
 listen | each {|income|
-    mkdir ~/.config/umbriel
-    let json = $income
-    let parseed = $json | from json
-    let data = $parseed.data
-    let isInHsr = $data | any {|window|
-        let class = $window.app_id
-        let title = $window.title
-        let focused = $window.focused
-        $class == steam_proton and $title == 崩坏：星穹铁道 and $focused == true
-    }
-    let payload = {
-        input: {
-            touchpad: {
-                disable_while_typing: (not $isInHsr)
-            }
+    $income
+    | split row "\n"
+    | each {|line| $line | str trim}
+    | where {|line| $line != ''}
+    | each {|line| try { $line | from json } catch { {} }}
+    | where {|obj| 'data' in $obj}
+    | each {|obj| $obj.data}
+    | each {|data|
+        let isInHsr = $data | any {|window|
+            $window.app_id == steam_proton and $window.title == 崩坏：星穹铁道 and $window.focused == true
         }
+        {
+            input: {
+                touchpad: {
+                    disable_while_typing: (not $isInHsr)
+                }
+            }
+        } | save -f ~/.config/umbriel/disable-dwt-in-hsr.toml
     }
-    $payload | save -f ~/.config/umbriel/disable-dwt-in-hsr.toml
-}
+    | ignore
+} | ignore
