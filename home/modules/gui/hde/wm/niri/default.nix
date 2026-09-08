@@ -37,6 +37,7 @@
     liuxu.home.gui.niri.settings = lib.kdl.formats.v1 (
       with lib.kdl.extras.niri;
       [
+        (spawn-at-startup (lib.getExe pkgs.disable-dwt-in-hsr))
         (xwayland-satellite [
           (path "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
         ])
@@ -51,6 +52,7 @@
             natural-scroll
           ])
         ])
+        (include { optional = true; } "~/.config/niri/disable-dwt-in-hsr.kdl")
       ]
     );
   };
