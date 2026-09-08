@@ -25,11 +25,17 @@ This repo is a NixOS configuration, with lots of modern and bleeding-edge settin
   - ./home: Generic Home Manager config, decoupled with specific user config
   - ./devices: Device specific config
   - ./devices/users/<name>: Specific user config for specific device
+  - ./parts: flake-parts modules
 - Custom library extension:
   - lib.kdl: kdl generator from github:lhcfl/nix-kdl
   - lib.liuxu: helpers for this repo
   - lib.hm: helpers from Home Manager
   - All of these available anywhere!
+- Centralized own packages
+  - ./packages/<name>: real package defination
+  - ./parts/packages: attach own packages above to flake first
+  - ./parts/overlays: own overlay, add above own packages by access flake config, while modify some packages in nixpkgs
+
 
 ## Rules
 
@@ -41,5 +47,3 @@ This repo is a NixOS configuration, with lots of modern and bleeding-edge settin
 - In addition of traditional cli tools, modern cli tools above is also available, and they're more friendly
 
 ## Known Issues
-
-- The users identity(git.username, git.email, ssh.authorizedKeys, etc.) hasn't decoupled with other layers
