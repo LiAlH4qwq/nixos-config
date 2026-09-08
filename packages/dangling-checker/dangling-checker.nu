@@ -81,7 +81,6 @@ if $src_length == $target_length {
 }
 let target_init: list = $target | take $src_length
 $src == $target_init }
-
 def main [...args]: nothing -> string {
     let allows: record<dirs: list<list<string>>, files: list<list<string>>> = $args | get 0 | open -r $in | from json
     let item: list<string> = $args | get 1 | path expand | path split
@@ -91,24 +90,24 @@ def main [...args]: nothing -> string {
             'No danglings or warnings.' | print
             exit 0
         }
-        {warnings:[], danglings: $danglings} => {
+        {warnings: [], danglings: $danglings} => {
             'No warnings.' | print
             'Danglings:' | print
             $danglings | par-each {|dangling| $dangling | path join} | sort | str join "\n" | print
             exit 1
         }
-        {danglings:[], warnings: $warnings} => {
+        {danglings: [], warnings: $warnings} => {
             'No danglings.' | print
             'Warnings:' | print
             $warnings | sort-by path | par-each {|warning| $"($warning.path)\n($warning.msg)"} | str join "\n\n" | print
             exit 2
         }
-        {danglings:$danglings, warnings: $warnings} => {
+        {danglings: $danglings, warnings: $warnings} => {
             'Danglings:' | print
             $danglings | par-each {|dangling| $dangling | path join} | sort | str join "\n" | print
             'Warnings:' | print
             $warnings | sort-by path | par-each {|warning| $"($warning.path)\n($warning.msg)"} | str join "\n\n" | print
             exit 3
         }
-    } 
+    }
 }

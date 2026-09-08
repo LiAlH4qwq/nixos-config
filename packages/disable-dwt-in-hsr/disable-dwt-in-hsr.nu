@@ -5,7 +5,6 @@ def listen [] {
         _ => (error make "Unspported window manager!")
     }
 }
-
 listen | each {|income|
     mkdir ~/.config/umbriel
     let json = $income
@@ -14,7 +13,8 @@ listen | each {|income|
     let isInHsr = $data | any {|window|
         let class = $window.app_id
         let title = $window.title
-        $class == steam_proton and $title == 崩坏：星穹铁道
+        let focused = $window.focused
+        $class == steam_proton and $title == 崩坏：星穹铁道 and $focused == true
     }
     let payload = {
         input: {
