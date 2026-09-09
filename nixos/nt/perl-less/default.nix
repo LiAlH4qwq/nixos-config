@@ -19,8 +19,6 @@ _: {
   # Get rid of perl script that generate users registry.
   services.userborn = {
     enable = true;
-    passwordFilesLocation = "/var/lib/userborn";
+    passwordFilesLocation = "/persist/var/lib/userborn";
   };
-
-  intransience.datastores.persist.dirs = [ "/var/lib/userborn" ];
 }

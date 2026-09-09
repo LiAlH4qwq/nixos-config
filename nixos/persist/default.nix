@@ -94,7 +94,9 @@
             |> map (builtins.getAttr "sourcePath")
             |> map (lib.splitString "/")
             |> map (x: [ "/" ] ++ builtins.tail x);
-          dirs = transAttrs (cfg.allDirs ++ cfg.etc.dirs);
+          dirs = transAttrs (
+            cfg.allDirs ++ cfg.etc.dirs ++ [ { sourcePath = "/persist/var/lib/userborn"; } ]
+          );
           files = transAttrs (cfg.allFiles ++ cfg.etc.files);
           allows =
             {
