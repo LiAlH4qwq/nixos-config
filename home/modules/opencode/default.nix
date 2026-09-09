@@ -25,7 +25,10 @@
         settings = {
           autoupdate = false;
           model = "deepseek/deepseek-v4-flash-vision-exp";
-          provider.deepseek.blacklist = [ "deepseek-v4-pro" ];
+          provider.deepseek = {
+            blacklist = [ "deepseek-v4-pro" ];
+            models."deepseek-v4.1-flash-expires-on-0910".name = "DeepSeek V4.1 Flash";
+          };
           permission = {
             external_directory."/nix/store/*" = "allow";
             edit."/nix/store/*" = "deny";
