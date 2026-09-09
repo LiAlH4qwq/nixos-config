@@ -17,6 +17,7 @@
     ./nix
     ./nt
     ./persist
+    ./sops
   ];
 
   systemd.oomd = {

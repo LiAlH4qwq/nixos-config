@@ -22,7 +22,7 @@
       "dialout"
       "amlusers"
     ];
-    hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Laptop.users.lialh4.password.path;
+    hashedPasswordFile = config.sops.secrets."users/lialh4/hashedPassword".path;
   };
   home-manager.users.lialh4 = {
     liuxu.home = {

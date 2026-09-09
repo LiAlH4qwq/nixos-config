@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  root,
   ...
 }:
 {
@@ -41,6 +42,11 @@
       windows-guest.enable = true;
     };
     system.version-when-installed = "25.11";
+  };
+
+  sops.secrets."users/lialh4/hashedPassword" = {
+    sopsFile = "${root}/sops/LiAlH4-Laptop.yaml";
+    neededForUsers = true;
   };
 
   programs.aml-flash-tool.enable = true;

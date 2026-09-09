@@ -32,7 +32,6 @@
         token = true;
       };
       devices = {
-        LiAlH4-Laptop.users.lialh4.password = true;
         LiAlH4-Server = {
           users.lialh4.password = true;
           samba.users.lialh4.passwordFile = true;
