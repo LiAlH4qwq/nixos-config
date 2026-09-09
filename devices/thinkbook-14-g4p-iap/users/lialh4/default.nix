@@ -11,10 +11,12 @@
     };
   };
 
-  liuxu.nixos.users.lialh4.id = config.liuxu.id.lialh4;
+  liuxu.nixos.users.lialh4 = {
+    id = config.liuxu.id.lialh4;
+    hashedPasswordFile = config.sops.secrets."localMachine/users/lialh4/hashedPassword".path;
+  };
 
   users.extraUsers.lialh4 = {
-    isNormalUser = true;
     # useDefaultShell = true;
     shell = pkgs.nushell;
     extraGroups = [
@@ -22,7 +24,6 @@
       "dialout"
       "amlusers"
     ];
-    hashedPasswordFile = config.sops.secrets."users/lialh4/hashedPassword".path;
   };
   home-manager.users.lialh4 = {
     liuxu.home = {

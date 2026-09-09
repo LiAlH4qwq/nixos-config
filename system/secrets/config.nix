@@ -33,7 +33,6 @@
       };
       devices = {
         LiAlH4-Server = {
-          users.lialh4.password = true;
           samba.users.lialh4.passwordFile = true;
           cloudflare-ddns.credentialsFile = {
             _isArgs = true;

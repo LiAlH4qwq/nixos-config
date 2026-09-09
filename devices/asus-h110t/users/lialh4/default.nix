@@ -1,13 +1,14 @@
 { config, ... }:
 {
-  liuxu.nixos.users.lialh4.id = config.liuxu.id.lialh4;
+  liuxu.nixos.users.lialh4 = {
+    id = config.liuxu.id.lialh4;
+    hashedPasswordFile = config.sops.secrets."localMachine/users/lialh4/hashedPassword".path;
+  };
 
   users.extraUsers.lialh4 = {
-    isNormalUser = true;
     useDefaultShell = true;
     linger = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = config.age.secretsV2.devices.LiAlH4-Server.users.lialh4.password.path;
   };
   home-manager.users.lialh4 = {
     services.syncthing.guiAddress = "[::]:8384";

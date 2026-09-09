@@ -8,16 +8,16 @@
   imports = [
     (root + "/ids")
     (root + "/system")
+    ./boot
     ./globals
     ./home-manager
-    ./i18n
     ./internal
-    ./kmscon
     ./modules
     ./nix
     ./nt
     ./persist
     ./sops
+    ./users
   ];
 
   systemd.oomd = {

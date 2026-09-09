@@ -1,8 +1,8 @@
 _: {
   imports = [
-    ./boot
     ./btrbk
+    ./i18n
+    ./kmscon
     ./smartd
-    ./users
   ];
 }

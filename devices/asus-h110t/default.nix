@@ -1,4 +1,10 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  root,
+  ...
+}:
+{
   imports = [
     ./fs
     ./users
@@ -92,6 +98,11 @@
       secureboot.enable = true;
     };
     system.version-when-installed = "25.11";
+  };
+
+  sops.secrets."localMachine/users/lialh4/hashedPassword" = {
+    sopsFile = "${root}/sops/LiAlH4-Server.yaml";
+    neededForUsers = true;
   };
 
   services.openssh.ports = [
