@@ -10,10 +10,6 @@
       brightness.enable = true;
       laptop.enable = true;
       pin.enable = false;
-      user-support.gui = {
-        display-manager.enable = false;
-        plymouth.enable = false;
-      };
     };
     system.version-when-installed = config.system.nixos.release;
   };

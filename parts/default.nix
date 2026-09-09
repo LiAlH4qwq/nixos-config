@@ -6,6 +6,7 @@ _: {
     ./home-modules
     ./lib
     ./nixos-hosts
+    ./nixos-livecd
     ./nixos-modules
     ./nix-on-droid
     ./overlays

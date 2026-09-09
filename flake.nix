@@ -49,7 +49,6 @@ in
             hosts = {
               LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
               LiAlH4-Server.modules = ./devices/asus-h110t;
-              LiAlH4-LiveCD.modules = ./devices/live-cd;
             };
           };
           disallowed-inputs-deps = [ ];
