@@ -138,7 +138,8 @@ in
     umbriel = {
       url = "git+https://github.com/noctalia-dev/umbriel";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        # Error when follow stable.
+        nixpkgs.follows = "nixpkgs-unstable";
         xdg-desktop-portal-umbriel.follows = "xdg-desktop-portal-umbriel";
       };
     };

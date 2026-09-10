@@ -701,7 +701,7 @@
     "umbriel": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "xdg-desktop-portal-umbriel": [
           "xdg-desktop-portal-umbriel"
