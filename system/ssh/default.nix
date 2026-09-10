@@ -1,6 +1,6 @@
 _: {
   services.openssh = {
-    # agenix depends on sshd, so it couldn't be fully disabled.
+    # sops depends on sshd, so it couldn't be fully disabled.
     enable = true;
     settings = {
       # No password login

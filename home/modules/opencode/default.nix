@@ -41,51 +41,9 @@
       };
     };
 
-    # FIXME: It's unsafe, since it assume that agenix os module has already installed secrets,
-    #   agenix home module should be used instead, so it can safely run after secret installing,
-    #   and also benifit from non-hardcoded secret owner,
-    #   but it needs pathing secretV2 submodule and I hadn't designed the interface change :(
-    systemd.user.services.opencode-secrets = {
-      Install.WantedBy = [ "default.target" ];
-      Service = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart =
-          lib.getExe
-          <| pkgs.writers.writeNuBin "opencode-secrets" (
-            let
-              secretPathsShArg =
-                osConfig.age.secretsV2.accessToken.ai
-                |> lib.mapAttrs' (
-                  n: v: {
-                    name =
-                      if n == "kimi" then
-                        "kimi-for-coding"
-                      else if n == "mimo" then
-                        "xiaomi-token-plan-cn"
-                      else
-                        n;
-                    value = v.path;
-                  }
-                )
-                |> (pkgs.formats.yaml_1_2 { }).generate "opencode-secrets"
-                |> lib.escapeShellArg;
-            in
-            ''
-              let secrets = open ${secretPathsShArg} | from yaml | items {|n, v|
-                let secret = open $v | str trim
-                {
-                  ($n): {
-                    type: api
-                    key: ($secret)
-                  }
-                }
-              } | reduce {|cur, acc| $acc | merge $cur}
-              mkdir ~/.local/share/opencode/
-              $secrets | save -f ~/.local/share/opencode/auth.json
-            ''
-          );
-      };
+    xdg.dataFile.opencode-auth = {
+      target = "opencode/auth.json";
+      source = osConfig.sops.templates."opencode/auth.json".path;
     };
 
     liuxu.home.internal.intransience =

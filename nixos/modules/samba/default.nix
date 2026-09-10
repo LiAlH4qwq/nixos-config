@@ -170,7 +170,7 @@
       systemd.services.samba-set-password =
         let
           before = [ "samba.target" ];
-          after = [ "agenix-install-secrets.service" ];
+          after = [ "sops-install-secrets.service" ];
         in
         {
           inherit before after;
