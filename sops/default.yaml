@@ -3,7 +3,7 @@ mihoyo:
         alink: ENC[AES256_GCM,data:q3nrmR7jsKNPoP6VyGLofipBPzX/Niu7mQgS17y9R30OjxyRvnQnLFsG00RZddNzU3ANsZbkRRzSPnOvWVGrLy9kROkuscu90+5mee/lFIQFHd9inNb5YEP0ilQ=,iv:qgh/hLISUPwJ3N6SAfRokgX54quULaHQ8zUFXtBvhDY=,tag:NNuwaMTCsr9Q+Q72v6TIiQ==,type:str]
 smartd:
     bot:
-        target: ENC[AES256_GCM,data:fzr3q9KC6Y09EA==,iv:oaZGFjTz0ovuTeUgDILUk5hgAn8mMtFMGRvEtfxJXaU=,tag:uGVS0GbkIATwSxhWbOGZbw==,type:int]
+        target: ENC[AES256_GCM,data:VEKTksI/EDzakQ==,iv:ADMA6VNT+c2c8C099//HxGa9GEXXMots9LpzGOrV/ic=,tag:4fru2/0O6oYqNi7C0HeRYw==,type:str]
         token: ENC[AES256_GCM,data:ZuiOTJ1cyEc3YXHnFJo7jNE4A1qBi/W8KUG2moOR1FBmez0pR6Pn09P2DwdRyw==,iv:C3YJ0ZrbU7Ziz4rhLHN5P7RDHdCrdT8qc4gzyj48UtI=,tag:b/8DAzu/KjZ/yUCqlV7bCw==,type:str]
 sops:
     age:
@@ -34,7 +34,7 @@ sops:
             7Y2sjcYvyHC6esDYSsXqIuumxSQjtHAs87wjZxkcanlHxprTxl80fQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-10T14:23:49Z"
-    mac: ENC[AES256_GCM,data:mIdBWgxmuPtNqKTCiYsAHPzBcyNiBMd6b1NcTtf96xtYQDafJB2VJ633nFiC5VV+ORXIjeR+iz1nDCXxvC9ug1EhPBaScNzcw/QTb4tNDzdlrsLUtOYivrT8kxR3F5vmdVw0BvjkpbI5DgCRIO7Zr3gPIQBT6GjEoSFQAMGldNM=,iv:6eM+H/cOWRKKHAaZUdhdKJqV3UBHOgJha6u2XuBP2xs=,tag:Cdhyd6EQM/MiG48a10Yr2g==,type:str]
+    lastmodified: "2026-09-10T14:33:41Z"
+    mac: ENC[AES256_GCM,data:SDfxl2IQpNEFrdNtrJ8SQp8bIpR2ifL02iAg+t0ozi68JjzwPqBVx2hIa0Ge5H0w1gHKQ0bZXTZcBQpK4XpzrKTNFdEu92Bq5lvEWry3ulclWQefhBhhUWlxEQ0WtVNQ7rc1AVJ1qAZHbCFRjdBh7o0lujqLB4NIdW4+JC+Wr/I=,iv:b5P5mndPtj8xO0ppAQRidrbCBwWJHZVmwmHtqJnTSnA=,tag:pCh17hD4dJeYeyqIt3ieCg==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

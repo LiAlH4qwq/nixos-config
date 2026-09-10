@@ -1,4 +1,6 @@
 localMachine:
+    cloudflare-ddns:
+        apiToken: ENC[AES256_GCM,data:7lFxtIdjLquBslx3NgKNkL1yIw5Lho/pr6rM8416pcZNpUnYkvBdtCnmm5Sgx/dLTDOA++U=,iv:CVlvflfLOm4M9BQRcdXlH0GBFOBw9Y65atFsCoaE4OA=,tag:G9745OEFVb04fD4udT2YAg==,type:str]
     users:
         lialh4:
             hashedPassword: ENC[AES256_GCM,data:AXLiGcxDCN9LP/ns+06mXkmDUBeVngNJ5hs+01KH0IElz/DJhjDwi5vdwFHsC+6fchtbVolfu4NWV8YAgVpIhddRaKg0w9nbvg==,iv:/PbT8CBcJ/1fXXOsYUhJY/b51h055Dsom7kmZMGeoGM=,tag:qmDHGk2n9ME3DObostkpgg==,type:str]
@@ -22,7 +24,7 @@ sops:
             Ph4Tfv6u/rq0S25SiU3q0oNE4WtixzXF2ePWlGo9Oe+MeY6LiszBGQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-09T23:53:17Z"
-    mac: ENC[AES256_GCM,data:ZC+xNdSgrvQrN9PqmZIUw3ag4y5F6r8VCYda3M52raLlv12tAzfk5/2gl5D9ioT8Ap6QaynIjcvLP02Bi1iLuEYCBHEDV+SIJK6fQ07C1LyFV2AIEHP846ZRIweRQdt8VplPoa0W5IEWBT4fQs9tgHbyBmYsFZR0VStxKefDkUw=,iv:AYJzSaQqQU+sPdHTExDftrEQ7vMIf2hHuE5nCJijeWA=,tag:Fd/INvH9pb+jAZKToS31kA==,type:str]
+    lastmodified: "2026-09-10T14:36:14Z"
+    mac: ENC[AES256_GCM,data:V8XyI8bE6ucdLNl/N0g+sy5EGLYXCl6lYI9avi0pQiL5BdRktoKBNEJ0i4T2JGEd/FwBWnvog6RSF3n+22tfikyTL912XykTj77sI//OwLG51273eyEM5zixlYhY3uEL2Dvqi+MCBuy2NElDoCHw7MYZ3Tc4tkiZJbZlXKdA6iE=,iv:zfH8wUKgjqIoX/CABFkbfeWjFAiYZWEwX6k8jeKtoxc=,tag:bbwlJCEBsGqCwInTgLV1Uw==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

@@ -16,7 +16,7 @@
       builder.enable = true;
       cloudflare-ddns = {
         enable = true;
-        credentialsFile = config.age.secretsV2.devices.LiAlH4-Server.cloudflare-ddns.credentialsFile.path;
+        credentialsFile = config.sops.templates."localMachine/cloudflare-ddns/credentials".path;
         provider = {
           ipv4 = "none";
           ipv6 = "local.iface:enp0s31f6";
@@ -100,9 +100,26 @@
     system.version-when-installed = "25.11";
   };
 
-  sops.secrets."localMachine/users/lialh4/hashedPassword" = {
-    sopsFile = "${root}/sops/LiAlH4-Server.yaml";
-    neededForUsers = true;
+  sops = {
+    secrets =
+      let
+        sopsFile = "${root}/sops/LiAlH4-Server.yaml";
+      in
+      {
+        "localMachine/cloudflare-ddns/apiToken" = {
+          inherit sopsFile;
+          owner = config.users.users.cloudflare-ddns.name;
+          group = config.users.users.cloudflare-ddns.group;
+        };
+        "localMachine/users/lialh4/hashedPassword" = {
+          inherit sopsFile;
+          neededForUsers = true;
+        };
+      };
+    templates."localMachine/cloudflare-ddns/credentials" = {
+      inherit (config.sops.secrets."localMachine/cloudflare-ddns/apiToken") owner group;
+      content = "CLOUDFLARE_API_TOKEN=${config.sops.placeholder."localMachine/cloudflare-ddns/apiToken"}";
+    };
   };
 
   services.openssh.ports = [
