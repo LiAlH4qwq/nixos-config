@@ -49,6 +49,10 @@ in
             hosts = {
               LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
               LiAlH4-Server.modules = ./devices/asus-h110t;
+              LiAlH4-Onecloud = {
+                arch = "armv7l-linux";
+                modules = ./devices/onecloud;
+              };
             };
           };
           disallowed-inputs-deps = [ ];
@@ -167,6 +171,13 @@ in
         # Error when follows stable.
         nixpkgs.follows = "nixpkgs-unstable";
         home-manager.follows = "home-manager";
+      };
+    };
+    nixos-onecloud = {
+      url = "github:LiAlH4qwq/nixos-onecloud";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
       };
     };
     cachyos-kernel = {

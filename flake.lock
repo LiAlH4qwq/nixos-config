@@ -425,6 +425,29 @@
         "type": "github"
       }
     },
+    "nixos-onecloud": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788795190,
+        "narHash": "sha256-mKrRspkV5+Khr0UlbqTdr5/k2Eu2DShe9GTJiBVMdqA=",
+        "owner": "LiAlH4qwq",
+        "repo": "nixos-onecloud",
+        "rev": "ee1c6ee9fe85984011711a0efc2536151cfb8107",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LiAlH4qwq",
+        "repo": "nixos-onecloud",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1788967131,
@@ -576,6 +599,7 @@
         "nix-on-droid": "nix-on-droid",
         "nix-parsec": "nix-parsec",
         "nix-prelude": "nix-prelude",
+        "nixos-onecloud": "nixos-onecloud",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",

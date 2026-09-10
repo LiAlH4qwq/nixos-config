@@ -2,6 +2,7 @@ _: {
   imports = [
     ./bluetooth
     ./brightness
+    ./btrbk
     ./builder
     ./cloudflare-ddns
     ./cloudflared

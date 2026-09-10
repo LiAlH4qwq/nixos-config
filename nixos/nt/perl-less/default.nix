@@ -1,4 +1,4 @@
-_: {
+{ config, lib, ... }: {
   imports = [ ./bash-less ];
 
   # Mutable users are meaningless,
@@ -17,8 +17,10 @@ _: {
   };
 
   # Get rid of perl script that generate users registry.
-  services.userborn = {
-    enable = true;
-    passwordFilesLocation = "/persist/var/lib/userborn";
-  };
+  services.userborn = lib.mkMerge [
+    {
+      enable = true;
+    }
+    (lib.mkIf config.intransience.enable { passwordFilesLocation = "/persist/var/lib/userborn"; })
+  ];
 }
