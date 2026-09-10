@@ -7,69 +7,93 @@
 {
   imports = [ ./settings ];
 
-  options.liuxu.nixos.network.mihoyo = {
-    enable = lib.liuxu.mkOsSwitchOffOption ''
-      Whether to enable Mihoyo.
-        Network should be enable first.
-        Genshin, Impact! (x
-    '';
-    settings = {
-      defaults = {
-        urlTest = {
-          url = lib.mkOption {
-            type = lib.types.singleLineStr;
-            default = "https://cp.cloudflare.com";
-            example = "https://www.gstatic.com/generate_204";
-            description = ''
-              Liuxu: Default URL test URL for mihoyo.
-            '';
+  options.liuxu.nixos = {
+    internal.final.network.mihoyo.enable =
+      let
+        cfg = config.liuxu.nixos.network;
+      in
+      lib.liuxu.mkComputedSwitchOption (cfg.enable && cfg.mihoyo.enable);
+    network.mihoyo =
+      let
+        desc = lib.liuxu.mkOsDesc;
+      in
+      {
+        enable = lib.liuxu.mkOsSwitchOffOption ''
+          Whether to enable Mihoyo.
+            Network should be enable first.
+            Genshin, Impact! (x
+        '';
+        settings = {
+          defaults = {
+            urlTest = {
+              url = lib.mkOption {
+                type = lib.types.singleLineStr;
+                default = "https://cp.cloudflare.com";
+                example = "https://www.gstatic.com/generate_204";
+                description = desc "Default URL test URL for mihoyo.";
+              };
+              lazy = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                example = false;
+                description = desc "Default URL test lazyness setting for mihoyo.";
+              };
+              expected-status = lib.mkOption {
+                type = lib.types.int;
+                default = 204;
+                example = 200;
+                description = desc "Expected http status of URL test for mihoyo.";
+              };
+              interval = lib.mkOption {
+                type = lib.types.int;
+                default = 300;
+                example = 600;
+                description = desc ''
+                  Interval of URL test for mihoyo,
+                    in seconds.
+                '';
+              };
+              timeout = lib.mkOption {
+                type = lib.types.int;
+                default = 5000;
+                example = 10000;
+                description = desc ''
+                  Interval of URL test for mihoyo,
+                    in ms.
+                '';
+              };
+            };
           };
-          lazy = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-            example = false;
-            description = ''
-              Liuxu: Default URL test lazyness setting for mihoyo.
-            '';
+        };
+        extraConfig = lib.mkOption {
+          type = lib.types.attrs;
+          internal = true;
+          default = { };
+          example = {
+            external-controller = "[::]:9090";
           };
-
+          description = desc ''
+            Extra config for Mihoyo.
+              Will be deep merged.
+          '';
+        };
+        providerUrlFiles = lib.mkOption {
+          type = lib.types.attrsOf lib.types.path;
+          default = { };
+          description = desc ''
+            Provider urls for Mihoyo,
+              as path to file.
+          '';
         };
       };
-    };
-    extraConfig = lib.mkOption {
-      type = lib.types.attrs;
-      internal = true;
-      default = { };
-      example = {
-        external-controller = "[::]:9090";
-      };
-      description = ''
-        Liuxu: Extra config for Mihoyo.
-          Will be deep merged.
-      '';
-    };
-    providerUrlFiles = lib.mkOption {
-      type = lib.types.attrsOf lib.types.path;
-      default = { };
-      description = ''
-        Liuxu: Providers for Mihoyo.
-      '';
-    };
   };
 
-  config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable (
+  config = lib.mkIf config.liuxu.nixos.internal.final.network.mihoyo.enable (
     let
       cfgDir = "/run/mihoyo";
       cfgFile = "${cfgDir}/config.yaml";
     in
     {
-      assertions = [
-        {
-          assertion = config.liuxu.nixos.network.enable;
-          message = "Network should be enable first in order to enable Mihoyo!";
-        }
-      ];
-
       liuxu.nixos.network.mihoyo.providerUrlFiles.alink =
         config.sops.secrets."mihoyo/providerUrls/alink".path;
 
@@ -101,7 +125,7 @@
         mihoyo =
           let
             before = [ "mihomo.service" ];
-            after = [ "agenix-install-secrets.service" ];
+            after = [ "sops-install-secrets.service" ];
             script =
               let
                 cfgDirShArg = cfgDir |> lib.escapeShellArg;
@@ -142,7 +166,7 @@
           };
       };
       # allow tun mode traffic.
-      services.firewalld.zones.trusted.interfaces = lib.singleton "mihoyo";
+      services.firewalld.zones.trusted.interfaces = [ "mihoyo" ];
       # Make cache persistent.
       intransience.datastores.persist.dirs = [
         {
