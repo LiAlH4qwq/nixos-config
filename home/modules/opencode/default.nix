@@ -29,10 +29,19 @@
             blacklist = [ "deepseek-v4-pro" ];
             models."deepseek-v4.1-flash-expires-on-0910".name = "DeepSeek V4.1 Flash";
           };
-          permission = {
-            external_directory."/nix/store/*" = "allow";
-            edit."/nix/store/*" = "deny";
-          };
+          permission =
+            let
+              roDirs = [
+                "/nix/store/*"
+                "/run/booted-system/*"
+                "/run/current-system"
+              ];
+              roDirsAttrsOf = x: roDirs |> map (lib.flip lib.nameValuePair x) |> builtins.listToAttrs;
+            in
+            {
+              external_directory = roDirsAttrsOf "allow";
+              edit = roDirsAttrsOf "deny";
+            };
         };
       };
       mcp = {
