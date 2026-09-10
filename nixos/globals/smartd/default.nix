@@ -10,8 +10,8 @@
     defaults.monitored =
       let
         tg-transient-wrapped = pkgs.tg-transient.wrap {
-          tokenFile = config.age.secretsV2.smartd.bot.token.path;
-          chatFile = config.age.secretsV2.smartd.bot.target.path;
+          tokenFile = config.sops.secrets."smartd/bot/token".path;
+          chatFile = config.sops.secrets."smartd/bot/target".path;
         };
         tg-transient-wrapped-sh-arg = tg-transient-wrapped |> lib.getExe |> lib.escapeShellArg;
         notify = pkgs.writers.writeFishBin "smartd-notify" ''
@@ -25,7 +25,7 @@
     let
       after = [
         "network-online.target"
-        "agenix-install-secrets.service"
+        "sops-install-secrets.service"
       ];
     in
     {

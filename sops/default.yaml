@@ -1,6 +1,10 @@
 mihoyo:
     providerUrls:
         alink: ENC[AES256_GCM,data:q3nrmR7jsKNPoP6VyGLofipBPzX/Niu7mQgS17y9R30OjxyRvnQnLFsG00RZddNzU3ANsZbkRRzSPnOvWVGrLy9kROkuscu90+5mee/lFIQFHd9inNb5YEP0ilQ=,iv:qgh/hLISUPwJ3N6SAfRokgX54quULaHQ8zUFXtBvhDY=,tag:NNuwaMTCsr9Q+Q72v6TIiQ==,type:str]
+smartd:
+    bot:
+        target: ENC[AES256_GCM,data:fzr3q9KC6Y09EA==,iv:oaZGFjTz0ovuTeUgDILUk5hgAn8mMtFMGRvEtfxJXaU=,tag:uGVS0GbkIATwSxhWbOGZbw==,type:int]
+        token: ENC[AES256_GCM,data:ZuiOTJ1cyEc3YXHnFJo7jNE4A1qBi/W8KUG2moOR1FBmez0pR6Pn09P2DwdRyw==,iv:C3YJ0ZrbU7Ziz4rhLHN5P7RDHdCrdT8qc4gzyj48UtI=,tag:b/8DAzu/KjZ/yUCqlV7bCw==,type:str]
 sops:
     age:
         - enc: |
@@ -30,7 +34,7 @@ sops:
             7Y2sjcYvyHC6esDYSsXqIuumxSQjtHAs87wjZxkcanlHxprTxl80fQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-10T13:52:20Z"
-    mac: ENC[AES256_GCM,data:xSMVoHjLs3fUy1mXC68Yj3Q3wCEVOgahz0LP+AJLFOfIEo8QAJ9tJmE0spW3EVY5+HL9I8/VB6k4SRWziExufXFBtJa4d1wNvkKw3b8yeJ+crIVwPbzRojmLbp4ikD9pNUFpM2ke8vBPFFli+oBBOQTkJVeEvphyR9tkV1Oq/jw=,iv:CI1CJky+I5ygwaQi+wx0KxA3wEI7+ph+5TIzR2suLpI=,tag:A4QSfkp2Fv+c7TuyN4t+zw==,type:str]
+    lastmodified: "2026-09-10T14:23:49Z"
+    mac: ENC[AES256_GCM,data:mIdBWgxmuPtNqKTCiYsAHPzBcyNiBMd6b1NcTtf96xtYQDafJB2VJ633nFiC5VV+ORXIjeR+iz1nDCXxvC9ug1EhPBaScNzcw/QTb4tNDzdlrsLUtOYivrT8kxR3F5vmdVw0BvjkpbI5DgCRIO7Zr3gPIQBT6GjEoSFQAMGldNM=,iv:6eM+H/cOWRKKHAaZUdhdKJqV3UBHOgJha6u2XuBP2xs=,tag:Cdhyd6EQM/MiG48a10Yr2g==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

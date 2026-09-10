@@ -26,10 +26,6 @@
           github.public-ro = args;
           ssh.nix-build = true;
         };
-      smartd.bot = {
-        target = true;
-        token = true;
-      };
       devices = {
         LiAlH4-Server = {
           samba.users.lialh4.passwordFile = true;

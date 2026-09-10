@@ -4,6 +4,10 @@
   sops = {
     defaultSopsFile = "${root}/sops/default.yaml";
     age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-    secrets."mihoyo/providerUrls/alink" = { };
+    secrets = {
+      "mihoyo/providerUrls/alink" = { };
+      "smartd/bot/target" = { };
+      "smartd/bot/token" = { };
+    };
   };
 }
