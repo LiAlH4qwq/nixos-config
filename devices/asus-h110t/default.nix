@@ -100,26 +100,17 @@
   };
 
   sops = {
-    secrets =
-      let
-        sopsFile = "${root}/sops/LiAlH4-Server.yaml";
-      in
-      {
-        "localMachine/cloudflare-ddns/apiToken" = {
-          inherit sopsFile;
-        };
-        "localMachine/cloudflared/accountTag" = { };
-        "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
-        "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
-        "localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
-        "localMachine/samba/users/lialh4/password" = {
-          inherit sopsFile;
-        };
-        "localMachine/users/lialh4/hashedPassword" = {
-          inherit sopsFile;
-          neededForUsers = true;
-        };
+    secrets = builtins.mapAttrs (x: x // { sopsFile = "${root}/sops/LiAlH4-Server.yaml"; }) {
+      "localMachine/cloudflare-ddns/apiToken" = { };
+      "localMachine/cloudflared/accountTag" = { };
+      "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
+      "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
+      "localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
+      "localMachine/samba/users/lialh4/password" = { };
+      "localMachine/users/lialh4/hashedPassword" = {
+        neededForUsers = true;
       };
+    };
     templates =
       let
         ph = config.sops.placeholder;
