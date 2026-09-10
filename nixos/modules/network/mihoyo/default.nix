@@ -70,7 +70,8 @@
         }
       ];
 
-      liuxu.nixos.network.mihoyo.providerUrlFiles.alink = config.age.secretsV2.mihoyo.alink.path;
+      liuxu.nixos.network.mihoyo.providerUrlFiles.alink =
+        config.sops.secrets."mihoyo/providerUrls/alink".path;
 
       services.mihomo = {
         enable = true;

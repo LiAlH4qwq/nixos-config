@@ -26,7 +26,6 @@
           github.public-ro = args;
           ssh.nix-build = true;
         };
-      mihoyo.alink = true;
       smartd.bot = {
         target = true;
         token = true;
