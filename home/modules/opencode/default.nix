@@ -34,7 +34,7 @@
               roDirs = [
                 "/nix/store/*"
                 "/run/booted-system/*"
-                "/run/current-system"
+                "/run/current-system/*"
               ];
               roDirsAttrsOf = x: roDirs |> map (lib.flip lib.nameValuePair x) |> builtins.listToAttrs;
             in
