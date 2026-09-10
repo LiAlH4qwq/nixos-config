@@ -49,7 +49,7 @@
           secrets = osConfig.sops.templates."opencode/auth.json".path;
         in
         lib.getExe
-        <| pkgs.writers.writeNuBin ''
+        <| pkgs.writers.writeNuBin "opencode-secrets" ''
           open -r ${secrets} | save -r
         '';
     };
