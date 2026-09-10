@@ -59,7 +59,7 @@
         in
         lib.getExe
         <| pkgs.writers.writeNuBin "opencode-secrets" ''
-          open -r ${secrets} | save -r ~/.local/share/opencode/auth.json
+          open -r ${secrets} | save -rf ~/.local/share/opencode/auth.json
         '';
     };
 
