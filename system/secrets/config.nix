@@ -6,27 +6,22 @@
       LiAlH4-Server = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHgPw52HnxnsDNsnUxOLdMxfMiRdF7T0zbqO6dlBFgZ";
     };
   };
-  items = {
-    os = {
-      accessToken =
-        let
-          args = {
-            _isArgs = true;
-            keys = lib.attrValuesRecursive config.keys;
-            perm = "0440";
-            group = "users";
-          };
-        in
-        {
-          ai = {
-            kimi = args;
-            mimo = args;
-            deepseek = args;
-          };
-          github.public-ro = args;
-          ssh.nix-build = true;
-        };
-      devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
+  items.os.accessToken =
+    let
+      args = {
+        _isArgs = true;
+        keys = lib.attrValuesRecursive config.keys;
+        perm = "0440";
+        group = "users";
+      };
+    in
+    {
+      ai = {
+        kimi = args;
+        mimo = args;
+        deepseek = args;
+      };
+      github.public-ro = args;
+      ssh.nix-build = true;
     };
-  };
 }

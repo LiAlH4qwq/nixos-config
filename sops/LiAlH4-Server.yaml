@@ -1,6 +1,13 @@
 localMachine:
     cloudflare-ddns:
         apiToken: ENC[AES256_GCM,data:7lFxtIdjLquBslx3NgKNkL1yIw5Lho/pr6rM8416pcZNpUnYkvBdtCnmm5Sgx/dLTDOA++U=,iv:CVlvflfLOm4M9BQRcdXlH0GBFOBw9Y65atFsCoaE4OA=,tag:G9745OEFVb04fD4udT2YAg==,type:str]
+    cloudflared:
+        accountTag: ENC[AES256_GCM,data:naxhTk+lDpp2t8Xs0OfnbmlJVkBR/vh0Rxu5N4iM4jc=,iv:d1vbbQGrCVUmHWzO1VI3u4IYemh37WBPobG7YGhurwE=,tag:CTSgeXJsXHmRq3EvLeIIaw==,type:str]
+        tunnels:
+            LiAlH4-Server:
+                tunnelId: ENC[AES256_GCM,data:qrbW6udBAPF6KXNTw/5OC6ipxEcLyEhuVDw091kb3WCG2QhK,iv:cpagdtimDXHS5u+ctx26+lj9dIhVC9+ssglMJIcbdGc=,tag:dJIKge1kDQkG9FKC751QWA==,type:str]
+                tunnelSecret: ENC[AES256_GCM,data:EQp8yAK8ZvcNf9M+/GR6KCQ8VWqm2x4mUiG9wnTZxheKwAbzuSsLEiNkcx0=,iv:SmqQM8gCxSVzmW1SySImJtJ8I73khymYA1xf21LI14s=,tag:Ul9gzTWzwRtSc/oFhW+FQA==,type:str]
+                endpoint: ""
     samba:
         users:
             lialh4:
@@ -28,7 +35,7 @@ sops:
             Ph4Tfv6u/rq0S25SiU3q0oNE4WtixzXF2ePWlGo9Oe+MeY6LiszBGQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-10T15:24:04Z"
-    mac: ENC[AES256_GCM,data:iF2mgcpnHDCtXvaWi8luCl1CvWh0BChZ0O7CNmZET+Y33mvXWwYHlQJqCMcpcNbzIbqjtH8sgtFDSRZ0yIN8OG30LmpTQ6+3mi+jRgpbjN1WnDvxbZlC7lXLKT4BNjhHuJfE/jaO3uD3drhON7aJCelkWDbyxnSmP5cgYftawzs=,iv:RQwOunrYxMDLMRARZ+/Pwgh1K+sm/d9iXaI/VpLhRTo=,tag:vDTIFHQUfC038H311+pbow==,type:str]
+    lastmodified: "2026-09-10T15:45:50Z"
+    mac: ENC[AES256_GCM,data:4GRVLnz3noXemyp/a4nbsssMssO6/REaOQdsyPPUckhea8yJDND+Sil1K1XSVfo2H056RpDgv/JfUHX0tgDj2NA7ej1sP7tZtX9ovNE8JMYqF0ty0AoIEyLft0poMKscFKyBUGdkOPy2TVOjQ1vW1n6BgVV0bSU76Ame5ApOu9c=,iv:ciZZaSxjwh/qUZN5PRUjjNKHw43+pQ0cekLqrciTwF0=,tag:6LRtZxCB6LPFFxXBeBtlnQ==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

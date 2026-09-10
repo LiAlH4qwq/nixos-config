@@ -33,7 +33,7 @@
           a00f657a-254c-496a-bc41-6cb0d6ec4535 = {
             default = "http_status:404";
             credentialsFile =
-              config.age.secretsV2.devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile.path;
+              config.sops.secrets."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
             };
@@ -108,6 +108,10 @@
         "localMachine/cloudflare-ddns/apiToken" = {
           inherit sopsFile;
         };
+        "localMachine/cloudflared/accountTag" = { };
+        "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
+        "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
+        "localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
         "localMachine/samba/users/lialh4/password" = {
           inherit sopsFile;
         };
@@ -116,11 +120,23 @@
           neededForUsers = true;
         };
       };
-    templates."localMachine/cloudflare-ddns/credentials" = {
-      content = "CLOUDFLARE_API_TOKEN=${config.sops.placeholder."localMachine/cloudflare-ddns/apiToken"}";
-      owner = config.users.users.cloudflare-ddns.name;
-      group = config.users.users.cloudflare-ddns.group;
-    };
+    templates =
+      let
+        ph = config.sops.placeholder;
+      in
+      {
+        "localMachine/cloudflare-ddns/credentials" = {
+          content = "CLOUDFLARE_API_TOKEN=${ph."localMachine/cloudflare-ddns/apiToken"}";
+          owner = config.users.users.cloudflare-ddns.name;
+          group = config.users.users.cloudflare-ddns.group;
+        };
+        "localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".content = builtins.toJSON {
+          AccountTag = ph."localMachine/cloudflared/accountTag";
+          TunnelID = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId";
+          TunnelSecret = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret";
+          Endpoint = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint";
+        };
+      };
   };
 
   services.openssh.ports = [
