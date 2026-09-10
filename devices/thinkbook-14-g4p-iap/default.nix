@@ -93,4 +93,19 @@
       programs.umbriel.settings.output.eDP-1.scale = 2;
     }
   ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      wpsoffice-cn = prev.wpsoffice-cn.overrideAttrs (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ prev.makeWrapper ];
+        postFixup = ''
+          ${old.postFixup or ""}
+          for p in $out/bin/*; do
+            wrapProgram "$p" \
+              --set WPS_FORCED_DPI 192
+          done
+        '';
+      });
+    })
+  ];
 }
