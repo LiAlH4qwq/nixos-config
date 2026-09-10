@@ -41,9 +41,17 @@
       };
     };
 
-    xdg.dataFile.opencode-auth = {
-      target = "opencode/auth.json";
-      source = osConfig.sops.templates."opencode/auth.json".path;
+    systemd.user.services.opencode-secrets.Service = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart =
+        let
+          secrets = osConfig.sops.templates."opencode/auth.json".path;
+        in
+        lib.getExe
+        <| pkgs.writers.writeNuBin ''
+          open -r ${secrets} | save -r
+        '';
     };
 
     liuxu.home.internal.intransience =

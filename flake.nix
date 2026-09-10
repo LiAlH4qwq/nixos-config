@@ -209,25 +209,6 @@ in
         flake-compat.follows = "";
       };
     };
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        systems.follows = "systems";
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        darwin.follows = "";
-      };
-    };
-    ragenix = {
-      url = "github:yaxitech/ragenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        crane.follows = "crane";
-        rust-overlay.follows = "rust-overlay";
-        agenix.follows = "agenix";
-      };
-    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs = {
