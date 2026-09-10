@@ -33,7 +33,7 @@
           a00f657a-254c-496a-bc41-6cb0d6ec4535 = {
             default = "http_status:404";
             credentialsFile =
-              config.sops.secrets."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
+              config.sops.templates."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
             };
