@@ -100,7 +100,7 @@
   };
 
   sops = {
-    secrets = builtins.mapAttrs (x: x // { sopsFile = "${root}/sops/LiAlH4-Server.yaml"; }) {
+    secrets = builtins.mapAttrs (_: x: x // { sopsFile = "${root}/sops/LiAlH4-Server.yaml"; }) {
       "localMachine/cloudflare-ddns/apiToken" = { };
       "localMachine/cloudflared/accountTag" = { };
       "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
