@@ -1,6 +1,10 @@
 localMachine:
     cloudflare-ddns:
         apiToken: ENC[AES256_GCM,data:7lFxtIdjLquBslx3NgKNkL1yIw5Lho/pr6rM8416pcZNpUnYkvBdtCnmm5Sgx/dLTDOA++U=,iv:CVlvflfLOm4M9BQRcdXlH0GBFOBw9Y65atFsCoaE4OA=,tag:G9745OEFVb04fD4udT2YAg==,type:str]
+    samba:
+        users:
+            lialh4:
+                password: ENC[AES256_GCM,data:rMFuC0e2fRbo48jssQSQlZytrng=,iv:IeWq/ewvvNZyrFCY4/KSnVGmzmPC5KmuYaYOjoO3oDA=,tag:Emafvfo0hKgmM5sr2FqlAg==,type:str]
     users:
         lialh4:
             hashedPassword: ENC[AES256_GCM,data:AXLiGcxDCN9LP/ns+06mXkmDUBeVngNJ5hs+01KH0IElz/DJhjDwi5vdwFHsC+6fchtbVolfu4NWV8YAgVpIhddRaKg0w9nbvg==,iv:/PbT8CBcJ/1fXXOsYUhJY/b51h055Dsom7kmZMGeoGM=,tag:qmDHGk2n9ME3DObostkpgg==,type:str]
@@ -24,7 +28,7 @@ sops:
             Ph4Tfv6u/rq0S25SiU3q0oNE4WtixzXF2ePWlGo9Oe+MeY6LiszBGQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-10T14:36:14Z"
-    mac: ENC[AES256_GCM,data:V8XyI8bE6ucdLNl/N0g+sy5EGLYXCl6lYI9avi0pQiL5BdRktoKBNEJ0i4T2JGEd/FwBWnvog6RSF3n+22tfikyTL912XykTj77sI//OwLG51273eyEM5zixlYhY3uEL2Dvqi+MCBuy2NElDoCHw7MYZ3Tc4tkiZJbZlXKdA6iE=,iv:zfH8wUKgjqIoX/CABFkbfeWjFAiYZWEwX6k8jeKtoxc=,tag:bbwlJCEBsGqCwInTgLV1Uw==,type:str]
+    lastmodified: "2026-09-10T15:24:04Z"
+    mac: ENC[AES256_GCM,data:iF2mgcpnHDCtXvaWi8luCl1CvWh0BChZ0O7CNmZET+Y33mvXWwYHlQJqCMcpcNbzIbqjtH8sgtFDSRZ0yIN8OG30LmpTQ6+3mi+jRgpbjN1WnDvxbZlC7lXLKT4BNjhHuJfE/jaO3uD3drhON7aJCelkWDbyxnSmP5cgYftawzs=,iv:RQwOunrYxMDLMRARZ+/Pwgh1K+sm/d9iXaI/VpLhRTo=,tag:vDTIFHQUfC038H311+pbow==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

@@ -26,10 +26,7 @@
           github.public-ro = args;
           ssh.nix-build = true;
         };
-      devices.LiAlH4-Server = {
-        samba.users.lialh4.passwordFile = true;
-        cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
-      };
+      devices.LiAlH4-Server.cloudflared.tunnels.LiAlH4-Server.credentialsFile = true;
     };
   };
 }

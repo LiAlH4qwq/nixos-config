@@ -86,8 +86,7 @@
       samba = {
         enable = true;
         port.tcp.alts = [ 26535 ];
-        passwordFile.lialh4 =
-          config.age.secretsV2.devices.LiAlH4-Server.samba.users.lialh4.passwordFile.path;
+        passwordFile.lialh4 = config.sops.secrets."localMachine/samba/users/lialh4/password".path;
         share.data = {
           path = "/mnt/data/lialh4";
           readOnly = false;
@@ -108,8 +107,9 @@
       {
         "localMachine/cloudflare-ddns/apiToken" = {
           inherit sopsFile;
-          owner = config.users.users.cloudflare-ddns.name;
-          group = config.users.users.cloudflare-ddns.group;
+        };
+        "localMachine/samba/users/lialh4/password" = {
+          inherit sopsFile;
         };
         "localMachine/users/lialh4/hashedPassword" = {
           inherit sopsFile;
@@ -117,8 +117,9 @@
         };
       };
     templates."localMachine/cloudflare-ddns/credentials" = {
-      inherit (config.sops.secrets."localMachine/cloudflare-ddns/apiToken") owner group;
       content = "CLOUDFLARE_API_TOKEN=${config.sops.placeholder."localMachine/cloudflare-ddns/apiToken"}";
+      owner = config.users.users.cloudflare-ddns.name;
+      group = config.users.users.cloudflare-ddns.group;
     };
   };
 
