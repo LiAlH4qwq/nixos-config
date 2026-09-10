@@ -18,22 +18,5 @@
       "smartd/bot/target" = { };
       "smartd/bot/token" = { };
     };
-    templates."opencode/auth.json" = {
-      mode = "0440";
-      group = config.users.groups.users.name;
-      content =
-        builtins.toJSON
-        <|
-          builtins.mapAttrs
-            (_: v: {
-              type = "api";
-              key = v;
-            })
-            {
-              deepseek = config.sops.placeholder."ai/accessTokens/deepseek";
-              kimi-for-coding = config.sops.placeholder."ai/accessTokens/kimi";
-              xiaomi-token-plan-cn = config.sops.placeholder."ai/accessTokens/mimo";
-            };
-    };
   };
 }

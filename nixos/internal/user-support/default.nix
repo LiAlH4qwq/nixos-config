@@ -1,3 +1,6 @@
 _: {
-  imports = [ ./gui ];
+  imports = [
+    ./gui
+    ./opencode
+  ];
 }
