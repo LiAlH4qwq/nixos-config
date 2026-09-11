@@ -39,6 +39,7 @@
         clapper # Video player
         wev # Input inspect
         materialgram # Telegram with material design
+        bitwarden-desktop
       ];
     };
 
@@ -50,6 +51,7 @@
 
         # CEF
         ".config/1Password"
+        ".config/Bitwarden"
       ];
 
       files = [
