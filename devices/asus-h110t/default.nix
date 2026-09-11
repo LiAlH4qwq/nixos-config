@@ -25,6 +25,7 @@
         proxied = "!is(genshin.lialh4.cyou)";
         ip6Domains = [
           "genshin.lialh4.cyou{hostid6=[::10,::20]}"
+          "vaultwarden.lialh4.cyou{hostid6=[::10,::20]}"
         ];
       };
       cloudflared = {
@@ -66,12 +67,23 @@
                   "tcp"
                   "udp"
                 ];
+            caddy-lialh4.ports =
+              map
+                (x: {
+                  port = 50288;
+                  protocol = x;
+                })
+                [
+                  "tcp"
+                  "udp"
+                ];
           };
           zones = {
             public.services = [
-              "dhcpv6-client"
               "ssh-lialh4"
               "samba-lialh4"
+              "qbittorrent-lialh4"
+              "caddy-lialh4"
             ];
             trusted.sources = [
               { address = "fd00::/64"; }
@@ -95,6 +107,10 @@
         };
       };
       secureboot.enable = true;
+      vaultwarden = {
+        enable = true;
+        port = 50288;
+      };
     };
     system.version-when-installed = "25.11";
   };

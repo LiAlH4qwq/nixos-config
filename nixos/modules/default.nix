@@ -18,6 +18,7 @@ _: {
     ./secureboot
     ./tlp
     ./user-support
+    ./vaultwarden
     ./virtualbox
     ./windows-guest
   ];
