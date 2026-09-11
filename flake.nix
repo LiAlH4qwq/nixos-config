@@ -270,7 +270,7 @@ in
       };
     };
     libpam-pwdfile-rs = {
-      url = "github:lialh4qwq/libpam-pwdfile-rs/v0.4.0";
+      url = "github:lialh4qwq/libpam-pwdfile-rs";
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
