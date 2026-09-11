@@ -36,6 +36,8 @@
     sdImage.enable = true;
   };
 
+  programs.nix-ld.enable = lib.mkForce false;
+
   services = {
     kmscon.enable = lib.mkForce false;
     smartd.enable = lib.mkForce false;
