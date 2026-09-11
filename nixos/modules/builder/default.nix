@@ -16,6 +16,6 @@
       groups.builder = { };
     };
 
-    nix.trustedUsers = [ "builder" ];
+    nix.settings.trusted-users = [ "builder" ];
   };
 }
