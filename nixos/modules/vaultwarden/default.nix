@@ -65,6 +65,13 @@
         -----END CERTIFICATE-----
       '';
     };
+    intransience.datastores.persist.dirs = [
+      {
+        path = "/var/lib/vaultwarden";
+        user = "vaultwarden";
+        group = "vaultwarden";
+      }
+    ];
     sops = {
       secrets = {
         "tlsCert/keys/lialh4.cyou.pem.key" = {
