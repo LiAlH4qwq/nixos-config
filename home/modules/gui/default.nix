@@ -21,14 +21,10 @@
   );
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
-    programs = {
-      ssh.settings."*".identityAgent = "~/.1password/agent.sock";
-      git.settings.gpg.ssh.program = lib.getExe' pkgs._1password-gui "op-ssh-sign";
-    };
-
     home = {
       sessionVariables = {
-        "NIXOS_OZONE_WL" = 1;
+        NIXOS_OZONE_WL = 1;
+        SSH_AUTH_SOCK = "~/.bitwarden-ssh-agent.sock";
       };
       # These programs hasn't been availible as programs config. :(
       packages = with pkgs; [
