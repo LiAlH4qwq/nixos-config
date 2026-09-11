@@ -49,6 +49,11 @@
       btdu = final.runCommand "btdu-stub" { } ''
         mkdir -p $out/bin && printf '#!/bin/sh\nexit 0\n' > $out/bin/btdu && chmod +x $out/bin/btdu
       '';
+      thin-provisioning-tools = prev.thin-provisioning-tools.overrideAttrs (old: {
+        preBuild = (old.preBuild or "") + ''
+          export BINDGEN_EXTRA_CLANG_ARGS="$BINDGEN_EXTRA_CLANG_ARGS --target=${prev.stdenv.hostPlatform.config} -march=${prev.stdenv.hostPlatform.gcc.arch} -mfpu=${prev.stdenv.hostPlatform.gcc.fpu}"
+        '';
+      });
     })
   ];
 }
