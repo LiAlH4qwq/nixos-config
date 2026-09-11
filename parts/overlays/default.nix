@@ -24,11 +24,19 @@
       );
     in
     {
-      unstable = import inputs.nixpkgs-unstable {
-        inherit (prev) config;
-        localSystem = prev.stdenv.buildPlatform;
-        crossSystem = prev.stdenv.hostPlatform;
-      };
+      unstable = import inputs.nixpkgs-unstable (
+        if prev.stdenv.hostPlatform.system == prev.stdenv.buildPlatform.system then
+          {
+            inherit (prev) config;
+            system = prev.stdenv.hostPlatform.system;
+          }
+        else
+          {
+            inherit (prev) config;
+            localSystem = prev.stdenv.buildPlatform;
+            crossSystem = prev.stdenv.hostPlatform;
+          }
+      );
       bottles = prev.bottles.override { removeWarningPopup = true; };
       btop-theme-rose-pine-dawn = config.packages.btop-theme-rose-pine-dawn;
       cloudflare-ddns = prev.cloudflare-ddns.overrideAttrs (
