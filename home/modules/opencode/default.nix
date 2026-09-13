@@ -32,6 +32,7 @@
           permission =
             let
               roDirs = [
+                "/etc/*"
                 "/nix/store/*"
                 "/run/booted-system/*"
                 "/run/current-system/*"
@@ -50,17 +51,20 @@
       };
     };
 
-    systemd.user.services.opencode-secrets.Service = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart =
-        let
-          secrets = osConfig.sops.templates."opencode/auth.json".path;
-        in
-        lib.getExe
-        <| pkgs.writers.writeNuBin "opencode-secrets" ''
-          open -r ${secrets} | save -rf ~/.local/share/opencode/auth.json
-        '';
+    systemd.user.services.opencode-secrets = {
+      Unit.WantedBy = [ "default.target" ];
+      Service = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart =
+          let
+            secrets = osConfig.sops.templates."opencode/auth.json".path;
+          in
+          lib.getExe
+          <| pkgs.writers.writeNuBin "opencode-secrets" ''
+            open -r ${secrets} | save -rf ~/.local/share/opencode/auth.json
+          '';
+      };
     };
 
     liuxu.home.internal.intransience =
