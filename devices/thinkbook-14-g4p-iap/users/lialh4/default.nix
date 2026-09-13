@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 {
   environment.etc = {
+    # newuidmap/newgidmap open these with O_NOFOLLOW, so they must be real
+    # files; with system.etc.overlay the default "symlink" mode would point
+    # into the store and make rootless podman fail with ELOOP.
     subuid = {
-      target = "subuid";
+      mode = "0644";
       text = "lialh4:100000:65536";
     };
     subgid = {
-      target = "subgid";
+      mode = "0644";
       text = "lialh4:100000:65536";
     };
   };
