@@ -64,6 +64,20 @@
               };
             };
           };
+          tun.stack = lib.mkOption {
+            type = lib.types.enum [
+              "gvisor"
+              "mixed"
+              "system"
+            ];
+            default = "mixed";
+            example = "gvisor";
+            description = ''
+              Tun stack impl, gvisor is userspace and system is kernelspace,
+                system is faster but problematic on some systems,
+                mixed means gvisor for udp and system for tcp.
+            '';
+          };
         };
         extraConfig = lib.mkOption {
           type = lib.types.attrs;
@@ -94,8 +108,10 @@
       cfgFile = "${cfgDir}/config.yaml";
     in
     {
-      liuxu.nixos.network.mihoyo.providerUrlFiles.alink =
-        config.sops.secrets."mihoyo/providerUrls/alink".path;
+      liuxu.nixos.network.mihoyo = {
+        providerUrlFiles.alink = config.sops.secrets."mihoyo/providerUrls/alink".path;
+        extraConfig.tun.stack = config.liuxu.nixos.network.mihoyo.settings.tun.stack;
+      };
 
       services.mihomo = {
         enable = true;

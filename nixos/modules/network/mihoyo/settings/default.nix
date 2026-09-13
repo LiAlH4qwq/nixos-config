@@ -27,7 +27,6 @@
 
         tun = {
           enable = true;
-          stack = "system";
           device = "mihoyo";
           auto-route = true;
           strict-route = true;
