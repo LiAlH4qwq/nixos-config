@@ -100,7 +100,10 @@
               };
             };
         };
-        extensions.packages = with pkgs.firefox-addons; [ onepassword-password-manager ];
+        extensions.packages = with pkgs.firefox-addons; [
+          #onepassword-password-manager
+          bitwarden
+        ];
       };
     in
     {
