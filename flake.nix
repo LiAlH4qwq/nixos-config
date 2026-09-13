@@ -159,7 +159,7 @@ in
       };
     };
     github-actions-nix = {
-      url = "https://flakehub.com/f/synapdeck/github-actions-nix/*";
+      url = "https://flakehub.com/f/synapdeck/github-actions-nix/0.2.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
@@ -272,7 +272,10 @@ in
     libpam-pwdfile-rs = {
       url = "github:lialh4qwq/libpam-pwdfile-rs";
       # url = "path:/mnt/data/lialh4/Projects/libpam-pwdfile-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
   };
 }
