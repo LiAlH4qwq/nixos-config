@@ -52,7 +52,7 @@
     };
 
     systemd.user.services.opencode-secrets = {
-      Unit.WantedBy = [ "default.target" ];
+      Install.WantedBy = [ "default.target" ];
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
