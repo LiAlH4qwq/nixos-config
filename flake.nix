@@ -2,8 +2,6 @@
 let
   nixConfig = {
     extra-experimental-features = [
-      "auto-allocate-uids"
-      "cgroups"
       "coerce-integers"
       #"daemon-trust-override"
       "flake-self-attrs"
@@ -12,7 +10,6 @@ let
       "nix-command"
       "pipe-operator"
       "read-only-local-store"
-      # "repl-automation"
     ];
     extra-substituters = [
       # "https://mirrors.nju.edu.cn/nix-channels/store"
@@ -49,6 +46,7 @@ in
             hosts = {
               LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
               LiAlH4-Server.modules = ./devices/asus-h110t;
+              LiAlH4-WorkPC.modules = ./devices/workpc;
               # LiAlH4-Onecloud = {
               #   arch = "armv7l-linux";
               #   modules = ./devices/onecloud;
