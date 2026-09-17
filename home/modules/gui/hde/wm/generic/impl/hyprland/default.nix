@@ -46,6 +46,7 @@
                 window-move-to-workspace =
                   lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.window.move({workspace="${toString e.args.id}"})''
                     key;
+                column-focus = lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.layout("focus ${e.args.direction}")'' key;
               };
             in
             dispatch.${e.type};

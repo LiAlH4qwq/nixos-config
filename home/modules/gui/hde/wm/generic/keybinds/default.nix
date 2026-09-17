@@ -135,12 +135,10 @@ let
       description = desc "Keybinds that focus a workspace by id.";
     };
     window-move-to-workspace = {
-      args = {
-        id = lib.mkOption {
-          type = int;
-          example = 1;
-          description = desc "Workspace id to move the window to.";
-        };
+      args.id = lib.mkOption {
+        type = int;
+        example = 1;
+        description = desc "Workspace id to move the window to.";
       };
       example = [
         {
@@ -153,6 +151,28 @@ let
         }
       ];
       description = desc "Keybinds that move a window to a workspace by id.";
+    };
+    column-focus = {
+      args.direction = lib.mkOption {
+        type = enum [
+          "left"
+          "right"
+        ];
+        example = "right";
+        description = desc "Direction of next column to focus.";
+      };
+      example = [
+        {
+          mod = "Mod";
+          key = "Left";
+          args.direction = "left";
+        }
+        {
+          mod = "Mod";
+          key = "Right";
+          args.direction = "right";
+        }
+      ];
     };
   };
   types = builtins.attrNames schema;
@@ -260,6 +280,16 @@ in
               "Shift"
             ];
             args.id = if ki == 0 then 10 else ki;
+          });
+        column-focus =
+          [
+            "left"
+            "right"
+          ]
+          |> map (x: {
+            mod = "Mod";
+            key = lib.toSentenceCase x;
+            args.direction = x;
           });
       };
     };

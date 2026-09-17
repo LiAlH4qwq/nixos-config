@@ -17,6 +17,14 @@
             execr = e: "spawn:${e.args.cmd |> builtins.concatStringsSep " "}";
             workspace-focus = e: "workspace-switch:${toString e.args.id}";
             window-move-to-workspace = e: "window-move-to-workspace:${toString e.args.id}";
+            column-focus =
+              e:
+              if e.args.direction == "left" then
+                "window-focus-left"
+              else if e.args.direction == "right" then
+                "window-focus-right"
+              else
+                throw "Unreachable";
           };
         in
         (lib.mkIf (cfg != [ ]) {

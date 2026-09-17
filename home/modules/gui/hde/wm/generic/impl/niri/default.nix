@@ -32,6 +32,14 @@
             execr = e: builtins.foldl' lib.id spawn e.args.cmd;
             workspace-focus = e: focus-workspace e.args.id;
             window-move-to-workspace = e: move-window-to-workspace e.args.id;
+            column-focus =
+              e:
+              if e.args.direction == "left" then
+                focus-column-left
+              else if e.args.direction == "right" then
+                focus-column-right
+              else
+                throw "Unreachable";
           };
           bind =
             e:
