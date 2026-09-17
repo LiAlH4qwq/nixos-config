@@ -184,10 +184,10 @@
       # allow tun mode traffic.
       services.firewalld.zones.trusted.interfaces = [ "mihoyo" ];
       # Make cache persistent.
-      intransience.datastores.persist.dirs = [
+      preservation.preserveAt.persist.directories = [
         {
-          path = "/var/lib/private/mihomo";
-          parentDirectory.mode = "0700";
+          directory = "/var/lib/private/mihomo";
+          parent.mode = "0700";
         }
       ];
     }

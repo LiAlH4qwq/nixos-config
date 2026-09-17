@@ -38,8 +38,8 @@
       ];
     };
 
-    liuxu.home.internal.intransience = {
-      dirs = [
+    liuxu.home.internal.preservation = {
+      directories = [
         ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring
         ".local/share/materialgram" # Telegram

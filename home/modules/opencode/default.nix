@@ -67,12 +67,12 @@
       };
     };
 
-    liuxu.home.internal.intransience =
+    liuxu.home.internal.preservation =
       let
         withOpdir = x: ".local/share/opencode/${x}";
       in
       {
-        dirs = map withOpdir [
+        directories = map withOpdir [
           "storage"
           "snapshot"
         ];

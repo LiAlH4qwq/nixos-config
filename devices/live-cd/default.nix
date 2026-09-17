@@ -19,7 +19,7 @@
     makeUsbBootable = true;
   };
 
-  intransience.enable = false;
+  preservation.enable = false;
 
   hardware.enableAllHardware = true;
 

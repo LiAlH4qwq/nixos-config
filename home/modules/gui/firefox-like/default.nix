@@ -116,7 +116,7 @@
         };
         zen-browser.profiles.default = lib.mkIf config.liuxu.home.internal.final.gui.zen.enable cpSettings;
       };
-      liuxu.home.internal.intransience.dirs = [ ".config/mozilla/firefox/default" ];
+      liuxu.home.internal.preservation.directories = [ ".config/mozilla/firefox/default" ];
     }
   );
 }

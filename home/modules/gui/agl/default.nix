@@ -25,6 +25,6 @@
     ];
 
     home.packages = with pkgs; [ the-honkers-railway-launcher ];
-    liuxu.home.internal.intransience.files = [ ".local/share/honkers-railway-launcher/config.json" ];
+    liuxu.home.internal.preservation.files = [ ".local/share/honkers-railway-launcher/config.json" ];
   };
 }

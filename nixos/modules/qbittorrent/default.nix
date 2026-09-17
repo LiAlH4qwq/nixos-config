@@ -23,18 +23,18 @@
       peer-ban-helper.enable = true;
     };
 
-    intransience.datastores.persist.dirs =
+    preservation.preserveAt.persist.directories =
       let
         cfg = config.services;
       in
       [
         {
           inherit (cfg.qbittorrent) user group;
-          path = cfg.qbittorrent.profileDir;
+          directory = cfg.qbittorrent.profileDir;
         }
         {
           inherit (cfg.peer-ban-helper) user group;
-          path = cfg.peer-ban-helper.dataDir;
+          directory = cfg.peer-ban-helper.dataDir;
         }
       ];
   };

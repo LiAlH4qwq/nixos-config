@@ -34,7 +34,7 @@
       ];
     };
     # Make secureboot keys persistent.
-    intransience.datastores.persist.dirs = [ "/var/lib/sbctl" ];
+    preservation.preserveAt.persist.directories = [ "/var/lib/sbctl" ];
 
   };
 }

@@ -44,5 +44,5 @@
         use-xdg-base-directories = true;
       };
   };
-  intransience.datastores.persist.files = lib.singleton "/root/.local/share/nix/trusted-settings.json";
+  preservation.preserveAt.persist.files = [ "/root/.local/share/nix/trusted-settings.json" ];
 }

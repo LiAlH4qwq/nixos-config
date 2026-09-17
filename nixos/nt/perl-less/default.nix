@@ -21,6 +21,6 @@
     {
       enable = true;
     }
-    (lib.mkIf config.intransience.enable { passwordFilesLocation = "/persist/var/lib/userborn"; })
+    (lib.mkIf config.preservation.enable { passwordFilesLocation = "/persist/var/lib/userborn"; })
   ];
 }

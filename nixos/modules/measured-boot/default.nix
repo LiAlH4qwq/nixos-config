@@ -31,8 +31,8 @@
         ];
       };
     };
-    intransience.datastores.persist = {
-      dirs = [
+    preservation.preserveAt.persist = {
+      directories = [
         config.boot.lanzaboote.measuredBoot.pcrlockDirectory
         "/var/lib/auto-cryptenroll"
       ];

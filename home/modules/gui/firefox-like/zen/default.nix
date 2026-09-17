@@ -22,6 +22,6 @@
       enable = true;
       profiles.default = { };
     };
-    liuxu.home.internal.intransience.dirs = [ ".config/zen/default" ];
+    liuxu.home.internal.preservation.directories = [ ".config/zen/default" ];
   };
 }

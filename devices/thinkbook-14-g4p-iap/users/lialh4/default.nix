@@ -38,7 +38,7 @@
       };
       opencode.enable = true;
       sdk.enable = true;
-      internal.intransience.dirs = [ ".local/share/fonts" ];
+      internal.preservation.directories = [ ".local/share/fonts" ];
     };
     services.podman = {
       enable = true;

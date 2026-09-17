@@ -85,13 +85,13 @@
     };
     home.file.fcitx5-punctuations = {
       force = true;
-      source = ./punctuations.kv;
+      source = ./punctuations.conf;
       target = ".local/share/fcitx5/punctuation/punc.mb.zh_CN";
     };
     # Fcitx5
     # It will be tmpfiles here,
-    # so this dir should be intransienced,
+    # so this dir should be persist,
     # otherwise it will failed to update dict files.
-    liuxu.home.internal.intransience.dirs = lib.singleton ".local/share/fcitx5/pinyin";
+    liuxu.home.internal.preservation.directories = lib.singleton ".local/share/fcitx5/pinyin";
   };
 }

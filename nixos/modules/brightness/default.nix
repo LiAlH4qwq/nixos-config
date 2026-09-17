@@ -17,6 +17,6 @@
       ];
     };
     # Prevent brightness setting loss when rebooting.
-    intransience.datastores.persist.dirs = [ "/var/lib/systemd/backlight" ];
+    preservation.preserveAt.persist.directories = [ "/var/lib/systemd/backlight" ];
   };
 }

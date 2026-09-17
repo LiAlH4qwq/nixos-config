@@ -12,9 +12,9 @@ _: {
     };
   };
 
-  liuxu.home.internal.intransience.files = [
+  liuxu.home.internal.preservation.files = [
     {
-      path = ".ssh/id_ed25519";
+      file = ".ssh/id_ed25519";
       mode = "0600";
     }
   ];

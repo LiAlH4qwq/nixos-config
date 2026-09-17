@@ -18,6 +18,6 @@
       firewall.enable = false;
     };
     # Make network connections persist.
-    intransience.datastores.persist.dirs = [ "/etc/NetworkManager/system-connections" ];
+    preservation.preserveAt.persist.directories = [ "/etc/NetworkManager/system-connections" ];
   };
 }

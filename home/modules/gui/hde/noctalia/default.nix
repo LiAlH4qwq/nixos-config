@@ -59,8 +59,8 @@
       target = "Pictures/Wallpapers/rainy-everything-in-the-night.png";
       source = "${root}/assets/rainy-everything-in-the-night.png";
     };
-    liuxu.home.internal.intransience = {
-      dirs = [ ".local/state/noctalia/clipboard" ];
+    liuxu.home.internal.preservation = {
+      directories = [ ".local/state/noctalia/clipboard" ];
       files = [
         ".local/state/noctalia/notification_history.json"
         ".local/state/noctalia/recently_used.json"

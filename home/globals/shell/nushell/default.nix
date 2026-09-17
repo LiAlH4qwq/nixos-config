@@ -6,5 +6,5 @@
 
   home.packages = with pkgs; [ nufmt ];
 
-  liuxu.home.internal.intransience.files = [ ".config/nushell/history.txt" ];
+  liuxu.home.internal.preservation.files = [ ".config/nushell/history.txt" ];
 }

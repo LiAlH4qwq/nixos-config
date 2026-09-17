@@ -29,7 +29,7 @@
     man.man-db.enable = false;
   };
 
-  intransience.enable = false;
+  preservation.enable = false;
 
   hardware.onecloud = {
     enable = true;

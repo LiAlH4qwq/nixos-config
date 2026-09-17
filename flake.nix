@@ -83,10 +83,10 @@ in
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-kdl.url = "github:Lhcfl/nix-kdl";
-    nix-parsec.url = "github:milahu/nix-parsec";
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    preservation.url = "github:nix-community/preservation";
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
       flake = false;
@@ -149,13 +149,6 @@ in
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-prelude = {
-      url = "github:anna328p/nix-prelude";
-      inputs = {
-        systems.follows = "systems";
-        parsec.follows = "nix-parsec";
-      };
-    };
     github-actions-nix = {
       url = "https://flakehub.com/f/synapdeck/github-actions-nix/0.2.0";
       inputs = {
@@ -201,14 +194,6 @@ in
         systems.follows = "systems";
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
-      };
-    };
-    intransience = {
-      url = "github:anna328p/intransience";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        nix-prelude.follows = "nix-prelude";
       };
     };
     agl = {

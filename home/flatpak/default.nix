@@ -6,7 +6,7 @@
 {
 
   config = lib.mkIf osConfig.liuxu.nixos.flatpak.enable {
-    liuxu.home.internal.intransience.dirs = [
+    liuxu.home.internal.preservation.directories = [
       ".local/share/flatpak"
       ".var/app"
     ];

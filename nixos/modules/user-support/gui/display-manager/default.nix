@@ -33,8 +33,8 @@
         # so the whole dir needs persist.
         # Besides, the state and config share same file,
         # so it can only be treated as state file.
-        intransience.datastores.persist.dirs = lib.singleton {
-          path = "/var/lib/noctalia-greeter";
+        preservation.preserveAt.persist.directories = lib.singleton {
+          directory = "/var/lib/noctalia-greeter";
           user = "greeter";
         };
       }

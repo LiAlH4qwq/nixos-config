@@ -10,6 +10,6 @@
 
   config = lib.mkIf config.liuxu.nixos.flatpak.enable {
     services.flatpak.enable = true;
-    intransience.datastores.persist.dirs = [ "/var/lib/flatpak" ];
+    preservation.preserveAt.persist.directories = [ "/var/lib/flatpak" ];
   };
 }

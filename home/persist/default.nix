@@ -1,6 +1,6 @@
 { lib, osConfig, ... }:
 {
-  options.liuxu.home.internal.intransience =
+  options.liuxu.home.internal.preservation =
     let
       o = {
         internal = true;
@@ -8,12 +8,12 @@
       };
     in
     {
-      dirs = lib.mkOption o;
+      directories = lib.mkOption o;
       files = lib.mkOption o;
     };
 
-  config.liuxu.home.internal.intransience = {
-    dirs = [
+  config.liuxu.home.internal.preservation = {
+    directories = [
       "Documents"
       "Downloads"
       "Pictures"
@@ -27,8 +27,8 @@
       # Whole dir needs persist,
       # since there will be temp files.
       {
-        path = ".local/share/zoxide";
-        method = "symlink";
+        directory = ".local/share/zoxide";
+        how = "symlink";
       }
     ];
 

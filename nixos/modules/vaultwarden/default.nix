@@ -65,9 +65,9 @@
         -----END CERTIFICATE-----
       '';
     };
-    intransience.datastores.persist.dirs = [
+    preservation.preserveAt.persist.directories = [
       {
-        path = "/var/lib/vaultwarden";
+        directory = "/var/lib/vaultwarden";
         user = "vaultwarden";
         group = "vaultwarden";
       }
