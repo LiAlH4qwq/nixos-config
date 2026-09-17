@@ -1,5 +1,5 @@
 _: {
-  boot.initrd.luks.devices.root.device = "/dev/disk/by-uuid/284a5404-8946-4a5f-8dfb-a1edf696f906";
+  boot.initrd.luks.devices.root.device = "/dev/disk/by-uuid/7f34e99b-9bdc-4691-8a9f-1d56f7d8c284";
 
   fileSystems = {
     "/" = {
@@ -43,12 +43,12 @@ _: {
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/6E2A-9336";
+      device = "/dev/disk/by-uuid/15D6-4691";
       fsType = "vfat";
     };
 
     "/mnt/btrbk/local" = {
-      device = "/dev/mapper/data";
+      device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [
         "noatime"
