@@ -7,41 +7,102 @@
   config = lib.mkIf config.liuxu.home.internal.gui.enable (
     let
       noctalia = [ "noctalia" ];
+      ipc = noctalia ++ [ "msg" ];
+      bind =
+        {
+          cmd,
+          key,
+          mod ? [ ],
+          opts ? { },
+        }:
+        {
+          inherit key mod opts;
+          args.cmd = ipc ++ cmd;
+        };
     in
     {
-      liuxu.home.gui = {
+      liuxu.home.gui.wm = {
         autostart = lib.singleton noctalia;
-        keybinds.execr =
-          let
-            mkIpcBind =
-              let
-                f =
-                  let
-                    ipc = noctalia ++ [ "msg" ];
-                  in
-                  v: ipc ++ v;
-              in
-              lib.liuxu.on2 lib.liuxu.wm.mkExecrBind f;
-            mkNormalIpcBind = mkIpcBind { };
-            mkLockedIpcBind = mkIpcBind { lock = true; };
-            mkLockedRepeatingIpcBind = mkIpcBind {
+        keybinds.execr = [
+          (bind {
+            cmd = [
+              "panel-toggle"
+              "session"
+            ];
+            key = "Delete";
+            mod = "Mod";
+          })
+          (bind {
+            cmd = [
+              "panel-toggle"
+              "launcher"
+            ];
+            key = "R";
+            mod = "Mod";
+          })
+          (bind {
+            cmd = [
+              "panel-toggle"
+              "clipboard"
+            ];
+            key = "V";
+            mod = "Mod";
+          })
+          (bind {
+            cmd = [
+              "session"
+              "lock"
+            ];
+            key = "L";
+            mod = "Mod";
+          })
+          (bind {
+            cmd = [ "power-cycle" ];
+            key = "Help";
+          })
+          (bind {
+            cmd = [ "volume-mute" ];
+            key = "XF86AudioMute";
+            opts.lock = true;
+          })
+          (bind {
+            cmd = [ "mic-mute" ];
+            key = "XF86AudioMicMute";
+            opts.lock = true;
+          })
+          (bind {
+            cmd = [ "volume-up" ];
+            key = "XF86AudioRaiseVolume";
+            opts = {
               lock = true;
               repeat = true;
             };
-          in
-          [
-            (mkNormalIpcBind [ "panel-toggle" "session" ] "Delete" "Mod")
-            (mkNormalIpcBind [ "panel-toggle" "launcher" ] "R" "Mod")
-            (mkNormalIpcBind [ "panel-toggle" "clipboard" ] "V" "Mod")
-            (mkNormalIpcBind [ "session" "lock" ] "L" "Mod")
-            (mkNormalIpcBind [ "power-cycle" ] "Help" [ ])
-            (mkLockedIpcBind [ "volume-mute" ] "XF86AudioMute" [ ])
-            (mkLockedIpcBind [ "mic-mute" ] "XF86AudioMicMute" [ ])
-            (mkLockedRepeatingIpcBind [ "volume-up" ] "XF86AudioRaiseVolume" [ ])
-            (mkLockedRepeatingIpcBind [ "volume-down" ] "XF86AudioLowerVolume" [ ])
-            (mkLockedRepeatingIpcBind [ "brightness-up" ] "XF86MonBrightnessUp" [ ])
-            (mkLockedRepeatingIpcBind [ "brightness-down" ] "XF86MonBrightnessDown" [ ])
-          ];
+          })
+          (bind {
+            cmd = [ "volume-down" ];
+            key = "XF86AudioLowerVolume";
+            opts = {
+              lock = true;
+              repeat = true;
+            };
+          })
+          (bind {
+            cmd = [ "brightness-up" ];
+            key = "XF86MonBrightnessUp";
+            opts = {
+              lock = true;
+              repeat = true;
+            };
+          })
+          (bind {
+            cmd = [ "brightness-down" ];
+            key = "XF86MonBrightnessDown";
+            opts = {
+              lock = true;
+              repeat = true;
+            };
+          })
+        ];
       };
     }
   );

@@ -3,320 +3,265 @@
   lib,
   ...
 }:
-{
-  options.liuxu.home =
-    let
-      inherit (lib.types)
-        bool
-        coercedTo
-        enum
-        int
-        listOf
-        nullOr
-        singleLineStr
-        str
-        submodule
-        unspecified
-        ;
-      tStrToList = coercedTo str lib.singleton (listOf str);
-      desc = lib.liuxu.mkHomeDesc;
-      commonOpts = {
-        mod = lib.mkOption {
-          type = tStrToList;
-          default = [ ];
-          example = "Mod";
-          description = desc ''
-            Keybind's modkey,
-              can be a single string or a list of string.
-          '';
-        };
-        key = lib.mkOption {
-          type = str;
-          example = "R";
-          description = desc ''
-            Keybind's key,
-              must not be empty.
-          '';
-        };
-        opt = {
-          lock = lib.mkOption {
-            type = bool;
-            default = false;
-            example = true;
-            description = desc ''
-              Whether or not the keybind
-                is effective in lockscreen.
-            '';
-          };
-          repeat = lib.mkOption {
-            type = bool;
-            default = false;
-            example = true;
-            description = desc ''
-              Whether or not the keybind
-                will do effect repeatly when long-pressed.
-            '';
-          };
-        };
-      };
-    in
-    {
-      internal.gui.keybinds = lib.mkOption {
-        default = [ ];
-        example = [
-          {
-            type = "execr";
-            mod = "Mod";
-            key = "R";
-            opt = {
-              lock = false;
-              repeat = false;
-            };
-            args = [
-              "noctalia"
-              "msg"
-              "panel-toggle"
-              "launcher"
-            ];
-          }
-        ];
+let
+  inherit (lib.types)
+    bool
+    coercedTo
+    enum
+    int
+    listOf
+    str
+    submodule
+    unspecified
+    ;
+  tStrToList = coercedTo str lib.singleton (listOf str);
+  desc = lib.liuxu.mkHomeDesc;
+  commonOpts = {
+    mod = lib.mkOption {
+      type = tStrToList;
+      default = [ ];
+      example = "Mod";
+      description = desc ''
+        Keybind's modkey,
+          can be a single string or a list of string.
+      '';
+    };
+    key = lib.mkOption {
+      type = str;
+      example = "R";
+      description = desc ''
+        Keybind's key,
+          must not be empty.
+      '';
+    };
+    opts = {
+      lock = lib.mkOption {
+        type = bool;
+        default = false;
+        example = true;
         description = desc ''
-          Keybinds apply to both Hyprland and Niri.
+          Whether or not the keybind
+            is effective in lockscreen.
         '';
-        type = listOf (submodule {
-          options = commonOpts // {
-            type = lib.mkOption {
-              type = enum [
-                "execr"
-                "close-window"
-                "focus-workspace"
-                "move-window-to-workspace"
-              ];
-              example = "execr";
-              description = desc ''
-                Keybinds's action type.
-              '';
-            };
-            args = lib.mkOption {
-              type = unspecified;
-              example = [
-                "noctalia"
-                "msg"
-                "panel-toggle"
-                "launcher"
-              ];
-              description = desc ''
-                Keybind's args.
-              '';
-            };
-          };
-        });
       };
-      gui.keybinds = {
-        close-window = lib.mkOption {
-          description = desc ''
-            Keybinds that close window,
-              target null means close active window.
-          '';
-          default = [ ];
-          example = [
-            {
-              mod = "Mod";
-              key = "Q";
-            }
-          ];
-          type = listOf (submodule {
-            options = commonOpts // {
-              force = lib.liuxu.mkHomeSwitchOnOption ''
-                Whether do force close,
-                  some wms may don't support it,
-                  then it will fallback to normal close.
-              '';
-              target = lib.mkOption {
-                type = nullOr singleLineStr;
-                default = null;
-                description = desc ''
-                  Window to close,
-                    null means active window.
-                '';
-              };
-            };
-          });
-        };
-        execr = lib.mkOption {
-          default = [ ];
-          example = [
-            {
-              mod = "Mod";
-              key = "R";
-              opt = {
-                lock = false;
-                repeat = false;
-              };
-              cmd = [
-                "noctalia"
-                "msg"
-                "panel-toggle"
-                "launcher"
-              ];
-            }
-          ];
-          description = desc ''
-            Keybinds that exec a cmd,
-              apply to both Hyprland and Niri.
-          '';
-          type = listOf (submodule {
-            options = commonOpts // {
-              cmd = lib.mkOption {
-                type = tStrToList;
-                example = [
-                  "noctalia"
-                  "msg"
-                  "panel-toggle"
-                  "launcher"
-                ];
-                description = desc ''
-                  Keybind's cmd to exec,
-                    must not be empty,
-                    can be a single str if there's no args.
-                '';
-              };
-            };
-          });
-        };
-        focus-workspace = lib.mkOption {
-          description = desc "Keybinds that focus workspace by id.";
-          default = [ ];
-          example = [
-            {
-              mod = "Mod";
-              key = "1";
-              opt = {
-                lock = false;
-                repeat = false;
-              };
-              id = 1;
-            }
-          ];
-          type = listOf (submodule {
-            options = commonOpts // {
-              id = lib.mkOption {
-                type = int;
-                example = 1;
-                description = desc "Workspace id to switch to.";
-              };
-            };
-          });
-        };
-        move-window-to-workspace = lib.mkOption {
-          description = desc ''
-            Keybinds that move window to workspace by id,
-              target null means move focused window.
-          '';
-          default = [ ];
-          example = [
-            {
-              mod = [
-                "Mod"
-                "Shift"
-              ];
-              key = "1";
-              opt = {
-                lock = false;
-                repeat = false;
-              };
-              id = 1;
-              target = null;
-            }
-          ];
-          type = listOf (submodule {
-            options = commonOpts // {
-              id = lib.mkOption {
-                type = int;
-                example = 1;
-                description = desc "Workspace id to switch to.";
-              };
-              target = lib.mkOption {
-                type = nullOr singleLineStr;
-                default = null;
-                description = desc ''
-                  Window to move,
-                    null means focused window.
-                '';
-              };
-            };
-          });
-        };
+      repeat = lib.mkOption {
+        type = bool;
+        default = false;
+        example = true;
+        description = desc ''
+          Whether or not the keybind
+            will do effect repeatly when long-pressed.
+        '';
       };
     };
+  };
+  mkArgs =
+    options:
+    lib.mkOption {
+      type = submodule { inherit options; };
+      default = { };
+      description = desc "Keybind's arguments.";
+    };
+
+  # Single source of truth: every keybind type, its typed args and its docs.
+  # The public `wm.keybinds` options are generated from it.
+  schema = {
+    window-close = {
+      args = {
+        force = lib.mkOption {
+          type = bool;
+          default = false;
+          example = true;
+          description = desc ''
+            Whether to force close the window,
+              some wms may not support it
+              and will fallback to normal close.
+          '';
+        };
+      };
+      example = [
+        {
+          mod = "Mod";
+          key = "Q";
+          args.force = true;
+        }
+      ];
+      description = desc "Keybinds that close a window.";
+    };
+    execr = {
+      args = {
+        cmd = lib.mkOption {
+          type = tStrToList;
+          example = [
+            "noctalia"
+            "msg"
+          ];
+          description = desc ''
+            Keybind's command to exec,
+              must not be empty,
+              can be a single str if there's no args.
+          '';
+        };
+      };
+      example = [
+        {
+          mod = "Mod";
+          key = "R";
+          args.cmd = [
+            "noctalia"
+            "msg"
+            "panel-toggle"
+            "launcher"
+          ];
+        }
+      ];
+      description = desc "Keybinds that exec a command.";
+    };
+    workspace-focus = {
+      args = {
+        id = lib.mkOption {
+          type = int;
+          example = 1;
+          description = desc "Workspace id to focus.";
+        };
+      };
+      example = [
+        {
+          mod = "Mod";
+          key = "1";
+          args.id = 1;
+        }
+      ];
+      description = desc "Keybinds that focus a workspace by id.";
+    };
+    window-move-to-workspace = {
+      args = {
+        id = lib.mkOption {
+          type = int;
+          example = 1;
+          description = desc "Workspace id to move the window to.";
+        };
+      };
+      example = [
+        {
+          mod = [
+            "Mod"
+            "Shift"
+          ];
+          key = "1";
+          args.id = 1;
+        }
+      ];
+      description = desc "Keybinds that move a window to a workspace by id.";
+    };
+  };
+  types = builtins.attrNames schema;
+in
+{
+  options.liuxu.home = {
+    gui.wm.keybinds = builtins.mapAttrs (
+      _: s:
+      lib.mkOption {
+        type = listOf (submodule {
+          options = commonOpts // {
+            args = mkArgs s.args;
+          };
+        });
+        default = [ ];
+        inherit (s) example description;
+      }
+    ) schema;
+    internal.gui.wm.keybinds = lib.mkOption {
+      internal = true;
+      default = [ ];
+      type = listOf (submodule {
+        options = commonOpts // {
+          type = lib.mkOption {
+            type = enum types;
+            description = desc "Keybind's action type.";
+          };
+          args = lib.mkOption {
+            type = unspecified;
+            description = desc "Keybind's arguments.";
+          };
+        };
+      });
+      description = desc ''
+        Normalized keybinds,
+          consumed by the wm backends.
+      '';
+    };
+  };
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     liuxu.home = {
-      internal.gui.keybinds =
-        let
-          cfg = config.liuxu.home.gui.keybinds;
-          toCommon = t: e: {
-            inherit (e) mod key opt;
-            type = t;
-            args = removeAttrs e [
-              "mod"
-              "key"
-              "opt"
-            ];
-          };
-        in
-        cfg
-        |> builtins.mapAttrs (lib.liuxu.o map toCommon)
+      internal.gui.wm.keybinds =
+        config.liuxu.home.gui.wm.keybinds
+        |> builtins.mapAttrs (type: map (e: e // { inherit type; }))
         |> builtins.attrValues
         |> builtins.concatLists;
-      gui.keybinds =
-        let
-          forAllNumkeyWs =
-            attrs:
-            lib.range 0 9
-            |> map (
-              ki:
-              let
-                ks = toString ki;
-                wi = if ki == 0 then 10 else ki;
-              in
-              {
-                key = ks;
-                id = wi;
-              }
-              // attrs
-            );
-        in
-        {
-          close-window = [
-            {
-              mod = "Mod";
-              key = "Q";
-            }
-            {
-              mod = [
-                "Mod"
-                "Shift"
-              ];
-              key = "Q";
-              force = true;
-            }
-          ];
-          execr = with lib.liuxu.wm; [
-            (mkNormalExecrBind "missioncenter" "Escape" "Mod")
-            (mkNormalExecrBind "kitty" "T" "Mod")
-            (mkNormalExecrBind "nautilus" "E" "Mod")
-            (mkNormalExecrBind "zen-beta" "B" "Mod")
-            (mkNormalExecrBind [ "1password" "--toggle" ] "XF86Favorites" [ ])
-          ];
-          focus-workspace = forAllNumkeyWs { mod = "Mod"; };
-          move-window-to-workspace = forAllNumkeyWs {
+      gui.wm.keybinds = {
+        window-close = [
+          {
+            key = "Q";
+            mod = "Mod";
+          }
+          {
+            key = "Q";
             mod = [
               "Mod"
               "Shift"
             ];
-          };
-        };
+            args.force = true;
+          }
+        ];
+        execr = [
+          {
+            key = "Escape";
+            mod = "Mod";
+            args.cmd = "missioncenter";
+          }
+          {
+            key = "T";
+            mod = "Mod";
+            args.cmd = "kitty";
+          }
+          {
+            key = "E";
+            mod = "Mod";
+            args.cmd = "nautilus";
+          }
+          {
+            key = "B";
+            mod = "Mod";
+            args.cmd = "zen-beta";
+          }
+          {
+            key = "XF86Favorites";
+            args.cmd = [
+              "1password"
+              "--toggle"
+            ];
+          }
+        ];
+        workspace-focus =
+          lib.range 0 9
+          |> map (ki: {
+            key = toString ki;
+            mod = "Mod";
+            args.id = if ki == 0 then 10 else ki;
+          });
+        window-move-to-workspace =
+          lib.range 0 9
+          |> map (ki: {
+            key = toString ki;
+            mod = [
+              "Mod"
+              "Shift"
+            ];
+            args.id = if ki == 0 then 10 else ki;
+          });
+      };
     };
   };
 }

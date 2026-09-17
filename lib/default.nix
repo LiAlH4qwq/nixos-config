@@ -148,25 +148,5 @@ lib: {
             repeating = true;
           };
         };
-
-      wm =
-        let
-          mkExecrBind = o: v: k: m: {
-            opt = o;
-            cmd = v;
-            key = k;
-            mod = m;
-          };
-        in
-        {
-          inherit mkExecrBind;
-          mkNormalExecrBind = mkExecrBind { };
-          mkLockedExecrBind = mkExecrBind { lock = true; };
-          mkRepeatingExecrBind = mkExecrBind { repeat = true; };
-          mkLockedRepeatingExecrBind = mkExecrBind {
-            lock = true;
-            repeat = true;
-          };
-        };
     };
 }

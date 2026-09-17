@@ -62,15 +62,30 @@
 
   home-manager.sharedModules = [
     {
-      liuxu.home.gui.keybinds.execr = with lib.liuxu.wm; [
+      liuxu.home.gui.wm.keybinds.execr = [
         # Screenshot key on this laptop.
         # Yes, it's hard-coded as Win + Shift + S.
         # That's definately WinBook.
-        (mkNormalExecrBind [ "noctalia" "msg" "screenshot-region" ] "S" [
-          "Mod"
-          "Shift"
-        ])
-        (mkNormalExecrBind [ "noctalia" "msg" "screenshot-fullscreen" ] "Print" [ ])
+        {
+          key = "S";
+          mod = [
+            "Mod"
+            "Shift"
+          ];
+          args.cmd = [
+            "noctalia"
+            "msg"
+            "screenshot-region"
+          ];
+        }
+        {
+          key = "Print";
+          args.cmd = [
+            "noctalia"
+            "msg"
+            "screenshot-fullscreen"
+          ];
+        }
       ];
     }
     {

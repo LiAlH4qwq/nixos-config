@@ -3,7 +3,7 @@
     lib.mkMerge [
       (
         let
-          cfg = config.liuxu.home.gui.autostart;
+          cfg = config.liuxu.home.gui.wm.autostart;
         in
         (lib.mkIf (cfg != [ ]) {
           wayland.windowManager.hyprland.settings.on =
@@ -23,40 +23,35 @@
       )
       (
         let
-          cfg = config.liuxu.home.internal.gui.keybinds;
+          cfg = config.liuxu.home.internal.gui.wm.keybinds;
+          bind =
+            e:
+            let
+              opts = {
+                locked = e.opts.lock;
+                repeating = e.opts.repeat;
+              };
+              mod = map (m: if m == "Mod" then "SUPER" else lib.toUpper m) e.mod;
+              key = "${if mod == [ ] then "" else "${builtins.concatStringsSep "+" mod}+"}${e.key}";
+              dispatch = {
+                window-close =
+                  if e.args.force then
+                    lib.liuxu.hyprland.mkLuaBind opts "hl.dsp.window.kill()" key
+                  else
+                    lib.liuxu.hyprland.mkLuaBind opts "hl.dsp.window.close()" key;
+                execr = lib.liuxu.hyprland.mkExecrBind opts (builtins.concatStringsSep " " e.args.cmd) key;
+                workspace-focus =
+                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.focus({workspace="${toString e.args.id}"})''
+                    key;
+                window-move-to-workspace =
+                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.window.move({workspace="${toString e.args.id}"})''
+                    key;
+              };
+            in
+            dispatch.${e.type};
         in
         (lib.mkIf (cfg != [ ]) {
-          wayland.windowManager.hyprland.settings.bind =
-            cfg
-            |> map (
-              e:
-              let
-                o = {
-                  locked = e.opt.lock;
-                  repeating = e.opt.repeat;
-                };
-                k = (
-                  e
-                  |> (e: e // { mod = map (m: if m == "Mod" then "SUPER" else lib.toUpper m) e.mod; })
-                  |> (e: "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}")
-                );
-              in
-              if e.type == "close-window" then
-                (
-                  if e.args.force then
-                    lib.liuxu.hyprland.mkLuaBind o "hl.dsp.window.kill()" k
-                  else
-                    lib.liuxu.hyprland.mkLuaBind o "hl.dsp.window.close()" k
-                )
-              else if e.type == "execr" then
-                lib.liuxu.hyprland.mkExecrBind o (builtins.concatStringsSep " " e.args.cmd) k
-              else if e.type == "focus-workspace" then
-                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.focus({workspace="${e.args.id}"})'' k
-              else if e.type == "move-window-to-workspace" then
-                lib.liuxu.hyprland.mkLuaBind o ''hl.dsp.window.move({workspace="${e.args.id}"})'' k
-              else
-                throw "Unreachable"
-            );
+          wayland.windowManager.hyprland.settings.bind = map bind cfg;
         })
       )
     ]

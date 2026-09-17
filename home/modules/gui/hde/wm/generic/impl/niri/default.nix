@@ -9,7 +9,7 @@
     lib.mkMerge [
       (
         let
-          cfg = config.liuxu.home.gui.autostart;
+          cfg = config.liuxu.home.gui.wm.autostart;
         in
         (lib.mkIf (cfg != [ ]) {
           liuxu.home.gui.niri.settings =
@@ -26,45 +26,36 @@
       )
       (
         let
-          cfg = config.liuxu.home.internal.gui.keybinds;
+          cfg = config.liuxu.home.internal.gui.wm.keybinds;
+          action = with lib.kdl.extras.niri; {
+            window-close = _: close-window;
+            execr = e: builtins.foldl' lib.id spawn e.args.cmd;
+            workspace-focus = e: focus-workspace e.args.id;
+            window-move-to-workspace = e: move-window-to-workspace e.args.id;
+          };
+          bind =
+            e:
+            lib.kdl.extras.niri.n
+              "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}"
+              (
+                {
+                  inherit (e.opts) repeat;
+                }
+                // (
+                  if e.type != "execr" then
+                    { }
+                  else
+                    {
+                      allow-when-locked = e.opts.lock;
+                    }
+                )
+              )
+              (lib.singleton (action.${e.type} e));
         in
         (lib.mkIf (cfg != [ ]) {
           liuxu.home.gui.niri.settings =
             cfg
-            |> map (
-              e:
-              lib.kdl.extras.niri.n
-                "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}"
-                (
-                  {
-                    inherit (e.opt) repeat;
-                  }
-                  // (
-                    if e.type != "execr" then
-                      { }
-                    else
-                      {
-                        allow-when-locked = e.opt.lock;
-                      }
-                  )
-                )
-                (
-                  with lib.kdl.extras.niri;
-                  (
-                    if e.type == "close-window" then
-                      close-window
-                    else if e.type == "execr" then
-                      builtins.foldl' lib.id spawn e.args.cmd
-                    else if e.type == "focus-workspace" then
-                      focus-workspace e.args.id
-                    else if e.type == "move-window-to-workspace" then
-                      move-window-to-workspace e.args.id
-                    else
-                      throw "Unreachable"
-                  )
-                  |> lib.singleton
-                )
-            )
+            |> map bind
             |> lib.kdl.extras.niri.binds
             |> lib.singleton
             |> lib.kdl.formats.v1

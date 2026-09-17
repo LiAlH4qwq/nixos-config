@@ -3,7 +3,7 @@
     lib.mkMerge [
       (
         let
-          cfg = config.liuxu.home.gui.autostart;
+          cfg = config.liuxu.home.gui.wm.autostart;
         in
         (lib.mkIf (cfg != [ ]) {
           programs.umbriel.settings.general.autostart = cfg |> map (builtins.concatStringsSep " ");
@@ -11,7 +11,13 @@
       )
       (
         let
-          cfg = config.liuxu.home.internal.gui.keybinds;
+          cfg = config.liuxu.home.internal.gui.wm.keybinds;
+          action = {
+            window-close = _: "window-close";
+            execr = e: "spawn:${e.args.cmd |> builtins.concatStringsSep " "}";
+            workspace-focus = e: "workspace-switch:${toString e.args.id}";
+            window-move-to-workspace = e: "window-move-to-workspace:${toString e.args.id}";
+          };
         in
         (lib.mkIf (cfg != [ ]) {
           programs.umbriel.settings.keybinds =
@@ -19,19 +25,9 @@
             |> map (e: {
               name = "${if e.mod == [ ] then "" else "${e.mod |> builtins.concatStringsSep "+"}+"}${e.key}";
               value = {
-                inherit (e.opt) repeat;
-                allow_when_locked = e.opt.lock;
-                action =
-                  if e.type == "close-window" then
-                    "window-close"
-                  else if e.type == "execr" then
-                    e.args.cmd |> builtins.concatStringsSep " " |> (x: "spawn:${x}")
-                  else if e.type == "focus-workspace" then
-                    "workspace-switch:${e.args.id}"
-                  else if e.type == "move-window-to-workspace" then
-                    "window-move-to-workspace:${e.args.id}"
-                  else
-                    throw "Unreachable";
+                inherit (e.opts) repeat;
+                allow_when_locked = e.opts.lock;
+                action = action.${e.type} e;
               };
             })
             |> builtins.listToAttrs;
