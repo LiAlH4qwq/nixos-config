@@ -258,10 +258,7 @@ in
           }
           {
             key = "XF86Favorites";
-            args.cmd = [
-              "1password"
-              "--toggle"
-            ];
+            args.cmd = "bitwarden";
           }
         ];
         workspace-focus =
