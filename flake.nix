@@ -260,5 +260,13 @@ in
         flake-parts.follows = "flake-parts";
       };
     };
+    opencode-sanitizer = {
+      url = "github:lialh4qwq/opencode-sanitizer";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+      };
+    };
   };
 }

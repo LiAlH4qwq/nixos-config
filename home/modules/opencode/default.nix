@@ -1,11 +1,14 @@
 {
   config,
+  inputs,
   lib,
   osConfig,
   pkgs,
   ...
 }:
 {
+  imports = [ inputs.opencode-sanitizer.homeModules.default ];
+
   options.liuxu.home.opencode.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
@@ -49,6 +52,18 @@
         enable = true;
         servers.nixos.command = lib.getExe <| pkgs.mcp-nixos;
       };
+    };
+
+    services.opencode-sanitizer = {
+      enable = true;
+      settings.rules = [
+        {
+          name = "TW Flag";
+          pattern = "🇹🇼";
+          literal = true;
+          replacement = "[Redacted Flag Emoji]";
+        }
+      ];
     };
 
     systemd.user.services.opencode-secrets = {
