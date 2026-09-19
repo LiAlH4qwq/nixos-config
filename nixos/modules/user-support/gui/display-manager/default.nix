@@ -20,7 +20,7 @@
   config = lib.mkIf config.liuxu.nixos.user-support.gui.display-manager.enable (
     lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
       {
-        programs.noctalia-greeter = {
+        services.displayManager.noctalia-greeter = {
           enable = true;
           package = pkgs.unstable.noctalia-greeter;
           settings.cursor = {
