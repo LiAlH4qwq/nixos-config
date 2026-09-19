@@ -78,9 +78,15 @@
                 mixed means gvisor for udp and system for tcp.
             '';
           };
+          external-controller = lib.mkOption {
+            type = lib.types.singleLineStr;
+            default = "[::1]:9090";
+            example = "[::]:9090";
+            description = desc "External controller listen address for mihoyo.";
+          };
         };
         extraConfig = lib.mkOption {
-          type = lib.types.attrs;
+          type = (pkgs.formats.yaml { }).type;
           internal = true;
           default = { };
           example = {
@@ -110,7 +116,10 @@
     {
       liuxu.nixos.network.mihoyo = {
         providerUrlFiles.alink = config.sops.secrets."mihoyo/providerUrls/alink".path;
-        extraConfig.tun.stack = config.liuxu.nixos.network.mihoyo.settings.tun.stack;
+        extraConfig = {
+          tun.stack = config.liuxu.nixos.network.mihoyo.settings.tun.stack;
+          external-controller = config.liuxu.nixos.network.mihoyo.settings.external-controller;
+        };
       };
 
       services.mihomo = {

@@ -17,7 +17,6 @@
         unified-delay = true;
         tcp-concurrent = true;
         find-process-mode = "always";
-        external-controller = "[::1]:9090";
         profile = {
           store-selected = true;
           store-fakeip = true;
