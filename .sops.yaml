@@ -3,6 +3,7 @@ keys:
   - &LiAlH4-Laptop age1uy3zxre0xvmuhfgmxyvq6wccxjnd6qq33efg0dd5s2ym4yz2wugstr8mz0
   - &LiAlH4-Server age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
   - &LiAlH4-WorkPC age1zh97yzwr3jchnkfemg0een57hfaexulxptgwfqhejsds48r593qsku75py
+  - &LiAlH4-DeployTest age1abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstu
 creation_rules:
   - path_regex: ^sops/default.yaml$
     key_groups:
@@ -26,3 +27,8 @@ creation_rules:
       - age:
           - *LiAlH4
           - *LiAlH4-WorkPC
+  - path_regex: ^sops/LiAlH4-DeployTest.yaml$
+    key_groups:
+      - age:
+          - *LiAlH4
+          - *LiAlH4-DeployTest
