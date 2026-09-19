@@ -12,7 +12,6 @@
 
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     liuxu.home.gui.wm.autostart = [
-      [ ]
     ];
   };
 }
