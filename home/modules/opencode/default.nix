@@ -61,7 +61,6 @@
           name = "TW Flag";
           pattern = "🇹🇼";
           literal = true;
-          replacement = "[Redacted Flag Emoji]";
         }
       ];
     };
