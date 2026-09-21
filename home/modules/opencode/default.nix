@@ -56,13 +56,10 @@
 
     services.opencode-sanitizer = {
       enable = true;
-      settings.rules = [
-        {
-          name = "TW Flag";
-          pattern = "🇹🇼";
-          literal = true;
-        }
-      ];
+      settings.rules.tw-flag = {
+        pattern = "🇹🇼";
+        literal = true;
+      };
     };
 
     systemd.user.services.opencode-secrets = {
@@ -81,7 +78,7 @@
       };
     };
 
-    liuxu.home.internal.preservation =
+    liuxu.home.preservation =
       let
         withOpdir = x: ".local/share/opencode/${x}";
       in

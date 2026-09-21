@@ -21,7 +21,7 @@
   # Fix non-posix shell don't load path
   programs.nushell.extraEnv = lib.mkAfter ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]'';
 
-  liuxu.home.internal.preservation.directories = [
+  liuxu.home.preservation.directories = [
     ".cache/node/corepack"
     ".local/share/npm"
     ".local/share/pnpm/store"

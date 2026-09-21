@@ -85,7 +85,7 @@
         };
       };
     };
-    liuxu.home.internal.preservation.directories = [
+    liuxu.home.preservation.directories = [
       ".config/Code"
     ];
   };

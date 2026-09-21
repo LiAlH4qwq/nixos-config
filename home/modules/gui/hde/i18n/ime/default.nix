@@ -92,6 +92,6 @@
     # It will be tmpfiles here,
     # so this dir should be persist,
     # otherwise it will failed to update dict files.
-    liuxu.home.internal.preservation.directories = lib.singleton ".local/share/fcitx5/pinyin";
+    liuxu.home.preservation.directories = lib.singleton ".local/share/fcitx5/pinyin";
   };
 }

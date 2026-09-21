@@ -1,18 +1,27 @@
 { lib, osConfig, ... }:
 {
-  options.liuxu.home.internal.preservation =
-    let
-      o = {
-        internal = true;
-        type = with lib.types; listOf unspecified;
-      };
-    in
-    {
-      directories = lib.mkOption o;
-      files = lib.mkOption o;
+  options.liuxu.home.preservation = {
+    directories = lib.mkOption {
+      type = with lib.types; listOf unspecified;
+      default = [ ];
+      example = [ "Downloads" ];
+      description = lib.liuxu.mkHomeDesc ''
+        Directories to persist,
+          will be merged to `osConfig.preservation.preserveAt.persist.users.<user>.directories`.
+      '';
     };
+    files = lib.mkOption {
+      type = with lib.types; listOf unspecified;
+      default = [ ];
+      example = [ ".ssh/known_hosts" ];
+      description = lib.liuxu.mkHomeDesc ''
+        Files to persist,
+          will be merged to `osConfig.preservation.preserveAt.persist.users.<user>.files`.
+      '';
+    };
+  };
 
-  config.liuxu.home.internal.preservation = {
+  config.liuxu.home.preservation = {
     directories = [
       "Documents"
       "Downloads"

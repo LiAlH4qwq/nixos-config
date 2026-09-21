@@ -38,7 +38,7 @@
       ];
     };
 
-    liuxu.home.internal.preservation = {
+    liuxu.home.preservation = {
       directories = [
         ".config/Clementine" # Clementine
         ".local/share/keyrings" # Gnome Keyring

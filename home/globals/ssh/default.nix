@@ -12,7 +12,7 @@ _: {
     };
   };
 
-  liuxu.home.internal.preservation.files = [
+  liuxu.home.preservation.files = [
     {
       file = ".ssh/id_ed25519";
       mode = "0600";

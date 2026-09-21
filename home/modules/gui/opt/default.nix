@@ -34,7 +34,7 @@
       wpsoffice-cn
     ];
 
-    liuxu.home.internal.preservation.directories = [
+    liuxu.home.preservation.directories = [
       # discord
       ".config/discord"
 
