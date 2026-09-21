@@ -1,0 +1,8 @@
+{
+	"rules": {
+		"tw-flag": {
+			"literal": true,
+			"pattern": "🇹🇼"
+		}
+	}
+}
