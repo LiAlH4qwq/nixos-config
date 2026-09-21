@@ -503,11 +503,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789997436,
-        "narHash": "sha256-uAoVIrwCRHUns6o4hWbm4DoxlhaHJ3SUJ5wfULdn4NY=",
+        "lastModified": 1790000649,
+        "narHash": "sha256-fPM/pym6E5TwTPeo2Imfhbw9jzTAGIH7YiBYZYvKmlI=",
         "owner": "lialh4qwq",
         "repo": "opencode-sanitizer",
-        "rev": "baf44ca37498752b1370da2dc237aa8e9a237a18",
+        "rev": "b9606d49ae05b7950b16b7eae9d2a4b7f67c101a",
         "type": "github"
       },
       "original": {
