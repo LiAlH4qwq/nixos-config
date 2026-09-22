@@ -173,6 +173,7 @@ let
           args.direction = "right";
         }
       ];
+      description = desc "Keybinds that focus a column by direction.";
     };
   };
   types = builtins.attrNames schema;
