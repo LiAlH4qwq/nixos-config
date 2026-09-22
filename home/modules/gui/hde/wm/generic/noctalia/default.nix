@@ -22,7 +22,6 @@
     in
     {
       liuxu.home.gui.wm = {
-        autostart = lib.singleton noctalia;
         keybinds.execr = [
           (bind {
             cmd = [

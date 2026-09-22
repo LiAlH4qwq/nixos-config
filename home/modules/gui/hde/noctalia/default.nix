@@ -17,6 +17,7 @@
   config = lib.mkIf config.liuxu.home.internal.gui.enable {
     programs.noctalia = {
       enable = true;
+      systemd.enable = true;
       package = pkgs.unstable.noctalia;
       settings = {
         weather.enabled = false;
@@ -26,6 +27,7 @@
           telemetry_enabled = true;
           screen_time_enabled = true;
           settings_show_advanced = true;
+          launch_apps_as_systemd_services = true;
           screenshot = {
             directory = "~/Pictures/Screenshots";
           };
@@ -54,6 +56,16 @@
           "power_profile"
         ];
       };
+    };
+    systemd.user.services.noctalia.Unit = {
+      PartOf = [
+        "pipewire.service"
+        "wireplumber.service"
+      ];
+      After = [
+        "pipewire.service"
+        "wireplumber.service"
+      ];
     };
     home.file.wallpaper = {
       target = "Pictures/Wallpapers/rainy-everything-in-the-night.png";
