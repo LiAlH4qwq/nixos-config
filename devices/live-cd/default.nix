@@ -1,4 +1,10 @@
-{ config, inputs, ... }: {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./users
     inputs.pe-key-scanner.nixosModules.default
@@ -14,6 +20,8 @@
     };
     system.version-when-installed = config.system.nixos.release;
   };
+
+  environment.systemPackages = with pkgs; [ cryptsetup ];
 
   isoImage = {
     makeEfiBootable = true;

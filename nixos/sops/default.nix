@@ -1,6 +1,6 @@
 {
-  config,
   inputs,
+  pkgs,
   root,
   ...
 }:
@@ -19,4 +19,9 @@
       "smartd/bot/token" = { };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    sops
+    ssh-to-age
+  ];
 }
