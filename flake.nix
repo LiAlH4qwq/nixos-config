@@ -269,5 +269,13 @@ in
         systems.follows = "systems";
       };
     };
+    pe-key-scanner = {
+      url = "github:lialh4qwq/pe-key-scanner";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+      };
+    };
   };
 }

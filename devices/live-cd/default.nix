@@ -1,6 +1,7 @@
 { config, inputs, ... }: {
   imports = [
     ./users
+    inputs.pe-key-scanner.nixosModules.default
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
   ];
 
@@ -17,6 +18,11 @@
   isoImage = {
     makeEfiBootable = true;
     makeUsbBootable = true;
+  };
+
+  services.pe-key-scanner = {
+    enable = true;
+    service.restartOnSuccess = [ "sops-install-secrets.service" ];
   };
 
   preservation.enable = false;

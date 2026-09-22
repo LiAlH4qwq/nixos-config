@@ -516,6 +516,32 @@
         "type": "github"
       }
     },
+    "pe-key-scanner": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790067438,
+        "narHash": "sha256-fQjEId30s4Hfm8IQu1FZv3qKPRT65N9DsV1GJtRQu1s=",
+        "owner": "lialh4qwq",
+        "repo": "pe-key-scanner",
+        "rev": "0c5e1bf3ffb650f0c29ca96ead555a95fab9d408",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lialh4qwq",
+        "repo": "pe-key-scanner",
+        "type": "github"
+      }
+    },
     "peer-ban-helper": {
       "inputs": {
         "flake-parts": [
@@ -581,6 +607,7 @@
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
         "opencode-sanitizer": "opencode-sanitizer",
+        "pe-key-scanner": "pe-key-scanner",
         "peer-ban-helper": "peer-ban-helper",
         "preservation": "preservation",
         "rust-overlay": "rust-overlay",
