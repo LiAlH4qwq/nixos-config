@@ -25,7 +25,6 @@
     extraGroups = [
       "wheel"
       "dialout"
-      "amlusers"
     ];
   };
   home-manager.users.lialh4 = {

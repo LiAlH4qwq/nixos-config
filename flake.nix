@@ -180,14 +180,6 @@ in
         flake-compat.follows = "";
       };
     };
-    aml-flash-tool = {
-      url = "github:lialh4qwq/aml-flash-tool-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        systems.follows = "systems";
-      };
-    };
     peer-ban-helper = {
       # url = "/mnt/data/lialh4/Projects/peer-ban-helper-nix";
       url = "github:lialh4qwq/peer-ban-helper-nix";

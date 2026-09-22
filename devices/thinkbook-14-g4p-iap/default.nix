@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    inputs.aml-flash-tool.nixosModules.default
     ./fs
     ./fingerprint
     ./users
@@ -48,8 +47,6 @@
     sopsFile = "${root}/sops/LiAlH4-Laptop.yaml";
     neededForUsers = true;
   };
-
-  programs.aml-flash-tool.enable = true;
 
   services.logind.settings.Login = {
     # 😭 The fingerprint reader is on the power button.
