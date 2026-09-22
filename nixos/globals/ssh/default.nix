@@ -1,4 +1,8 @@
-_: {
+{ lib, ... }: {
+  imports = [
+    (lib.mkAliasOptionModule [ "liuxu" "nixos" "ssh" "ports" ] [ "services" "openssh" "ports" ])
+  ];
+
   services.openssh = {
     # sops depends on sshd, so it couldn't be fully disabled.
     enable = true;

@@ -94,6 +94,7 @@
             fake-ip-filter = [
               "*"
               "+.lan"
+              "+.lialh4.cyou"
             ];
             default-nameserver = doh-cn;
             proxy-server-nameserver = doh-cn;

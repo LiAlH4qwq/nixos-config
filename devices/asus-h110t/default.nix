@@ -107,6 +107,38 @@
         };
       };
       secureboot.enable = true;
+      sops.localMachine = {
+        secrets = {
+          "cloudflare-ddns/apiToken" = { };
+          "cloudflared/accountTag" = { };
+          "cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
+          "cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
+          "cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
+          "samba/users/lialh4/password" = { };
+          "users/lialh4/hashedPassword".neededForUsers = true;
+        };
+        templates =
+          let
+            ph = config.sops.placeholder;
+          in
+          {
+            "cloudflare-ddns/credentials" = {
+              content = "CLOUDFLARE_API_TOKEN=${ph."localMachine/cloudflare-ddns/apiToken"}";
+              owner = config.users.users.cloudflare-ddns.name;
+              group = config.users.users.cloudflare-ddns.group;
+            };
+            "cloudflared/tunnels/LiAlH4-Server/credentials".content = builtins.toJSON {
+              AccountTag = ph."localMachine/cloudflared/accountTag";
+              TunnelID = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId";
+              TunnelSecret = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret";
+              Endpoint = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint";
+            };
+          };
+      };
+      ssh.ports = [
+        22
+        14159
+      ];
       vaultwarden = {
         enable = true;
         port = 50288;
@@ -114,40 +146,4 @@
     };
     system.version-when-installed = "25.11";
   };
-
-  sops = {
-    secrets = builtins.mapAttrs (_: x: x // { sopsFile = "${root}/sops/LiAlH4-Server.yaml"; }) {
-      "localMachine/cloudflare-ddns/apiToken" = { };
-      "localMachine/cloudflared/accountTag" = { };
-      "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
-      "localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
-      "localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
-      "localMachine/samba/users/lialh4/password" = { };
-      "localMachine/users/lialh4/hashedPassword" = {
-        neededForUsers = true;
-      };
-    };
-    templates =
-      let
-        ph = config.sops.placeholder;
-      in
-      {
-        "localMachine/cloudflare-ddns/credentials" = {
-          content = "CLOUDFLARE_API_TOKEN=${ph."localMachine/cloudflare-ddns/apiToken"}";
-          owner = config.users.users.cloudflare-ddns.name;
-          group = config.users.users.cloudflare-ddns.group;
-        };
-        "localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".content = builtins.toJSON {
-          AccountTag = ph."localMachine/cloudflared/accountTag";
-          TunnelID = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId";
-          TunnelSecret = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret";
-          Endpoint = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint";
-        };
-      };
-  };
-
-  services.openssh.ports = [
-    22
-    14159
-  ];
 }

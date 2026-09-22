@@ -34,6 +34,7 @@
       nh.flake = "/mnt/data/lialh4/Projects/nixos-config";
       podman.enable = true;
       secureboot.enable = true;
+      sops.localMachine.secrets."users/lialh4/hashedPassword".neededForUsers = true;
       tlp.disks = [
         "nvme-Micron_MTFDKBA512TFH_222138471762"
         "nvme-WD_Blue_SN5000_1TB_251308802891"
@@ -41,11 +42,6 @@
       windows-guest.enable = true;
     };
     system.version-when-installed = "25.11";
-  };
-
-  sops.secrets."localMachine/users/lialh4/hashedPassword" = {
-    sopsFile = "${root}/sops/LiAlH4-Laptop.yaml";
-    neededForUsers = true;
   };
 
   services.logind.settings.Login = {

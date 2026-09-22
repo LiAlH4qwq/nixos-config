@@ -8,7 +8,6 @@
   imports = [
     ./modules
     ./nix
-    ./ssh
     ./uutils
   ];
 

@@ -25,32 +25,6 @@
         "type": "github"
       }
     },
-    "aml-flash-tool": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1787909594,
-        "narHash": "sha256-QMzwDJ+sGwGt54dLKEE2sk4MYMKDDzQWeFE0MDIbhiY=",
-        "owner": "lialh4qwq",
-        "repo": "aml-flash-tool-nix",
-        "rev": "12e3f8dea320c4eebc2fe52dc864a239da9127e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lialh4qwq",
-        "repo": "aml-flash-tool-nix",
-        "type": "github"
-      }
-    },
     "cachyos-kernel": {
       "inputs": {
         "flake-compat": [],
@@ -586,7 +560,6 @@
     "root": {
       "inputs": {
         "agl": "agl",
-        "aml-flash-tool": "aml-flash-tool",
         "cachyos-kernel": "cachyos-kernel",
         "crane": "crane",
         "firefox-addons": "firefox-addons",
