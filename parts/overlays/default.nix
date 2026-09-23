@@ -82,14 +82,17 @@
           hash = "sha256-ga4rhULvUxH8cuz1PJpSOSPINFacew2lLgv0Nguctfk=";
         };
       });
-      wechat = prev.wechat.overrideAttrs (old: {
-        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ prev.makeWrapper ];
-        postFixup = ''
-          ${old.postFixup or ""}
+      wechat = prev.symlinkJoin {
+        name = "wechat-${prev.wechat.version}";
+        paths = [ prev.wechat ];
+        nativeBuildInputs = [ prev.makeWrapper ];
+        postBuild = ''
           wrapProgram $out/bin/wechat \
-            --set QT_IM_MODULE fcitx
+            --set QT_IM_MODULE fcitx \
+            --set XMODIFIERS @im=fcitx
         '';
-      });
+        meta = prev.wechat.meta;
+      };
       wpsoffice-cn = prev.wpsoffice-cn.overrideAttrs (old: {
         nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ prev.makeWrapper ];
         postFixup = ''
