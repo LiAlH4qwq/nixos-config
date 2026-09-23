@@ -16,7 +16,10 @@
       spiceUSBRedirection.enable = true;
       libvirtd = {
         enable = true;
-        qemu.package = pkgs.qemu_kvm;
+        qemu = {
+          package = pkgs.qemu_kvm;
+          vhostUserPackages = with pkgs; [ virtiofsd ];
+        };
       };
     };
     systemd.tmpfiles.settings.sr-iov."/sys/devices/pci0000:00/0000:00:02.0/sriov_numvfs".w.argument =
