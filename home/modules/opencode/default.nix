@@ -27,10 +27,9 @@
         skills.nushell = "${pkgs.nushell-skill}/share/nushell-skill/skills/nushell";
         settings = {
           autoupdate = false;
-          model = "deepseek/deepseek-v4-flash-vision-exp";
+          model = "deepseek/deepseek-flash";
           provider.deepseek = {
             blacklist = [ "deepseek-v4-pro" ];
-            models."deepseek-v4.1-flash-expires-on-0910".name = "DeepSeek V4.1 Flash";
           };
           permission =
             let
