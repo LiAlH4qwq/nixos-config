@@ -29,7 +29,10 @@
           };
         general = {
           show_cheatsheet = false;
-          autostart = [ (lib.getExe pkgs.disable-dwt-in-hsr) ];
+          autostart = [
+            (lib.getExe pkgs.disable-dwt-in-hsr)
+            (lib.getExe pkgs.xwayland-xft-dpi)
+          ];
         };
         workspaces.empty_above = true;
         keybinds = {

@@ -41,6 +41,7 @@
         (xwayland-satellite [
           (path "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
         ])
+        (spawn-at-startup (lib.getExe pkgs.xwayland-xft-dpi))
         prefer-no-csd
         (hotkey-overlay [ skip-at-startup ])
         (layout [ empty-workspace-above-first ])

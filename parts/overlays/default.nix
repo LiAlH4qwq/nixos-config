@@ -103,5 +103,6 @@
           done
         '';
       });
+      xwayland-xft-dpi = config.packages.xwayland-xft-dpi;
     };
 }

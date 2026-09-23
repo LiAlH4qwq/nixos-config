@@ -5,6 +5,7 @@
       dangling-checker = pkgs.callPackage (root + /packages/dangling-checker) { };
       disable-dwt-in-hsr = pkgs.callPackage (root + /packages/disable-dwt-in-hsr) { };
       nushell-skill = pkgs.callPackage (root + /packages/nushell-skill) { };
+      xwayland-xft-dpi = pkgs.callPackage (root + /packages/xwayland-xft-dpi) { };
     };
   };
 }
