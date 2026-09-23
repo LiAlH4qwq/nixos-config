@@ -1,10 +1,9 @@
-#!/usr/bin/env nu
 # xwayland-satellite advertises HiDPI to X clients through XSETTINGS
 # (`Xft/DPI`, `Gdk/WindowScalingFactor`), but Xft-based clients -- notably
 # fcitx5's XCB candidate window -- size themselves from the `Xft.dpi` X
 # resource instead. Mirror the effective output scale into that resource so
 # XWayland windows render at the correct size.
-def x-ready [] { (^xrdb -query | complete).exit_code == 0 }
+def x-ready [] { (^@xrdb@ -query | complete).exit_code == 0 }
 def output-scales [] {
   match ($env.XDG_CURRENT_DESKTOP? | default "") {
     "niri" => (
@@ -29,5 +28,5 @@ if $ready {
     output-scales | math min
   } catch { 1.0 })
   let dpi = (($scale * 96) | math round | into int)
-  $"Xft.dpi: ($dpi)\n" | ^xrdb -merge
+  $"Xft.dpi: ($dpi)\n" | ^@xrdb@ -merge
 }
