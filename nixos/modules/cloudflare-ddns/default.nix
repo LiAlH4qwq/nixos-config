@@ -31,25 +31,25 @@
         (lib.mkIf (cfg.ip6Filter != null) {
           systemd.services.cloudflare-ddns.environment.IP6_DETECTION_FILTER = cfg.ip6Filter;
         })
-        {
-          networking.networkmanager.dispatcherScripts = [
-            {
-              type = "basic";
-              source =
-                let
-                  systemctl = "systemctl" |> lib.getExe' config.systemd.package;
-                in
-                lib.getExe
-                <| pkgs.writers.writeNuBin "cloudflare-ddns-ip-change" ''
-                  def main [iface: string, action: string] {
-                    if $action in [up dhcp6-change connectivity-change] {
-                      ^${systemctl} restart --no-block cloudflare-ddns.service
-                    }
-                  }
-                '';
-            }
-          ];
-        }
+        # {
+        #   networking.networkmanager.dispatcherScripts = [
+        #     {
+        #       type = "basic";
+        #       source =
+        #         let
+        #           systemctl = "systemctl" |> lib.getExe' config.systemd.package;
+        #         in
+        #         lib.getExe
+        #         <| pkgs.writers.writeNuBin "cloudflare-ddns-ip-change" ''
+        #           def main [iface: string, action: string] {
+        #             if $action in [up dhcp6-change connectivity-change] {
+        #               ^${systemctl} restart --no-block cloudflare-ddns.service
+        #             }
+        #           }
+        #         '';
+        #     }
+        #   ];
+        # }
       ]
     );
 }
