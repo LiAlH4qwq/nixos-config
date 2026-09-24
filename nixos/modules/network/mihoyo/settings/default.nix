@@ -225,9 +225,10 @@
 
         rules = [
           "DST-PORT, 53, Dns"
-          "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct"
+          "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct, no-resolve"
+          "PROCESS-NAME, cloudflared, Direct, no-resolve"
           # cloudflare-ddns
-          "PROCESS-NAME, ddns, Direct"
+          "PROCESS-NAME, ddns, Direct, no-resolve"
           "PROCESS-PATH-REGEX, ^/mnt/data/lialh4/Game/HSR/.*/bin/wineserver$, Direct"
           "DOMAIN, genshin.lialh4.cyou, Direct, no-resolve"
           "GEOIP, lan, Direct, no-resolve"
