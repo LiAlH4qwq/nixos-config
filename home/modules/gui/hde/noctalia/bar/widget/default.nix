@@ -16,6 +16,7 @@
         drawer = true;
         pinned = [
           "Fcitx"
+          "KDE Connect Indicator"
           "udiskie"
         ];
       };
