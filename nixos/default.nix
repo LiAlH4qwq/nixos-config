@@ -37,6 +37,7 @@
     defaultPackages = lib.mkForce [ ];
     systemPackages = with pkgs; [
       btdu
+      cloudflared
       nix-output-monitor
       nushell
       pciutils # `lspci`
