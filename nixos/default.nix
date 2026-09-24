@@ -33,6 +33,7 @@
   };
 
   environment = {
+    enableAllTerminfo = true;
     defaultPackages = lib.mkForce [ ];
     systemPackages = with pkgs; [
       btdu
