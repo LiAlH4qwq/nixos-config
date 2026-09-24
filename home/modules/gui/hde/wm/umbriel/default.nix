@@ -45,6 +45,5 @@
         include.optional.files = [ "~/.config/umbriel/disable-dwt-in-hsr.toml" ];
       };
     };
-    systemd.user.tmpfiles.rules = [ "f %h/.config/umbriel/disable-dwt-in-hsr.toml - - - - -" ];
   };
 }
