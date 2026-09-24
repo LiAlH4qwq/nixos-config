@@ -25,7 +25,7 @@
         proxied = "!is(genshin.lialh4.cyou)";
         ip6Domains = [
           "genshin.lialh4.cyou{hostid6=[::10,::20]}"
-          "vaultwarden.lialh4.cyou{hostid6=[::10,::20]}"
+          # "vaultwarden.lialh4.cyou{hostid6=[::10,::20]}"
         ];
       };
       cloudflared = {
@@ -37,6 +37,7 @@
               config.sops.templates."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
+              "vaultwarden.lialh4.cyou" = "http://localhost:8222";
             };
           };
         };
