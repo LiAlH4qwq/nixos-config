@@ -226,7 +226,7 @@
         rules = [
           "DST-PORT, 53, Dns"
           "PROCESS-NAME, .qbittorrent-nox-wrapped, Direct, no-resolve"
-          "PROCESS-NAME, cloudflared, Direct, no-resolve"
+          # "PROCESS-NAME, cloudflared, Direct, no-resolve"
           # cloudflare-ddns
           "PROCESS-NAME, ddns, Direct, no-resolve"
           "PROCESS-PATH-REGEX, ^/mnt/data/lialh4/Game/HSR/.*/bin/wineserver$, Direct"
