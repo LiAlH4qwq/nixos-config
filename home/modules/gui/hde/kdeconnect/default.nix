@@ -3,4 +3,6 @@ _: {
     enable = true;
     indicator = true;
   };
+
+  liuxu.home.preservation.directories = [ ".config/kdeconnect" ];
 }
