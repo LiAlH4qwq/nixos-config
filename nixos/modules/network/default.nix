@@ -3,6 +3,7 @@
   imports = [
     ./firewalld
     ./mihoyo
+    ./song-of-welkin-moon
   ];
 
   options.liuxu.nixos.network.enable = lib.liuxu.mkOsSwitchOffOption ''

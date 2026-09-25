@@ -269,5 +269,14 @@ in
         systems.follows = "systems";
       };
     };
+    hoyofall = {
+      url = "github:lialh4qwq/hoyofall";
+      # url = "path:/mnt/data/lialh4/Projects/hoyofall";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+      };
+    };
   };
 }

@@ -202,6 +202,29 @@
         "type": "github"
       }
     },
+    "hoyofall": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790317649,
+        "narHash": "sha256-qf50uju162G1WbUuFuwyapqjDJEOucBNiGGNXqTH9qA=",
+        "path": "/mnt/data/lialh4/Projects/hoyofall",
+        "type": "path"
+      },
+      "original": {
+        "path": "/mnt/data/lialh4/Projects/hoyofall",
+        "type": "path"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": [
@@ -568,6 +591,7 @@
         "flat-flake": "flat-flake",
         "github-actions-nix": "github-actions-nix",
         "home-manager": "home-manager",
+        "hoyofall": "hoyofall",
         "lanzaboote": "lanzaboote",
         "libpam-pwdfile-rs": "libpam-pwdfile-rs",
         "lix": "lix",
