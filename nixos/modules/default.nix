@@ -10,6 +10,7 @@ _: {
     ./flatpak
     ./laptop
     ./measured-boot
+    ./microcode
     ./network
     ./pin
     ./podman
