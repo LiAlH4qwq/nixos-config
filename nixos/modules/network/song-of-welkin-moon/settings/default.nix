@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
   imports = [
     ./dns
     ./route
@@ -8,7 +8,7 @@ _: {
     experimental = {
       clash_api = {
         external_controller = "[::1]:9090";
-        external_ui = "ui";
+        external_ui = "${pkgs.metacubexd}";
       };
       cache_file = {
         enabled = true;
