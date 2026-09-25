@@ -69,7 +69,7 @@
         patches = (old.patches or [ ]) ++ [
           (prev.fetchpatch {
             url = "https://patch-diff.githubusercontent.com/raw/niri-wm/niri/pull/1791.patch";
-            hash = "sha256-dyB6BMnrFi+DRI0q+sP4L17WvsxDmMjcV2ZVsCiGLis=";
+            hash = "sha256-qUiaHnQy1n9KYzYcaXawcF8nLpniQ20TnLLyp6tKfr0=";
           })
         ];
       });
