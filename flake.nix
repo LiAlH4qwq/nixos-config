@@ -234,16 +234,7 @@ in
     };
     flat-flake = {
       url = "github:linyinfeng/flat-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        flake-parts.follows = "flake-parts";
-        treefmt-nix.follows = "treefmt-nix";
-        crane.follows = "crane";
-        # Tested, null-ok.
-        rust-overlay.follows = "";
-        flake-compat.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     libpam-pwdfile-rs = {
       url = "github:lialh4qwq/libpam-pwdfile-rs";
