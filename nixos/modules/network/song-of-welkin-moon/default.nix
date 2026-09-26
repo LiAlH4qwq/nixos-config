@@ -31,16 +31,16 @@
             urlEnv = "DEFAULT_URL";
           };
           groups.custom =
-            {
-              hk = "🇭🇰";
-              tw = "🇹🇼";
-              sg = "🇸🇬";
-              uk = "🇬🇧";
-              us = "🇺🇸";
-              ca = "🇨🇦";
-            }
-            |>
-              lib.mapAttrs' (
+            (
+              {
+                hk = "🇭🇰";
+                tw = "🇹🇼";
+                sg = "🇸🇬";
+                uk = "🇬🇧";
+                us = "🇺🇸";
+                ca = "🇨🇦";
+              }
+              |> lib.mapAttrs' (
                 n: v: {
                   name = "${n}-auto";
                   value = {
@@ -49,15 +49,16 @@
                   };
                 }
               )
-              // {
-                default = {
-                  type = "selector";
-                  default = "hk-auto";
-                  includeProxies = true;
-                  includeCustomGroups = true;
-                  includeDirect = true;
-                };
+            )
+            // {
+              default = {
+                type = "selector";
+                default = "hk-auto";
+                includeProxies = true;
+                includeCustomGroups = true;
+                includeDirect = true;
               };
+            };
         };
         environmentFile = config.sops.templates."hoyofall/default".path;
       };
