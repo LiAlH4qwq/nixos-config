@@ -30,26 +30,17 @@
             userAgent = "clash.meta/v1.19.0";
             urlEnv = "DEFAULT_URL";
           };
-          groups.custom = lib.mkMerge [
+          groups.custom =
             {
-              default = {
-                type = "selector";
-                default = "hk-auto";
-                includeProxies = true;
-                includeCustomGroups = true;
-                includeDirect = true;
-              };
+              hk = "🇭🇰";
+              tw = "🇹🇼";
+              sg = "🇸🇬";
+              uk = "🇬🇧";
+              us = "🇺🇸";
+              ca = "🇨🇦";
             }
-            (
-              {
-                hk = "🇭🇰";
-                tw = "🇹🇼";
-                sg = "🇸🇬";
-                uk = "🇬🇧";
-                us = "🇺🇸";
-                ca = "🇨🇦";
-              }
-              |> lib.mapAttrs' (
+            |>
+              lib.mapAttrs' (
                 n: v: {
                   name = "${n}-auto";
                   value = {
@@ -58,8 +49,15 @@
                   };
                 }
               )
-            )
-          ];
+              // {
+                default = {
+                  type = "selector";
+                  default = "hk-auto";
+                  includeProxies = true;
+                  includeCustomGroups = true;
+                  includeDirect = true;
+                };
+              };
         };
         environmentFile = config.sops.templates."hoyofall/default".path;
       };
