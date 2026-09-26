@@ -11,12 +11,8 @@ _: {
         type = "logical";
         mode = "or";
         rules = [
-          {
-            protocol = "dns";
-          }
-          {
-            port = 53;
-          }
+          { protocol = "dns"; }
+          { port = 53; }
         ];
         action = "hijack-dns";
       }
@@ -25,29 +21,43 @@ _: {
         outbound = "direct";
       }
       {
-        rule_set = "geosite-cn";
-        outbound = "direct";
+        rule_set = "geosite-category-ai-!cn";
+        outbound = "ai-not-cn";
       }
       {
-        rule_set = "geoip-cn";
+        rule_set = "geosite-github";
+        outbound = "github";
+      }
+      {
+        type = "logical";
+        mode = "or";
+        rules = [
+          { rule_set = "geosite-cn"; }
+          { rule_set = "geoip-cn"; }
+        ];
         outbound = "direct";
       }
     ];
-    rule_set = [
+    rule_set =
       {
-        tag = "geosite-cn";
-        type = "remote";
-        format = "binary";
-        download_detour = "default";
-        url = "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs";
+        geosite = [
+          "category-ai-!cn"
+          "github"
+          "cn"
+        ];
+        geoip = [ "cn" ];
       }
-      {
-        tag = "geoip-cn";
-        type = "remote";
-        format = "binary";
-        download_detour = "default";
-        url = "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs";
-      }
-    ];
+      |> builtins.mapAttrs (
+        n:
+        map (x: {
+          tag = "${n}-${x}";
+          type = "remote";
+          format = "binary";
+          download_detour = "default";
+          url = "https://raw.githubusercontent.com/SagerNet/sing-${n}/rule-set/${n}-${x}.srs";
+        })
+      )
+      |> builtins.attrValues
+      |> builtins.concatLists;
   };
 }

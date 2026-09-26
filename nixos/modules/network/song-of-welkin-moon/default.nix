@@ -50,15 +50,22 @@
                 }
               )
             )
-            // {
-              default = {
-                type = "selector";
+            // (
+              {
                 default = "hk-auto";
-                includeProxies = true;
-                includeCustomGroups = true;
-                includeDirect = true;
-              };
-            };
+                ai-not-cn = "tw-auto";
+                github = "hk-auto";
+              }
+              |> builtins.mapAttrs (
+                _: v: {
+                  type = "selector";
+                  default = v;
+                  includeProxies = true;
+                  includeCustomGroups = true;
+                  includeDirect = true;
+                }
+              )
+            );
         };
         environmentFile = config.sops.templates."hoyofall/default".path;
       };
