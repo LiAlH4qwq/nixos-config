@@ -39,7 +39,7 @@
         {
           "ai/accessTokens/deepseek" = { };
           "ai/accessTokens/kimi" = { };
-          "ai/accessTokens/mimo" = { };
+          "ai/accessTokens/command-code" = { };
           "mihoyo/providerUrls/alink" = { };
           "smartd/bot/target" = { };
           "smartd/bot/token" = { };

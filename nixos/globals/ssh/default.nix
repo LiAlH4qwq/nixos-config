@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     (lib.mkAliasOptionModule [ "liuxu" "nixos" "ssh" "ports" ] [ "services" "openssh" "ports" ])
   ];
@@ -19,4 +19,23 @@
       }
     ];
   };
+
+  systemd.services.ssh-host-pubkey =
+    let
+      before = [ "sshd.service" ];
+    in
+    {
+      inherit before;
+      wantedBy = before;
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        ${pkgs.openssh}/bin/ssh-keygen -y \
+          -f /etc/ssh/ssh_host_ed25519_key \
+          > /etc/ssh/ssh_host_ed25519_key.pub
+        chmod 644 /etc/ssh/ssh_host_ed25519_key.pub
+      '';
+    };
 }

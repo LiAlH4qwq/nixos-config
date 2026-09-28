@@ -21,7 +21,7 @@
             {
               deepseek = config.sops.placeholder."ai/accessTokens/deepseek";
               kimi-for-coding = config.sops.placeholder."ai/accessTokens/kimi";
-              xiaomi-token-plan-cn = config.sops.placeholder."ai/accessTokens/mimo";
+              command-code = config.sops.placeholder."ai/accessTokens/command-code";
             };
     };
   };

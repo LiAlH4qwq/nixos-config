@@ -28,8 +28,33 @@
         settings = {
           autoupdate = false;
           model = "deepseek/deepseek-flash";
-          provider.deepseek = {
-            blacklist = [ "deepseek-v4-pro" ];
+          provider = {
+            deepseek = {
+              blacklist = [ "deepseek-v4-pro" ];
+            };
+            command-code = {
+              npm = "@ai-sdk/openai";
+              name = "Command Code";
+              options.baseURL = "https://api.commandcode.ai/provider/v1";
+              models."deepseek/deepseek-v4-flash" = {
+                name = "DeepSeek V4 Flash (Command Code)";
+                reasoning = true;
+                limit = {
+                  context = 1000000;
+                  output = 65536;
+                };
+                modalities = {
+                  input = [ "text" ];
+                  output = [ "text" ];
+                };
+                cost = {
+                  input = 0.15;
+                  output = 0.6;
+                  cache_read = 0.003;
+                  cache_write = 0;
+                };
+              };
+            };
           };
           permission =
             let
