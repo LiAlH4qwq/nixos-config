@@ -33,7 +33,7 @@
               blacklist = [ "deepseek-v4-pro" ];
             };
             command-code = {
-              npm = "@ai-sdk/openai";
+              npm = "@ai-sdk/openai-compatible";
               name = "Command Code";
               options.baseURL = "https://api.commandcode.ai/provider/v1";
               models."deepseek/deepseek-v4-flash" = {
