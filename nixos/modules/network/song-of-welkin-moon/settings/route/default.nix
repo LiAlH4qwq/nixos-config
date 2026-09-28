@@ -17,6 +17,20 @@ _: {
         action = "hijack-dns";
       }
       {
+        type = "logical";
+        mode = "or";
+        rules = [
+          { protocol = "bittorrent"; }
+          {
+            process_name = [
+              ".qbittorrent-nox-wrapped"
+              "qbittorrent-nox"
+            ];
+          }
+        ];
+        outbound = "direct";
+      }
+      {
         ip_is_private = true;
         outbound = "direct";
       }

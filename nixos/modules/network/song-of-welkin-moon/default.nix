@@ -31,15 +31,18 @@
             urlEnv = "DEFAULT_URL";
           };
           groups.custom =
-            (
-              {
+            let
+              regMap = {
                 hk = "🇭🇰";
                 tw = "🇹🇼";
                 sg = "🇸🇬";
                 uk = "🇬🇧";
                 us = "🇺🇸";
                 ca = "🇨🇦";
-              }
+              };
+            in
+            (
+              regMap
               |> lib.mapAttrs' (
                 n: v: {
                   name = "${n}-auto";
@@ -60,8 +63,14 @@
                 _: v: {
                   type = "selector";
                   default = v;
+                  members =
+                    regMap
+                    |> builtins.attrNames
+                    |> map (x: {
+                      type = "customGroup";
+                      name = "${x}-auto";
+                    });
                   includeProxies = true;
-                  includeCustomGroups = true;
                   includeDirect = true;
                 }
               )
