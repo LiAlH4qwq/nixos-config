@@ -23,6 +23,19 @@ _: {
       }
     ];
     rules = [
+      # Fix connection reset of some client when no ipv6 address.
+      {
+        type = "logical";
+        mode = "and";
+        action = "predefined";
+        rules = [
+          { query_type = [ "AAAA" ]; }
+          {
+            default_interface_address = [ "2000::/3" ];
+            invert = true;
+          }
+        ];
+      }
       {
         tag = "query_cloudflare";
         action = "evaluate";
