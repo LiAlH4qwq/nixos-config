@@ -57,14 +57,43 @@
         ];
       };
     };
-    systemd.user.services.noctalia.Unit = {
-      PartOf = [
-        "pipewire.service"
-        "wireplumber.service"
-      ];
-      After = [
-        "pipewire.service"
-        "wireplumber.service"
+    systemd.user.services.noctalia = {
+      Unit = {
+        PartOf = [
+          "pipewire.service"
+          "wireplumber.service"
+        ];
+        After = [
+          "pipewire.service"
+          "wireplumber.service"
+        ];
+      };
+      Service.ExecStartPre = [
+        (
+          lib.getExe
+          <|
+            pkgs.writers.writeNuBin "noctalia-wait-networkmanager"
+              {
+                makeWrapperArgs = [
+                  "--prefix"
+                  "PATH"
+                  ":"
+                  (lib.makeBinPath [
+                    pkgs.systemd
+                    pkgs.uutils-coreutils-noprefix
+                  ])
+                ];
+              }
+              ''
+                for _ in 0..149 {
+                  if (^busctl --system status org.freedesktop.NetworkManager | complete | get exit_code) == 0 {
+                    exit 0
+                  }
+                  sleep 200ms
+                }
+                print -e "NetworkManager not on the system bus after 30s; starting noctalia anyway"
+              ''
+        )
       ];
     };
     home.file.wallpaper = {
