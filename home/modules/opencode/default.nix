@@ -36,15 +36,18 @@
               npm = "@ai-sdk/openai-compatible";
               name = "Command Code";
               options.baseURL = "https://api.commandcode.ai/provider/v1";
-              models."deepseek/deepseek-v4-flash" = {
-                name = "DeepSeek V4 Flash (Command Code)";
+              models."deepseek/deepseek-v4.1-flash" = {
+                name = "DeepSeek V4.1 Flash (Command Code)";
                 reasoning = true;
                 limit = {
                   context = 1000000;
                   output = 65536;
                 };
                 modalities = {
-                  input = [ "text" ];
+                  input = [
+                    "text"
+                    "image"
+                  ];
                   output = [ "text" ];
                 };
                 cost = {
