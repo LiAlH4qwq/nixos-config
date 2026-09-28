@@ -36,6 +36,7 @@
         agl.enable = true;
       };
       opencode.enable = true;
+      pi-coding-agent.enable = true;
       sdk.enable = true;
       preservation.directories = [ ".local/share/fonts" ];
     };
