@@ -47,6 +47,7 @@
                 n: v: {
                   name = "${n}-auto";
                   value = {
+                    level = 1;
                     type = "urltest";
                     includeRegexes = [ "^${v}" ];
                   };
@@ -61,15 +62,10 @@
               }
               |> builtins.mapAttrs (
                 _: v: {
+                  level = 2;
                   type = "selector";
                   default = v;
-                  members =
-                    regMap
-                    |> builtins.attrNames
-                    |> map (x: {
-                      type = "customGroup";
-                      name = "${x}-auto";
-                    });
+                  includeLevels = [ 1 ];
                   includeProxies = true;
                   includeDirect = true;
                 }
