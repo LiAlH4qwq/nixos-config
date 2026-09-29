@@ -1,7 +1,6 @@
 _: {
   imports = [
+    ./ai-coding-agent
     ./gui
-    ./opencode
-    ./pi-coding-agent
   ];
 }

@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.liuxu.home.pi-coding-agent.enable =
+  options.liuxu.home.ai-coding-agent.pi.enable =
     lib.liuxu.mkHomeSwitchOnOption "Whether to enable pi coding agent";
 
-  config = lib.mkIf config.liuxu.home.pi-coding-agent.enable {
+  config = lib.mkIf config.liuxu.home.ai-coding-agent.pi.enable {
     home = {
       packages = with pkgs; [ unstable.pi-coding-agent ];
       file = {
@@ -46,6 +46,8 @@
         };
       };
     };
+
+    services.opencode-sanitizer.pi-coding-agent.enable = true;
 
     systemd.user.services.pi-coding-agent-secrets = {
       Install.WantedBy = [ "default.target" ];

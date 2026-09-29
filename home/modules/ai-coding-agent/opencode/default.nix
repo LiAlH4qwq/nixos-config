@@ -9,17 +9,12 @@
 {
   imports = [ inputs.opencode-sanitizer.homeModules.default ];
 
-  options.liuxu.home.opencode.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = ''
-      Liuxu (Home): Whether to enable opencode,
-        a coding agent.
-    '';
-  };
+  options.liuxu.home.ai-coding-agent.opencode.enable = lib.liuxu.mkHomeSwitchOnOption ''
+    Liuxu (Home): Whether to enable opencode,
+      a coding agent.
+  '';
 
-  config = lib.mkIf config.liuxu.home.opencode.enable {
+  config = lib.mkIf config.liuxu.home.ai-coding-agent.opencode.enable {
     programs = {
       opencode = {
         enable = true;
@@ -81,13 +76,7 @@
       };
     };
 
-    services.opencode-sanitizer = {
-      enable = true;
-      settings.rules.tw-flag = {
-        pattern = "🇹🇼";
-        literal = true;
-      };
-    };
+    services.opencode-sanitizer.opencode.enable = true;
 
     systemd.user.services.opencode-secrets = {
       Install.WantedBy = [ "default.target" ];
