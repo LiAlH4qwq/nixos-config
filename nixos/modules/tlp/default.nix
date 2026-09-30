@@ -4,31 +4,35 @@
   ...
 }:
 {
-  options.liuxu.nixos.tlp = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = config.liuxu.nixos.laptop.enable;
-      example = false;
-      description = ''
-        Liuxu: Whether to enable the TLP,
-          a better power management suit,
-          replacing `power-profiles-daemon`.
-          Default enable when `laptop` enabled.
-      '';
+  options.liuxu.nixos.tlp =
+    let
+      desc = lib.liuxu.mkOsDesc;
+    in
+    {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = config.liuxu.nixos.laptop.enable;
+        example = false;
+        description = desc ''
+          Whether to enable the TLP,
+            a better power management suit,
+            replacing `power-profiles-daemon`.
+            Default enable when `laptop` enabled.
+        '';
+      };
+      disks = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        example = [
+          "NVME_123456789012"
+          "SATA_210987654321"
+        ];
+        description = desc ''
+          Disks managed TLP.
+            Can be obtained using `ls /dev/disks/by-id`
+        '';
+      };
     };
-    disks = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      example = [
-        "NVME_123456789012"
-        "SATA_210987654321"
-      ];
-      description = ''
-        Liuxu: Disks managed TLP.
-          Can be obtained using `ls /dev/disks/by-id`
-      '';
-    };
-  };
 
   config = lib.mkIf config.liuxu.nixos.tlp.enable {
     services = {

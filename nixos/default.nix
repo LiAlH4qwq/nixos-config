@@ -9,6 +9,7 @@
     (root + "/ids")
     (root + "/system")
     ./boot
+    ./defaults
     ./globals
     ./home-manager
     ./internal

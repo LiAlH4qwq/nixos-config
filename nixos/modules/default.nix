@@ -2,7 +2,6 @@ _: {
   imports = [
     ./bluetooth
     ./brightness
-    ./btrbk
     ./builder
     ./cloudflare-ddns
     ./cloudflared
@@ -10,9 +9,6 @@ _: {
     ./flatpak
     ./laptop
     ./measured-boot
-    ./microcode
-    ./network
-    ./pin
     ./podman
     ./qbittorrent
     ./samba
