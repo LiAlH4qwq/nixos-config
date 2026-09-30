@@ -14,16 +14,15 @@
   '';
 
   config = lib.mkIf config.liuxu.nixos.pin.enable {
-    libpam-pwdfile-rs = {
-      pin = {
-        services = [
-          "login"
-          "sudo"
-          "sudo-i"
-          "polkit-1"
-        ]
-        ++ lib.optional config.liuxu.nixos.user-support.gui.display-manager.enable "greetd";
-      };
+    services.libpam-pwdfile-rs = {
+      enable = true;
+      instances.pin.pamServices = [
+        "login"
+        "sudo"
+        "sudo-i"
+        "polkit-1"
+      ]
+      ++ lib.optional config.liuxu.nixos.user-support.gui.display-manager.enable "greetd";
     };
   };
 }

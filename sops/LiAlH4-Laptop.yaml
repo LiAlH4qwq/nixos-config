@@ -2,6 +2,10 @@ localMachine:
     users:
         lialh4:
             hashedPassword: ENC[AES256_GCM,data:kpDBmyQwhx4aYVGy5Ch1kVyVwpLdSXFY2V+3CK2Ps7FYCB9w5vEKGLaMu4QyXmRAEv7mChFJ9ml7n7KrMaRY6YhtVvbvB8JQIA==,iv:FQYj+uQauZkeDsZ//RATssAd85shTYLTgS8WYLfnD3U=,tag:i3z3uI8Q5TGLuRemyIOorg==,type:str]
+    pin:
+        users:
+            lialh4:
+                hashedPassword: ENC[AES256_GCM,data:yi9ui2h/b2D5toswesO8abiDekUc8EYY36ncdrWJ7DQzxO4UtcLicIjQfuqWNHbw1WYVphv5rAXSASfYpxmB1mlmVA/P7BwmrQ==,iv:08aU4NA3VW0IOY4QMg1/7jk9jCpp0WNYym3/YlwxeLI=,tag:QGOEKYYbI5HGEVVwTCkx6w==,type:str]
 sops:
     age:
         - enc: |
@@ -22,7 +26,7 @@ sops:
             +4zJmMzFiMfCNOr6maGGBWlHqjqA1sYvVA2tpraE8kLUE5YkNq5hxg==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1uy3zxre0xvmuhfgmxyvq6wccxjnd6qq33efg0dd5s2ym4yz2wugstr8mz0
-    lastmodified: "2026-09-09T23:30:32Z"
-    mac: ENC[AES256_GCM,data:vgaIs4sxDkeHmBZeUtNzRTiHg3ZaRZHQ8CzbcjxRQJOIFwBxbrpicUKe4KNeelCcMKkOLliNCxJ7CC5ySjBdTV2j+PlHjowDLn0ad5e+cBVEGnTnZIGQw6v2WKWqvPiaHV2sgSOUJWooVwy9WEVeaHiBTq8ys24T2cxwBLpJuJk=,iv:2Zy2Wn8mMkJZiXaUqlJ1SvcgtQe8CghnKp3uTgIRwLo=,tag:Ry8WgTq442wU9lW0hgg9ww==,type:str]
+    lastmodified: "2026-09-30T16:01:31Z"
+    mac: ENC[AES256_GCM,data:+ZtnS+Zw65XIEzO/NBUY6in+1eqfk4BSDlcg4ed6X6t2oldKl9JtBCivItgH5kf636OAqbtdpG8L788c0NjQeMC9yN1hWtVuaoxazhqrOHULU+Kx468zFYEJslhYxZxnhxZ8+gT/GX5mdxWsWGDuhQuVk3apRYqehV4TOijff4k=,iv:nl1id89aTutNtLzs65DeoKTX6JBLGPM2erZvXJr2BGU=,tag:8g/9I4MJJcnKGzsA+uqPJA==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3

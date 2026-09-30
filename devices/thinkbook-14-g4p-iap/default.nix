@@ -36,7 +36,10 @@
       nh.flake = "/mnt/data/lialh4/Projects/nixos-config";
       podman.enable = true;
       secureboot.enable = true;
-      sops.localMachine.secrets."users/lialh4/hashedPassword".neededForUsers = true;
+      sops.localMachine.secrets = {
+        "users/lialh4/hashedPassword".neededForUsers = true;
+        "pin/users/lialh4/hashedPassword" = { };
+      };
       tlp.disks = [
         "nvme-Micron_MTFDKBA512TFH_222138471762"
         "nvme-WD_Blue_SN5000_1TB_251308802891"

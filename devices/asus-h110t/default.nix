@@ -117,6 +117,7 @@
           "cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
           "samba/users/lialh4/password" = { };
           "users/lialh4/hashedPassword".neededForUsers = true;
+          "pin/users/lialh4/hashedPassword" = { };
         };
         templates =
           let

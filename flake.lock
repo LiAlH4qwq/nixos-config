@@ -252,11 +252,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789307763,
-        "narHash": "sha256-XKUMzujHDpuanB1LGTsEuoT3I+IyPqC00lB4x/Pu1ws=",
+        "lastModified": 1790782886,
+        "narHash": "sha256-eoe55wLdI+9jMuflPTYl+i6MqXyG293hHEdYIbgyWAg=",
         "owner": "lialh4qwq",
         "repo": "libpam-pwdfile-rs",
-        "rev": "97a2de151cafca09df7ff3fd4f5a829df88e7f81",
+        "rev": "d27ba322d6d9da462bb5b656b954664088c42cbe",
         "type": "github"
       },
       "original": {
