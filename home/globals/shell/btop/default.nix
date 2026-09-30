@@ -4,6 +4,7 @@
     settings = {
       proc_aggregate = true;
       proc_filter_kernel = true;
+      save_config_on_exit = false;
     };
   };
 
