@@ -1,6 +1,10 @@
 { pkgs, ... }: {
   programs.btop = {
     enable = true;
+    settings = {
+      proc_aggregate = true;
+      proc_filter_kernel = true;
+    };
   };
 
   xdg.configFile.btop-theme-rose-pine-dawn = {
