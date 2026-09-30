@@ -10,7 +10,5 @@
     '';
   };
 
-  config = {
-    system.stateVersion = config.liuxu.system.version-when-installed;
-  };
+  config.system.stateVersion = config.liuxu.system.version-when-installed;
 }
