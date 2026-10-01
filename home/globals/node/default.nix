@@ -14,12 +14,18 @@
     };
   };
 
-  home.sessionPath = [
+  home.sessionPath = lib.mkBefore [
+    "\${HOME}/.local/share/pnpm/bin"
     "\${HOME}/.local/share/npm/bin"
   ];
 
   # Fix non-posix shell don't load path
-  programs.nushell.extraEnv = lib.mkAfter ''$env.PATH = $env.PATH | prepend [$"($env.HOME)/.local/share/npm/bin"]'';
+  programs.nushell.extraEnv = lib.mkAfter ''
+    $env.PATH = $env.PATH | prepend [
+      $"($env.HOME)/.local/share/pnpm/bin"
+      $"($env.HOME)/.local/share/npm/bin"
+    ]
+  '';
 
   liuxu.home.preservation.directories = [
     ".cache/node/corepack"
