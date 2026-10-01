@@ -47,8 +47,8 @@
               inherit (v) hashedPasswordFile;
               isNormalUser = true;
             }
-            (lib.mkIf (v.id != null && v.id.ssh.authorizedKeys != [ ]) {
-              openssh.authorizedKeys.keys = v.id.ssh.authorizedKeys;
+            (lib.mkIf (v.id != null && v.id.ssh.key.primary != null) {
+              openssh.authorizedKeys.keys = [ v.id.ssh.key.primary ];
             })
           ]
         );

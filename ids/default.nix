@@ -5,7 +5,6 @@
     let
       inherit (lib.types)
         attrsOf
-        listOf
         nullOr
         path
         singleLineStr
@@ -50,6 +49,7 @@
               };
               avatar = lib.mkOption {
                 type = nullOr path;
+                default = null;
                 example = lib.literalMD "`./avatar.webp`";
                 description = desc ''
                   Path to avatar,
@@ -73,11 +73,11 @@
                   description = desc "Git email of ID";
                 };
               };
-              ssh.authorizedKeys = lib.mkOption {
-                type = listOf singleLineStr;
-                default = [ ];
-                example = [ (lib.literalMD "<REDACTED>") ];
-                description = desc "List of authorized ssh key of id.";
+              ssh.key.primary = lib.mkOption {
+                type = nullOr singleLineStr;
+                default = null;
+                example = lib.literalMD "<REDACTED>";
+                description = desc "Primary ssh key of id.";
               };
             };
           }
