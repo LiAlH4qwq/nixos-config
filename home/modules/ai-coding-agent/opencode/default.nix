@@ -22,7 +22,7 @@
         skills.nushell = "${pkgs.nushell-skill}/share/nushell-skill/skills/nushell";
         settings = {
           autoupdate = false;
-          model = "deepseek/deepseek-flash";
+          model = "command-code/deepseek/deepseek-v4.1-flash";
           provider = {
             deepseek = {
               blacklist = [ "deepseek-v4-pro" ];
