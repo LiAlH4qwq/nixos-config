@@ -106,10 +106,7 @@
             "play"
           ];
           key = "XF86PickupPhone";
-          opts = {
-            lock = true;
-            repeat = true;
-          };
+          opts.lock = true;
         })
         (bind {
           cmd = [
@@ -117,10 +114,7 @@
             "pause"
           ];
           key = "XF86HangupPhone";
-          opts = {
-            lock = true;
-            repeat = true;
-          };
+          opts.lock = true;
         })
       ];
     }
