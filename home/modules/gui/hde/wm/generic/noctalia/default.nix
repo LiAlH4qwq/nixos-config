@@ -101,7 +101,10 @@
           };
         })
         (bind {
-          cmd = [ "media play" ];
+          cmd = [
+            "media"
+            "play"
+          ];
           key = "XF86PickupPhone";
           opts = {
             lock = true;
@@ -109,7 +112,10 @@
           };
         })
         (bind {
-          cmd = [ "media pause" ];
+          cmd = [
+            "media"
+            "pause"
+          ];
           key = "XF86HangupPhone";
           opts = {
             lock = true;
