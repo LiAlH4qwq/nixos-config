@@ -1,10 +1,5 @@
-{ config, lib, ... }:
-{
-  options.liuxu.nixos.fingerprint.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to enable the fingerprint reader support.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.fingerprint.enable {
+_: {
+  here.config = {
     services.fprintd = {
       enable = true;
     };

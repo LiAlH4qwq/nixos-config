@@ -1,14 +1,23 @@
 {
   flakeConfig,
   inputs,
-  pkgs,
+  lib,
+  scopes,
   ...
 }:
+let
+  tree =
+    base: dir:
+    lib.liuxu.mkTree {
+      inherit scopes base dir;
+      scopeName = "system";
+    };
+in
 {
   imports = [
-    ./modules
-    ./nix
-    ./uutils
+    (tree [ ] ./modules)
+    (tree [ ] ./nix)
+    (tree [ ] ./uutils)
   ];
 
   programs = {

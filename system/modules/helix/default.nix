@@ -1,40 +1,34 @@
+{ pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options.liuxu.system.helix.enable = lib.liuxu.mkOsSwitchOffOption ''
-    Whether to enable helix,
-      a modern cli text editor.
-  '';
+  here = {
+    switch.default = true;
 
-  config =
-    let
-      cmd = "hx -c /etc/helix/config.toml";
-    in
-    lib.mkIf config.liuxu.system.helix.enable {
-      environment = {
-        systemPackages = with pkgs; [
-          helix
-        ];
-        sessionVariables = {
-          EDITOR = cmd;
-        };
-        etc = {
-          helix = {
-            target = "helix/config.toml";
-            source =
-              let
-                mkToml = pkgs.formats.toml { } |> (x: x.generate "");
-              in
-              mkToml {
-                theme = "github_light_colorblind";
-              };
+    config =
+      let
+        cmd = "hx -c /etc/helix/config.toml";
+      in
+      {
+        environment = {
+          systemPackages = with pkgs; [
+            helix
+          ];
+          sessionVariables = {
+            EDITOR = cmd;
+          };
+          etc = {
+            helix = {
+              target = "helix/config.toml";
+              source =
+                let
+                  mkToml = pkgs.formats.toml { } |> (x: x.generate "");
+                in
+                mkToml {
+                  theme = "github_light_colorblind";
+                };
+            };
           };
         };
+        programs.fish.shellAliases.hx = cmd;
       };
-      programs.fish.shellAliases.hx = cmd;
-    };
+  };
 }

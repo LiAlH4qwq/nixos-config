@@ -1,6 +1,5 @@
 { config, lib, ... }: {
-  imports = [ ./widget ];
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     programs.noctalia.settings.bar.default = {
       margin_edge = 0;
       margin_ends = 0;

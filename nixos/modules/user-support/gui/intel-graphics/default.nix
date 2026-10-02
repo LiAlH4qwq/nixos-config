@@ -7,7 +7,7 @@
 {
   options.liuxu.nixos.user-support.gui.intel-graphics.enable = lib.mkOption {
     type = lib.types.bool;
-    default = config.liuxu.nixos.internal.user-support.gui.enable;
+    default = config.liuxu.nixos.internal.final.internal.user-support.gui.enable;
     example = false;
     description = ''
       Liuxu: Whether to enable the Intel Graphics support.
@@ -17,7 +17,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.intel-graphics.enable (
-    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.mkIfElse config.liuxu.nixos.internal.final.internal.user-support.gui.enable
       {
         hardware.graphics.extraPackages = with pkgs; [
           intel-media-driver # VAAPI

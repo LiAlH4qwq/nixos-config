@@ -9,12 +9,9 @@
 {
   imports = [
     inputs.noctalia.homeModules.default
-    ./bar
-    ./lockscreen
-    ./power
   ];
 
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     programs.noctalia = {
       enable = true;
       systemd.enable = true;

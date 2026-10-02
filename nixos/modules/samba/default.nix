@@ -4,136 +4,131 @@
   pkgs,
   ...
 }:
+let
+  cfg = config.liuxu.nixos.samba;
+in
 {
-  options.liuxu.nixos.samba = {
-    enable = lib.liuxu.mkOsSwitchOnOption ''
-      Whether to enable samba,
-        file sharing server.
-    '';
-    port = {
-      tcp = {
-        main = lib.mkOption {
-          type = lib.types.ints.u16;
-          default = 445;
-          example = 10445;
-          description = ''
-            Liuxu: Main tcp port of samba,
-              used for mDns registry.
-          '';
+  here = {
+    options = {
+      port = {
+        tcp = {
+          main = lib.mkOption {
+            type = lib.types.ints.u16;
+            default = 445;
+            example = 10445;
+            description = ''
+              Liuxu: Main tcp port of samba,
+                used for mDns registry.
+            '';
+          };
+          alts = lib.mkOption {
+            type = with lib.types; listOf ints.u16;
+            default = [ ];
+            example = [
+              20445
+              30445
+            ];
+            description = ''
+              Liuxu: Alt tcp ports of samba,
+                can be left empty.
+            '';
+          };
         };
-        alts = lib.mkOption {
+        nbt = {
+          main = lib.mkOption {
+            type = with lib.types; nullOr ints.u16;
+            default = 139;
+            example = 10139;
+            description = ''
+              Liuxu: Main nbt port of samba,
+                used for mDns registry,
+                can be left null.
+            '';
+          };
+          alts = lib.mkOption {
+            type = with lib.types; listOf ints.u16;
+            default = [ ];
+            example = [
+              20139
+              30139
+            ];
+            description = ''
+              Liuxu: Alt nbt ports of samba,
+                can be left empty.
+            '';
+          };
+        };
+        quic.alts = lib.mkOption {
           type = with lib.types; listOf ints.u16;
           default = [ ];
           example = [
-            20445
-            30445
+            10443
+            20443
+            30443
           ];
           description = ''
-            Liuxu: Alt tcp ports of samba,
+            Liuxu: Alt quic ports of samba,
               can be left empty.
           '';
         };
       };
-      nbt = {
-        main = lib.mkOption {
-          type = with lib.types; nullOr ints.u16;
-          default = 139;
-          example = 10139;
-          description = ''
-            Liuxu: Main nbt port of samba,
-              used for mDns registry,
-              can be left null.
-          '';
+      share = lib.mkOption {
+        default = { };
+        example.data = {
+          path = "/mnt/data/lialh4";
+          user = "lialh4";
         };
-        alts = lib.mkOption {
-          type = with lib.types; listOf ints.u16;
-          default = [ ];
-          example = [
-            20139
-            30139
-          ];
-          description = ''
-            Liuxu: Alt nbt ports of samba,
-              can be left empty.
-          '';
-        };
-      };
-      quic.alts = lib.mkOption {
-        type = with lib.types; listOf ints.u16;
-        default = [ ];
-        example = [
-          10443
-          20443
-          30443
-        ];
         description = ''
-          Liuxu: Alt quic ports of samba,
-            can be left empty.
+          Liuxu: Shares of Samba.
+        '';
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              path = lib.mkOption {
+                type = lib.types.singleLineStr;
+                example = "/mnt/data/lialh4";
+                description = ''
+                  Liuxu: Path of share.
+                '';
+              };
+              user = lib.mkOption {
+                type = lib.types.singleLineStr;
+                example = "lialh4";
+                description = ''
+                  Liuxu: User of share.
+                '';
+              };
+              group = lib.mkOption {
+                type = lib.types.singleLineStr;
+                example = "users";
+                description = ''
+                  Liuxu: Group of share.
+                '';
+              };
+              readOnly = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                example = false;
+                description = ''
+                  Liuxu: Is share read-only?
+                '';
+              };
+            };
+          }
+        );
+      };
+      passwordFile = lib.mkOption {
+        type = lib.types.attrsOf lib.types.singleLineStr;
+        default = { };
+        example = {
+          lialh4 = lib.literalMD "config.age.secretV2.samba.passwordFile";
+        };
+        description = ''
+          Liuxu: Password files of Samba user.
         '';
       };
     };
-    share = lib.mkOption {
-      default = { };
-      example.data = {
-        path = "/mnt/data/lialh4";
-        user = "lialh4";
-      };
-      description = ''
-        Liuxu: Shares of Samba.
-      '';
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            path = lib.mkOption {
-              type = lib.types.singleLineStr;
-              example = "/mnt/data/lialh4";
-              description = ''
-                Liuxu: Path of share.
-              '';
-            };
-            user = lib.mkOption {
-              type = lib.types.singleLineStr;
-              example = "lialh4";
-              description = ''
-                Liuxu: User of share.
-              '';
-            };
-            group = lib.mkOption {
-              type = lib.types.singleLineStr;
-              example = "users";
-              description = ''
-                Liuxu: Group of share.
-              '';
-            };
-            readOnly = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-              example = false;
-              description = ''
-                Liuxu: Is share read-only?
-              '';
-            };
-          };
-        }
-      );
-    };
-    passwordFile = lib.mkOption {
-      type = lib.types.attrsOf lib.types.singleLineStr;
-      default = { };
-      example = {
-        lialh4 = lib.literalMD "config.age.secretV2.samba.passwordFile";
-      };
-      description = ''
-        Liuxu: Password files of Samba user.
-      '';
-    };
-  };
-
-  config =
-    let
-      cfg = config.liuxu.nixos.samba;
-    in
-    lib.mkIf cfg.enable {
+    config = {
       services.samba = {
         enable = true;
         settings = lib.mkMerge [
@@ -196,4 +191,5 @@
             |> lib.getExe;
         };
     };
+  };
 }

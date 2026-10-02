@@ -1,15 +1,11 @@
 {
-  config,
   lib,
   osConfig,
   pkgs,
   ...
 }:
 {
-  options.liuxu.home.ai-coding-agent.pi.enable =
-    lib.liuxu.mkHomeSwitchOnOption "Whether to enable pi coding agent";
-
-  config = lib.mkIf config.liuxu.home.ai-coding-agent.pi.enable {
+  here.config = {
     home = {
       packages = with pkgs; [ unstable.pi-coding-agent ];
       file = {

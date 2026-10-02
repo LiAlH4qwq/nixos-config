@@ -5,9 +5,7 @@
   ...
 }:
 {
-  imports = [ ./zen ];
-
-  config = lib.mkIf config.liuxu.home.internal.gui.enable (
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable (
     let
       cpSettings = {
         search = {

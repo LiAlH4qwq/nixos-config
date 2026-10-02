@@ -1,0 +1,46 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  here = {
+    options.settings = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      example = lib.kdl.formats.v1 (with lib.kdl.extras.niri; [ (input [ disable-power-key-handling ]) ]);
+      description = ''
+        Liuxu (Home): Niri settings in kdl.
+      '';
+    };
+    config = {
+      xdg.configFile.niri-settings = {
+        target = "niri/config.kdl";
+        text = config.liuxu.home.gui.niri.settings;
+      };
+      liuxu.home.gui.niri.settings = lib.kdl.formats.v1 (
+        with lib.kdl.extras.niri;
+        [
+          (spawn-at-startup (lib.getExe pkgs.disable-dwt-in-hsr))
+          (xwayland-satellite [
+            (path "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
+          ])
+          (spawn-at-startup (lib.getExe pkgs.xwayland-xft-dpi))
+          prefer-no-csd
+          (hotkey-overlay [ skip-at-startup ])
+          (layout [ empty-workspace-above-first ])
+          (overview [ (backdrop-color "#faf4ed") ])
+          (input [
+            disable-power-key-handling
+            (touchpad [
+              tap
+              natural-scroll
+            ])
+          ])
+          (include { optional = true; } "~/.config/niri/disable-dwt-in-hsr.kdl")
+        ]
+      );
+    };
+  };
+}

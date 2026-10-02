@@ -2,23 +2,40 @@
   lib,
   pkgs,
   root,
+  scopes,
   ...
 }:
+let
+  tree =
+    base: dir:
+    lib.liuxu.mkTree {
+      inherit scopes base dir;
+      scopeName = "nixos";
+    };
+in
 {
   imports = [
-    (root + "/ids")
+    (lib.liuxu.mkTree {
+      inherit scopes;
+      scopeName = "id";
+      dir = root + "/ids";
+      base = [ ];
+    })
     (root + "/system")
-    ./boot
-    ./defaults
-    ./globals
-    ./home-manager
-    ./internal
-    ./modules
-    ./nix
-    ./nt
-    ./persist
-    ./sops
-    ./users
+    (tree [ ] ./boot)
+    (tree [ "btrbk" ] ./btrbk)
+    (tree [ "microcode" ] ./microcode)
+    (tree [ "network" ] ./network)
+    (tree [ "pin" ] ./pin)
+    (tree [ ] ./globals)
+    (tree [ ] ./home-manager)
+    (tree [ "internal" ] ./internal)
+    (tree [ ] ./modules)
+    (tree [ ] ./nix)
+    (tree [ ] ./nt)
+    (tree [ ] ./persist)
+    (tree [ ] ./sops)
+    (tree [ ] ./users)
   ];
 
   systemd.oomd = {

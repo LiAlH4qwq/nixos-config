@@ -5,11 +5,7 @@
   ...
 }:
 {
-  imports = [
-    inputs.preservation.nixosModules.default
-    ./dangling-checker
-    ./machine-id
-  ];
+  imports = [ inputs.preservation.nixosModules.default ];
 
   preservation = {
     enable = lib.mkDefault true;

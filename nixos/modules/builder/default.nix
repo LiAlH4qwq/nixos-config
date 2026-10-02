@@ -1,9 +1,5 @@
-{ config, lib, ... }: {
-  options.liuxu.nixos.builder.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether make this machine a Nix remote builder.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.builder.enable {
+_: {
+  here.config = {
     users = {
       users.builder = {
         isSystemUser = true;

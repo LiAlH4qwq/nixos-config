@@ -1,9 +1,4 @@
 _: {
-  imports = [
-    ./perl-less
-    ./python-less
-  ];
-
   # Use Chrony for better experience,
   #  especially on laptop.
   services.chrony.enable = true;

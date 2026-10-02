@@ -1,6 +1,4 @@
 { config, lib, ... }: {
-  imports = [ ./bash-less ];
-
   # Mutable users are meaningless,
   # when using tmpfs-as-root.
   users.mutableUsers = false;

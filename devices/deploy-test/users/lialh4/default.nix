@@ -13,7 +13,7 @@
   home-manager.users.lialh4 = {
     liuxu.home = {
       gui.umbriel.enable = true;
-      opencode.enable = true;
+      ai-coding-agent.opencode.enable = true;
     };
   };
 }

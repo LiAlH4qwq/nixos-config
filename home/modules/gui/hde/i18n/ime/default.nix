@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";

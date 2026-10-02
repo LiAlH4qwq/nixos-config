@@ -1,16 +1,6 @@
+{ config, ... }:
 {
-  config,
-  lib,
-  ...
-}:
-{
-  options.liuxu.nixos.measured-boot.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to enable measured-boot.
-      See: https://nix-community.github.io/lanzaboote/explanation/measured-boot.html
-      And: https://nix-community.github.io/lanzaboote/how-to-guides/enable-measured-boot.html
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.measured-boot.enable {
+  here.config = {
     boot.lanzaboote = {
       enable = true;
       configurationLimit = 8;

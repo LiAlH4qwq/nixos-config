@@ -1,24 +1,3 @@
-{ lib, ... }:
-{
-  imports = [
-    ./bat
-    ./fd
-    ./eza
-    ./fish
-    ./fzf
-    ./ripgrep
-    ./starship
-    ./zoxide
-  ];
-
-  options.liuxu.system.better-shell.enable = lib.liuxu.mkOsSwitchOffOption ''
-    Whether to enable the better shell.
-      Currently enables fish, set it to default shell for all users,
-      enables starship, enables its shell integration for all shells,
-      enables zoxide, enables its shell integration (`z` command) for fish and bash,
-      enables bat, eza, and set fish and bash aliases:
-      cat --> bat
-      ls --> eza
-      enables fd, fzf, ripgrep.
-  '';
+_: {
+  here.switch.default = true;
 }

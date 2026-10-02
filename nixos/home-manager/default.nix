@@ -4,6 +4,7 @@
   lib,
   options,
   root,
+  scopes,
   ...
 }:
 {
@@ -14,7 +15,12 @@
     overwriteBackup = true;
     backupFileExtension = "bak";
     extraSpecialArgs = {
-      inherit inputs lib root;
+      inherit
+        inputs
+        lib
+        root
+        scopes
+        ;
       osOptions = options;
     };
     sharedModules = [

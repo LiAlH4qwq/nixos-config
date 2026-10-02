@@ -1,16 +1,6 @@
+{ pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options.liuxu.nixos.brightness.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to enable the brightness control support.
-      Currently enables `brightnessctl`.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.brightness.enable {
+  here.config = {
     environment.systemPackages = with pkgs; [
       brightnessctl
     ];

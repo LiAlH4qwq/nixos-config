@@ -9,7 +9,7 @@
   imports = [ inputs.noctalia-greeter.nixosModules.default ];
   options.liuxu.nixos.user-support.gui.display-manager.enable = lib.mkOption {
     type = lib.types.bool;
-    default = config.liuxu.nixos.internal.user-support.gui.enable;
+    default = config.liuxu.nixos.internal.final.internal.user-support.gui.enable;
     example = false;
     description = ''
       Liuxu: Whether to enable Display Manager.
@@ -18,7 +18,7 @@
   };
 
   config = lib.mkIf config.liuxu.nixos.user-support.gui.display-manager.enable (
-    lib.liuxu.mkIfElse config.liuxu.nixos.internal.user-support.gui.enable
+    lib.liuxu.mkIfElse config.liuxu.nixos.internal.final.internal.user-support.gui.enable
       {
         services.displayManager.noctalia-greeter = {
           enable = true;

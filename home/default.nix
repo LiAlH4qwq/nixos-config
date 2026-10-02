@@ -1,14 +1,28 @@
-{ osConfig, pkgs, ... }:
+{
+  lib,
+  osConfig,
+  pkgs,
+  scopes,
+  ...
+}:
+let
+  tree =
+    base: dir:
+    lib.liuxu.mkTree {
+      inherit scopes base dir;
+      scopeName = "home";
+    };
+in
 {
   imports = [
-    ./git
-    ./flatpak
-    ./globals
+    (tree [ ] ./git)
+    (tree [ ] ./flatpak)
+    (tree [ ] ./globals)
     ./modules
-    ./persist
-    ./syncthing
-    ./uv
-    ./yazi
+    (tree [ ] ./persist)
+    (tree [ ] ./syncthing)
+    (tree [ ] ./uv)
+    (tree [ ] ./yazi)
   ];
 
   # these hasn't been available as a program in release 25.11.

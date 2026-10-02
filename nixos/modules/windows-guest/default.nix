@@ -1,16 +1,6 @@
+{ pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options.liuxu.nixos.windows-guest.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to include a Windows guest configuration,
-      by virt-manager, qemu, kvm, with SR-IOV.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.windows-guest.enable {
+  here.config = {
     programs.virt-manager.enable = true;
     virtualisation = {
       spiceUSBRedirection.enable = true;

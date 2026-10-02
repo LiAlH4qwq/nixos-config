@@ -1,19 +1,12 @@
 {
-  config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  options.liuxu.nixos.secureboot.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to enable the secure boot support.
-      Currently enables lanzaboote.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.secureboot.enable {
+  here.config = {
     boot = {
       loader.systemd-boot.enable = false;
       lanzaboote = {
@@ -35,6 +28,5 @@
     };
     # Make secureboot keys persistent.
     preservation.preserveAt.persist.directories = [ "/var/lib/sbctl" ];
-
   };
 }

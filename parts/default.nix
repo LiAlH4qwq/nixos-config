@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./checks
     ./disallowed-inputs-deps
     ./docs
     ./gh-workflows
@@ -11,6 +12,7 @@ _: {
     ./nix-on-droid
     ./overlays
     ./packages
+    ./scopes
     ./treefmt
   ];
 }

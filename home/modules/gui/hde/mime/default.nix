@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  config = lib.mkIf config.liuxu.home.internal.gui.enable (
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable (
     let
       withPrefix = prefix: map (x: "${prefix}${x}");
       mapping = {

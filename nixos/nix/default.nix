@@ -5,11 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ./lix
-    ./nixos
-  ];
-
   nix = {
     channel.enable = false;
     distributedBuilds = true;

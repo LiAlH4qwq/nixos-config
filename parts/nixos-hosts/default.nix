@@ -3,6 +3,7 @@
   inputs,
   lib,
   root,
+  scopes,
   ...
 }:
 {
@@ -85,7 +86,7 @@
       }:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs root;
+          inherit inputs root scopes;
           inherit (config.flake) lib;
           flakeConfig = config;
         };

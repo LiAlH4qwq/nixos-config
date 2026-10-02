@@ -1,14 +1,19 @@
-{ config, lib, ... }:
+{ config, pkgs, ... }:
 {
-  options.liuxu.nixos.internal.user-support.gui.hyprland.enable = lib.liuxu.mkComputedSwitchOption (
-    config.home-manager.users
-    |> builtins.attrValues
-    |> map (cfg: cfg.liuxu.home.gui.hyprland.enable)
-    |> builtins.any lib.id
-  );
-
-  config = lib.mkIf config.liuxu.nixos.internal.user-support.gui.hyprland.enable {
-    programs.hyprland = {
+  here = {
+    switch = {
+      default = true;
+      premise = [
+        {
+          scope = "home";
+          path = [
+            "gui"
+            "hyprland"
+          ];
+        }
+      ];
+    };
+    config.programs.hyprland = {
       enable = true;
       xwayland.enable = true;
     };

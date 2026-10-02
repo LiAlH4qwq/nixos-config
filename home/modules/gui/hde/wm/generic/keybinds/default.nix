@@ -214,7 +214,7 @@ in
     };
   };
 
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     liuxu.home = {
       internal.gui.wm.keybinds =
         config.liuxu.home.gui.wm.keybinds

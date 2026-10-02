@@ -12,7 +12,7 @@ _: {
         opt.enable = false;
         zen.enable = false;
       };
-      opencode.enable = true;
+      ai-coding-agent.opencode.enable = true;
     };
   };
 }

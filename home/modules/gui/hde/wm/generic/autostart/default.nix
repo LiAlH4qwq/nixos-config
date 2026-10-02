@@ -10,7 +10,7 @@
     default = [ ];
   };
 
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     liuxu.home.gui.wm.autostart = [
     ];
   };

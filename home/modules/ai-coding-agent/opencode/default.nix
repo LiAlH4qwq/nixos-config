@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   lib,
   osConfig,
@@ -9,12 +8,7 @@
 {
   imports = [ inputs.opencode-sanitizer.homeModules.default ];
 
-  options.liuxu.home.ai-coding-agent.opencode.enable = lib.liuxu.mkHomeSwitchOnOption ''
-    Liuxu (Home): Whether to enable opencode,
-      a coding agent.
-  '';
-
-  config = lib.mkIf config.liuxu.home.ai-coding-agent.opencode.enable {
+  here.config = {
     programs = {
       opencode = {
         enable = true;

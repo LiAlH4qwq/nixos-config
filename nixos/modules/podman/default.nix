@@ -1,17 +1,6 @@
+{ pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options.liuxu.nixos.podman.enable = lib.liuxu.mkOsSwitchOnOption ''
-    Whether to enable Podman,
-      a container management tool,
-      drop-in replacement of docker.
-  '';
-
-  config = lib.mkIf config.liuxu.nixos.podman.enable {
+  here.config = {
     virtualisation = {
       containers.enable = true;
       oci-containers.backend = "podman";

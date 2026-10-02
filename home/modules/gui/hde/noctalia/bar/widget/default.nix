@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  config = lib.mkIf config.liuxu.home.internal.gui.enable {
+  config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     programs.noctalia.settings.widget = {
       active_window.title_scroll = "on_hover";
       brightness.show_label = false;

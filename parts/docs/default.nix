@@ -3,6 +3,7 @@
   inputs,
   lib,
   root,
+  scopes,
   ...
 }:
 {
@@ -12,7 +13,7 @@
         osModules = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs root;
+            inherit inputs root scopes;
             inherit (config.flake) lib;
             flakeConfig = config;
           };
@@ -25,7 +26,7 @@
           inherit pkgs;
           check = false;
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs scopes;
             inherit (config.flake) lib;
             osConfig = osModules.config;
           };
