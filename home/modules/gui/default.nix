@@ -31,7 +31,7 @@
           gnome-calculator # calc.exe
           clementine # Music player
           clapper # Video player
-          vaulta # Currency converter
+          valuta # Currency converter
           wev # Input inspect
           materialgram # Telegram with material design
         ];
