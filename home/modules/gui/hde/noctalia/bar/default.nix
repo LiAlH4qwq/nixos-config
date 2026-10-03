@@ -19,6 +19,7 @@
       end = [
         "media"
         "tray"
+        "caffeine"
         "bluetooth"
         "network"
         "volume"
