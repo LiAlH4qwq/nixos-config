@@ -28,8 +28,10 @@
           nautilus # explorer.exe
           mission-center # taskmgr.exe
           gnome-text-editor # notepad.exe
+          gnome-calculator # calc.exe
           clementine # Music player
           clapper # Video player
+          vaulta # Currency converter
           wev # Input inspect
           materialgram # Telegram with material design
         ];
