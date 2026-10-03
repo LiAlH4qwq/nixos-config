@@ -1,4 +1,10 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   config = lib.mkIf config.liuxu.home.gui.umbriel.enable (
     lib.mkMerge [
       (
@@ -13,7 +19,8 @@
         let
           cfg = config.liuxu.home.internal.gui.wm.keybinds;
           action = {
-            window-close = _: "window-close";
+            window-close =
+              e: if e.args.force then "spawn:${lib.getExe pkgs.kill-focused-window}" else "window-close";
             execr = e: "spawn:${e.args.cmd |> builtins.concatStringsSep " "}";
             workspace-focus = e: "workspace-switch:${toString e.args.id}";
             window-move-to-workspace = e: "window-move-to-workspace:${toString e.args.id}";

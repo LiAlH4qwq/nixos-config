@@ -28,7 +28,8 @@
         let
           cfg = config.liuxu.home.internal.gui.wm.keybinds;
           action = with lib.kdl.extras.niri; {
-            window-close = _: close-window;
+            window-close =
+              e: if e.args.force then spawn (lib.getExe pkgs.kill-focused-window) else close-window;
             execr = e: builtins.foldl' lib.id spawn e.args.cmd;
             workspace-focus = e: focus-workspace e.args.id;
             window-move-to-workspace = e: move-window-to-workspace e.args.id;

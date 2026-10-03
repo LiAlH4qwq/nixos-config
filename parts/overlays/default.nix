@@ -61,6 +61,7 @@
           providedSessions = builtins.filter (s: s != "hyprland-uwsm") (old.passthru.providedSessions or [ ]);
         };
       });
+      kill-focused-window = config.packages.kill-focused-window;
       lix = prev.lix.overrideAttrs (old: {
         # Fix github ci fail.
         doInstallCheck = false;
