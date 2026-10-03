@@ -1,11 +1,12 @@
-{ root, ... }: {
+_: {
   imports = [
     ./fs
     ./users
   ];
 
   liuxu = {
-    nixos.sops.localMachine.secrets."users/lialh4/hashedPassword".neededForUsers = true;
+    # No `pin/users/<user>/hashedPassword` secret is configured for this host.
+    nixos.pin.enable = false;
     system.version-when-installed = "26.05";
   };
 }

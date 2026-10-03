@@ -2,7 +2,8 @@
 {
   liuxu.nixos.users.lialh4 = {
     id = config.liuxu.id.lialh4;
-    hashedPasswordFile = config.sops.secrets."localMachine/users/lialh4/hashedPassword".path;
+    # Test host: no per-host sops file, so use a locked password.
+    hashedPasswordFile = toString (pkgs.writeText "deploy-test-hashed-password" "!");
   };
   users.extraUsers.lialh4 = {
     useDefaultShell = true;
