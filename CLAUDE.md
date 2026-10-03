@@ -1,3 +1,3 @@
 # Claude
 
-Read `./NO-AGENTS.md` **first**.
+Read `./AGENTS.md` **first**.
