@@ -116,6 +116,24 @@
           key = "XF86HangupPhone";
           opts.lock = true;
         })
+        (bind {
+          cmd = [
+            "media"
+            "previous"
+          ];
+          key = "XF86PickupPhone";
+          mod = [ "Shift" ];
+          opts.lock = true;
+        })
+        (bind {
+          cmd = [
+            "media"
+            "next"
+          ];
+          key = "XF86HangupPhone";
+          mod = [ "Shift" ];
+          opts.lock = true;
+        })
       ];
     }
   );
