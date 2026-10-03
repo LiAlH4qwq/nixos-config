@@ -3,13 +3,11 @@ let
   nixConfig = {
     extra-experimental-features = [
       "coerce-integers"
-      #"daemon-trust-override"
       "flake-self-attrs"
       "flakes"
       "lix-custom-sub-commands"
       "nix-command"
       "pipe-operator"
-      "read-only-local-store"
     ];
     extra-substituters = [
       # "https://mirrors.nju.edu.cn/nix-channels/store"
@@ -21,7 +19,11 @@ let
       "https://ezkea.cachix.org"
       # inputs.cachyos-kernel
       "https://attic.xuyh0120.win/lantian"
-      "https://cache.xinux.uz"
+      # Disabled: returns 502 Bad Gateway (nginx) for /nix-cache-info, which makes
+      # substitutes/IFD fail unless `--fallback` is passed. The authoritative
+      # verification is the same as CI: `nix flake check --repair --all-systems`
+      # (see parts/gh-workflows).
+      # "https://cache.xinux.uz"
       "https://lialh4.cachix.org"
     ];
     extra-trusted-public-keys = [
@@ -30,7 +32,8 @@ let
       "afnix:oqt801y+IwJ09XRtNDQYCKb7zuCw9DQXQk8fDWPkwxM="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
-      "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
+      # Disabled together with the substituter above.
+      # "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
       "lialh4.cachix.org-1:4j2YJj81SVMTyZWnEnMFnQ/I5j2g2IdFinQ8m9dv5c4="
     ];
   };
