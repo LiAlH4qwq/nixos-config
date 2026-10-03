@@ -55,8 +55,13 @@
           mod = "Mod";
         })
         (bind {
+          cmd = [ "caffeine-toggle" ];
+          key = "Help";
+        })
+        (bind {
           cmd = [ "power-cycle" ];
           key = "Help";
+          mod = "Shift";
         })
         (bind {
           cmd = [ "volume-mute" ];
