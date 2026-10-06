@@ -64,7 +64,7 @@
           CPU_HWP_DYN_BOOST_ON_AC = 1;
           CPU_HWP_DYN_BOOST_ON_BAT = 1;
           CPU_HWP_DYN_BOOST_ON_SAV = 0;
-          DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth nfc wifi wwan";
+          DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth nfc wwan";
         };
       };
     };
