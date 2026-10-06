@@ -56,11 +56,13 @@
                 "/run/booted-system/*"
                 "/run/current-system/*"
               ];
-              roDirsAttrsOf = x: roDirs |> map (lib.flip lib.nameValuePair x) |> builtins.listToAttrs;
+              rwDirs = [
+                "/sys"
+              ];
             in
             {
-              external_directory = roDirsAttrsOf "allow";
-              edit = roDirsAttrsOf "deny";
+              external_directory = (roDirs ++ rwDirs) |> lib.genAttrs (_: "allow");
+              edit = roDirs |> lib.genAttrs (_: "deny");
             };
         };
       };
