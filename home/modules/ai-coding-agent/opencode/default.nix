@@ -61,8 +61,8 @@
               ];
             in
             {
-              external_directory = (roDirs ++ rwDirs) |> lib.genAttrs (_: "allow");
-              edit = roDirs |> lib.genAttrs (_: "deny");
+              external_directory = (roDirs ++ rwDirs) |> lib.flip lib.genAttrs (_: "allow");
+              edit = roDirs |> lib.flip lib.genAttrs (_: "deny");
             };
         };
       };

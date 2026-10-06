@@ -83,6 +83,7 @@
           hash = "sha256-ga4rhULvUxH8cuz1PJpSOSPINFacew2lLgv0Nguctfk=";
         };
       });
+      waydroid-lineage-vanilla = config.packages.waydroid-lineage-vanilla;
       wechat = prev.symlinkJoin {
         name = "wechat-${prev.wechat.version}";
         paths = [ prev.wechat ];

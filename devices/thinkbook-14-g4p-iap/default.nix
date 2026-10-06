@@ -44,6 +44,7 @@
         "nvme-Micron_MTFDKBA512TFH_222138471762"
         "nvme-WD_Blue_SN5000_1TB_251308802891"
       ];
+      waydroid.enable = true;
       windows-guest.enable = true;
     };
     system.version-when-installed = "25.11";

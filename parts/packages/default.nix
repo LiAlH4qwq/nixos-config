@@ -6,6 +6,7 @@
       disable-dwt-in-hsr = pkgs.callPackage (root + /packages/disable-dwt-in-hsr) { };
       kill-focused-window = pkgs.callPackage (root + /packages/kill-focused-window) { };
       nushell-skill = pkgs.callPackage (root + /packages/nushell-skill) { };
+      waydroid-lineage-vanilla = pkgs.callPackage (root + /packages/waydroid-lineage-vanilla) { };
       xwayland-xft-dpi = pkgs.callPackage (root + /packages/xwayland-xft-dpi) { };
     };
   };
