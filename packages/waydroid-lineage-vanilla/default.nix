@@ -17,6 +17,10 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [ unzip ];
 
+  # The archives contain only top-level files (system.img / vendor.img), so the
+  # generic builder would otherwise fail to detect a source root.
+  sourceRoot = ".";
+
   dontConfigure = true;
   dontBuild = true;
 
