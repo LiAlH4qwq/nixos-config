@@ -29,6 +29,15 @@
           ];
         };
         workspaces.empty_above = true;
+        window_rule = [
+          {
+            # The Waydroid toplevel is created by the container's HWC service
+            # and never requests activation, so Umbriel would otherwise place
+            # it off-screen without scrolling to it.
+            match.app_id = "^Waydroid$";
+            default_focused = true;
+          }
+        ];
         keybinds = {
           "Mod+Equal" = "window-modify-width-right:0.05";
           "Mod+Minus" = "window-modify-width-right:-0.05";
