@@ -4,6 +4,7 @@
   ...
 }:
 {
+  here = { };
 
   config = lib.mkIf osConfig.liuxu.nixos.flatpak.enable {
     liuxu.home.preservation.directories = [

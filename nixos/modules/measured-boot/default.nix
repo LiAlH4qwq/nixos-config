@@ -1,32 +1,35 @@
 { config, ... }:
 {
-  here.config = {
-    boot.lanzaboote = {
-      enable = true;
-      configurationLimit = 8;
-      measuredBoot = {
+  here = {
+    switch.generate = true;
+    apply = {
+      boot.lanzaboote = {
         enable = true;
-        autoCryptenroll = {
+        configurationLimit = 8;
+        measuredBoot = {
           enable = true;
-          autoReboot = true;
-          device = config.boot.initrd.luks.devices.root.device;
+          autoCryptenroll = {
+            enable = true;
+            autoReboot = true;
+            device = config.boot.initrd.luks.devices.root.device;
+          };
+          pcrs = [
+            0
+            # 1
+            # 2
+            # 3
+            4
+            7
+          ];
         };
-        pcrs = [
-          0
-          # 1
-          # 2
-          # 3
-          4
-          7
-        ];
       };
-    };
-    preservation.preserveAt.persist = {
-      directories = [
-        config.boot.lanzaboote.measuredBoot.pcrlockDirectory
-        "/var/lib/auto-cryptenroll"
-      ];
-      files = [ config.boot.lanzaboote.measuredBoot.pcrlockPolicy ];
+      preservation.preserveAt.persist = {
+        directories = [
+          config.boot.lanzaboote.measuredBoot.pcrlockDirectory
+          "/var/lib/auto-cryptenroll"
+        ];
+        files = [ config.boot.lanzaboote.measuredBoot.pcrlockPolicy ];
+      };
     };
   };
 }

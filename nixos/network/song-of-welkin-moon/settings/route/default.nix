@@ -1,4 +1,5 @@
 _: {
+  here = { };
   services.sing-box.settings.route = {
     auto_detect_interface = true;
     find_process = true;

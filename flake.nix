@@ -87,6 +87,10 @@ in
   inputs = {
     systems.url = "github:nix-systems/default-linux";
     nix-kdl.url = "github:Lhcfl/nix-kdl";
+    nix-tree-modules = {
+      url = "path:./nix-tree-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     crane.url = "github:ipetkov/crane";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";

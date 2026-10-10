@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  options.liuxu.nixos.users =
+  here.option =
     let
       inherit (lib.types)
         attrsOf
@@ -33,7 +33,7 @@
       );
     };
 
-  config =
+  here.apply =
     let
       cfg = config.liuxu.nixos.users;
     in

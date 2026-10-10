@@ -9,6 +9,7 @@ let
 in
 {
   here = {
+    switch.generate = true;
     options = {
       port = {
         tcp = {
@@ -128,7 +129,7 @@ in
         '';
       };
     };
-    config = {
+    apply = {
       services.samba = {
         enable = true;
         settings = lib.mkMerge [

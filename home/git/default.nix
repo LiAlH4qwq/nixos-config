@@ -1,4 +1,5 @@
 { config, lib, ... }: {
+  here = { };
   programs.git = {
     enable = true;
     settings = {

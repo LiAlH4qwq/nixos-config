@@ -8,21 +8,21 @@
 let
   tree =
     base: dir:
-    lib.liuxu.mkTree {
+    lib.nix-tree-modules.mkTree {
       inherit scopes base dir;
       scopeName = "home";
     };
 in
 {
   imports = [
-    (tree [ ] ./git)
-    (tree [ ] ./flatpak)
+    (tree [ "git" ] ./git)
+    (tree [ "flatpak" ] ./flatpak)
     (tree [ ] ./globals)
     ./modules
-    (tree [ ] ./persist)
-    (tree [ ] ./syncthing)
-    (tree [ ] ./uv)
-    (tree [ ] ./yazi)
+    (tree [ "preservation" ] ./preservation)
+    (tree [ "syncthing" ] ./syncthing)
+    (tree [ "uv" ] ./uv)
+    (tree [ "yazi" ] ./yazi)
   ];
 
   # these hasn't been available as a program in release 25.11.

@@ -17,13 +17,23 @@
     '';
   };
 
+  options.nix.settings.trusted-substituters = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+    description = ''
+      Liuxu (Droid): Ported from NixOS options.
+    '';
+  };
+
   config = {
     nix.extraOptions =
       let
-        cfg = config.nix.settings.experimental-features;
+        exp = config.nix.settings.experimental-features;
+        ts = config.nix.settings.trusted-substituters;
       in
-      lib.optional (cfg != [ ]) (
-        lib.mkBefore "experimental-features = ${builtins.concatStringsSep " " cfg}"
-      );
+      (lib.optional (exp != [ ]) (
+        lib.mkBefore "experimental-features = ${builtins.concatStringsSep " " exp}"
+      ))
+      ++ (lib.optional (ts != [ ]) "trusted-substituters = ${builtins.concatStringsSep " " ts}");
   };
 }

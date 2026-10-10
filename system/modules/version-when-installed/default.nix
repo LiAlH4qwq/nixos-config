@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.liuxu.system.version-when-installed = lib.mkOption {
+  here.option = lib.mkOption {
     type = lib.types.singleLineStr;
     default = "25.11";
     example = "26.05";
@@ -10,5 +10,5 @@
     '';
   };
 
-  config.system.stateVersion = config.liuxu.system.version-when-installed;
+  here.apply.system.stateVersion = config.liuxu.system.version-when-installed;
 }

@@ -1,4 +1,5 @@
 _: {
+  here = { };
   # Fix machine-id persist on first boot,
   # avoid stucking
   # Taken from: https://nix-community.github.io/preservation/examples.html#examples

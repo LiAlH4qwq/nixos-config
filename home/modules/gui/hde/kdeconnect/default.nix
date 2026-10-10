@@ -1,4 +1,5 @@
 _: {
+  here = { };
   services.kdeconnect = {
     enable = true;
     indicator = true;

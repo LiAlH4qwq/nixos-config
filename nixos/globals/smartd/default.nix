@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   services.smartd = {
     enable = true;
     defaults.monitored =

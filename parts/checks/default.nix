@@ -3,15 +3,15 @@
   perSystem =
     { pkgs, ... }:
     let
-      results = import (root + "/lib/liuxu/tests") { lib = config.flake.lib; };
+      results = import (root + "/nix-tree-modules/src/tests") { lib = config.flake.lib; };
       failed = builtins.filter (n: !results.${n}) (builtins.attrNames results);
     in
     {
-      checks.liuxu-switch = pkgs.runCommand "liuxu-switch-test" { } (
+      checks.nix-tree-modules-switch = pkgs.runCommand "nix-tree-modules-switch-test" { } (
         if failed == [ ] then
           "touch $out"
         else
-          "echo 'liuxu switch test failures: ${builtins.concatStringsSep ", " failed}' >&2; exit 1"
+          "echo 'nix-tree-modules switch test failures: ${builtins.concatStringsSep ", " failed}' >&2; exit 1"
       );
     };
 }

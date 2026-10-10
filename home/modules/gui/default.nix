@@ -7,17 +7,26 @@
 {
   here = {
     switch = {
+      generate = true;
       default = true;
-      children = {
-        mode = "any";
-        of = [
-          "hyprland"
-          "niri"
-          "umbriel"
+      premise = {
+        any = [
+          [
+            "here"
+            "hyprland"
+          ]
+          [
+            "here"
+            "niri"
+          ]
+          [
+            "here"
+            "umbriel"
+          ]
         ];
       };
     };
-    config = {
+    apply = {
       home = {
         sessionVariables = {
           NIXOS_OZONE_WL = 1;

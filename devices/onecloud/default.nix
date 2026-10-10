@@ -2,12 +2,18 @@
   inputs,
   lib,
   pkgs,
+  scopes,
   ...
 }:
 {
   imports = [
     inputs.nixos-onecloud.nixosModules.default
-    ./users
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./users;
+      base = [ "users" ];
+    })
   ];
 
   nixpkgs.buildPlatform.system = "x86_64-linux";
@@ -17,7 +23,7 @@
     network.enable = false;
   };
 
-  liuxu.system.better-shell.enable = false;
+  liuxu.nixos.better-shell.enable = false;
 
   boot = {
     loader.systemd-boot.enable = false;

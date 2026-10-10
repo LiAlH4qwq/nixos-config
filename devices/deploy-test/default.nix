@@ -1,7 +1,22 @@
-_: {
+{
+  lib,
+  scopes,
+  ...
+}:
+{
   imports = [
-    ./fs
-    ./users
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./fs;
+      base = [ "fs" ];
+    })
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./users;
+      base = [ "users" ];
+    })
   ];
 
   liuxu = {

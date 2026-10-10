@@ -1,4 +1,5 @@
 { config, lib, ... }: {
+  here = { };
   # Mutable users are meaningless,
   # when using tmpfs-as-root.
   users.mutableUsers = false;

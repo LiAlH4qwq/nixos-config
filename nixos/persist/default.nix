@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   imports = [ inputs.preservation.nixosModules.default ];
 
   preservation = {

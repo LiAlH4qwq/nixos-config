@@ -1,7 +1,8 @@
 { config, ... }:
 {
   here = {
-    config = {
+    switch.generate = true;
+    apply = {
       hardware.bluetooth = {
         enable = true;
         powerOnBoot = false;

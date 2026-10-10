@@ -1,13 +1,29 @@
 {
   lib,
   pkgs,
+  scopes,
   ...
 }:
 {
   imports = [
-    ./fs
-    ./fingerprint
-    ./users
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./fs;
+      base = [ "fs" ];
+    })
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./fingerprint;
+      base = [ "fingerprint" ];
+    })
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./users;
+      base = [ "users" ];
+    })
   ];
 
   liuxu = {

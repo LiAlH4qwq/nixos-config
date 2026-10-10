@@ -1,12 +1,19 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
+  scopes,
   ...
 }:
 {
   imports = [
-    ./users
+    (lib.nix-tree-modules.mkTree {
+      inherit scopes;
+      scopeName = "device";
+      dir = ./users;
+      base = [ "users" ];
+    })
     inputs.pe-key-scanner.nixosModules.default
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
   ];

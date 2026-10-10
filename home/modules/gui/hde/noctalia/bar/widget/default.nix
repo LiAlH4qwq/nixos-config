@@ -1,4 +1,5 @@
 { config, lib, ... }: {
+  here = { };
   config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     programs.noctalia.settings.widget = {
       active_window.title_scroll = "on_hover";

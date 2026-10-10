@@ -1,17 +1,16 @@
 _: {
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "gui"
-            "niri"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "gui"
+          "niri"
+        ];
+      };
     };
-    config.programs.niri.enable = true;
+    apply.programs.niri.enable = true;
   };
 }

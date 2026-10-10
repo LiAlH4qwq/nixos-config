@@ -10,6 +10,7 @@ in
 {
   here = {
     switch = {
+      generate = true;
       default = true;
       premise = [ "network" ];
     };
@@ -97,7 +98,7 @@ in
         '';
       };
     };
-    config =
+    apply =
       let
         cfg = config.liuxu.nixos.network.mihoyo;
         cfgDir = "/run/mihoyo";

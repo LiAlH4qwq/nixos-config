@@ -54,19 +54,31 @@ in
 
   options.scopes = mkOption {
     type = types.attrsOf (
-      types.submodule {
-        options = {
-          root = mkOption {
-            type = types.listOf types.str;
-            description = "Option path of this scope (relative to the module system root).";
+      types.submodule (
+        { config, ... }: {
+          options = {
+            root = mkOption {
+              type = types.listOf types.str;
+              description = "Option path of this scope (relative to the module system root).";
+            };
+            internal = mkOption {
+              type = types.listOf types.str;
+              default = config.root ++ [ "internal" ];
+              description = "Option path prefix of this scope's `final` tree.";
+            };
+            switches = mkOption {
+              type = types.bool;
+              default = true;
+              description = "Whether this scope's nodes generate switches. Disable for pure data scopes.";
+            };
+            deps = mkOption {
+              type = types.attrsOf depType;
+              default = { };
+              description = "Scopes this scope may premise on.";
+            };
           };
-          deps = mkOption {
-            type = types.attrsOf depType;
-            default = { };
-            description = "Scopes this scope may premise on.";
-          };
-        };
-      }
+        }
+      )
     );
     default = { };
   };
@@ -94,7 +106,11 @@ in
     };
 
     nix-on-droid = {
-      root = config.namespace ++ [ "nix-on-droid" ];
+      root = [ ];
+      internal = config.namespace ++ [
+        "nix-on-droid"
+        "internal"
+      ];
       deps = {
         home = {
           cardinality = "one";
@@ -114,10 +130,26 @@ in
 
     id = {
       root = config.namespace ++ [ "id" ];
+      switches = false;
     };
 
     system = {
       root = config.namespace ++ [ "system" ];
+    };
+
+    device = {
+      root = config.namespace ++ [ "device" ];
+      switches = false;
+      deps = {
+        nixos = { };
+        home = {
+          cardinality = "many";
+          defaultQuant = "any";
+          instances = args: builtins.attrValues args.config.home-manager.users;
+        };
+        id = { };
+        system = { };
+      };
     };
   };
 }

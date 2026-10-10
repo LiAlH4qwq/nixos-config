@@ -1,8 +1,11 @@
 _: {
   here = {
-    switch.default = true;
+    switch = {
+      generate = true;
+      default = true;
+    };
 
-    config.services.btrbk.instances.default = {
+    apply.services.btrbk.instances.default = {
       settings = {
         preserve_day_of_week = "saturday";
         preserve_hour_of_day = "20";

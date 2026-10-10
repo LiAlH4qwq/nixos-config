@@ -2,6 +2,7 @@
 {
   here = {
     switch = {
+      generate = true;
       default = true;
     };
     options.variant = lib.mkOption {
@@ -16,7 +17,7 @@
           defaults to intel.
       '';
     };
-    config = lib.mkMerge [
+    apply = lib.mkMerge [
       (lib.mkIf (config.liuxu.nixos.microcode.variant == "intel") {
         hardware.cpu.intel.updateMicrocode = true;
       })

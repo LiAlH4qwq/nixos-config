@@ -9,8 +9,11 @@
   imports = [ inputs.hoyofall.nixosModules.default ];
 
   here = {
-    switch.premise = [ "network" ];
-    config = {
+    switch = {
+      generate = true;
+      premise = [ "network" ];
+    };
+    apply = {
       sops.templates."hoyofall/default".content = "DEFAULT_URL=${
         config.sops.placeholder."mihoyo/providerUrls/alink"
       }";

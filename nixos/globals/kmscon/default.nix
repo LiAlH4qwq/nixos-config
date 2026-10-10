@@ -1,4 +1,5 @@
 { lib, ... }: {
+  here = { };
   services.kmscon = {
     enable = true;
     hwRender = true;

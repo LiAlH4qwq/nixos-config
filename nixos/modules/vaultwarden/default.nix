@@ -1,13 +1,14 @@
 { config, lib, ... }:
 {
   here = {
+    switch.generate = true;
     options.port = lib.mkOption {
       type = lib.types.ints.u16;
       default = 443;
       example = 8443;
       description = lib.liuxu.mkOsDesc "Port for vaultwarden.";
     };
-    config = {
+    apply = {
       services = {
         vaultwarden = {
           enable = true;

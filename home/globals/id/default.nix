@@ -1,5 +1,5 @@
 { lib, ... }: {
-  options.liuxu.home.id =
+  here.option =
     let
       inherit (lib.types) nullOr unspecified;
     in

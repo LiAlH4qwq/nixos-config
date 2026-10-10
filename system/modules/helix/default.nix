@@ -1,9 +1,12 @@
 { pkgs, ... }:
 {
   here = {
-    switch.default = true;
+    switch = {
+      generate = true;
+      default = true;
+    };
 
-    config =
+    apply =
       let
         cmd = "hx -c /etc/helix/config.toml";
       in

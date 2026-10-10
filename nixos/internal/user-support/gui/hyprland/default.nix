@@ -1,19 +1,17 @@
-{ config, pkgs, ... }:
-{
+_: {
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "gui"
-            "hyprland"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "gui"
+          "hyprland"
+        ];
+      };
     };
-    config.programs.hyprland = {
+    apply.programs.hyprland = {
       enable = true;
       xwayland.enable = true;
     };

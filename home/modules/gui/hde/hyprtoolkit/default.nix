@@ -11,6 +11,7 @@
 
 { config, lib, ... }:
 {
+  here = { };
   config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     home.file.hyprtoolkit = {
       target = ".config/hypr/hyprtoolkit.conf";

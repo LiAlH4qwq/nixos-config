@@ -2,18 +2,17 @@
 {
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "ai-coding-agent"
-            "opencode"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "ai-coding-agent"
+          "opencode"
+        ];
+      };
     };
-    config.sops.templates."opencode/auth.json" = {
+    apply.sops.templates."opencode/auth.json" = {
       mode = "0440";
       group = config.users.groups.users.name;
       content =

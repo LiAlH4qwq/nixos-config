@@ -4,17 +4,16 @@
 
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "gui"
-            "umbriel"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "gui"
+          "umbriel"
+        ];
+      };
     };
-    config.programs.umbriel.enable = true;
+    apply.programs.umbriel.enable = true;
   };
 }

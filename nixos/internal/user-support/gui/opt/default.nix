@@ -1,17 +1,16 @@
 _: {
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "gui"
-            "opt"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "gui"
+          "opt"
+        ];
+      };
     };
-    config.programs.steam.enable = true;
+    apply.programs.steam.enable = true;
   };
 }

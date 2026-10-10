@@ -1,7 +1,10 @@
 _: {
   here = {
-    switch.default = true;
-    config = {
+    switch = {
+      generate = true;
+      default = true;
+    };
+    apply = {
       networking = {
         networkmanager.enable = true;
         nftables.enable = true;

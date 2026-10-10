@@ -1,5 +1,6 @@
 { config, lib, ... }:
 {
+  here = { };
   config = lib.mkIf config.liuxu.nixos.network.mihoyo.enable {
     liuxu.nixos.network.mihoyo.extraConfig =
       let

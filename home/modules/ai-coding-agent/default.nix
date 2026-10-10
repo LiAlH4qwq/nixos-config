@@ -1,16 +1,22 @@
 _: {
   here = {
     switch = {
+      generate = true;
       default = true;
-      children = {
-        mode = "any";
-        of = [
-          "opencode"
-          "pi"
+      premise = {
+        any = [
+          [
+            "here"
+            "opencode"
+          ]
+          [
+            "here"
+            "pi"
+          ]
         ];
       };
     };
-    config.services.opencode-sanitizer.settings.rules.tw-flag = {
+    apply.services.opencode-sanitizer.settings.rules.tw-flag = {
       pattern = "🇹🇼";
       literal = true;
     };

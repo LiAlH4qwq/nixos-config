@@ -32,8 +32,9 @@ enabling features across NixOS / home-manager / nix-on-droid scopes.
 | `flake.nix` | flake inputs, `nixConfig`, and the flake-parts entry (`liuxu.fp.nixos.hosts` lists hosts). |
 | `parts/` | flake-parts modules (outputs wiring). `parts/default.nix` imports them all. |
 | `scopes/` | **Settings**: the scope registry, evaluated via `lib.evalModules`. Not library code. |
-| `lib/` | Extended `lib`, exposed as `lib.kdl`, `lib.liuxu`, `lib.hm`. |
-| `lib/liuxu/` | Pure utilities: strict-tree walker + `here.switch` translation. No settings. |
+| `lib/` | Extended `lib`, exposed as `lib.kdl`, `lib.liuxu`, `lib.hm`, `lib.nix-tree-modules`. |
+| `lib/liuxu/` | Pure utilities: combinators + `<name>Desc` helpers. No settings. |
+| `nix-tree-modules/` | Separate flake: the `here` DSL (strict-tree walker + switch translation). Exposed as `lib.nix-tree-modules`. |
 | `system/` | OS-agnostic config shared by NixOS and nix-on-droid (WIP). |
 | `nixos/` | Generic NixOS config, decoupled from devices. |
 | `home/` | Generic home-manager config, decoupled from users. |
@@ -57,47 +58,56 @@ Every module is a directory module at `a/b/.../z/default.nix`:
 - The option path equals the directory path under the scope root. Example:
   `home/modules/gui/niri/default.nix` → `liuxu.home.gui.niri.*`.
 
-The walker is `lib.liuxu.mkTree { scopes; scopeName; dir; base ? [ ]; }` and is applied
+The walker is `lib.nix-tree-modules.mkTree { scopes; scopeName; dir; base ? [ ]; }` and is applied
 by the parent module (see `nixos/default.nix`, `home/default.nix`, `home/modules/default.nix`,
 `system/default.nix`).
 
 ## The `here` DSL
 
-A switch module returns `here`:
+A module may take an injected read-only `here` handle (its file/path/own-subtree
+config) and may return a `here` attribute declaring its switch metadata, options
+and gated config:
 
 ```nix
-{ config, lib, ... }:
+{ here, lib, ... }:
 {
-  here = {
-    switch = {
-      # enable   = true;            # gate config behind the final enable (default true)
-      # default  = true;            # public enable default; omit = opt-in (false)
-      # premise  = [ ... ];         # AND-ed requirements
-      # children = "any" | "all" | { mode = "any"; of = [ "childA" "childB" ]; };
-    };
-    options = { /* extra options, placed at <scope-root>.<path>.* */ };
-    config  = { /* applied only when the computed final enable is true */ };
+  here.switch = {
+    generate    = true;          # explicit bool; true generates the public <path>.enable
+    default     = false;         # default of the generated enable
+    description = "…";           # description of the generated enable
+    premise     = <premise>;     # boolean over other switches
   };
+  here.options = { /* sub-options, placed at <scope-root>.<path>.* */ };
+  here.option  = <option>;       # an option at <scope-root>.<path> itself
+  here.apply   = { /* gated config */ };
+
+  # normal module surface is also honoured: `imports`, `options`, `config`.
 }
 ```
 
+Injected handle (read only): `here.file`, `here.path`, `here.config` (the config
+at this node's own subtree), `here.options`.
+
 Semantics:
 
-- **Opt-in** (common): omit `here.switch` (or set `here = { config = ...; }`). The public
-  `enable` defaults to `false`; `config` is gated by it.
-- **Opt-out**: `here.switch.default = true;`.
-- Generated options per module at path `p` in scope with root `R`:
-  - `R.<p>.enable` — public, settable.
-  - `R.internal.final.<p>.enable` — read-only computed final.
-  - `config` is applied iff the final is true (unless `switch.enable = false`).
-- `premise` entries:
-  - same-scope shorthand: `"group"` or `[ "a" "b" ]`;
-  - cross-scope: `{ scope = "home"; path = [ "gui" "niri" ]; quant = "any" | "all"; }`.
-  A cross-scope reference is legal only along the scope DAG (`scopes/default.nix`), and reads
-  the target's computed `internal.final`. `many` targets aggregate with `quant`.
-- `children` aggregates direct child switches into this node's final.
+- Generated per module at path `p` in scope with root `R`:
+  - `R.<p>.enable` — public, only when `generate = true`.
+  - `R.<p>.switch` — internal metadata, only when `generate = true`.
+  - `R.internal.final.<p>.enable` — read-only computed final (always generated).
+- Gating (there is no `configGating`): config is gated iff `generate` is true or
+  `premise` is non-empty; `final = (if generate then <p>.enable else true) && premiseOk`.
+- No switch and empty premise → a transparent/support node: config unconditional.
+- `premise` is a boolean algebra over switch references:
+  - `[ "a" "b" ]` — a path (one switch); a leading `"here"` makes it relative to
+    the current node; `"a/b/c"` is equivalent. A list is never an AND.
+  - `{ scope ? <self>; path = [ … ]; quant = "any" | "all"; }` — explicit ref.
+  - `{ all = [ … ]; }` / `{ any = [ … ]; }` / `{ not = …; }` — combinators.
+  A cross-scope ref is legal only along the scope DAG (`scopes/default.nix`) and
+  reads the target's computed `internal.final`; a missing target errors immediately.
+- `here.option` declares the node path itself as a leaf option (for modules whose
+  own path is an attrset/submodule); it cannot be combined with `generate`.
 
-A module without `here` is imported as-is (plain module). Use that for support/umbrella-free code.
+A module without `here` is imported as-is (plain module).
 
 ### Strict tree rules recap
 
@@ -123,8 +133,8 @@ NixOS (`specialArgs`), home-manager (`extraSpecialArgs`), docs, and nix-on-droid
 
 `lib.liuxu` (all available as `lib.liuxu.*` everywhere):
 
-- Strict tree: `mkTree`, `translateModule`, `evalPremise`, `mkSwitchRefType`,
-  `mkPremiseType`, `mkSwitchOptionType`.
+- `lib.nix-tree-modules` (the `here` DSL, from the `nix-tree-modules` flake): `mkTree`, `translateModule`,
+  `evalPremise`, `mkSwitchRefType`, `mkPremiseType`, `mkSwitchOptionType`.
 - Switches (legacy helpers still used outside `here`): `mkSwitchOnOption` (opt-in),
   `mkSwitchOffOption` (opt-out), `mkComputedOption` / `mkComputedSwitchOption`,
   `mkIfElse`, and the `mkOs*/mkHome*/mkFp*/mkId*` wrappers.
@@ -146,7 +156,7 @@ while CI fails. Other useful commands:
 
 ```sh
 nix fmt                     # format (nixfmt, rfc style) — run before committing
-nix build .#checks.x86_64-linux.liuxu-switch   # library regression test
+nix build .#checks.x86_64-linux.nix-tree-modules-switch   # library regression test
 nix eval .#nixosConfigurations.<host>.config.<path>   # inspect an option
 nix build .#nixosConfigurations.<host>.config.system.build.toplevel
 nix build .#packages.x86_64-linux.live-cd      # live ISO

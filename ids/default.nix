@@ -1,7 +1,5 @@
 { lib, ... }: {
-  imports = [ ./lialh4 ];
-
-  options.liuxu.id =
+  here.option =
     let
       inherit (lib.types)
         attrsOf

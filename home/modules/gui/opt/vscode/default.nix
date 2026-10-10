@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   config = lib.mkIf config.liuxu.home.internal.final.gui.opt.enable {
     programs.vscode = {
       enable = true;

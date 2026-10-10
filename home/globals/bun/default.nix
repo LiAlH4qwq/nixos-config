@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  here = { };
   programs = {
     bun = {
       enable = true;

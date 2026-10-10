@@ -1,4 +1,5 @@
 { lib, ... }: {
+  here = { };
   imports = [
     (lib.mkAliasOptionModule
       [

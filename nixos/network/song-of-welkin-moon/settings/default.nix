@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+  here = { };
   services.sing-box.settings = {
     experimental = {
       clash_api = {

@@ -1,4 +1,5 @@
 { config, lib, ... }: {
+  here = { };
   config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     services.udiskie = {
       enable = true;

@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   nix = {
     channel.enable = false;
     distributedBuilds = true;

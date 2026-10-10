@@ -1,17 +1,20 @@
 _: {
-  here.config = {
-    users = {
-      users.builder = {
-        isSystemUser = true;
-        useDefaultShell = true;
-        group = "builder";
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMBJTE2mzCoOzL7ajBjgtjNixnyslgvAhBcwnjSFmeK"
-        ];
+  here = {
+    switch.generate = true;
+    apply = {
+      users = {
+        users.builder = {
+          isSystemUser = true;
+          useDefaultShell = true;
+          group = "builder";
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMBJTE2mzCoOzL7ajBjgtjNixnyslgvAhBcwnjSFmeK"
+          ];
+        };
+        groups.builder = { };
       };
-      groups.builder = { };
-    };
 
-    nix.settings.trusted-users = [ "builder" ];
+      nix.settings.trusted-users = [ "builder" ];
+    };
   };
 }

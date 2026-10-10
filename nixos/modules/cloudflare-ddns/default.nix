@@ -9,6 +9,8 @@
     (lib.mkAliasOptionModule [ "liuxu" "nixos" "cloudflare-ddns" ] [ "services" "cloudflare-ddns" ])
   ];
 
+  here = { };
+
   options.services.cloudflare-ddns.ip6Filter = lib.mkOption {
     type = with lib.types; nullOr singleLineStr;
     default = null;

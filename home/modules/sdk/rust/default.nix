@@ -1,9 +1,10 @@
 _: {
   here = {
     switch = {
+      generate = true;
       default = true;
       premise = [ "sdk" ];
     };
-    config.programs.cargo.enable = true;
+    apply.programs.cargo.enable = true;
   };
 }

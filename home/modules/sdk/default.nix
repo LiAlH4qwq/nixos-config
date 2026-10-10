@@ -1,3 +1,3 @@
 _: {
-  here = { };
+  here.switch.generate = true;
 }

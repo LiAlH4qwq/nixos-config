@@ -1,6 +1,9 @@
 _: {
-  here.config = {
-    services.flatpak.enable = true;
-    preservation.preserveAt.persist.directories = [ "/var/lib/flatpak" ];
+  here = {
+    switch.generate = true;
+    apply = {
+      services.flatpak.enable = true;
+      preservation.preserveAt.persist.directories = [ "/var/lib/flatpak" ];
+    };
   };
 }

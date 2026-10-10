@@ -1,4 +1,5 @@
 { flakeConfig, ... }: {
+  here = { };
   nix.settings =
     let
       cfg = flakeConfig.flake.nixConfig;

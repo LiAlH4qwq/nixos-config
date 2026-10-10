@@ -1,4 +1,5 @@
 _: {
+  here = { };
   services.sing-box.settings.dns = {
     optimistic = true;
     reverse_mapping = true;

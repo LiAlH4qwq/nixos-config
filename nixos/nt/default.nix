@@ -1,4 +1,5 @@
 _: {
+  here = { };
   # Use Chrony for better experience,
   #  especially on laptop.
   services.chrony.enable = true;

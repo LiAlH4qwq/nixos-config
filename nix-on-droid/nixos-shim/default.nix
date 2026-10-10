@@ -6,8 +6,6 @@
 }:
 {
   imports = [
-    ./nix
-    ./programs
     (lib.mkAliasOptionModule
       [
         "environment"

@@ -7,8 +7,9 @@
 {
   imports = [ inputs.umbriel.homeModules.default ];
 
-  here.config = {
-    programs.umbriel = {
+  here = {
+    switch.generate = true;
+    apply.programs.umbriel = {
       enable = true;
       settings = {
         input =

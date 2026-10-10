@@ -7,6 +7,7 @@
   ...
 }:
 {
+  here = { };
   imports = [
     inputs.noctalia.homeModules.default
   ];

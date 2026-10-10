@@ -2,18 +2,17 @@
 {
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "ai-coding-agent"
-            "pi"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "ai-coding-agent"
+          "pi"
+        ];
+      };
     };
-    config.sops.templates."pi-coding-agent/auth.json" = {
+    apply.sops.templates."pi-coding-agent/auth.json" = {
       mode = "0440";
       group = config.users.groups.users.name;
       content =

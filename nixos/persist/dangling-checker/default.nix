@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   systemd.services.dangling-checker = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {

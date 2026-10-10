@@ -4,17 +4,16 @@
 
   here = {
     switch = {
+      generate = true;
       default = true;
-      premise = [
-        {
-          scope = "home";
-          path = [
-            "gui"
-            "agl"
-          ];
-        }
-      ];
+      premise = {
+        scope = "home";
+        path = [
+          "gui"
+          "agl"
+        ];
+      };
     };
-    config.networking.mihoyo-telemetry.block = true;
+    apply.networking.mihoyo-telemetry.block = true;
   };
 }

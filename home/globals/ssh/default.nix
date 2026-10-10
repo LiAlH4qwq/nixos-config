@@ -1,4 +1,5 @@
 _: {
+  here = { };
   programs.ssh = {
     enable = true;
     # See: https://mynixos.com/home-manager/option/programs.ssh.enableDefaultConfig

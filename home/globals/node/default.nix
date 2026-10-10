@@ -1,4 +1,5 @@
 { lib, pkgs, ... }: {
+  here = { };
   programs.npm = {
     enable = true;
     package = pkgs.nodejs_latest;

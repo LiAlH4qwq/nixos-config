@@ -2,10 +2,11 @@
 {
   here = {
     switch = {
+      generate = true;
       default = true;
       premise = [ "gui" ];
     };
-    config = {
+    apply = {
       programs = {
         discord = {
           enable = true;

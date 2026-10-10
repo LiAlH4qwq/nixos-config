@@ -349,6 +349,23 @@
         "type": "github"
       }
     },
+    "nix-tree-modules": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-kN8rATh/Vb8WEfGV/e0FFZ3zEeaXohIF4b7MdfLa4Po=",
+        "path": "./nix-tree-modules",
+        "type": "path"
+      },
+      "original": {
+        "path": "./nix-tree-modules",
+        "type": "path"
+      }
+    },
     "nixos-onecloud": {
       "inputs": {
         "flake-parts": [
@@ -587,6 +604,7 @@
         "lix-module": "lix-module",
         "nix-kdl": "nix-kdl",
         "nix-on-droid": "nix-on-droid",
+        "nix-tree-modules": "nix-tree-modules",
         "nixos-onecloud": "nixos-onecloud",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

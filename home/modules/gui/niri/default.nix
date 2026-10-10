@@ -6,6 +6,7 @@
 }:
 {
   here = {
+    switch.generate = true;
     options.settings = lib.mkOption {
       type = lib.types.lines;
       default = "";
@@ -14,7 +15,7 @@
         Liuxu (Home): Niri settings in kdl.
       '';
     };
-    config = {
+    apply = {
       xdg.configFile.niri-settings = {
         target = "niri/config.kdl";
         text = config.liuxu.home.gui.niri.settings;

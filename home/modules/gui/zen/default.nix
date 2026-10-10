@@ -8,10 +8,11 @@
 
   here = {
     switch = {
+      generate = true;
       default = true;
       premise = [ "gui" ];
     };
-    config = {
+    apply = {
       programs.zen-browser = {
         enable = true;
         profiles.default = {

@@ -5,6 +5,7 @@
   ...
 }:
 {
+  here = { };
   config = lib.mkIf config.liuxu.home.internal.final.gui.enable {
     i18n.inputMethod = {
       enable = true;
