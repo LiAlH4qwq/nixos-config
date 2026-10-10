@@ -49,7 +49,6 @@ in
             hosts = {
               LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
               LiAlH4-Server.modules = ./devices/asus-h110t;
-              LiAlH4-WorkPC.modules = ./devices/workpc;
               LiAlH4-DeployTest.modules = ./devices/deploy-test;
               # LiAlH4-Onecloud = {
               #   arch = "armv7l-linux";
