@@ -59,7 +59,8 @@
                   "/run/current-system/*"
                 ];
                 rwDirs = [
-                  "/sys"
+                  "/sys/*"
+                  "/tmp/*"
                 ];
               in
               {

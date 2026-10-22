@@ -42,7 +42,7 @@
           clapper # Video player
           valuta # Currency converter
           wev # Input inspect
-          materialgram # Telegram with material design
+          telegram-desktop # Telegram
         ];
       };
 
@@ -50,7 +50,7 @@
         directories = [
           ".config/Clementine" # Clementine
           ".local/share/keyrings" # Gnome Keyring
-          ".local/share/materialgram" # Telegram
+          ".local/share/TelegramDesktop" # Telegram
 
           # CEF
           ".config/1Password"
