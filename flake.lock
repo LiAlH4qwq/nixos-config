@@ -201,11 +201,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790933034,
-        "narHash": "sha256-rGuVXUL6+UC/LGVJVAVH034GTodT0hcU13hMwekshCc=",
+        "lastModified": 1792665374,
+        "narHash": "sha256-NnJS1rUZnGi9xr+vSV7Lbiv4iZ5C+f/QqCRaA41e2+Y=",
         "owner": "lialh4qwq",
         "repo": "hoyofall",
-        "rev": "9954d8433ee68526e5bece72eb398717b621c6b9",
+        "rev": "6446602a28e1e8eae2c3c3d32beba25c19a41a8a",
         "type": "github"
       },
       "original": {
