@@ -32,6 +32,7 @@
       gui = {
         hyprland.enable = true;
         niri.enable = true;
+        rustdesk.enable = true;
         umbriel.enable = true;
         agl.enable = true;
       };

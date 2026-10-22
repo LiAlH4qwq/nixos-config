@@ -1,9 +1,9 @@
-{ config, root, ... }:
+{ config, inputs, ... }:
 {
   perSystem =
     { pkgs, ... }:
     let
-      results = import (root + "/nix-tree-modules/src/tests") { lib = config.flake.lib; };
+      results = import (inputs.nix-tree-modules.outPath + "/src/tests") { lib = config.flake.lib; };
       failed = builtins.filter (n: !results.${n}) (builtins.attrNames results);
     in
     {

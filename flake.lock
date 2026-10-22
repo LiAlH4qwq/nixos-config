@@ -356,14 +356,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-kN8rATh/Vb8WEfGV/e0FFZ3zEeaXohIF4b7MdfLa4Po=",
-        "path": "./nix-tree-modules",
-        "type": "path"
+        "lastModified": 1792651706,
+        "narHash": "sha256-KXCBhFP9E2ei6VxJiA8ZPDna9rqM5zgdmjhthKEhKVc=",
+        "owner": "LiAlH4qwq",
+        "repo": "nix-tree-modules",
+        "rev": "8beba5824d927831db5b75bea6117fb1e112d0b7",
+        "type": "github"
       },
       "original": {
-        "path": "./nix-tree-modules",
-        "type": "path"
+        "owner": "LiAlH4qwq",
+        "repo": "nix-tree-modules",
+        "type": "github"
       }
     },
     "nixos-onecloud": {

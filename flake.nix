@@ -18,7 +18,9 @@ let
       # inputs.agl
       "https://ezkea.cachix.org"
       # inputs.cachyos-kernel
-      "https://attic.xuyh0120.win/lantian"
+      # Disabled: returns 503 ("binary cache unavailable due to server compromise")
+      # for /nix-cache-info, which breaks substitutes/IFD.
+      # "https://attic.xuyh0120.win/lantian"
       # Disabled: returns 502 Bad Gateway (nginx) for /nix-cache-info, which makes
       # substitutes/IFD fail unless `--fallback` is passed. The authoritative
       # verification is the same as CI: `nix flake check --repair --all-systems`
@@ -31,8 +33,9 @@ let
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "afnix:oqt801y+IwJ09XRtNDQYCKb7zuCw9DQXQk8fDWPkwxM="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
-      # Disabled together with the substituter above.
+      # Disabled together with the attic substituter above.
+      # "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      # Disabled together with the cache.xinux.uz substituter above.
       # "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
       "lialh4.cachix.org-1:4j2YJj81SVMTyZWnEnMFnQ/I5j2g2IdFinQ8m9dv5c4="
     ];
@@ -87,7 +90,7 @@ in
     systems.url = "github:nix-systems/default-linux";
     nix-kdl.url = "github:Lhcfl/nix-kdl";
     nix-tree-modules = {
-      url = "path:./nix-tree-modules";
+      url = "github:LiAlH4qwq/nix-tree-modules";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     crane.url = "github:ipetkov/crane";

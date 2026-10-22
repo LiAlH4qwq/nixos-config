@@ -1,10 +1,10 @@
-# Evaluate the scope registry (settings under `<root>/scopes`) once through the
-# nixpkgs module system and inject it as a flake-parts module argument, so it
-# is available to every part and can be forwarded into NixOS / home-manager.
-{ lib, root, ... }:
-let
-  scopeEval = lib.evalModules { modules = [ (root + "/scopes") ]; };
-in
+# Evaluate this repo's scope data (under `<root>/scopes`) with the schema and
+# evaluator from upstream `nix-tree-modules`, then inject the result as a
+# flake-parts module argument so every part can forward it into NixOS /
+# home-manager.
+{ inputs, root, ... }:
 {
-  _module.args.scopes = scopeEval.config.scopes;
+  _module.args.scopes = inputs.nix-tree-modules.lib.mkScopes {
+    modules = [ (root + "/scopes") ];
+  };
 }

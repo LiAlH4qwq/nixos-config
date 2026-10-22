@@ -1,8 +1,8 @@
-# Scope registry for the strict-tree switch system.
+# Concrete scope registry data for this configuration.
 #
-# This is *settings*, not library code: it is evaluated on its own through the
-# nixpkgs module system (`lib.evalModules`) so every field below is type-checked.
-# `lib.liuxu` only consumes the evaluated result.
+# The schema/types and the evaluation wiring live upstream in
+# `nix-tree-modules` (`scopeModule` / `mkScopes`); this module only supplies the
+# namespace and the per-scope roots/deps for this repo.
 #
 # A module in scope `<from>` may `premise` on a switch in scope `<to>` iff
 # `scopes.<from>.deps.<to>` is declared.  `deps` is therefore the explicit DAG
@@ -10,78 +10,9 @@
 #
 # Cardinality is a property of the *edge*: the same `home` scope is many-valued
 # from `nixos` (one per user) but single-valued from `nix-on-droid`.
-{ lib, config, ... }:
-let
-  inherit (lib) types mkOption;
-
-  depType = types.submodule {
-    options = {
-      cardinality = mkOption {
-        type = types.enum [
-          "one"
-          "many"
-        ];
-        default = "one";
-        description = "Whether the target scope has one or many instances.";
-      };
-      defaultQuant = mkOption {
-        type = types.enum [
-          "any"
-          "all"
-        ];
-        default = "any";
-        description = "Default quantifier used when cardinality is many.";
-      };
-      prefix = mkOption {
-        type = types.nullOr (types.listOf types.str);
-        default = null;
-        description = "Override for the path prefix of the target switch inside an instance config.";
-      };
-      instances = mkOption {
-        type = types.nullOr (types.functionTo (types.listOf types.raw));
-        default = null;
-        description = "args -> list of instance configs; required when cardinality is many.";
-      };
-    };
-  };
-in
+{ config, ... }:
 {
-  options.namespace = mkOption {
-    type = types.listOf types.str;
-    default = [ "liuxu" ];
-    description = "Global option namespace all scopes live under.";
-  };
-
-  options.scopes = mkOption {
-    type = types.attrsOf (
-      types.submodule (
-        { config, ... }: {
-          options = {
-            root = mkOption {
-              type = types.listOf types.str;
-              description = "Option path of this scope (relative to the module system root).";
-            };
-            internal = mkOption {
-              type = types.listOf types.str;
-              default = config.root ++ [ "internal" ];
-              description = "Option path prefix of this scope's `final` tree.";
-            };
-            switches = mkOption {
-              type = types.bool;
-              default = true;
-              description = "Whether this scope's nodes generate switches. Disable for pure data scopes.";
-            };
-            deps = mkOption {
-              type = types.attrsOf depType;
-              default = { };
-              description = "Scopes this scope may premise on.";
-            };
-          };
-        }
-      )
-    );
-    default = { };
-  };
+  config.namespace = [ "liuxu" ];
 
   config.scopes = {
     fp = {

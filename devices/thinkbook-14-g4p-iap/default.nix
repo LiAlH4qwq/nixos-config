@@ -56,6 +56,10 @@
         "users/lialh4/hashedPassword".neededForUsers = true;
         "pin/users/lialh4/hashedPassword" = { };
       };
+      sunshine = {
+        enable = true;
+        outputName = "eDP-1";
+      };
       tlp.disks = [
         "nvme-Micron_MTFDKBA512TFH_222138471762"
         "nvme-WD_Blue_SN5000_1TB_251308802891"
