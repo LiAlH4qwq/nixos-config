@@ -72,6 +72,7 @@
 
       environment.systemPackages = with pkgs; [
         sops
+        sops-ssh-key
         ssh-to-age
       ];
     };
