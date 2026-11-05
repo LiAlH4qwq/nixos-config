@@ -145,10 +145,12 @@ sandbox even when the config is valid.
 - Format with `nixfmt` (rfc style) via `nix fmt`.
 - **Do not use `rec`.** Use `let` with the smallest necessary scope.
 - Unused function argument → `_:`, not `{ ... }:`.
-- **Module defaults and examples must be host-independent.** Anything tied to a
-  specific machine (host name, DRM connector, disk, …) is set on the host side
-  (`devices/<host>/`), not defaulted in `nixos/` or `home/`. Prefer `null` (let
-  the underlying tool fall back) or a neutral constant over a real host value.
+- **Module defaults, examples, and constants must be independent of the device
+  layer.** Anything tied to a specific machine or device (host name, device port,
+  disk, network interface, DRM connector, …) belongs in `devices/<host>/` or the
+  `device` scope, never as a default, example, or constant in `nixos/`, `home/`,
+  or `system/`. Prefer `null` (let the underlying tool fall back), a neutral
+  constant, or a required option over a real device value.
 - **Option descriptions use the scope's `mk*Desc` helper**, never a hand-written
   `Liuxu (...)` prefix: `lib.liuxu.mkOsDesc` (nixos), `lib.liuxu.mkHomeDesc`
   (home), `lib.liuxu.mkFpDesc` (fp), `lib.liuxu.mkIdDesc` (id). Bind it once as

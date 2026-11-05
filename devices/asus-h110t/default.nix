@@ -49,9 +49,27 @@
               config.sops.templates."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
-              "vaultwarden.lialh4.cyou" = "http://localhost:8222";
+              "vaultwarden.lialh4.cyou" = {
+                service = "https://localhost:${toString config.liuxu.nixos.caddy.port}";
+                originRequest.originServerName = "vaultwarden.lialh4.cyou";
+              };
+              "matrix.lialh4.cyou" = {
+                service = "https://localhost:${toString config.liuxu.nixos.caddy.port}";
+                originRequest.originServerName = "matrix.lialh4.cyou";
+              };
             };
           };
+        };
+      };
+      continuwuity = {
+        enable = true;
+        settings.global = {
+          server_name = "lialh4.cyou";
+          trusted_servers = [
+            "matrix.org"
+            "mat.stelpolva.moe"
+            "catgirl.cloud"
+          ];
         };
       };
       kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
@@ -153,10 +171,8 @@
         22
         14159
       ];
-      vaultwarden = {
-        enable = true;
-        port = 50288;
-      };
+      caddy.port = 50288;
+      vaultwarden.enable = true;
     };
     system.version-when-installed = "25.11";
   };
