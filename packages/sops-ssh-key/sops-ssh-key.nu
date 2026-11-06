@@ -2,8 +2,12 @@
 #
 # sops/age reject encrypted SSH private keys, and keeping an unencrypted copy
 # around is dangerous. This decrypts a copy in a private temporary directory
-# (tmpfs when available), points SOPS_AGE_SSH_PRIVATE_KEY_FILE at it, runs
-# sops, and removes the copy afterwards.
+# (tmpfs when available), converts it to a native age identity, points
+# SOPS_AGE_KEY_FILE at it, runs sops, and removes everything afterwards.
+#
+# The conversion is required because the `age1...` recipients in .sops.yaml are
+# native X25519 keys derived from the SSH key, while sops' SSH identity support
+# only handles `ssh-ed25519`/`ssh-rsa` recipient blocks.
 
 def --wrapped main [
   --key (-k): path = "~/.ssh/id_ed25519" # Encrypted SSH private key
@@ -35,7 +39,15 @@ def --wrapped main [
       error make { msg: "Failed to decrypt SSH private key (wrong passphrase?)" }
     }
 
-    with-env { SOPS_AGE_SSH_PRIVATE_KEY_FILE: $tmpkey } {
+    let agekey = ($tmpdir | path join "age.key")
+    ^@sshToAge@ -private-key -i $tmpkey -o $agekey
+    if $env.LAST_EXIT_CODE != 0 {
+      error make { msg: "Failed to convert SSH private key to an age identity" }
+    }
+    rm -f $tmpkey
+    ^@chmod@ 600 $agekey
+
+    with-env { SOPS_AGE_KEY_FILE: $agekey } {
       ^@sops@ ...$args
     }
   } catch {|err|
