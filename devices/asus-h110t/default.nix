@@ -64,6 +64,7 @@
       continuwuity = {
         enable = true;
         settings.global = {
+          allow_registration = true;
           server_name = "lialh4.cyou";
           trusted_servers = [
             "matrix.org"
