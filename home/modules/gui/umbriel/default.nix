@@ -40,8 +40,8 @@
           }
         ];
         keybinds = {
-          "Mod+Equal" = "window-modify-width-right:0.05";
-          "Mod+Minus" = "window-modify-width-right:-0.05";
+          "Mod+Equal" = "window-modify-width-right 0.05";
+          "Mod+Minus" = "window-modify-width-right -0.05";
           "Mod+M" = "window-toggle-maximize";
           "Mod+F" = "window-toggle-floating";
         };
