@@ -58,9 +58,10 @@ in
     };
     preservation.preserveAt.persist.directories = [
       {
-        directory = "/var/lib/continuwuity";
+        directory = "/var/lib/private/continuwuity";
         inherit (cfg) user group;
         mode = "0700";
+        parent.mode = "0700";
       }
     ];
   };
