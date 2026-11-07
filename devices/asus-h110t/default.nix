@@ -50,11 +50,11 @@
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
               "vaultwarden.lialh4.cyou" = {
-                service = "https://localhost:${toString config.liuxu.nixos.caddy.port}";
+                service = "https://localhost:${config.liuxu.nixos.caddy.port}";
                 originRequest.originServerName = "vaultwarden.lialh4.cyou";
               };
               "matrix.lialh4.cyou" = {
-                service = "https://localhost:${toString config.liuxu.nixos.caddy.port}";
+                service = "https://localhost:${config.liuxu.nixos.caddy.port}";
                 originRequest.originServerName = "matrix.lialh4.cyou";
               };
             };
