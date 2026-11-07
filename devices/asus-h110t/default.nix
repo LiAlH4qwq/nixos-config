@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  root,
   scopes,
   ...
 }:
@@ -26,6 +25,7 @@
     nixos = {
       bluetooth.enable = true;
       builder.enable = true;
+      caddy.port = 50288;
       cloudflare-ddns = {
         enable = true;
         credentialsFile = config.sops.templates."localMachine/cloudflare-ddns/credentials".path;
@@ -172,7 +172,6 @@
         22
         14159
       ];
-      caddy.port = 50288;
       vaultwarden.enable = true;
     };
     system.version-when-installed = "25.11";
