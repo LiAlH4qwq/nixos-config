@@ -84,6 +84,10 @@
         };
       });
       sops-ssh-key = config.packages.sops-ssh-key;
+      # nixos-26.05 ships VSCode 1.144 with a stale ripgrep patch that fails to
+      # build; nixpkgs-unstable already has the `@vscode/ripgrep-universal` fix.
+      # Drop this once the stable branch catches up.
+      vscode = final.unstable.vscode;
       waydroid-lineage-vanilla = config.packages.waydroid-lineage-vanilla;
       wechat = prev.symlinkJoin {
         name = "wechat-${prev.wechat.version}";
