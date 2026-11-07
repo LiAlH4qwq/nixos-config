@@ -57,6 +57,10 @@
                 service = "https://localhost:${config.liuxu.nixos.caddy.port}";
                 originRequest.originServerName = "matrix.lialh4.cyou";
               };
+              "fedi.lialh4.cyou" = {
+                service = "https://localhost:${config.liuxu.nixos.caddy.port}";
+                originRequest.originServerName = "fedi.lialh4.cyou";
+              };
             };
           };
         };
@@ -72,6 +76,19 @@
             "unredacted.org"
             "matrix.org"
           ];
+        };
+      };
+      misskey = {
+        enable = true;
+        database.createLocally = true;
+        redis.createLocally = true;
+        meilisearch.createLocally = true;
+        meilisearch.keyFile = config.sops.secrets."localMachine/meilisearch/masterKey".path;
+        settings = {
+          url = "https://fedi.lialh4.cyou/";
+          fulltextSearch.provider = "meilisearch";
+          meilisearch.index = "fedi_lialh4_cyou";
+          setupPassword = "@SETUP_PASSWORD@";
         };
       };
       kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
@@ -150,6 +167,21 @@
           "samba/users/lialh4/password" = { };
           "users/lialh4/hashedPassword".neededForUsers = true;
           "pin/users/lialh4/hashedPassword" = { };
+          "misskey/setupPassword" = {
+            owner = "misskey";
+            group = "misskey";
+            mode = "0400";
+            restartUnits = [ "misskey.service" ];
+          };
+          "meilisearch/masterKey" = {
+            owner = "misskey";
+            group = "misskey";
+            mode = "0400";
+            restartUnits = [
+              "misskey.service"
+              "meilisearch.service"
+            ];
+          };
         };
         templates =
           let
@@ -177,4 +209,15 @@
     };
     system.version-when-installed = "25.11";
   };
+
+  services.meilisearch = {
+    masterKeyFile = config.sops.secrets."localMachine/meilisearch/masterKey".path;
+    settings.env = "production";
+  };
+
+  systemd.services.misskey.preStart = lib.mkAfter ''
+    ${pkgs.replace-secret}/bin/replace-secret '@SETUP_PASSWORD@' ${
+      config.sops.secrets."localMachine/misskey/setupPassword".path
+    } /run/misskey/default.yml
+  '';
 }

@@ -8,6 +8,10 @@ localMachine:
                 tunnelId: ENC[AES256_GCM,data:qrbW6udBAPF6KXNTw/5OC6ipxEcLyEhuVDw091kb3WCG2QhK,iv:cpagdtimDXHS5u+ctx26+lj9dIhVC9+ssglMJIcbdGc=,tag:dJIKge1kDQkG9FKC751QWA==,type:str]
                 tunnelSecret: ENC[AES256_GCM,data:EQp8yAK8ZvcNf9M+/GR6KCQ8VWqm2x4mUiG9wnTZxheKwAbzuSsLEiNkcx0=,iv:SmqQM8gCxSVzmW1SySImJtJ8I73khymYA1xf21LI14s=,tag:Ul9gzTWzwRtSc/oFhW+FQA==,type:str]
                 endpoint: ""
+    misskey:
+        setupPassword: ENC[AES256_GCM,data:QaQLjbhQmGEQd2OIeXS9WV4FxwRX5Up01CNTYIyMLahFsTS8uH0quijoUzdc,iv:h3n3RDh6rxypKbjtDPnHtMk+1KuZCfOlFNyT2SKisWY=,tag:G3281l3TduYzdeIs8Zn75A==,type:str]
+    meilisearch:
+        masterKey: ENC[AES256_GCM,data:gDWbUEnPkhC77BBSserzx8LTTBo+qrndlN2oRXii4+NnLFlUQiB+uffldDuqCG6Pa4M=,iv:ZW+WXtQynazTjtadMkbARa1tPiXBKzPq+AuYKUzDWsI=,tag:mDSwlp8HvSfd+ZF0+Rb5Ew==,type:str]
     samba:
         users:
             lialh4:
@@ -39,7 +43,7 @@ sops:
             Ph4Tfv6u/rq0S25SiU3q0oNE4WtixzXF2ePWlGo9Oe+MeY6LiszBGQ==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1xsh3h76kgprlway8ysuzxq2pqnp0ppujq9tlsrggt3df4y5qgycqlqtl48
-    lastmodified: "2026-09-30T16:10:42Z"
-    mac: ENC[AES256_GCM,data:XJ8AA1QXIMhE8IRTzsRSTs6FrzZ4clrmdNi/3T2kR/lvAP22CcmtOkwKcHA9zYcgT5hPTJqyh2h4s9s283/Wz6oB/OLqx79JmnnminRrlymGK1Z3Zar5kM38ZJA9dSza6TSgpgniVktxfLBNEBvdE82EaATTS9kG/uLl3jJNJRg=,iv:BNy2+x2zGE/hvvBQ0hLKZv914gmioG1CfJkyuv8qr1M=,tag:/c03bFI/DFnx7i2boJoDSw==,type:str]
+    lastmodified: "2026-11-07T11:32:04Z"
+    mac: ENC[AES256_GCM,data:629nmKaut74g8hThzLzPGEpeA0CfZ+unu6Xx4XmqUBL+iinGlebswbniMGUC6DjN4XZ/kwTCdo5ZNCICJRP7Z60q6Xp+zLCly28c8B6JblMfHZOaylxw1fcFCraOmFJ4zyYxK5fflbm81o4P7lF7xkj8rdAePOKyCkPGyDQ6FS8=,iv:zleblzzPMrwFYAhTyHtznPZ03j/77WZkJCZl6piDTyo=,tag:8TaRj3eao010CkfoqzoBOg==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.13.3
