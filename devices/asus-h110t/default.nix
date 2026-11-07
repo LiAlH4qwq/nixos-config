@@ -216,8 +216,10 @@
   };
 
   systemd.services.misskey.preStart = lib.mkAfter ''
-    ${pkgs.replace-secret}/bin/replace-secret '@SETUP_PASSWORD@' ${
-      config.sops.secrets."localMachine/misskey/setupPassword".path
-    } /run/misskey/default.yml
+    for f in /run/misskey/default.yml /run/misskey/default.json; do
+      ${pkgs.replace-secret}/bin/replace-secret '@SETUP_PASSWORD@' ${
+        config.sops.secrets."localMachine/misskey/setupPassword".path
+      } "$f"
+    done
   '';
 }

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -29,6 +30,20 @@ in
 
   config = lib.mkIf cfg.enable {
     services.misskey.settings.address = lib.mkDefault "127.0.0.1";
+
+    systemd.services.misskey.preStart = lib.mkAfter (
+      lib.concatStringsSep "\n" (
+        lib.optional (cfg.database.passwordFile != null) ''
+          ${pkgs.replace-secret}/bin/replace-secret '@DATABASE_PASSWORD@' ${lib.escapeShellArg (toString cfg.database.passwordFile)} /run/misskey/default.json
+        ''
+        ++ lib.optional (cfg.redis.passwordFile != null) ''
+          ${pkgs.replace-secret}/bin/replace-secret '@REDIS_PASSWORD@' ${lib.escapeShellArg (toString cfg.redis.passwordFile)} /run/misskey/default.json
+        ''
+        ++ lib.optional (cfg.meilisearch.keyFile != null) ''
+          ${pkgs.replace-secret}/bin/replace-secret '@MEILISEARCH_KEY@' ${lib.escapeShellArg (toString cfg.meilisearch.keyFile)} /run/misskey/default.json
+        ''
+      )
+    );
 
     liuxu.nixos.caddy = {
       enable = true;
