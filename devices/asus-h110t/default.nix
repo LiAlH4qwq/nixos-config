@@ -86,6 +86,7 @@
         meilisearch.keyFile = config.sops.secrets."localMachine/meilisearch/masterKey".path;
         settings = {
           url = "https://fedi.lialh4.cyou/";
+          mediaProxy = "https://misskey-media-proxy.lialh4.cyou";
           allowedPrivateNetworks = [ "198.18.0.0/15" ];
           fulltextSearch.provider = "meilisearch";
           meilisearch.index = "fedi_lialh4_cyou";
