@@ -70,6 +70,7 @@
         settings.global = {
           allow_registration = true;
           server_name = "lialh4.cyou";
+          well_known.client = "https://matrix.lialh4.cyou";
           trusted_servers = [
             "mat.stelpolva.moe"
             "catgirl.cloud"
