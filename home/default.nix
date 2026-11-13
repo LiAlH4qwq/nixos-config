@@ -5,25 +5,26 @@
   scopes,
   ...
 }:
-let
-  tree =
-    base: dir:
-    lib.nix-tree-modules.mkTree {
-      inherit scopes base dir;
-      scopeName = "home";
-    };
-in
 {
-  imports = [
-    (tree [ "git" ] ./git)
-    (tree [ "flatpak" ] ./flatpak)
-    (tree [ ] ./globals)
-    ./modules
-    (tree [ "preservation" ] ./preservation)
-    (tree [ "syncthing" ] ./syncthing)
-    (tree [ "uv" ] ./uv)
-    (tree [ "yazi" ] ./yazi)
-  ];
+  imports =
+    let
+      tree =
+        base: dir:
+        lib.nix-tree-modules.mkTree {
+          inherit scopes base dir;
+          scopeName = "home";
+        };
+    in
+    [
+      (tree [ "git" ] ./git)
+      (tree [ "flatpak" ] ./flatpak)
+      (tree [ ] ./globals)
+      ./modules
+      (tree [ "preservation" ] ./preservation)
+      (tree [ "syncthing" ] ./syncthing)
+      (tree [ "uv" ] ./uv)
+      (tree [ "yazi" ] ./yazi)
+    ];
 
   # these hasn't been available as a program in release 25.11.
   home = {

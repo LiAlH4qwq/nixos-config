@@ -4,193 +4,198 @@
   pkgs,
   ...
 }:
-let
-  cfg = config.liuxu.nixos.samba;
-in
 {
   here = {
     switch.generate = true;
-    options = {
-      port = {
-        tcp = {
-          main = lib.mkOption {
-            type = lib.types.ints.u16;
-            default = 445;
-            example = 10445;
-            description = ''
-              Liuxu: Main tcp port of samba,
-                used for mDns registry.
-            '';
+    options =
+      let
+        desc = lib.liuxu.mkOsDesc;
+      in
+      {
+        port = {
+          tcp = {
+            main = lib.mkOption {
+              type = lib.types.ints.u16;
+              default = 445;
+              example = 10445;
+              description = desc ''
+                Main tcp port of samba,
+                  used for mDns registry.
+              '';
+            };
+            alts = lib.mkOption {
+              type = with lib.types; listOf ints.u16;
+              default = [ ];
+              example = [
+                20445
+                30445
+              ];
+              description = desc ''
+                Alt tcp ports of samba,
+                  can be left empty.
+              '';
+            };
           };
-          alts = lib.mkOption {
+          nbt = {
+            main = lib.mkOption {
+              type = with lib.types; nullOr ints.u16;
+              default = 139;
+              example = 10139;
+              description = desc ''
+                Main nbt port of samba,
+                  used for mDns registry,
+                  can be left null.
+              '';
+            };
+            alts = lib.mkOption {
+              type = with lib.types; listOf ints.u16;
+              default = [ ];
+              example = [
+                20139
+                30139
+              ];
+              description = desc ''
+                Alt nbt ports of samba,
+                  can be left empty.
+              '';
+            };
+          };
+          quic.alts = lib.mkOption {
             type = with lib.types; listOf ints.u16;
             default = [ ];
             example = [
-              20445
-              30445
+              10443
+              20443
+              30443
             ];
-            description = ''
-              Liuxu: Alt tcp ports of samba,
+            description = desc ''
+              Alt quic ports of samba,
                 can be left empty.
             '';
           };
         };
-        nbt = {
-          main = lib.mkOption {
-            type = with lib.types; nullOr ints.u16;
-            default = 139;
-            example = 10139;
-            description = ''
-              Liuxu: Main nbt port of samba,
-                used for mDns registry,
-                can be left null.
-            '';
+        share = lib.mkOption {
+          default = { };
+          example.data = {
+            path = "/mnt/data/lialh4";
+            user = "lialh4";
           };
-          alts = lib.mkOption {
-            type = with lib.types; listOf ints.u16;
-            default = [ ];
-            example = [
-              20139
-              30139
-            ];
-            description = ''
-              Liuxu: Alt nbt ports of samba,
-                can be left empty.
-            '';
-          };
+          description = desc ''
+            Shares of Samba.
+          '';
+          type = lib.types.attrsOf (
+            lib.types.submodule {
+              options = {
+                path = lib.mkOption {
+                  type = lib.types.singleLineStr;
+                  example = "/mnt/data/lialh4";
+                  description = desc ''
+                    Path of share.
+                  '';
+                };
+                user = lib.mkOption {
+                  type = lib.types.singleLineStr;
+                  example = "lialh4";
+                  description = desc ''
+                    User of share.
+                  '';
+                };
+                group = lib.mkOption {
+                  type = lib.types.singleLineStr;
+                  example = "users";
+                  description = desc ''
+                    Group of share.
+                  '';
+                };
+                readOnly = lib.mkOption {
+                  type = lib.types.bool;
+                  default = true;
+                  example = false;
+                  description = desc ''
+                    Is share read-only?
+                  '';
+                };
+              };
+            }
+          );
         };
-        quic.alts = lib.mkOption {
-          type = with lib.types; listOf ints.u16;
-          default = [ ];
-          example = [
-            10443
-            20443
-            30443
-          ];
-          description = ''
-            Liuxu: Alt quic ports of samba,
-              can be left empty.
+        passwordFile = lib.mkOption {
+          type = lib.types.attrsOf lib.types.singleLineStr;
+          default = { };
+          example = {
+            lialh4 = lib.literalMD "config.age.secretV2.samba.passwordFile";
+          };
+          description = desc ''
+            Password files of Samba user.
           '';
         };
       };
-      share = lib.mkOption {
-        default = { };
-        example.data = {
-          path = "/mnt/data/lialh4";
-          user = "lialh4";
-        };
-        description = ''
-          Liuxu: Shares of Samba.
-        '';
-        type = lib.types.attrsOf (
-          lib.types.submodule {
-            options = {
-              path = lib.mkOption {
-                type = lib.types.singleLineStr;
-                example = "/mnt/data/lialh4";
-                description = ''
-                  Liuxu: Path of share.
-                '';
-              };
-              user = lib.mkOption {
-                type = lib.types.singleLineStr;
-                example = "lialh4";
-                description = ''
-                  Liuxu: User of share.
-                '';
-              };
-              group = lib.mkOption {
-                type = lib.types.singleLineStr;
-                example = "users";
-                description = ''
-                  Liuxu: Group of share.
-                '';
-              };
-              readOnly = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                example = false;
-                description = ''
-                  Liuxu: Is share read-only?
-                '';
-              };
-            };
-          }
-        );
-      };
-      passwordFile = lib.mkOption {
-        type = lib.types.attrsOf lib.types.singleLineStr;
-        default = { };
-        example = {
-          lialh4 = lib.literalMD "config.age.secretV2.samba.passwordFile";
-        };
-        description = ''
-          Liuxu: Password files of Samba user.
-        '';
-      };
-    };
-    apply = {
-      services.samba = {
-        enable = true;
-        settings = lib.mkMerge [
-          (
-            let
-              portsTaint = t: ps: ps |> map toString |> map (x: "${t}:${x}");
-              tcpPorts = ([ cfg.port.tcp.main ] ++ cfg.port.tcp.alts) |> portsTaint "tcp";
-              nbtPorts =
-                ((if cfg.port.nbt.main == null then [ ] else [ cfg.port.nbt.main ]) ++ cfg.port.nbt.alts)
-                |> portsTaint "nbt";
-              quicPorts = cfg.port.quic.alts |> portsTaint "quic";
-              ports = tcpPorts ++ nbtPorts ++ quicPorts;
+    apply =
+      let
+        cfg = config.liuxu.nixos.samba;
+      in
+      {
+        services.samba = {
+          enable = true;
+          settings = lib.mkMerge [
+            (
+              let
+                portsTaint = t: ps: ps |> map (x: "${t}:${x}");
+                tcpPorts = ([ cfg.port.tcp.main ] ++ cfg.port.tcp.alts) |> portsTaint "tcp";
+                nbtPorts =
+                  ((if cfg.port.nbt.main == null then [ ] else [ cfg.port.nbt.main ]) ++ cfg.port.nbt.alts)
+                  |> portsTaint "nbt";
+                quicPorts = cfg.port.quic.alts |> portsTaint "quic";
+                ports = tcpPorts ++ nbtPorts ++ quicPorts;
 
-            in
-            {
-              global."server smb transports" = ports |> builtins.concatStringsSep ", ";
-            }
-          )
-          (
-            cfg.share
-            |> builtins.mapAttrs (
-              _: v: {
-                inherit (v) path;
-                "read only" = if v.readOnly then "yes" else "no";
-                "force user" = v.user;
-                "force group" = v.group;
-                "create mask" = "0644";
-                "directory mask" = "0755";
+              in
+              {
+                global."server smb transports" = ports |> builtins.concatStringsSep ", ";
               }
             )
-          )
-        ];
-      };
-      systemd.services.samba-set-password =
-        let
-          before = [ "samba.target" ];
-          after = [ "sops-install-secrets.service" ];
-        in
-        {
-          inherit before after;
-          requiredBy = before;
-          requires = after;
-          serviceConfig.ExecStart =
-            pkgs.writers.writeNuBin "samba-set-password" (
-              let
-                smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
-                smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
-                mkYaml = (pkgs.formats.yaml_1_2 { }).generate;
-                passwordsYaml = mkYaml "samba-passwords" cfg.passwordFile;
-                passwordsYamlShArg = passwordsYaml |> lib.escapeShellArg;
-              in
-              ''
-                let passwordFiles = open ${passwordsYamlShArg} | from yaml
-                $passwordFiles | items {|user, passwordFile|
-                  let password = open ($passwordFile) | str trim
-                  echo $"($password)\n($password)" | ${smbpasswdShArg} -sa ($user) 
-                } | ignore
-              ''
+            (
+              cfg.share
+              |> builtins.mapAttrs (
+                _: v: {
+                  inherit (v) path;
+                  "read only" = if v.readOnly then "yes" else "no";
+                  "force user" = v.user;
+                  "force group" = v.group;
+                  "create mask" = "0644";
+                  "directory mask" = "0755";
+                }
+              )
             )
-            |> lib.getExe;
+          ];
         };
-    };
+        systemd.services.samba-set-password =
+          let
+            before = [ "samba.target" ];
+            after = [ "sops-install-secrets.service" ];
+          in
+          {
+            inherit before after;
+            requiredBy = before;
+            requires = after;
+            serviceConfig.ExecStart =
+              pkgs.writers.writeNuBin "samba-set-password" (
+                let
+                  smbpasswd = "smbpasswd" |> lib.getExe' pkgs.samba;
+                  smbpasswdShArg = smbpasswd |> lib.escapeShellArg;
+                  mkYaml = (pkgs.formats.yaml_1_2 { }).generate;
+                  passwordsYaml = mkYaml "samba-passwords" cfg.passwordFile;
+                  passwordsYamlShArg = passwordsYaml |> lib.escapeShellArg;
+                in
+                ''
+                  let passwordFiles = open ${passwordsYamlShArg} | from yaml
+                  $passwordFiles | items {|user, passwordFile|
+                    let password = open ($passwordFile) | str trim
+                    echo $"($password)\n($password)" | ${smbpasswdShArg} -sa ($user)
+                  } | ignore
+                ''
+              )
+              |> lib.getExe;
+          };
+      };
   };
 }

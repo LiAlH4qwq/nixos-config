@@ -42,10 +42,10 @@
                     lib.liuxu.hyprland.mkLuaBind opts "hl.dsp.window.close()" key;
                 execr = lib.liuxu.hyprland.mkExecrBind opts (builtins.concatStringsSep " " e.args.cmd) key;
                 workspace-focus =
-                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.focus({workspace="${toString e.args.id}"})''
+                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.focus({workspace="${e.args.id}"})''
                     key;
                 window-move-to-workspace =
-                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.window.move({workspace="${toString e.args.id}"})''
+                  lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.window.move({workspace="${e.args.id}"})''
                     key;
                 column-focus = lib.liuxu.hyprland.mkLuaBind opts ''hl.dsp.layout("focus ${e.args.direction}")'' key;
               };

@@ -1,8 +1,4 @@
 { config, lib, ... }:
-let
-  id = config.liuxu.home.id;
-  hasKey = id != null && id.ssh.key.primary != null;
-in
 {
   here = { };
   programs.ssh = {
@@ -11,17 +7,27 @@ in
     enableDefaultConfig = false;
   };
 
-  home.file = lib.mkIf hasKey {
-    ssh-id-pub = {
-      target = ".ssh/id_ed25519.pub";
-      text = id.ssh.key.primary;
+  home.file =
+    let
+      id = config.liuxu.home.id;
+      hasKey = id != null && id.ssh.key.primary != null;
+    in
+    lib.mkIf hasKey {
+      ssh-id-pub = {
+        target = ".ssh/id_ed25519.pub";
+        text = id.ssh.key.primary;
+      };
     };
-  };
 
-  liuxu.home.preservation.files = lib.mkIf hasKey [
-    {
-      file = ".ssh/id_ed25519";
-      mode = "0600";
-    }
-  ];
+  liuxu.home.preservation.files =
+    let
+      id = config.liuxu.home.id;
+      hasKey = id != null && id.ssh.key.primary != null;
+    in
+    lib.mkIf hasKey [
+      {
+        file = ".ssh/id_ed25519";
+        mode = "0600";
+      }
+    ];
 }

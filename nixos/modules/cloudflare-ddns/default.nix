@@ -11,14 +11,18 @@
 
   here = { };
 
-  options.services.cloudflare-ddns.ip6Filter = lib.mkOption {
-    type = with lib.types; nullOr singleLineStr;
-    default = null;
-    example = "!addr-in(fd00::/64)";
-    description = ''
-      Liuxu: IPV6 filter of cloudflare-ddns.
-    '';
-  };
+  options.services.cloudflare-ddns.ip6Filter =
+    let
+      desc = lib.liuxu.mkOsDesc;
+    in
+    lib.mkOption {
+      type = with lib.types; nullOr singleLineStr;
+      default = null;
+      example = "!addr-in(fd00::/64)";
+      description = desc ''
+        IPV6 filter of cloudflare-ddns.
+      '';
+    };
 
   config =
     let

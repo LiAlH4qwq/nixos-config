@@ -7,14 +7,18 @@
 {
   here = {
     switch.generate = true;
-    options.settings = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      example = lib.kdl.formats.v1 (with lib.kdl.extras.niri; [ (input [ disable-power-key-handling ]) ]);
-      description = ''
-        Liuxu (Home): Niri settings in kdl.
-      '';
-    };
+    options.settings =
+      let
+        desc = lib.liuxu.mkHomeDesc;
+      in
+      lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        example = lib.kdl.formats.v1 (with lib.kdl.extras.niri; [ (input [ disable-power-key-handling ]) ]);
+        description = desc ''
+          Niri settings in kdl.
+        '';
+      };
     apply = {
       xdg.configFile.niri-settings = {
         target = "niri/config.kdl";

@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  desc = lib.liuxu.mkOsDesc;
-in
 {
   here = {
     switch = {
@@ -14,90 +11,94 @@ in
       default = true;
       premise = [ "network" ];
     };
-    options = {
-      settings = {
-        defaults = {
-          urlTest = {
-            url = lib.mkOption {
-              type = lib.types.singleLineStr;
-              default = "https://cp.cloudflare.com";
-              example = "https://www.gstatic.com/generate_204";
-              description = desc "Default URL test URL for mihoyo.";
-            };
-            lazy = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-              example = false;
-              description = desc "Default URL test lazyness setting for mihoyo.";
-            };
-            expected-status = lib.mkOption {
-              type = lib.types.int;
-              default = 204;
-              example = 200;
-              description = desc "Expected http status of URL test for mihoyo.";
-            };
-            interval = lib.mkOption {
-              type = lib.types.int;
-              default = 300;
-              example = 600;
-              description = desc ''
-                Interval of URL test for mihoyo,
-                  in seconds.
-              '';
-            };
-            timeout = lib.mkOption {
-              type = lib.types.int;
-              default = 5000;
-              example = 10000;
-              description = desc ''
-                Interval of URL test for mihoyo,
-                  in ms.
-              '';
+    options =
+      let
+        desc = lib.liuxu.mkOsDesc;
+      in
+      {
+        settings = {
+          defaults = {
+            urlTest = {
+              url = lib.mkOption {
+                type = lib.types.singleLineStr;
+                default = "https://cp.cloudflare.com";
+                example = "https://www.gstatic.com/generate_204";
+                description = desc "Default URL test URL for mihoyo.";
+              };
+              lazy = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                example = false;
+                description = desc "Default URL test lazyness setting for mihoyo.";
+              };
+              expected-status = lib.mkOption {
+                type = lib.types.int;
+                default = 204;
+                example = 200;
+                description = desc "Expected http status of URL test for mihoyo.";
+              };
+              interval = lib.mkOption {
+                type = lib.types.int;
+                default = 300;
+                example = 600;
+                description = desc ''
+                  Interval of URL test for mihoyo,
+                    in seconds.
+                '';
+              };
+              timeout = lib.mkOption {
+                type = lib.types.int;
+                default = 5000;
+                example = 10000;
+                description = desc ''
+                  Interval of URL test for mihoyo,
+                    in ms.
+                '';
+              };
             };
           };
+          tun.stack = lib.mkOption {
+            type = lib.types.enum [
+              "gvisor"
+              "mixed"
+              "system"
+            ];
+            default = "mixed";
+            example = "gvisor";
+            description = desc ''
+              Tun stack impl, gvisor is userspace and system is kernelspace,
+                system is faster but problematic on some systems,
+                mixed means gvisor for udp and system for tcp.
+            '';
+          };
+          external-controller = lib.mkOption {
+            type = lib.types.singleLineStr;
+            default = "[::1]:9090";
+            example = "[::]:9090";
+            description = desc "External controller listen address for mihoyo.";
+          };
         };
-        tun.stack = lib.mkOption {
-          type = lib.types.enum [
-            "gvisor"
-            "mixed"
-            "system"
-          ];
-          default = "mixed";
-          example = "gvisor";
-          description = ''
-            Tun stack impl, gvisor is userspace and system is kernelspace,
-              system is faster but problematic on some systems,
-              mixed means gvisor for udp and system for tcp.
+        extraConfig = lib.mkOption {
+          type = (pkgs.formats.yaml { }).type;
+          internal = true;
+          default = { };
+          example = {
+            external-controller = "[::]:9090";
+          };
+          description = desc ''
+            Extra config for Mihoyo.
+              Will be deep merged.
           '';
         };
-        external-controller = lib.mkOption {
-          type = lib.types.singleLineStr;
-          default = "[::1]:9090";
-          example = "[::]:9090";
-          description = desc "External controller listen address for mihoyo.";
+        providerUrlFiles = lib.mkOption {
+          type = lib.types.attrsOf lib.types.path;
+          default = { };
+          description = desc ''
+            Provider urls for Mihoyo,
+              as path to file.
+          '';
         };
       };
-      extraConfig = lib.mkOption {
-        type = (pkgs.formats.yaml { }).type;
-        internal = true;
-        default = { };
-        example = {
-          external-controller = "[::]:9090";
-        };
-        description = desc ''
-          Extra config for Mihoyo.
-            Will be deep merged.
-        '';
-      };
-      providerUrlFiles = lib.mkOption {
-        type = lib.types.attrsOf lib.types.path;
-        default = { };
-        description = desc ''
-          Provider urls for Mihoyo,
-            as path to file.
-        '';
-      };
-    };
     apply =
       let
         cfg = config.liuxu.nixos.network.mihoyo;

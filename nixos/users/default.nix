@@ -21,12 +21,12 @@
               type = nullOr unspecified;
               default = null;
               example = lib.literalMD "`config.liuxu.id.lialh4`";
-              description = "User's ID.";
+              description = desc "User's ID.";
             };
             hashedPasswordFile = lib.mkOption {
               type = str;
               example = lib.literalMD "`config.sops.secrets.\"localMachine.users.lialh4.hashedPassword\".path`";
-              description = "User's hashed password as a file path";
+              description = desc "User's hashed password as a file path";
             };
           };
         })

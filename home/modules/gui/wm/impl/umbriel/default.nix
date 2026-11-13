@@ -23,8 +23,8 @@
             window-close =
               e: if e.args.force then "spawn ${lib.getExe pkgs.kill-focused-window}" else "window-close";
             execr = e: "spawn ${e.args.cmd |> builtins.concatStringsSep " "}";
-            workspace-focus = e: "workspace-switch ${toString e.args.id}";
-            window-move-to-workspace = e: "window-move-to-workspace ${toString e.args.id}";
+            workspace-focus = e: "workspace-switch ${e.args.id}";
+            window-move-to-workspace = e: "window-move-to-workspace ${e.args.id}";
             column-focus =
               e:
               if e.args.direction == "left" then

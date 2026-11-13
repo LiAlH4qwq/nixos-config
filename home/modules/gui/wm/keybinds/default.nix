@@ -265,14 +265,14 @@ in
         workspace-focus =
           lib.range 0 9
           |> map (ki: {
-            key = toString ki;
+            key = "${ki}";
             mod = "Mod";
             args.id = if ki == 0 then 10 else ki;
           });
         window-move-to-workspace =
           lib.range 0 9
           |> map (ki: {
-            key = toString ki;
+            key = "${ki}";
             mod = [
               "Mod"
               "Shift"

@@ -5,15 +5,19 @@
   ...
 }:
 {
-  here.option = lib.mkOption {
-    type = lib.types.listOf lib.types.anything;
-    default = [ ];
-    example = with lib.kdl.extras.niri; [ (n "Mod+Q" [ close-window ]) ];
-    description = ''
-      Liuxu (Home): keybinds for niri,
-        KDL snippit in nix-kdl expression.
-    '';
-  };
+  here.option =
+    let
+      desc = lib.liuxu.mkHomeDesc;
+    in
+    lib.mkOption {
+      type = lib.types.listOf lib.types.anything;
+      default = [ ];
+      example = with lib.kdl.extras.niri; [ (n "Mod+Q" [ close-window ]) ];
+      description = desc ''
+        keybinds for niri,
+          KDL snippit in nix-kdl expression.
+      '';
+    };
 
   options.liuxu.home.internal.gui.niri.keybinds.kdl = lib.mkOption {
     internal = true;

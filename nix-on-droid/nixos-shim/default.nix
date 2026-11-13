@@ -18,14 +18,18 @@
     )
   ];
 
-  options.users.defaultUserShell = lib.mkOption {
-    type = lib.types.package;
-    default = pkgs.bash;
-    example = pkgs.fish;
-    description = ''
-      Liuxu (Droid): Ported from NixOS options.
-    '';
-  };
+  options.users.defaultUserShell =
+    let
+      desc = lib.liuxu.mkDroidDesc;
+    in
+    lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.bash;
+      example = pkgs.fish;
+      description = desc ''
+        Ported from NixOS options.
+      '';
+    };
 
   config.user.shell = lib.getExe config.users.defaultUserShell;
 }

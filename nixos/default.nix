@@ -7,39 +7,40 @@
   scopes,
   ...
 }:
-let
-  tree =
-    base: dir:
-    lib.nix-tree-modules.mkTree {
-      inherit scopes base dir;
-      scopeName = "nixos";
-    };
-in
 {
-  imports = [
-    (lib.nix-tree-modules.mkTree {
-      inherit scopes;
-      scopeName = "id";
-      dir = root + "/ids";
-      base = [ ];
-    })
-    (root + "/system")
-    (tree [ "boot" ] ./boot)
-    (tree [ "btrbk" ] ./btrbk)
-    (tree [ "microcode" ] ./microcode)
-    (tree [ "network" ] ./network)
-    (tree [ "pin" ] ./pin)
-    (tree [ ] ./globals)
-    (tree [ "home-manager" ] ./home-manager)
-    (tree [ "internal" ] ./internal)
-    (tree [ ] ./modules)
-    (tree [ "nix" ] ./nix)
-    (tree [ "nt" ] ./nt)
-    (tree [ "persist" ] ./persist)
-    (tree [ "sops" ] ./sops)
-    (tree [ "users" ] ./users)
-    (tree [ "uutils" ] ./uutils)
-  ];
+  imports =
+    let
+      tree =
+        base: dir:
+        lib.nix-tree-modules.mkTree {
+          inherit scopes base dir;
+          scopeName = "nixos";
+        };
+    in
+    [
+      (lib.nix-tree-modules.mkTree {
+        inherit scopes;
+        scopeName = "id";
+        dir = root + "/ids";
+        base = [ ];
+      })
+      (root + "/system")
+      (tree [ "boot" ] ./boot)
+      (tree [ "btrbk" ] ./btrbk)
+      (tree [ "microcode" ] ./microcode)
+      (tree [ "network" ] ./network)
+      (tree [ "pin" ] ./pin)
+      (tree [ ] ./globals)
+      (tree [ "home-manager" ] ./home-manager)
+      (tree [ "internal" ] ./internal)
+      (tree [ ] ./modules)
+      (tree [ "nix" ] ./nix)
+      (tree [ "nt" ] ./nt)
+      (tree [ "persist" ] ./persist)
+      (tree [ "sops" ] ./sops)
+      (tree [ "users" ] ./users)
+      (tree [ "uutils" ] ./uutils)
+    ];
 
   systemd.oomd = {
     enable = true;

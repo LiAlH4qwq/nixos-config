@@ -1,14 +1,18 @@
 { config, lib, ... }: {
-  options.programs.bash.shellAliases = lib.mkOption {
-    type = lib.types.attrsOf lib.types.str;
-    default = { };
-    example = {
-      cat = "bat";
+  options.programs.bash.shellAliases =
+    let
+      desc = lib.liuxu.mkDroidDesc;
+    in
+    lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
+      example = {
+        cat = "bat";
+      };
+      description = desc ''
+        Ported from NixOS options.
+      '';
     };
-    description = ''
-      Liuxu (Droid): Ported from NixOS options.
-    '';
-  };
 
   config.environment.etc.bashrc.text =
     config.programs.bash.shellAliases

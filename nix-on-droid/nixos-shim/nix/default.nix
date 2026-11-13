@@ -4,25 +4,35 @@
     (lib.mkAliasOptionModule [ "nix" "settings" "trusted-public-keys" ] [ "nix" "trustedPublicKeys" ])
   ];
 
-  options.nix.settings.experimental-features = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    default = [ ];
-    example = [
-      "flakes"
-      "nix-command"
-      "pipe-operator"
-    ];
-    description = ''
-      Liuxu (Droid): Ported from NixOS options.
-    '';
-  };
+  options.nix.settings = {
+    experimental-features =
+      let
+        desc = lib.liuxu.mkDroidDesc;
+      in
+      lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        example = [
+          "flakes"
+          "nix-command"
+          "pipe-operator"
+        ];
+        description = desc ''
+          Ported from NixOS options.
+        '';
+      };
 
-  options.nix.settings.trusted-substituters = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    default = [ ];
-    description = ''
-      Liuxu (Droid): Ported from NixOS options.
-    '';
+    trusted-substituters =
+      let
+        desc = lib.liuxu.mkDroidDesc;
+      in
+      lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        description = desc ''
+          Ported from NixOS options.
+        '';
+      };
   };
 
   config = {

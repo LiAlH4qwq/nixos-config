@@ -144,6 +144,17 @@ sandbox even when the config is valid.
 
 - Format with `nixfmt` (rfc style) via `nix fmt`.
 - **Do not use `rec`.** Use `let` with the smallest necessary scope.
+- **Do not copy nixpkgs module style by hoisting `let` to the module top.** Bind
+  names at the smallest scope that consumes them, and inline them into the
+  consuming attribute when that is the only use. A module-level `let` is only
+  acceptable when the binding is genuinely shared by disjoint top-level
+  sections. Even a one-line script should bind locally:
+  `script = let x = y; in "${x}";`.
+- **Do not add a module-level `cfg = config.liuxu...` binding by default.**
+  Under nix-tree-modules the module already has a scoped handle (`here.config`)
+  and options are already namespaced, so a module-wide `cfg` is usually
+  unnecessary. Bind it only inside the small expression that repeats it (e.g.
+  `here.apply = let cfg = ...; in { ... };`).
 - Unused function argument → `_:`, not `{ ... }:`.
 - **Module defaults, examples, and constants must be independent of the device
   layer.** Anything tied to a specific machine or device (host name, device port,
@@ -153,8 +164,18 @@ sandbox even when the config is valid.
   constant, or a required option over a real device value.
 - **Option descriptions use the scope's `mk*Desc` helper**, never a hand-written
   `Liuxu (...)` prefix: `lib.liuxu.mkOsDesc` (nixos), `lib.liuxu.mkHomeDesc`
-  (home), `lib.liuxu.mkFpDesc` (fp), `lib.liuxu.mkIdDesc` (id). Bind it once as
-  `desc` in the module `let` and wrap every `description`.
+  (home), `lib.liuxu.mkFpDesc` (fp), `lib.liuxu.mkIdDesc` (id),
+  `lib.liuxu.mkDroidDesc` (nix-on-droid). Bind it once as
+  `desc` at the smallest scope that covers the descriptions and wrap every
+  `description`.
+- **The flake enables Lix `coerce-integers`.** Do not wrap a value in `toString`
+  just to interpolate it: write `"${port}"`, not `"${toString port}"`.
+  `toString` is still fine when a function genuinely requires a string.
+- **The device layer is a registry, not a config dump.** `devices/<host>/`
+  should ultimately contain only `liuxu.*` entries. To introduce a setting, add
+  a generic module under `nixos/`, `home/`, or `system/`, then configure it (or
+  default-enable it) from the device layer. Do not fill the device layer with
+  raw upstream options (`services.*`, `programs.*`, `nixpkgs.*`, ...).
 - Hyphenated attribute names are valid identifiers; do not quote them:
   `ai-coding-agent.opencode`, `nix-on-droid`, not `."ai-coding-agent"`.
   (Quotes are still required for names with `/`, `.`, `+`, spaces, or leading digits.)

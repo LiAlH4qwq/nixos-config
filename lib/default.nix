@@ -43,6 +43,7 @@ lib: {
       mkHomeDesc = desc: "Liuxu (Home): ${desc}";
       mkFpDesc = desc: "Liuxu (FP): ${desc}";
       mkIdDesc = desc: "Liuxu (ID): ${desc}";
+      mkDroidDesc = desc: "Liuxu (Droid): ${desc}";
       mkComputedOption =
         type: by:
         lib.mkOption {
@@ -101,6 +102,7 @@ lib: {
         mkHomeDesc
         mkFpDesc
         mkIdDesc
+        mkDroidDesc
         mkComputedOption
         mkSwitchOption
         mkComputedSwitchOption

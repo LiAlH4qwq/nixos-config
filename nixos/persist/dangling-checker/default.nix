@@ -27,7 +27,6 @@
               inherit dirs files;
             }
             |> (pkgs.formats.json { }).generate "dangling-checker-allows.json"
-            |> toString
             |> lib.escapeShellArg;
         in
         "-${

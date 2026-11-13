@@ -6,15 +6,19 @@
 }:
 {
   here = {
-    switch = {
-      generate = true;
-      default = config.liuxu.nixos.internal.final.internal.user-support.gui.enable;
-      description = ''
-        Liuxu: Whether to enable the Intel Graphics support.
-          Currently enables VAAPI and QSV drivers for Intel graphics cards.
-          Won't be actually enabled when no user has GUI enabled.
-      '';
-    };
+    switch =
+      let
+        desc = lib.liuxu.mkOsDesc;
+      in
+      {
+        generate = true;
+        default = config.liuxu.nixos.internal.final.internal.user-support.gui.enable;
+        description = desc ''
+          Whether to enable the Intel Graphics support.
+            Currently enables VAAPI and QSV drivers for Intel graphics cards.
+            Won't be actually enabled when no user has GUI enabled.
+        '';
+      };
 
     apply = lib.mkIf config.liuxu.nixos.internal.user-support.gui.intel-graphics.enable (
       lib.liuxu.mkIfElse config.liuxu.nixos.internal.final.internal.user-support.gui.enable
