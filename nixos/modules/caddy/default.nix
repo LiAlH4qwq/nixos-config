@@ -58,7 +58,7 @@
         cfg = config.liuxu.nixos.caddy;
         certTarget = "tlsCerts/lialh4.cyou.pem";
         certFile = "/etc/${certTarget}";
-        keyFile = config.sops.secrets."tlsCert/keys/lialh4.cyou.pem.key".path;
+        keyFile = config.vaultix.secrets."tlsCert/keys/lialh4.cyou.pem.key".path;
       in
       {
         services.caddy = {
@@ -97,7 +97,7 @@
             -----END CERTIFICATE-----
           '';
         };
-        sops.secrets."tlsCert/keys/lialh4.cyou.pem.key" = {
+        vaultix.secrets."tlsCert/keys/lialh4.cyou.pem.key" = {
           owner = config.users.users.caddy.name;
           group = config.users.users.caddy.group;
         };

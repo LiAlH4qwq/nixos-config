@@ -6,13 +6,19 @@
 }:
 {
   here = { };
+
+  vaultix.secrets = {
+    "smartd/bot/target" = { };
+    "smartd/bot/token" = { };
+  };
+
   services.smartd = {
     enable = true;
     defaults.monitored =
       let
         tg-transient-wrapped = pkgs.tg-transient.wrap {
-          tokenFile = config.sops.secrets."smartd/bot/token".path;
-          chatFile = config.sops.secrets."smartd/bot/target".path;
+          tokenFile = config.vaultix.secrets."smartd/bot/token".path;
+          chatFile = config.vaultix.secrets."smartd/bot/target".path;
         };
         tg-transient-wrapped-sh-arg = tg-transient-wrapped |> lib.getExe |> lib.escapeShellArg;
         notify = pkgs.writers.writeFishBin "smartd-notify" ''
@@ -26,7 +32,7 @@
     let
       after = [
         "network-online.target"
-        "sops-install-secrets.service"
+        "vaultix-activate.service"
       ];
     in
     {

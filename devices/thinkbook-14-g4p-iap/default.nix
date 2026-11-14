@@ -52,10 +52,6 @@
       nh.flake = "/mnt/data/lialh4/Projects/nixos-config";
       podman.enable = true;
       secureboot.enable = true;
-      sops.localMachine.secrets = {
-        "users/lialh4/hashedPassword".neededForUsers = true;
-        "pin/users/lialh4/hashedPassword" = { };
-      };
       sunshine = {
         enable = true;
         outputName = "eDP-1";
@@ -64,6 +60,16 @@
         "nvme-Micron_MTFDKBA512TFH_222138471762"
         "nvme-WD_Blue_SN5000_1TB_251308802891"
       ];
+      vaultix = {
+        hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ0MgEBFCBkrbZIi9JLRWGN17846odM3KMj+21eko4RK";
+        localMachine = {
+          beforeUserborn = [ "users/lialh4/hashedPassword" ];
+          secrets = {
+            "users/lialh4/hashedPassword" = { };
+            "pin/users/lialh4/hashedPassword" = { };
+          };
+        };
+      };
       waydroid.enable = true;
       windows-guest.enable = true;
     };

@@ -42,7 +42,7 @@ enabling features across NixOS / home-manager / nix-on-droid scopes.
 | `ids/` | Identity data (`liuxu.id.<name>`). |
 | `packages/` | This repo's own packages; attached to the flake by `parts/packages`. |
 | `nix-on-droid/` | nix-on-droid configuration. |
-| `sops/`, `secrets/` | Secrets (sops-nix). Never print secret values. |
+| `secrets/` | vaultix-encrypted secrets and per-host cache. Never print secret values. |
 
 Flake outputs are assembled from `parts/`: `nixosConfigurations`, `nixosModules`,
 `homeModules`, `nixOnDroidConfigurations`, `overlays`, `packages`, `checks`,
@@ -176,6 +176,18 @@ sandbox even when the config is valid.
   a generic module under `nixos/`, `home/`, or `system/`, then configure it (or
   default-enable it) from the device layer. Do not fill the device layer with
   raw upstream options (`services.*`, `programs.*`, `nixpkgs.*`, ...).
+- **Vaultix host-independent settings live under `nixos/`.** The persisted host
+  key path (`hostKeys`) is shared by regular hosts and belongs in
+  `nixos/vaultix`; only the host-specific `hostPubkey` stays in `devices/<host>/`.
+- **`liuxu.nixos.vaultix.localMachine` mirrors vaultix's native shape.** Use
+  native `secrets` / `templates` / `beforeUserborn`; do not reintroduce sops-nix
+  keys such as `neededForUsers`, `restartUnits`, or `sopsFile`.
+- **Declare non-local-machine secrets in the module/user-support module that
+  consumes them.** This keeps them gated by the module switch and removes them
+  together when the module is retired. Do not centralize them in the vaultix
+  backend module.
+- **Keep `devices/` scopes alphabetically ordered.** Attributes directly under
+  `liuxu.nixos`, `liuxu.system`, and `liuxu.home` are sorted by name.
 - Hyphenated attribute names are valid identifiers; do not quote them:
   `ai-coding-agent.opencode`, `nix-on-droid`, not `."ai-coding-agent"`.
   (Quotes are still required for names with `/`, `.`, `+`, spaces, or leading digits.)
@@ -191,7 +203,7 @@ sandbox even when the config is valid.
 - Prefer the modern CLI tools already installed: `nu`/`fish`, `rg` (grep), `fd` (find),
   `eza` (ls), `bat` (cat), `zoxide`, `starship`, `fzf`.
 - Prefer the NixOS MCP tool over querying the nix store directly.
-- Never print secret values from `sops/` or `secrets/`.
+- Never print secret values from `secrets/` or `~/.config/vaultix/identity.txt`.
 
 ## Known issues
 

@@ -84,7 +84,7 @@
           RemainAfterExit = true;
           ExecStart =
             let
-              secrets = osConfig.sops.templates."opencode/auth.json".path;
+              secrets = osConfig.vaultix.templates."opencode/auth.json".path;
             in
             lib.getExe
             <| pkgs.writers.writeNuBin "opencode-secrets" ''

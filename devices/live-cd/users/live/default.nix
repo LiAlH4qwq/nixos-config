@@ -7,12 +7,12 @@ _: {
 
   home-manager.users.live = {
     liuxu.home = {
+      ai-coding-agent.opencode.enable = true;
       gui = {
-        umbriel.enable = true;
         opt.enable = false;
+        umbriel.enable = true;
         zen.enable = false;
       };
-      ai-coding-agent.opencode.enable = true;
     };
   };
 }

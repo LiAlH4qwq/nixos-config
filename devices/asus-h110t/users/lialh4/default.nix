@@ -2,7 +2,7 @@
 {
   liuxu.nixos.users.lialh4 = {
     id = config.liuxu.id.lialh4;
-    hashedPasswordFile = config.sops.secrets."localMachine/users/lialh4/hashedPassword".path;
+    hashedPasswordFile = config.vaultix.secrets."users/lialh4/hashedPassword".path;
   };
 
   users.extraUsers.lialh4 = {
@@ -14,5 +14,5 @@
     services.syncthing.guiAddress = "[::]:8384";
   };
   services.libpam-pwdfile-rs.instances.pin.users.lialh4.hashedPasswordFile =
-    config.sops.secrets."localMachine/pin/users/lialh4/hashedPassword".path;
+    config.vaultix.secrets."pin/users/lialh4/hashedPassword".path;
 }

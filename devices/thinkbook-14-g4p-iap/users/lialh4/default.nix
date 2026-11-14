@@ -6,17 +6,19 @@
     # into the store and make rootless podman fail with ELOOP.
     subuid = {
       mode = "0644";
-      text = "lialh4:100000:65536";
+      # newuidmap's commonio parser treats a final line without "\n" as an
+      # ENOMEM failure, so keep the trailing newline.
+      text = "lialh4:100000:65536\n";
     };
     subgid = {
       mode = "0644";
-      text = "lialh4:100000:65536";
+      text = "lialh4:100000:65536\n";
     };
   };
 
   liuxu.nixos.users.lialh4 = {
     id = config.liuxu.id.lialh4;
-    hashedPasswordFile = config.sops.secrets."localMachine/users/lialh4/hashedPassword".path;
+    hashedPasswordFile = config.vaultix.secrets."users/lialh4/hashedPassword".path;
   };
 
   users.extraUsers.lialh4 = {
@@ -29,19 +31,19 @@
   };
   home-manager.users.lialh4 = {
     liuxu.home = {
-      gui = {
-        hyprland.enable = true;
-        niri.enable = true;
-        rustdesk.enable = true;
-        umbriel.enable = true;
-        agl.enable = true;
-      };
       ai-coding-agent = {
         opencode.enable = true;
         pi.enable = true;
       };
-      sdk.enable = true;
+      gui = {
+        agl.enable = true;
+        hyprland.enable = true;
+        niri.enable = true;
+        rustdesk.enable = true;
+        umbriel.enable = true;
+      };
       preservation.directories = [ ".local/share/fonts" ];
+      sdk.enable = true;
     };
     services.podman = {
       enable = true;
@@ -49,5 +51,5 @@
     };
   };
   services.libpam-pwdfile-rs.instances.pin.users.lialh4.hashedPasswordFile =
-    config.sops.secrets."localMachine/pin/users/lialh4/hashedPassword".path;
+    config.vaultix.secrets."pin/users/lialh4/hashedPassword".path;
 }

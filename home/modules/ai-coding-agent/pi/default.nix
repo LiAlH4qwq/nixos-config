@@ -54,7 +54,7 @@
           RemainAfterExit = true;
           ExecStart =
             let
-              secrets = osConfig.sops.templates."pi-coding-agent/auth.json".path;
+              secrets = osConfig.vaultix.templates."pi-coding-agent/auth.json".path;
             in
             lib.getExe
             <| pkgs.writers.writeNuBin "pi-coding-agent-secrets" ''

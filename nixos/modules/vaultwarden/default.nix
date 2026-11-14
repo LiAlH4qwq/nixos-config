@@ -6,7 +6,7 @@
       services = {
         vaultwarden = {
           enable = true;
-          environmentFile = config.sops.templates."vaultwarden/credentials".path;
+          environmentFile = config.vaultix.templates."vaultwarden/credentials".path;
           config = {
             ROCKET_PORT = 8222;
             SIGNUPS_ALLOWED = false;
@@ -33,15 +33,17 @@
           group = "vaultwarden";
         }
       ];
-      sops = {
+      vaultix = {
         secrets."vaultwarden/adminToken" = { };
         templates."vaultwarden/credentials" = {
           owner = config.users.users.vaultwarden.name;
           group = config.users.users.vaultwarden.group;
-          restartUnits = [ "vaultwarden.service" ];
-          content = "ADMIN_TOKEN=${config.sops.placeholder."vaultwarden/adminToken"}";
+          content = "ADMIN_TOKEN=${config.vaultix.placeholder."vaultwarden/adminToken"}";
         };
       };
+      systemd.services.vaultwarden.restartTriggers = [
+        config.vaultix.secrets."vaultwarden/adminToken".file
+      ];
     };
   };
 }

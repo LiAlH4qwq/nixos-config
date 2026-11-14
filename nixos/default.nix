@@ -37,8 +37,8 @@
       (tree [ "nix" ] ./nix)
       (tree [ "nt" ] ./nt)
       (tree [ "persist" ] ./persist)
-      (tree [ "sops" ] ./sops)
       (tree [ "users" ] ./users)
+      (tree [ "vaultix" ] ./vaultix)
       (tree [ "uutils" ] ./uutils)
     ];
 

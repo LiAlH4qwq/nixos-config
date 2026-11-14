@@ -5,7 +5,7 @@
   ];
 
   services.openssh = {
-    # sops depends on sshd, so it couldn't be fully disabled.
+    # vaultix decrypts with the host SSH key, so sshd must stay enabled.
     enable = true;
     settings = {
       # No password login

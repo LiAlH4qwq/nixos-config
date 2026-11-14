@@ -6,7 +6,6 @@
       disable-dwt-in-hsr = pkgs.callPackage (root + /packages/disable-dwt-in-hsr) { };
       kill-focused-window = pkgs.callPackage (root + /packages/kill-focused-window) { };
       nushell-skill = pkgs.callPackage (root + /packages/nushell-skill) { };
-      sops-ssh-key = pkgs.callPackage (root + /packages/sops-ssh-key) { };
       xwayland-xft-dpi = pkgs.callPackage (root + /packages/xwayland-xft-dpi) { };
     }
     // lib.optionalAttrs (system == "x86_64-linux") {

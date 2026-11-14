@@ -14,8 +14,9 @@
       premise = [ "network" ];
     };
     apply = {
-      sops.templates."hoyofall/default".content = "DEFAULT_URL=${
-        config.sops.placeholder."mihoyo/providerUrls/alink"
+      vaultix.secrets."mihoyo/providerUrls/alink" = { };
+      vaultix.templates."hoyofall/default".content = "DEFAULT_URL=${
+        config.vaultix.placeholder."mihoyo/providerUrls/alink"
       }";
       services = {
         hoyofall = {
@@ -68,7 +69,7 @@
                 )
               );
           };
-          environmentFile = config.sops.templates."hoyofall/default".path;
+          environmentFile = config.vaultix.templates."hoyofall/default".path;
         };
         sing-box = {
           enable = true;
@@ -77,7 +78,7 @@
       };
       systemd.services.hoyofall =
         let
-          after = [ "sops-install-secrets.service" ];
+          after = [ "vaultix-activate.service" ];
         in
         {
           inherit after;

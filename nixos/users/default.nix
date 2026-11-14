@@ -25,7 +25,7 @@
             };
             hashedPasswordFile = lib.mkOption {
               type = str;
-              example = lib.literalMD "`config.sops.secrets.\"localMachine.users.lialh4.hashedPassword\".path`";
+              example = lib.literalMD "`config.vaultix.secrets.\"users/lialh4/hashedPassword\".path`";
               description = desc "User's hashed password as a file path";
             };
           };

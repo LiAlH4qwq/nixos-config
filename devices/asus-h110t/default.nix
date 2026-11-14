@@ -28,7 +28,7 @@
       caddy.port = 50288;
       cloudflare-ddns = {
         enable = true;
-        credentialsFile = config.sops.templates."localMachine/cloudflare-ddns/credentials".path;
+        credentialsFile = config.vaultix.templates."cloudflare-ddns/credentials".path;
         provider = {
           ipv4 = "none";
           ipv6 = "local.iface:enp0s31f6";
@@ -45,8 +45,7 @@
         tunnels = {
           a00f657a-254c-496a-bc41-6cb0d6ec4535 = {
             default = "http_status:404";
-            credentialsFile =
-              config.sops.templates."localMachine/cloudflared/tunnels/LiAlH4-Server/credentials".path;
+            credentialsFile = config.vaultix.templates."cloudflared/tunnels/LiAlH4-Server/credentials".path;
             ingress = {
               "hsr.lialh4.cyou" = "ssh://localhost:22";
               "vaultwarden.lialh4.cyou" = {
@@ -79,12 +78,13 @@
           ];
         };
       };
+      kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
       misskey = {
         enable = true;
         database.createLocally = true;
         redis.createLocally = true;
         meilisearch.createLocally = true;
-        meilisearch.keyFile = config.sops.secrets."localMachine/meilisearch/masterKey".path;
+        meilisearch.keyFile = config.vaultix.secrets."meilisearch/masterKey".path;
         settings = {
           url = "https://fedi.lialh4.cyou/";
           mediaProxy = "https://misskey-media-proxy.lialh4.cyou";
@@ -94,7 +94,6 @@
           setupPassword = "@SETUP_PASSWORD@";
         };
       };
-      kernel.package = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
       network = {
         firewalld = {
           services = {
@@ -151,7 +150,7 @@
       samba = {
         enable = true;
         port.tcp.alts = [ 26535 ];
-        passwordFile.lialh4 = config.sops.secrets."localMachine/samba/users/lialh4/password".path;
+        passwordFile.lialh4 = config.vaultix.secrets."samba/users/lialh4/password".path;
         share.data = {
           path = "/mnt/data/lialh4";
           readOnly = false;
@@ -160,68 +159,67 @@
         };
       };
       secureboot.enable = true;
-      sops.localMachine = {
-        secrets = {
-          "cloudflare-ddns/apiToken" = { };
-          "cloudflared/accountTag" = { };
-          "cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
-          "cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
-          "cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
-          "samba/users/lialh4/password" = { };
-          "users/lialh4/hashedPassword".neededForUsers = true;
-          "pin/users/lialh4/hashedPassword" = { };
-          "misskey/setupPassword" = {
-            owner = "misskey";
-            group = "misskey";
-            mode = "0400";
-            restartUnits = [ "misskey.service" ];
-          };
-          "meilisearch/masterKey" = {
-            owner = "misskey";
-            group = "misskey";
-            mode = "0400";
-            restartUnits = [
-              "misskey.service"
-              "meilisearch.service"
-            ];
-          };
-        };
-        templates =
-          let
-            ph = config.sops.placeholder;
-          in
-          {
-            "cloudflare-ddns/credentials" = {
-              content = "CLOUDFLARE_API_TOKEN=${ph."localMachine/cloudflare-ddns/apiToken"}";
-              owner = config.users.users.cloudflare-ddns.name;
-              group = config.users.users.cloudflare-ddns.group;
-            };
-            "cloudflared/tunnels/LiAlH4-Server/credentials".content = builtins.toJSON {
-              AccountTag = ph."localMachine/cloudflared/accountTag";
-              TunnelID = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelId";
-              TunnelSecret = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/tunnelSecret";
-              Endpoint = ph."localMachine/cloudflared/tunnels/LiAlH4-Server/endpoint";
-            };
-          };
-      };
       ssh.ports = [
         22
         14159
       ];
+      vaultix = {
+        hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHgPw52HnxnsDNsnUxOLdMxfMiRdF7T0zbqO6dlBFgZ";
+        localMachine = {
+          beforeUserborn = [ "users/lialh4/hashedPassword" ];
+          secrets = {
+            "cloudflare-ddns/apiToken" = { };
+            "cloudflared/accountTag" = { };
+            "cloudflared/tunnels/LiAlH4-Server/tunnelId" = { };
+            "cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
+            "cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
+            "samba/users/lialh4/password" = { };
+            "users/lialh4/hashedPassword" = { };
+            "pin/users/lialh4/hashedPassword" = { };
+            "misskey/setupPassword" = {
+              owner = "misskey";
+              group = "misskey";
+              mode = "0400";
+            };
+            "meilisearch/masterKey" = {
+              owner = "misskey";
+              group = "misskey";
+              mode = "0400";
+            };
+          };
+          templates =
+            let
+              ph = config.vaultix.placeholder;
+            in
+            {
+              "cloudflare-ddns/credentials" = {
+                content = "CLOUDFLARE_API_TOKEN=${ph."cloudflare-ddns/apiToken"}";
+                owner = config.users.users.cloudflare-ddns.name;
+                group = config.users.users.cloudflare-ddns.group;
+              };
+              "cloudflared/tunnels/LiAlH4-Server/credentials".content = builtins.toJSON {
+                AccountTag = ph."cloudflared/accountTag";
+                TunnelID = ph."cloudflared/tunnels/LiAlH4-Server/tunnelId";
+                TunnelSecret = ph."cloudflared/tunnels/LiAlH4-Server/tunnelSecret";
+                Endpoint = ph."cloudflared/tunnels/LiAlH4-Server/endpoint";
+              };
+            };
+        };
+      };
       vaultwarden.enable = true;
     };
     system.version-when-installed = "25.11";
   };
 
   services.meilisearch = {
-    masterKeyFile = config.sops.secrets."localMachine/meilisearch/masterKey".path;
+    masterKeyFile = config.vaultix.secrets."meilisearch/masterKey".path;
     settings.env = "production";
   };
 
   systemd.services.misskey.preStart = lib.mkAfter ''
     for f in /run/misskey/default.yml /run/misskey/default.json; do
       ${pkgs.replace-secret}/bin/replace-secret '@SETUP_PASSWORD@' ${
-        config.sops.secrets."localMachine/misskey/setupPassword".path
+        config.vaultix.secrets."misskey/setupPassword".path
       } "$f"
     done
   '';

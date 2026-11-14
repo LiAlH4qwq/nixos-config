@@ -171,7 +171,7 @@
         systemd.services.samba-set-password =
           let
             before = [ "samba.target" ];
-            after = [ "sops-install-secrets.service" ];
+            after = [ "vaultix-activate.service" ];
           in
           {
             inherit before after;

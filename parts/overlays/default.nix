@@ -83,7 +83,6 @@
           hash = "sha256-ga4rhULvUxH8cuz1PJpSOSPINFacew2lLgv0Nguctfk=";
         };
       });
-      sops-ssh-key = config.packages.sops-ssh-key;
       # nixos-26.05 ships VSCode 1.144 with a stale ripgrep patch that fails to
       # build; nixpkgs-unstable already has the `@vscode/ripgrep-universal` fix.
       # Drop this once the stable branch catches up.

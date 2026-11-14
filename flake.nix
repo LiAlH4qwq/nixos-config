@@ -49,7 +49,6 @@ in
             hosts = {
               LiAlH4-Laptop.modules = ./devices/thinkbook-14-g4p-iap;
               LiAlH4-Server.modules = ./devices/asus-h110t;
-              LiAlH4-DeployTest.modules = ./devices/deploy-test;
               # LiAlH4-Onecloud = {
               #   arch = "armv7l-linux";
               #   modules = ./devices/onecloud;
@@ -74,11 +73,22 @@ in
         imports = [
           inputs.flat-flake.flakeModules.flatFlake
           inputs.github-actions-nix.flakeModules.default
+          inputs.vaultix.flakeModules.default
           ./parts
         ];
         _module.args.root = ./.;
         systems = import inputs.systems;
-        flake.nixConfig = nixConfig;
+        flake = {
+          nixConfig = nixConfig;
+          vaultix = {
+            identity = "/home/lialh4/.config/vaultix/identity.txt";
+            cache = "./secrets/cache";
+            defaultSecretDirectory = "./secrets";
+            # The admin age recipient derived from the user's primary SSH key,
+            # kept as a backup recipient for every secret.
+            extraRecipients = [ "age13h6k5sxuzcw6wrc6wj804f24mzq9qu03swhu555zuz7vqeweuswsceq8qs" ];
+          };
+        };
         debug = true;
       }
     );
@@ -124,8 +134,9 @@ in
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops = {
-      url = "github:Mic92/sops-nix";
+    vaultix = {
+      # Use git+https instead of github: to avoid the GitHub API rate limit.
+      url = "git+https://github.com/milieuim/vaultix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {

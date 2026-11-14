@@ -106,8 +106,10 @@
         cfgFile = "${cfgDir}/config.yaml";
       in
       {
+        vaultix.secrets."mihoyo/providerUrls/alink" = { };
+
         liuxu.nixos.network.mihoyo = {
-          providerUrlFiles.alink = config.sops.secrets."mihoyo/providerUrls/alink".path;
+          providerUrlFiles.alink = config.vaultix.secrets."mihoyo/providerUrls/alink".path;
           extraConfig = {
             tun.stack = cfg.settings.tun.stack;
             external-controller = cfg.settings.external-controller;
@@ -142,7 +144,7 @@
           mihoyo =
             let
               before = [ "mihomo.service" ];
-              after = [ "sops-install-secrets.service" ];
+              after = [ "vaultix-activate.service" ];
               script =
                 let
                   cfgDirShArg = cfgDir |> lib.escapeShellArg;
