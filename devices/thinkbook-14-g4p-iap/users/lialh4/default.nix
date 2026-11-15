@@ -42,7 +42,10 @@
         rustdesk.enable = true;
         umbriel.enable = true;
       };
-      preservation.directories = [ ".local/share/fonts" ];
+      preservation.directories = [
+        ".config/vaultix"
+        ".local/share/fonts"
+      ];
       sdk.enable = true;
     };
     services.podman = {

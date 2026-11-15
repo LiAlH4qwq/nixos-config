@@ -76,22 +76,31 @@
         hostDir = root + "/secrets/hosts/${config.networking.hostName}";
         localSecrets =
           cfg.localMachine.secrets |> lib.mapAttrs (n: v: v // { file = v.file or (hostDir + "/${n}.age"); });
+        beforeUserbornFiles =
+          config.vaultix.beforeUserborn
+          |> lib.filter (id: builtins.hasAttr id config.vaultix.secrets)
+          |> map (id: config.vaultix.secrets.${id}.file);
       in
-      {
-        vaultix = {
-          settings = lib.mkMerge [
-            (lib.mkIf (cfg.hostPubkey != null) { inherit (cfg) hostPubkey; })
-            { inherit (cfg) hostKeys; }
-          ];
-          secrets = localSecrets;
-          templates = cfg.localMachine.templates;
-          inherit (cfg.localMachine) beforeUserborn;
-        };
+      lib.mkMerge [
+        {
+          vaultix = {
+            settings = lib.mkMerge [
+              (lib.mkIf (cfg.hostPubkey != null) { inherit (cfg) hostPubkey; })
+              { inherit (cfg) hostKeys; }
+            ];
+            secrets = localSecrets;
+            templates = cfg.localMachine.templates;
+            inherit (cfg.localMachine) beforeUserborn;
+          };
 
-        environment.systemPackages = with pkgs; [
-          age
-          ssh-to-age
-        ];
-      };
+          environment.systemPackages = with pkgs; [
+            age
+            ssh-to-age
+          ];
+        }
+        (lib.mkIf config.services.userborn.enable {
+          systemd.services.userborn.restartTriggers = beforeUserbornFiles;
+        })
+      ];
   };
 }

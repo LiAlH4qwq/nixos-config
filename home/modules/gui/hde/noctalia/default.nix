@@ -66,33 +66,39 @@
           "wireplumber.service"
         ];
       };
-      Service.ExecStartPre = [
-        (
-          lib.getExe
-          <|
-            pkgs.writers.writeNuBin "noctalia-wait-networkmanager"
-              {
-                makeWrapperArgs = [
-                  "--prefix"
-                  "PATH"
-                  ":"
-                  (lib.makeBinPath [
-                    pkgs.systemd
-                    pkgs.uutils-coreutils-noprefix
-                  ])
-                ];
-              }
-              ''
-                for _ in 0..149 {
-                  if (^busctl --system status org.freedesktop.NetworkManager | complete | get exit_code) == 0 {
-                    exit 0
-                  }
-                  sleep 200ms
+      Service = {
+        # The upstream module sets Type=notify, but noctalia does not send
+        # READY=1 reliably (plugin/network work can exceed the 90s start
+        # timeout), which makes systemd kill and restart it forever.
+        Type = lib.mkForce "simple";
+        ExecStartPre = [
+          (
+            lib.getExe
+            <|
+              pkgs.writers.writeNuBin "noctalia-wait-networkmanager"
+                {
+                  makeWrapperArgs = [
+                    "--prefix"
+                    "PATH"
+                    ":"
+                    (lib.makeBinPath [
+                      pkgs.systemd
+                      pkgs.uutils-coreutils-noprefix
+                    ])
+                  ];
                 }
-                print -e "NetworkManager not on the system bus after 30s; starting noctalia anyway"
-              ''
-        )
-      ];
+                ''
+                  for _ in 0..149 {
+                    if (^busctl --system status org.freedesktop.NetworkManager | complete | get exit_code) == 0 {
+                      exit 0
+                    }
+                    sleep 200ms
+                  }
+                  print -e "NetworkManager not on the system bus after 30s; starting noctalia anyway"
+                ''
+          )
+        ];
+      };
     };
     home.file.wallpaper = {
       target = "Pictures/Wallpapers/rainy-everything-in-the-night.png";
