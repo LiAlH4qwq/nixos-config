@@ -1,7 +1,6 @@
 _: {
   imports = [
     ./checks
-    ./disallowed-inputs-deps
     ./docs
     ./gh-workflows
     ./home-modules

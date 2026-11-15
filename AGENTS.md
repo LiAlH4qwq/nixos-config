@@ -204,6 +204,10 @@ sandbox even when the config is valid.
   `eza` (ls), `bat` (cat), `zoxide`, `starship`, `fzf`.
 - Prefer the NixOS MCP tool over querying the nix store directly.
 - Never print secret values from `secrets/` or `~/.config/vaultix/identity.txt`.
+- Do not encode workarounds for external rate limits (for example, pinning a revision in a
+  flake input URL to dodge a GitHub API limit) into committed files. Always keep the
+  canonical form on disk. If an API token is needed to update the lock, ask the user for one
+  (e.g. `GH_TOKEN` or `access-tokens`) instead of changing the source.
 
 ## Known issues
 

@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -27,7 +28,7 @@
       serverName = cfg.settings.global.server_name;
       matrixHost = "matrix.${serverName}";
       matrixPort = builtins.head cfg.settings.global.port;
-      cinny = pkgs.cinny.override {
+      sable = inputs.sable.packages.${pkgs.stdenv.hostPlatform.system}.sable.override {
         conf = {
           defaultHomeserver = 0;
           homeserverList = [ matrixHost ];
@@ -50,7 +51,7 @@
               }
             }
             handle {
-              root * ${cinny}
+              root * ${sable}
               try_files {path} /index.html
               file_server
             }

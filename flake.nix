@@ -55,7 +55,6 @@ in
               # };
             };
           };
-          disallowed-inputs-deps = [ ];
         };
         flatFlake.config.allowed = [
           # Shouldn't override.
@@ -134,10 +133,27 @@ in
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sable = {
+      url = "github:SableClient/sable-next";
+      # The web build needs Rust 1.97+, which nixos-26.05 does not provide.
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     vaultix = {
       # Use git+https instead of github: to avoid the GitHub API rate limit.
       url = "git+https://github.com/milieuim/vaultix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        crane.follows = "crane";
+        flake-parts.follows = "flake-parts";
+        pre-commit-hooks.follows = "pre-commit-hooks";
+      };
+    };
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "";
+      };
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
