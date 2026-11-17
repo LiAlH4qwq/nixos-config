@@ -1,4 +1,10 @@
-{ lib, root, ... }: {
+{
+  inputs,
+  lib,
+  root,
+  ...
+}:
+{
   perSystem = { pkgs, system, ... }: {
     packages = {
       btop-theme-rose-pine-dawn = pkgs.callPackage (root + /packages/btop-theme-rose-pine-dawn) { };
@@ -6,6 +12,9 @@
       disable-dwt-in-hsr = pkgs.callPackage (root + /packages/disable-dwt-in-hsr) { };
       kill-focused-window = pkgs.callPackage (root + /packages/kill-focused-window) { };
       nushell-skill = pkgs.callPackage (root + /packages/nushell-skill) { };
+      pi-catppuccin-latte = pkgs.callPackage (root + /packages/pi-catppuccin-latte) {
+        pi-coding-agent = inputs.nixpkgs-unstable.legacyPackages.${system}.pi-coding-agent;
+      };
       xwayland-xft-dpi = pkgs.callPackage (root + /packages/xwayland-xft-dpi) { };
     }
     // lib.optionalAttrs (system == "x86_64-linux") {

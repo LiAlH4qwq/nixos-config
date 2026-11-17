@@ -9,7 +9,7 @@
     switch.generate = true;
     apply = {
       home = {
-        packages = with pkgs; [ unstable.pi-coding-agent ];
+        packages = [ pkgs.pi-catppuccin-latte ];
         file = {
           pi-coding-agent-settings = {
             target = ".pi/agent/settings.json";
