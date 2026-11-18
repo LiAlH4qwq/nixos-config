@@ -35,7 +35,7 @@
               enableAnalytics = true;
               theme = "catppuccin-latte";
               defaultProvider = "commandcode";
-              defaultModel = "deepseek-v4.1-flash";
+              defaultModel = "deepseek/deepseek-v4.1-flash";
               enabledModels = [
                 "deepseek/deepseek-flash"
                 "commandcode/deepseek/deepseek-v4.1-flash"
