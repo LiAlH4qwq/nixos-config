@@ -143,7 +143,7 @@
             ];
           };
         };
-        mihoyo.settings.external-controller = "[::]:9090";
+        song-of-welkin-moon.enable = true;
       };
       podman.enable = true;
       qbittorrent.enable = true;

@@ -46,7 +46,6 @@
       };
       laptop.enable = true;
       network = {
-        mihoyo.enable = false;
         song-of-welkin-moon.enable = true;
       };
       nh.flake = "/mnt/data/lialh4/Projects/nixos-config";

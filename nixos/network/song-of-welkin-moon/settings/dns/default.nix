@@ -51,6 +51,15 @@ _: {
         server = "alidns";
       }
       {
+        domain = [ "lialh4.cyou" ];
+        domain_suffix = [ ".lialh4.cyou" ];
+        server = "cloudflare";
+      }
+      {
+        rule_set = [ "geosite-cloudflare" ];
+        server = "cloudflare";
+      }
+      {
         query_type = [
           "A"
           "AAAA"

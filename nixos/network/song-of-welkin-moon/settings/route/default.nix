@@ -32,6 +32,21 @@ _: {
         outbound = "direct";
       }
       {
+        process_name = [
+          "ddns"
+          "wineserver"
+        ];
+        outbound = "direct";
+      }
+      {
+        process_name = [ "cloudflared" ];
+        outbound = "vps-anytls";
+      }
+      {
+        domain = [ "genshin.lialh4.cyou" ];
+        outbound = "direct";
+      }
+      {
         ip_is_private = true;
         outbound = "direct";
       }
@@ -52,6 +67,10 @@ _: {
         ];
         outbound = "direct";
       }
+      {
+        user = [ "misskey" ];
+        outbound = "vps-anytls";
+      }
     ];
     rule_set =
       {
@@ -59,6 +78,7 @@ _: {
           "category-ai-!cn"
           "github"
           "cn"
+          "cloudflare"
         ];
         geoip = [ "cn" ];
       }

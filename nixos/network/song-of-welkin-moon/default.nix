@@ -15,6 +15,7 @@
     };
     apply = {
       vaultix.secrets."mihoyo/providerUrls/alink" = { };
+      vaultix.secrets."anytls/password" = { };
       vaultix.templates."hoyofall/default".content = "DEFAULT_URL=${
         config.vaultix.placeholder."mihoyo/providerUrls/alink"
       }";
