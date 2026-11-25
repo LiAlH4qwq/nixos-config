@@ -15,6 +15,9 @@
       pi-catppuccin-latte = pkgs.callPackage (root + /packages/pi-catppuccin-latte) {
         pi-coding-agent = inputs.nixpkgs-unstable.legacyPackages.${system}.pi-coding-agent;
       };
+      soulsteads-messaging = pkgs.callPackage (root + /packages/soulsteads-messaging) {
+        rustPlatform = inputs.nixpkgs-unstable.legacyPackages.${system}.rustPlatform;
+      };
       xwayland-xft-dpi = pkgs.callPackage (root + /packages/xwayland-xft-dpi) { };
     }
     // lib.optionalAttrs (system == "x86_64-linux") {

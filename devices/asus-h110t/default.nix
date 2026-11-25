@@ -23,6 +23,20 @@
 
   liuxu = {
     nixos = {
+      ai.soulsteads-messaging = {
+        enable = true;
+        botName = "冰糖雪梨";
+        user = "bingtangxueli";
+        group = "bingtangxueli";
+        matrix = {
+          homeserver = "https://matrix.lialh4.cyou";
+          userId = "@bingtangxueli:lialh4.cyou";
+          trigger = "!冰糖雪梨";
+          allowedUsers = [ "@lialh4:lialh4.cyou" ];
+          allowedRooms = [ "!zJkEPdjz6LfLecr5JerZp5VCHz0SFJfCZjlCMPCmfcg" ];
+          encryption = true;
+        };
+      };
       bluetooth.enable = true;
       builder.enable = true;
       caddy.port = 50288;
@@ -174,6 +188,7 @@
             "cloudflared/tunnels/LiAlH4-Server/tunnelSecret" = { };
             "cloudflared/tunnels/LiAlH4-Server/endpoint" = { };
             "samba/users/lialh4/password" = { };
+            "soulsteads-messaging/matrix-token" = { };
             "users/lialh4/hashedPassword" = { };
             "pin/users/lialh4/hashedPassword" = { };
             "misskey/setupPassword" = {
