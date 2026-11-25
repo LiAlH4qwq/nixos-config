@@ -68,7 +68,10 @@ _: {
         outbound = "direct";
       }
       {
-        user = [ "misskey" ];
+        user = [
+          "continuwuity"
+          "misskey"
+        ];
         outbound = "vps-anytls";
       }
     ];
