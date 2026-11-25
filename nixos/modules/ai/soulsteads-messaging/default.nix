@@ -59,11 +59,11 @@ in
         permission = mkOption {
           type = types.anything;
           default = {
-            edit = "deny";
+            edit = "ask";
             bash = "ask";
             webfetch = "allow";
             external_directory = {
-              "*" = "deny";
+              "*" = "ask";
             };
           };
           description = "OpenCode permission block.";
